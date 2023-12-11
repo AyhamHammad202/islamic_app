@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:islamic_app/generated/l10n.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
@@ -15,7 +15,7 @@ class CustomAppBar extends StatelessWidget {
         ),
         SizedBox(width: 8),
         Text(
-          "Al Quran",
+          S.of(context).appName,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
