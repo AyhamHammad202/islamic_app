@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:islamic_app/router.dart';
+import 'package:islamic_app/views/home_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,20 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: const Text("Hello World!",),
-      ),
+      onGenerateRoute: onGenerateRoute,
+      debugShowCheckedModeBanner: false,
+      initialRoute: HomeView.id,
     );
   }
 }
