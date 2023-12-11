@@ -1,4 +1,9 @@
 {
     "appName":"Al Quran",
-    "lastRead":"Last Read"
+    "lastRead":"Last Read",
+    "sura":"Sura",
+    "page":"Page",
+    "juz":"Juz",
+    "hizb":"Hizb",
+    "ruku":"Ruku"
 }

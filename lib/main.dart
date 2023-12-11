@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:islamic_app/cubits/cubit/quran_cubit.dart';
 import 'package:islamic_app/router.dart';
 import 'package:islamic_app/views/home_view.dart';
 
@@ -15,17 +17,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-      onGenerateRoute: onGenerateRoute,
-      debugShowCheckedModeBanner: false,
-      initialRoute: HomeView.id,
+    return BlocProvider(
+      create: (context) => QuranCubit(),
+      child: MaterialApp(
+        localizationsDelegates: [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
+        onGenerateRoute: onGenerateRoute,
+        debugShowCheckedModeBanner: false,
+        initialRoute: HomeView.id,
+      ),
     );
   }
 }

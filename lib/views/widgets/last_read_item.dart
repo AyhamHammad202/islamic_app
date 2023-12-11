@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islamic_app/constant.dart';
 
 class LastReadItem extends StatelessWidget {
   const LastReadItem({
@@ -8,11 +9,12 @@ class LastReadItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(8),
+      margin: EdgeInsetsDirectional.only(top: 8, bottom: 8, end: 8),
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
           color: Color(0xfffceddc), borderRadius: BorderRadius.circular(12)),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "Al-Baqarah",
@@ -22,7 +24,7 @@ class LastReadItem extends StatelessWidget {
           Text(
             "Verse 285",
             style: TextStyle(
-              color: Color(0xff9e7948),
+              color: secondlyColor,
             ),
           ),
         ],
