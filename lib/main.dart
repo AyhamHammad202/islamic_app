@@ -23,7 +23,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: const Text("Hello World!"),
+        child: const Text("Hello World!",),
       ),
     );
   }
