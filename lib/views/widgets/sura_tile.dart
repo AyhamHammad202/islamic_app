@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islamic_app/constant.dart';
+import 'package:islamic_app/cubits/cubit/quran_cubit.dart';
 import 'package:islamic_app/models/sura_model.dart';
 import 'package:islamic_app/views/sura_view.dart';
 
@@ -17,6 +19,7 @@ class SuraTile extends StatelessWidget {
         hoverColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () {
+    BlocProvider.of<QuranCubit>(context).getAllAyaOfSura(sura);
           Navigator.pushNamed(context, SuraView.id);
         },
         child: Container(
@@ -34,7 +37,7 @@ class SuraTile extends StatelessWidget {
                       ),
                     ),
                     child: Center(
-                      child: Text("${int.parse(sura.index)}",
+                      child: Text("${sura.index}",
                           style: TextStyle(fontSize: 16)),
                     ),
                   ),
