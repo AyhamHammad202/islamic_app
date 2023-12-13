@@ -1,10 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:islamic_app/generated/l10n.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
-    super.key,
-  });
+    Key? key,
+    required this.title,
+    required this.icon,
+  }) : super(key: key);
+  final String title;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +21,14 @@ class CustomAppBar extends StatelessWidget {
         ),
         SizedBox(width: 8),
         Text(
-          S.of(context).appName,
+          title,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
         Spacer(),
-        Icon(Icons.search),
+        Icon(icon),
       ],
     );
   }

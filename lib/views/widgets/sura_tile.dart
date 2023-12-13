@@ -19,8 +19,12 @@ class SuraTile extends StatelessWidget {
         hoverColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () {
-    BlocProvider.of<QuranCubit>(context).getAllAyaOfSura(sura);
-          Navigator.pushNamed(context, SuraView.id);
+          BlocProvider.of<QuranCubit>(context).getAllAyaOfSura(sura);
+          Navigator.pushNamed(
+            context,
+            SuraView.id,
+            arguments: sura,
+          );
         },
         child: Container(
           child: Column(
@@ -37,20 +41,20 @@ class SuraTile extends StatelessWidget {
                       ),
                     ),
                     child: Center(
-                      child: Text("${sura.index}",
-                          style: TextStyle(fontSize: 16)),
+                      child:
+                          Text("${sura.index}", style: TextStyle(fontSize: 16)),
                     ),
                   ),
                   SizedBox(width: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(sura.titleEn),
+                      Text(sura.nameTranslation),
                       SizedBox(height: 6),
                       Row(
                         children: [
                           Text(
-                            "${sura.allAyaNumber} Verses",
+                            "${sura.allAya.length} Verses",
                             style: TextStyle(
                               color: secondlyColor,
                               fontWeight: FontWeight.w500,

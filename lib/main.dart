@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => QuranCubit(),
       child: MaterialApp(
+        locale: Locale("en"),
         localizationsDelegates: [
           S.delegate,
           GlobalMaterialLocalizations.delegate,

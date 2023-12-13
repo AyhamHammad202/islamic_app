@@ -32,7 +32,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomAppBar(),
+          CustomAppBar(title: S.of(context).appName, icon: Icons.search,),
           SizedBox(height: 24),
           Text(
             S.of(context).lastRead,
