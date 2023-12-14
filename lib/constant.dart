@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-const Color secondlyColor = Color(0xff9e7948);
-const Color thirdlyColor = Color(0xfffcf3e9);
-const String ayaFram = "assets/images/Group_19.png";
-const String suraInfoBackground = "assets/images/Group_19.png";
-// const String suraJsonFile = "assets/data/sura.json";
-const String suraJsonFile = "assets/data/quran.json";
-const String muyassarJsonFile = "assets/data/ar_muyassar.json";
-const String book = "assets/images/book.png";
-const String fontUthmanicHafs = "UthmanicHafs";
+const Color kBackgroundColor = Color(0xffFFFBF8);
+const Color kPrimaryColor = Color(0xffFFEEDC);
+const Color kSecondlyColor = Color(0xffC39B7B);
+const Color kThirdlyColor = Color(0xff77554C);
+const String kSearchAsset= "assets/images/search.svg";
+const String kFontUthmanicHafs = "UthmanicHafs";
+const String kFontKufamItalicVariableFont = "KufamItalicVariableFont";
+const String kFontNotoNaskhArabic = "NotoNaskhArabic";
+const String kFontKufamRegular = "KufamRegular";
+const String kFontKufamItalic = "KufamItalic";

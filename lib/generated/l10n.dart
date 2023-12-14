@@ -50,11 +50,11 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Al Quran`
-  String get appName {
+  /// `Al-Quran Al-Kreem`
+  String get quran {
     return Intl.message(
-      'Al Quran',
-      name: 'appName',
+      'Al-Quran Al-Kreem',
+      name: 'quran',
       desc: '',
       args: [],
     );
@@ -65,56 +65,6 @@ class S {
     return Intl.message(
       'Last Read',
       name: 'lastRead',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sura`
-  String get sura {
-    return Intl.message(
-      'Sura',
-      name: 'sura',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Page`
-  String get page {
-    return Intl.message(
-      'Page',
-      name: 'page',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Juz`
-  String get juz {
-    return Intl.message(
-      'Juz',
-      name: 'juz',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Hizb`
-  String get hizb {
-    return Intl.message(
-      'Hizb',
-      name: 'hizb',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ruku`
-  String get ruku {
-    return Intl.message(
-      'Ruku',
-      name: 'ruku',
       desc: '',
       args: [],
     );

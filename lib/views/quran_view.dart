@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/custom_app_bar.dart';
 import 'widgets/quran_view_body.dart';
 
 class QuranView extends StatelessWidget {
@@ -8,7 +9,8 @@ class QuranView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: CustomAppBar(),
       body: QuranViewBody(),
     );
   }

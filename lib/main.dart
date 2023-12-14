@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/cubits/cubit/quran_cubit.dart';
 import 'package:islamic_app/router.dart';
 import 'package:islamic_app/views/quran_view.dart';
@@ -19,18 +21,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => QuranCubit(),
-      child: MaterialApp(
-        locale: Locale("en"),
-        localizationsDelegates: [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        onGenerateRoute: onGenerateRoute,
-        debugShowCheckedModeBanner: false,
-        initialRoute: QuranView.id,
+      child: ScreenUtilInit(
+        builder: (context, child) => MaterialApp(
+          theme: ThemeData(
+            scaffoldBackgroundColor: kBackgroundColor,
+          ),
+          locale: Locale("ar"),
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          onGenerateRoute: onGenerateRoute,
+          debugShowCheckedModeBanner: false,
+          initialRoute: QuranView.id,
+        ),
       ),
     );
   }
