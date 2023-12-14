@@ -36,7 +36,7 @@ class DataClient {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
 
-      ByteData data = await rootBundle.load(join("assets", _databaseName));
+      ByteData data = await rootBundle.load(join("assets/data", _databaseName));
       List<int> bytes =
           data.buffer.asInt8List(data.offsetInBytes, data.lengthInBytes);
       await File(path).writeAsBytes(bytes, flush: true);

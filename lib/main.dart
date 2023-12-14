@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:islamic_app/cubits/cubit/quran_cubit.dart';
 import 'package:islamic_app/router.dart';
-import 'package:islamic_app/views/home_view.dart';
+import 'package:islamic_app/views/quran_view.dart';
 
 import 'generated/l10n.dart';
 
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         onGenerateRoute: onGenerateRoute,
         debugShowCheckedModeBanner: false,
-        initialRoute: HomeView.id,
+        initialRoute: QuranView.id,
       ),
     );
   }
