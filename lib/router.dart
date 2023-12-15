@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:islamic_app/models/aya_model.dart';
+import 'package:islamic_app/views/ayat_view.dart';
 import 'package:islamic_app/views/quran_view.dart';
 
-import 'models/sura_model.dart';
 
 Route<dynamic>? onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -9,13 +10,10 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => QuranView(),
       );
-    // case SuraView.id:
-    //   final SuraModel sura = settings.arguments as SuraModel;
-    //   return MaterialPageRoute(
-    //     builder: (context) => SuraView(
-    //       sura: sura,
-    //     ),
-    //   );
+    case AyatView.id:
+      return MaterialPageRoute(
+        builder: (context) => AyatView(  ),
+      );
     default:
       return MaterialPageRoute(
         builder: (context) => Text("DEFAULT ROUTE ERROR"),

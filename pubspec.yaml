@@ -70,6 +70,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/hijri/
+    - assets/images/quran_pages/
     - assets/images/sorahs/
     - assets/data/
   #   - images/a_dot_ham.jpeg
