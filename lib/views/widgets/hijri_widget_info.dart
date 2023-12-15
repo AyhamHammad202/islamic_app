@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,9 +21,9 @@ class HijriWidgetInfo extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 24.h),
         decoration: BoxDecoration(
           color: kPrimaryColor,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(8.r),
           border: Border.all(
-            color: Color(0xff40C39B7B),
+            color: kForthColor,
             width: 2,
           ),
         ),
@@ -60,7 +59,7 @@ class HijriWidgetInfo extends StatelessWidget {
             // ),
             SvgPicture.asset(
               fromHijriIndexToImage(hijri.hMonth),
-              color: kThirdlyColor,
+              colorFilter: ColorFilter.mode(kThirdlyColor, BlendMode.srcIn),
             ),
             Spacer(),
             Column(

@@ -1,4 +1,8 @@
 {
     "quran":"Al-Quran Al-Kreem",
-    "lastRead":"Last Read"
+    "lastRead":"Last Read",
+    "sorahs":"Sorahs",
+    "pages":"Pages",
+    "juz":"Juzes",
+    "qurter":"Qurters"
 }

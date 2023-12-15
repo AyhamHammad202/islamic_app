@@ -1,12 +1,7 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/services.dart';
-import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/database/data_client.dart';
-import 'package:islamic_app/models/aya_model.dart';
-import 'package:islamic_app/models/sura_model.dart';
 import 'package:meta/meta.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -16,31 +11,27 @@ part 'quran_state.dart';
 
 class QuranCubit extends Cubit<QuranState> {
   QuranCubit() : super(QuranInitial());
+  List<SorahModel> allSorahOfQuran = [];
 
   DataClient _client = DataClient();
-  Future<List<SorahModel>> all() async {
+  void all() async {
     Database? database = await _client.database;
     if (database == null || !database.isOpen) {
       print('Database is null or closed');
-      return [];
+      // return [];
     }
 
     try {
-      List<Map> results = (await database.query(SorahModel.tableName,
-              columns: SorahModel.columns))
+      List<Map> results = (await database!
+              .query(SorahModel.tableName, columns: SorahModel.columns))
           .cast<Map>();
-
-      List<SorahModel> sorahList = [];
       results.forEach((result) {
-        log(result.toString());
         SorahModel suraModel = SorahModel.fromMap(result);
-        sorahList.add(suraModel);
+        allSorahOfQuran.add(suraModel);
       });
-      log("HEYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
-      return sorahList;
+      emit(QuranDone());
     } catch (e) {
       log('Database query failed: $e');
-      return [];
     }
   }
 
