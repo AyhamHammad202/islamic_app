@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class QuranAyat {
   static String tableName = "Quran";
   final String soraNameAr;
@@ -12,6 +13,13 @@ class QuranAyat {
     required this.soraNumber,
     required this.ayat,
   });
+
+  static List<String> columns = [
+    "SoraName_ar",
+    "SoraName_en",
+    "SoraNameSearch",
+    "SoraNum",
+  ];
 }
 
 class AyatModel {
@@ -20,11 +28,21 @@ class AyatModel {
   final String ayaText;
   final String ayaSearchText;
   final int ayaNumber;
+  final String soraNameAr;
+  final String soraNameEn;
+  final String soraSearchName;
+  final int soraNumber;
+  final String taffser;
   AyatModel({
     required this.id,
     required this.ayaText,
     required this.ayaSearchText,
     required this.ayaNumber,
+    required this.soraNameAr,
+    required this.soraNameEn,
+    required this.soraSearchName,
+    required this.soraNumber,
+    required this.taffser,
   });
 
   static List<String> columns = [
@@ -32,6 +50,11 @@ class AyatModel {
     "AyaDiac",
     "SearchText",
     "AyaNum",
+    "SoraName_ar",
+    "SoraName_En",
+    "SoraNameSearch",
+    "SoraNum",
+    "taffser_saadi"
   ];
 
   Map<String, dynamic> toMap() {
@@ -40,6 +63,11 @@ class AyatModel {
       'AyaDiac': ayaText,
       'SearchText': ayaSearchText,
       'ayaNum': ayaNumber,
+      'SoraName_ar': soraNameAr,
+      'SoraName_en': soraNameEn,
+      'SoraNameSearch': soraSearchName,
+      'SoraNum': soraNumber,
+      'taffser_saadi': taffser,
     };
   }
 
@@ -49,6 +77,11 @@ class AyatModel {
       ayaText: map['AyaDiac'] as String,
       ayaSearchText: map['SearchText'] as String,
       ayaNumber: map['AyaNum'] as int,
+      soraNameAr: map['SoraName_ar'] as String,
+      soraNameEn: map['SoraName_En'] as String,
+      soraSearchName: map['SoraNameSearch'] as String,
+      soraNumber: map['SoraNum'] as int,
+      taffser: map['taffser_saadi'] as String,
     );
   }
 }

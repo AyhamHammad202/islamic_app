@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:islamic_app/constant.dart';
-import 'package:islamic_app/cubits/cubit/quran_cubit.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/sorah_model.dart';
 import 'package:islamic_app/views/ayat_view.dart';
@@ -18,8 +16,8 @@ class SorahTile extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       child: InkWell(
         onTap: () {
-          BlocProvider.of<QuranCubit>(context).getAllAyatOfPage(sorah.pageNum);
-          Navigator.pushNamed(context, AyatView.id);
+          // BlocProvider.of<QuranCubit>(context).getAllAyatOfPage(sorah.pageNum);
+          Navigator.pushNamed(context, AyatView.id, arguments: sorah);
         },
         child: Container(
           child: Row(

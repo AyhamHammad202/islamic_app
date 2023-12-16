@@ -36,8 +36,10 @@ class QuranCubit extends Cubit<QuranState> {
     }
   }
 
-  List<AyatModel> ayatOfPage = [];
+  List<AyatModel>? ayatOfPage;
   void getAllAyatOfPage(int page) async {
+    log("getting data ishuhhsfufhasu");
+    ayatOfPage = [];
     Database? database = await _client.database;
     if (database == null || !database.isOpen) {
       print('Database is null or closed');
@@ -49,40 +51,12 @@ class QuranCubit extends Cubit<QuranState> {
           .cast<Map>();
       results.forEach(
         (element) {
-          ayatOfPage.add(AyatModel.fromMap(element));
+          ayatOfPage!.add(AyatModel.fromMap(element));
         },
       );
-      log("Ayat Quary Length======= ${results.length}");
+      emit(QuranDone());
     } catch (e) {
       log('Database query failed: $e');
     }
   }
-
-  // List<SuraModel> suras = [];
-  // List<AyaModel>? allAyaOfSura;
-
-  // void getAllSuraOfQuran() async {
-  //   final String response = await rootBundle.loadString(suraJsonFile);
-  //   dynamic surasData = jsonDecode(response);
-  //   for (var sura in surasData) {
-  //     SuraModel s = SuraModel.fromMap(sura);
-  //     suras.add(s);
-  //     // for (var aya in s.allAya) {
-  //     //   AyaModel ayaModel = AyaModel.fromMap(s.allAya[0]);
-  //     //   allAyaOfSura.add(ayaModel);
-  //     // }
-  //   }
-  //   log(suras[0].titleAr);
-  //   log(suras[1].titleAr);
-  //   emit(QuranDone());
-  // }
-
-  // void getAllAyaOfSura(SuraModel sura) async {
-  //   allAyaOfSura = [];
-  //   for (var aya in sura.allAya) {
-  //     AyaModel ayaModel = AyaModel.fromMap(aya);
-  //     allAyaOfSura!.add(ayaModel);
-  //   }
-  //   log("${allAyaOfSura.toString()} ${allAyaOfSura!.length}");
-  // }
 }

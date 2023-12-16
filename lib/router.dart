@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:islamic_app/models/aya_model.dart';
+import 'package:islamic_app/models/sorah_model.dart';
 import 'package:islamic_app/views/ayat_view.dart';
 import 'package:islamic_app/views/quran_view.dart';
-
 
 Route<dynamic>? onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -12,7 +11,9 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
       );
     case AyatView.id:
       return MaterialPageRoute(
-        builder: (context) => AyatView(  ),
+        builder: (context) => AyatView(
+          sorah: settings.arguments as SorahModel,
+        ),
       );
     default:
       return MaterialPageRoute(
