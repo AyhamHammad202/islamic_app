@@ -36,9 +36,37 @@ class QuranCubit extends Cubit<QuranState> {
     }
   }
 
+  List<PageModel>? currentPage;
+  void getCurrentPageSora(int page) async {
+    currentPage = [];
+    emit(QuranSearch());
+    Database? database = await _client.database;
+    if (database == null || !database.isOpen) {
+      print('Database is null or closed');
+      // return [];
+    }
+
+    try {
+      List<Map> results = (await database!.query(
+        PageModel.tableName,
+        columns: PageModel.columns,
+        where: "PageNum =${page}",
+      ))
+          .cast<Map>();
+      results.forEach((result) {
+        PageModel pageModel = PageModel.fromMap(result);
+        currentPage!.add(pageModel);
+      });
+      log("pageeeeeeeeeeeeeeeeeeeeeee ${currentPage!.length}");
+      log("pageeeeeeeeeeeeeeeeeeeeeee ${currentPage![0].soraNum}");
+      emit(QuranDone());
+    } catch (e) {
+      log('Database query failed: $e');
+    }
+  }
+
   List<AyatModel>? ayatOfPage;
   void getAllAyatOfPage(int page) async {
-    log("getting data ishuhhsfufhasu");
     ayatOfPage = [];
     Database? database = await _client.database;
     if (database == null || !database.isOpen) {
@@ -57,6 +85,41 @@ class QuranCubit extends Cubit<QuranState> {
       emit(QuranDone());
     } catch (e) {
       log('Database query failed: $e');
+    }
+  }
+
+  List<AyatModel>? ayaList = [];
+  void search(String text) async {
+    ayaList!.clear();
+    emit(QuranSearch());
+    Database? database = await _client.database;
+    if (database == null || !database.isOpen) {
+      log('Database is null or closed');
+    }
+    try {
+      if (text.isNotEmpty) {
+        await database!.transaction(
+          (transaction) async {
+            List<Map> results = await transaction.query(
+              AyatModel.tableName,
+              columns: AyatModel.columns,
+              where: "SearchText LIKE ? OR PageNum = ? OR SoraNameSearch = ?",
+              whereArgs: ['%$text%', text, text],
+            );
+            results.forEach(
+              (aya) {
+                ayaList!.add(AyatModel.fromMap(aya));
+              },
+            );
+            log("${ayaList!.length}");
+          },
+        );
+        log("searchhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh ${ayaList!.length}");
+      }
+
+      emit(QuranDone());
+    } catch (e) {
+      log("Error in search: $e");
     }
   }
 }

@@ -81,7 +81,7 @@ class AyatModel {
       soraNameEn: map['SoraName_En'] as String,
       soraSearchName: map['SoraNameSearch'] as String,
       soraNumber: map['SoraNum'] as int,
-      taffser: map['taffser_saadi'] as String,
+      taffser: map['taffser_saadi'] ?? "h",
     );
   }
 }

@@ -47,14 +47,75 @@ class SorahModel {
 
   factory SorahModel.fromMap(Map map) {
     return SorahModel(
-      id : map['Id'],
-      name : map['Name_ar'],
-      nameEn : map['Name_en'],
-      searchText : map['SearchText'],
-      ayaCount : map['AyatCount'],
-      pageNum : map['PageNum'],
-      typeAr : map['TypeText_ar'],
-      typeEn : map['TypeText_en'],
+      id: map['Id'],
+      name: map['Name_ar'],
+      nameEn: map['Name_en'],
+      searchText: map['SearchText'],
+      ayaCount: map['AyatCount'],
+      pageNum: map['PageNum'],
+      typeAr: map['TypeText_ar'],
+      typeEn: map['TypeText_en'],
+    );
+  }
+}
+
+class PageModel {
+  static String tableName = "Quran";
+  final int id;
+  final int soraNum;
+  // final String nameEn;
+  // final String searchText;
+  // final int ayaCount;
+  // final int pageNum;
+  // final String typeAr;
+  // final String typeEn;
+
+  PageModel({
+    required this.id,
+    required this.soraNum,
+    // required this.nameEn,
+    // required this.searchText,
+    // required this.ayaCount,
+    // required this.pageNum,
+    // required this.typeAr,
+    // required this.typeEn,
+  });
+
+  static final columns = [
+    "ID",
+    "SoraNum",
+    // "Name_en",
+    // "SearchText",
+    // 'AyatCount',
+    // 'PageNum',
+    // 'TypeText_ar',
+    // 'TypeText_en',
+  ];
+
+  // Map toMap() {
+  //   Map map = {
+  //     "Name_ar": name,
+  //     "Name_en": nameEn,
+  //     "SearchText": searchText,
+  //     "AyatCount": ayaCount,
+  //     "PageNum": pageNum,
+  //     "TypeText_ar": typeAr,
+  //     "TypeText_en": typeEn,
+  //   };
+  //   map['id'] = id;
+  //   return map;
+  // }
+
+  factory PageModel.fromMap(Map map) {
+    return PageModel(
+      id: map['ID'],
+      soraNum: map['SoraNum'],
+      // nameEn : map['Name_en'],
+      // searchText : map['SearchText'],
+      // ayaCount : map['AyatCount'],
+      // pageNum : map['PageNum'],
+      // typeAr : map['TypeText_ar'],
+      // typeEn : map['TypeText_en'],
     );
   }
 }

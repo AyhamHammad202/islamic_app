@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islamic_app/models/sorah_model.dart';
 import 'package:islamic_app/views/ayat_view.dart';
+
+import '../../cubits/cubit/quran_cubit.dart';
+import 'ayat_image_background.dart';
 
 class AyatImagePageView extends StatefulWidget {
   const AyatImagePageView({
@@ -24,6 +28,7 @@ class _AyatImagePageViewState extends State<AyatImagePageView> {
         controller: widget.pageController,
         onPageChanged: (page) {
           setState(() {
+            BlocProvider.of<QuranCubit>(context).getCurrentPageSora(page + 1);
             globalPage = page;
           });
         },
@@ -32,6 +37,7 @@ class _AyatImagePageViewState extends State<AyatImagePageView> {
           return Stack(
             alignment: Alignment.center,
             children: [
+              index >= 2 ? AyatImageBackground() : SizedBox(),
               Image.asset(
                 "assets/images/quran_pages/00${index + 1}.png",
                 fit: BoxFit.contain,

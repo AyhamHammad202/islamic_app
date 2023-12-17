@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:islamic_app/views/ayat_view.dart';
 
-import '../../constant.dart';
 import '../../cubits/cubit/quran_cubit.dart';
 import '../../models/aya_model.dart';
 import '../../models/sorah_model.dart';
@@ -44,6 +42,8 @@ class _AyatTextPageViewState extends State<AyatTextPageView> {
               setState(() {
                 globalPage = page;
                 BlocProvider.of<QuranCubit>(context)
+                    .getCurrentPageSora(page + 1);
+                BlocProvider.of<QuranCubit>(context)
                     .getAllAyatOfPage(globalPage + 1);
               });
             },
@@ -56,4 +56,3 @@ class _AyatTextPageViewState extends State<AyatTextPageView> {
     );
   }
 }
-

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:islamic_app/views/search_view.dart';
 
 import '../../constant.dart';
 import '../../generated/l10n.dart';
@@ -18,7 +19,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.w),
-          child: SvgPicture.asset(kSearchAsset),
+          child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, SearchView.id);
+            },
+            child: SvgPicture.asset(kSearchAsset),
+          ),
         ),
       ],
       title: Text(
