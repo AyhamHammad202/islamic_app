@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:islamic_app/constant.dart';
-import 'package:islamic_app/cubits/cubit/quran_cubit.dart';
+import '../../cubits/quran_cubit/quran_cubit.dart';
+
 import 'package:islamic_app/models/aya_model.dart';
 
 class SearchViewBody extends StatefulWidget {

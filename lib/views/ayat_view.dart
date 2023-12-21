@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:islamic_app/constant.dart';
-import 'package:islamic_app/cubits/cubit/quran_cubit.dart';
+import '../../cubits/quran_cubit/quran_cubit.dart';
+
 import 'package:islamic_app/models/sorah_model.dart';
 
 import 'widgets/ayat_image_page_view.dart';

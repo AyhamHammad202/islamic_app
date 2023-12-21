@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:islamic_app/cubits/cubit/quran_cubit.dart';
 import 'package:islamic_app/models/sorah_model.dart';
 
+import '../../cubits/quran_cubit/quran_cubit.dart';
 import 'sorah_tile.dart';
 
 class AllSorahListView extends StatefulWidget {

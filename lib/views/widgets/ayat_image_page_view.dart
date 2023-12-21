@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islamic_app/models/sorah_model.dart';
 import 'package:islamic_app/views/ayat_view.dart';
 
-import '../../cubits/cubit/quran_cubit.dart';
+import '../../cubits/quran_cubit/quran_cubit.dart';
 import 'ayat_image_background.dart';
 
 class AyatImagePageView extends StatefulWidget {

@@ -7,7 +7,8 @@ import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/sorah_model.dart';
 import 'package:islamic_app/views/ayat_view.dart';
 
-import '../../cubits/cubit/quran_cubit.dart';
+import '../../cubits/quran_cubit/quran_cubit.dart';
+
 
 class SorahTile extends StatelessWidget {
   const SorahTile({super.key, required this.sorah});

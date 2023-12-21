@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:islamic_app/constant.dart';
+import 'package:islamic_app/cubits/tabs/tabs_cubit.dart';
 
 import '../../generated/l10n.dart';
 import 'tab_bar_item.dart';
@@ -15,7 +17,13 @@ class TabBarListView extends StatefulWidget {
 }
 
 class _TabBarListViewState extends State<TabBarListView> {
-  int currentIndex = 0;
+  int? tap;
+  @override
+  void initState() {
+    tap = BlocProvider.of<TabsCubit>(context).tab;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> tabs = [
@@ -38,12 +46,13 @@ class _TabBarListViewState extends State<TabBarListView> {
             return GestureDetector(
               onTap: () {
                 setState(() {
-                  currentIndex = index;
+                  tap = index;
+                  BlocProvider.of<TabsCubit>(context).changeTap(index);
                 });
               },
               child: TabBarItem(
                 title: tabs[index],
-                isSelected: currentIndex == index,
+                isSelected: tap == index,
               ),
             );
           },
