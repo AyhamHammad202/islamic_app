@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/cubits/tabs/tabs_cubit.dart';
 
-import '../../generated/l10n.dart';
+import '../generated/l10n.dart';
 import 'tab_bar_item.dart';
 
 class TabBarListView extends StatefulWidget {

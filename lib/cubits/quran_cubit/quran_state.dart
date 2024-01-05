@@ -6,3 +6,4 @@ sealed class QuranState {}
 final class QuranInitial extends QuranState {}
 final class QuranDone extends QuranState {}
 final class QuranSearch extends QuranState {}
+final class LastRead extends QuranState {}

@@ -30,6 +30,9 @@ class _AyatImagePageViewState extends State<AyatImagePageView> {
           setState(() {
             BlocProvider.of<QuranCubit>(context).getCurrentPageSora(page + 1);
             globalPage = page;
+            BlocProvider.of<QuranCubit>(context).setLastRead(page + 1);
+            BlocProvider.of<QuranCubit>(context).getLastRead();
+            BlocProvider.of<QuranCubit>(context).getAyatOfLastRead(page + 1);
           });
         },
         itemCount: 604,

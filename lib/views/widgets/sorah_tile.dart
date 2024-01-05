@@ -9,7 +9,6 @@ import 'package:islamic_app/views/ayat_view.dart';
 
 import '../../cubits/quran_cubit/quran_cubit.dart';
 
-
 class SorahTile extends StatelessWidget {
   const SorahTile({super.key, required this.sorah});
   final SorahModel sorah;
@@ -20,9 +19,13 @@ class SorahTile extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       child: InkWell(
         onTap: () {
+          globalPage = sorah.pageNum - 1;
           BlocProvider.of<QuranCubit>(context)
               .getCurrentPageSora(sorah.pageNum);
           // BlocProvider.of<QuranCubit>(context).getAllAyatOfPage(sorah.pageNum);
+          BlocProvider.of<QuranCubit>(context).setLastRead(sorah.pageNum);
+          BlocProvider.of<QuranCubit>(context).getLastRead();
+          BlocProvider.of<QuranCubit>(context).getAyatOfLastRead(sorah.pageNum);
           Navigator.pushNamed(context, AyatView.id, arguments: sorah);
         },
         child: Container(

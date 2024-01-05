@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../constant.dart';
+import '../constant.dart';
 
 class TabBarItem extends StatelessWidget {
   const TabBarItem({

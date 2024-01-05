@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:islamic_app/database/data_client.dart';
 import 'package:islamic_app/models/aya_model.dart';
+import 'package:islamic_app/models/last_read_model.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../models/sorah_model.dart';
@@ -13,6 +15,43 @@ part 'quran_state.dart';
 class QuranCubit extends Cubit<QuranState> {
   QuranCubit() : super(QuranInitial());
   List<SorahModel> allSorahOfQuran = [];
+  int lastPageRead = 1;
+
+  void setLastRead(int page) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setInt("lastRead", page);
+  }
+
+  Future<int> getFLastRead() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    return pref.getInt("lastRead")??1;
+  }
+
+  void getLastRead() async {
+    emit(LastRead());
+    lastPageRead = await getFLastRead();
+  }
+
+  LastReadModel? lastRead;
+  void getAyatOfLastRead(int page) async {
+    Database? database = await _client.database;
+    if (database == null || !database.isOpen) {
+      print('Database is null or closed');
+      // return [];
+    }
+    try {
+      var result = await database!.query(
+        LastReadModel.table,
+        columns: LastReadModel.columns,
+        limit: 1,
+        where: "PageNum =${lastPageRead}",
+      );
+      lastRead = LastReadModel.fromMap(result.first);
+      emit(QuranDone());
+    } catch (e) {
+      log('Database query failed: $e');
+    }
+  }
 
   DataClient _client = DataClient();
   void all() async {

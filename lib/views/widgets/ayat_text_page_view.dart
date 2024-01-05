@@ -46,6 +46,10 @@ class _AyatTextPageViewState extends State<AyatTextPageView> {
                     .getCurrentPageSora(page + 1);
                 BlocProvider.of<QuranCubit>(context)
                     .getAllAyatOfPage(globalPage + 1);
+                BlocProvider.of<QuranCubit>(context).setLastRead(page + 1);
+                BlocProvider.of<QuranCubit>(context).getLastRead();
+                BlocProvider.of<QuranCubit>(context)
+                    .getAyatOfLastRead(page + 1);
               });
             },
             itemBuilder: (context, index) {

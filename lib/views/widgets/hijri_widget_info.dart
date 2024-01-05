@@ -36,7 +36,7 @@ class HijriWidgetInfo extends StatelessWidget {
               // "${29.toArabic()}",
               style: TextStyle(
                 color: kThirdlyColor,
-                fontSize: 72.sp,
+                fontSize: 64.sp,
                 fontWeight: FontWeight.w600,
                 fontFamily: kFontNotoNaskhArabic,
                 height: 1,

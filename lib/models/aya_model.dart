@@ -28,6 +28,7 @@ class AyatModel {
   final String ayaText;
   final String ayaSearchText;
   final int ayaNumber;
+  final int ayaPage;
   final String soraNameAr;
   final String soraNameEn;
   final String soraSearchName;
@@ -38,6 +39,7 @@ class AyatModel {
     required this.ayaText,
     required this.ayaSearchText,
     required this.ayaNumber,
+    required this.ayaPage,
     required this.soraNameAr,
     required this.soraNameEn,
     required this.soraSearchName,
@@ -50,6 +52,7 @@ class AyatModel {
     "AyaDiac",
     "SearchText",
     "AyaNum",
+    "PageNum",
     "SoraName_ar",
     "SoraName_En",
     "SoraNameSearch",
@@ -63,6 +66,7 @@ class AyatModel {
       'AyaDiac': ayaText,
       'SearchText': ayaSearchText,
       'ayaNum': ayaNumber,
+      "PageNum":ayaPage,
       'SoraName_ar': soraNameAr,
       'SoraName_en': soraNameEn,
       'SoraNameSearch': soraSearchName,
@@ -77,6 +81,7 @@ class AyatModel {
       ayaText: map['AyaDiac'] as String,
       ayaSearchText: map['SearchText'] as String,
       ayaNumber: map['AyaNum'] as int,
+      ayaPage: map['PageNum']as int,
       soraNameAr: map['SoraName_ar'] as String,
       soraNameEn: map['SoraName_En'] as String,
       soraSearchName: map['SoraNameSearch'] as String,

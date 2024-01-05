@@ -26,7 +26,6 @@ class _AyatViewState extends State<AyatView> {
 
   @override
   void initState() {
-    globalPage = widget.sorah.pageNum - 1;
     // BlocProvider.of<QuranCubit>(context).getCurrentPageSora(widget.sorah.pageNum);
     super.initState();
   }
@@ -34,7 +33,7 @@ class _AyatViewState extends State<AyatView> {
   @override
   Widget build(BuildContext context) {
     PageController pageController =
-        PageController(initialPage: globalPage, keepPage: true);
+        PageController(initialPage: globalPage, keepPage: false);
 
     return Scaffold(
       appBar: AppBar(
