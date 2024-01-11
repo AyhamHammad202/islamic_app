@@ -66,10 +66,6 @@ class _LastSorahReadWidgetState extends State<LastSorahReadWidget> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Text("page ${(lastRead?.pageNum) ?? 1}"),
-                  // Text("aya ${(lastRead?.ayaNum) ?? 1}"),
-                  // Text("sora num ${(lastRead?.soraNum) ?? 1}"),
-                  // Text("sora name ${(lastRead?.soraEnName) ?? 1}"),
                   Column(
                     children: [
                       SvgPicture.asset(
@@ -101,7 +97,6 @@ class _LastSorahReadWidgetState extends State<LastSorahReadWidget> {
                   Column(
                     children: [
                       Text(
-                        // "2023/12/15",
                         "${lastRead?.dateTime ?? ""}",
                         style: TextStyle(
                           color: kThirdlyColor,
