@@ -1,6 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<uses-permission android:name="android.permission.INTERNET" />
+<queries>
+            <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="tg" />
+        </intent>
+            <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="wa.ma" />
+        </intent>
+    </queries>
     <application
-        android:label="إسلامنا"
+        android:label="نور المؤمن"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

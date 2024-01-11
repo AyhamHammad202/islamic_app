@@ -1,9 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/models/aya_model.dart';
+import 'package:islamic_app/services/settings_service.dart';
 
 import 'aya_item_above.dart';
 
@@ -32,14 +35,18 @@ class _AyaItemState extends State<AyaItem> {
           AyaItemAbove(ayat: widget.ayat),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 8.h),
-            child: Text(
-              widget.ayat.ayaText,
-              style: TextStyle(
-                fontFamily: kFontUthmanicHafs,
-                color: Colors.black,
-                fontSize: 32.sp,
-              ),
-            ),
+            child: FutureBuilder(
+                future: SettingsService().getStringValue("ayaFontSize"),
+                builder: (context, snapshot) {
+                  return Text(
+                    widget.ayat.ayaText,
+                    style: TextStyle(
+                      fontFamily: kFontUthmanicHafs,
+                      color: Colors.black,
+                      fontSize: double.parse(snapshot.data ?? "24").sp,
+                    ),
+                  );
+                }),
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 4.h),
@@ -91,18 +98,72 @@ class _AyaItemState extends State<AyaItem> {
           ),
           Visibility(
             visible: isTaffserShowed,
-            child: SelectableText(
-              widget.ayat.taffser,
-              style: TextStyle(
-                fontFamily: kFontNotoNaskhArabic,
-                color: Colors.black,
-                fontSize: 20.sp,
-              ),
-              textAlign: TextAlign.justify,
-            ),
-          )
+            child: FutureBuilder(
+                future: SettingsService().getStringValue("fontSize"),
+                builder: (context, snapshot) {
+                  if (snapshot.data == null)
+                    return buildRichText(widget.ayat.taffser, "16");
+                  return buildRichText(widget.ayat.taffser, snapshot.data!);
+                }),
+          ),
         ],
       ),
+    );
+  }
+
+  SelectableText buildRichText(String text, String fontSize) {
+    final regex = RegExp(r'\{[^}]+\}');
+    String remaining = text;
+
+    List<TextSpan> textSpans = [];
+
+    while (regex.hasMatch(remaining)) {
+      final match = regex.firstMatch(remaining)!;
+      final matchedString = match.group(0)!;
+      final leadingText = remaining.substring(0, match.start);
+
+      if (leadingText.isNotEmpty) {
+        textSpans.add(
+          TextSpan(
+            text: leadingText,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+        );
+      }
+
+      final strippedWord = matchedString.replaceAll(RegExp(r'[{}]'), '');
+      textSpans.add(TextSpan(
+          text: strippedWord,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.red,
+            fontFamily: kFontUthmanicHafs,
+          )));
+
+      remaining = remaining.substring(match.end);
+    }
+
+    if (remaining.isNotEmpty) {
+      textSpans.add(
+        TextSpan(
+          text: remaining,
+          // style: TextStyle(color: Colors.black),
+        ),
+      );
+    }
+    return SelectableText.rich(
+      TextSpan(
+        style: TextStyle(
+          fontFamily: kFontNotoNaskhArabic,
+          color: Colors.black,
+          fontSize: double.parse(fontSize).sp,
+        ),
+        children: textSpans,
+      ),
+      textAlign: TextAlign.justify,
+      selectionHeightStyle: BoxHeightStyle.strut,
     );
   }
 }

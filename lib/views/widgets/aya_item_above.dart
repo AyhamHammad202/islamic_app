@@ -6,6 +6,7 @@ import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/aya_model.dart';
 import 'package:islamic_app/views/widgets/custom_botton.dart';
+import 'package:share_plus/share_plus.dart';
 
 class AyaItemAbove extends StatelessWidget {
   const AyaItemAbove({
@@ -65,10 +66,15 @@ class AyaItemAbove extends StatelessWidget {
             ),
             CustomBotton(
               image: "assets/images/sharee.png",
+              onTap: () {
+                Share.share(
+                    "{ ${ayat.ayaText.substring(0, ayat.ayaText.length - 2)} }\n${ayat.soraNameAr} الآية:${ayat.ayaNumber}\nالتفسير:${ayat.taffser}");
+              },
             ),
           ],
         ),
       ),
     );
   }
+
 }

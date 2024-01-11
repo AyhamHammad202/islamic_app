@@ -84,6 +84,7 @@ class _LastSorahReadWidgetState extends State<LastSorahReadWidget> {
                           color: kThirdlyColor,
                           fontFamily: kFontKufamItalicVariableFont,
                           fontWeight: FontWeight.w600,
+                          fontSize: 16.sp,
                         ),
                       ),
                     ],

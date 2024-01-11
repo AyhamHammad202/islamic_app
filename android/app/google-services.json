@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "159972411554",
+    "project_id": "islamic-app-fc619",
+    "storage_bucket": "islamic-app-fc619.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159972411554:android:d9e015fa20e5b24ae7affb",
+        "android_client_info": {
+          "package_name": "com.example.islamic_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtZhaV-sczAXzKCQE1KQwfatOYoM1bODI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

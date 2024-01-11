@@ -9,6 +9,7 @@ const String kSearchAsset = "assets/images/search.svg";
 const String kSorahNumberFramAsset = "assets/images/sorah_number_fram.svg";
 const String kTransferAsset = "assets/images/transfer.png";
 const String kFramAsset = "assets/images/Group_19.png";
+const String kAppIconAsset = "assets/icon/quran.png";
 const String kFontUthmanicHafs = "UthmanicHafs";
 const String kFontKufamItalicVariableFont = "KufamItalicVariableFont";
 const String kFontNotoNaskhArabic = "NotoNaskhArabic";

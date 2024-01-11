@@ -29,6 +29,9 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.2
+  device_preview: ^1.1.0
+  firebase_core: ^2.24.2
+  firebase_messaging: ^14.7.10
   flutter:
     sdk: flutter
   flutter_advanced_drawer: ^1.3.5
@@ -39,9 +42,13 @@ dependencies:
     sdk: flutter
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.9
+  font_awesome_flutter: ^10.6.0
   hijri: ^3.0.0
+  settings_ui: ^2.0.2
+  share_plus: ^7.2.1
   shared_preferences: ^2.2.2
   sqflite: ^2.3.0
+  url_launcher: ^6.2.2
 
 dev_dependencies:
   flutter_test:
@@ -74,7 +81,9 @@ flutter:
     - assets/images/hijri/
     - assets/images/quran_pages/
     - assets/images/sorahs/
+    - assets/icon/
     - assets/data/
+    - shorebird.yaml
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

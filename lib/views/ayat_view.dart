@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:islamic_app/constant.dart';
 import '../../cubits/quran_cubit/quran_cubit.dart';
@@ -37,6 +38,7 @@ class _AyatViewState extends State<AyatView> {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 55.h,
         backgroundColor: Colors.transparent,
         elevation: 0,
         actionsIconTheme: IconThemeData(color: kThirdlyColor),
@@ -56,7 +58,12 @@ class _AyatViewState extends State<AyatView> {
                 isImageView = !isImageView;
               });
             },
-            icon: Image.asset(kTransferAsset),
+            icon: Image.asset(
+              kTransferAsset,
+              width: 30.w,
+              height: 30.h,
+              fit: BoxFit.contain,
+            ),
           ),
         ],
         title: BlocBuilder<QuranCubit, QuranState>(
@@ -65,6 +72,7 @@ class _AyatViewState extends State<AyatView> {
               pages = BlocProvider.of<QuranCubit>(context).currentPage;
               return SvgPicture.asset(
                 "assets/images/sorahs/${pages!.first.soraNum.toString().padLeft(3, "0")}.svg",
+                width: 110.w,
                 colorFilter: ColorFilter.mode(kThirdlyColor, BlendMode.srcIn),
               );
             } else {

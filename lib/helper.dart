@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 extension ArabicNumerals on int {
   String toArabic() {
     final arabicNumerals = {
@@ -18,6 +21,55 @@ extension ArabicNumerals on int {
         .map((char) => arabicNumerals[char] ?? char)
         .join('');
   }
+}
+
+Future<void> openUrl(
+    {required String url,
+    required String errorMessage,
+    required BuildContext context}) async {
+  final Uri url0 = Uri.parse(url);
+  if (await canLaunchUrl(url0)) {
+    if (await launchUrl(url0)) {
+      if (context.mounted) {
+        show(context: context, message: 'حدث خطأ', marginFromHorizontal: 70);
+      }
+    }
+  } else {
+    if (context.mounted) {
+      show(context: context, message: errorMessage, marginFromHorizontal: 70);
+    }
+  }
+}
+
+void show(
+    {required BuildContext context,
+    required String message,
+    double? marginFromHorizontal}) {
+  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      duration: const Duration(seconds: 3),
+      content: Container(
+        margin: EdgeInsets.symmetric(horizontal: marginFromHorizontal ?? 0),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        decoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Text(
+          message,
+          textAlign: TextAlign.center,
+          textDirection: TextDirection.rtl,
+          style: const TextStyle(
+            fontFamily: 'Tajawal',
+          ),
+        ),
+      ),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+      elevation: 0,
+    ),
+  );
 }
 
 String fromHijriIndexToImage(int month) {
