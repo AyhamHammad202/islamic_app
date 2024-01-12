@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islamic_app/constant.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 extension ArabicNumerals on int {
@@ -61,7 +62,7 @@ void show(
           textAlign: TextAlign.center,
           textDirection: TextDirection.rtl,
           style: const TextStyle(
-            fontFamily: 'Tajawal',
+            fontFamily: kFontKufamRegular,
           ),
         ),
       ),

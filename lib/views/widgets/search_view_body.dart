@@ -2,8 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/views/ayat_view.dart';
 import 'package:islamic_app/views/widgets/aya_item.dart';
 import '../../cubits/quran_cubit/quran_cubit.dart';

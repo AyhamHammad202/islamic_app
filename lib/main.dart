@@ -1,12 +1,13 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:islamic_app/api/firebase_api.dart';
 import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/firebase_options.dart';
+import 'package:islamic_app/services/notificiton_service.dart';
 import '../../cubits/quran_cubit/quran_cubit.dart';
 import 'package:islamic_app/router.dart';
 import 'package:islamic_app/views/quran_view.dart';
@@ -18,7 +19,35 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseApi().initNotifictions();
+  // await FirebaseApi().initNotifictions();
+  await AwesomeNotifications().initialize("resource://drawable/quran", [
+    NotificationChannel(
+      channelKey: "salatAldoha",
+      channelName: "صلاة الضحى",
+      channelDescription: "التذكير بصلاة الضحى",
+      groupKey: "salatReminder",
+      icon: "resource://drawable/quran",
+      enableLights: true,
+      importance: NotificationImportance.High,
+      channelShowBadge: true,
+    ),
+    NotificationChannel(
+      channelKey: "salatAlotr",
+      channelName: "صلاة الوتر",
+      channelDescription: "التذكير بصلاة الوتر",
+      groupKey: "salatReminder",
+      icon: "resource://drawable/quran",
+      enableLights: true,
+      importance: NotificationImportance.High,
+      channelShowBadge: true,
+    )
+  ], channelGroups: [
+    NotificationChannelGroup(
+        channelGroupKey: "salatReminder", channelGroupName: "salatGroub")
+  ]);
+  if (!await AwesomeNotifications().isNotificationAllowed()) {
+    AwesomeNotifications().requestPermissionToSendNotifications();
+  }
   runApp(
     DevicePreview(
       builder: (context) => const MyApp(),
@@ -27,12 +56,32 @@ void main() async {
   );
 }
 
-final navigatorKey = GlobalKey<NavigatorState>();
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+// This widget is the root of your application.
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    AwesomeNotifications().setListeners(
+      onActionReceivedMethod: NotificationController.onActionReceivedMethod,
+      onNotificationCreatedMethod:
+          NotificationController.onNotificationCreatedMethod,
+      onNotificationDisplayedMethod:
+          NotificationController.onNotificationDisplayedMethod,
+      onDismissActionReceivedMethod:
+          NotificationController.onDismissActionReceivedMethod,
+    );
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -40,7 +89,7 @@ class MyApp extends StatelessWidget {
       child: SafeArea(
         child: ScreenUtilInit(
           builder: (context, child) => MaterialApp(
-            navigatorKey: navigatorKey,
+            navigatorKey: MyApp.navigatorKey,
             theme: ThemeData(
               scaffoldBackgroundColor: kBackgroundColor,
             ),

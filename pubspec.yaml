@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  awesome_notifications: ^0.8.2
   cupertino_icons: ^1.0.2
   device_preview: ^1.1.0
   firebase_core: ^2.24.2
@@ -44,7 +45,6 @@ dependencies:
   flutter_svg: ^2.0.9
   font_awesome_flutter: ^10.6.0
   hijri: ^3.0.0
-  settings_ui: ^2.0.2
   share_plus: ^7.2.1
   shared_preferences: ^2.2.2
   sqflite: ^2.3.0

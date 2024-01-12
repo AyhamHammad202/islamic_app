@@ -15,20 +15,26 @@ class SearchView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: MediaQuery.of(context).size.width - 30,
-        leading: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: TextField(
-            decoration: InputDecoration(
-                hintText: "أبحث بأستخدام الآية أو رقم الصفحة أو اسم السورة",
-                hintStyle: TextStyle(
-                  fontFamily: kFontNotoNaskhArabic,
-                ),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.r))),
-            onChanged: (value) {
-              BlocProvider.of<QuranCubit>(context).search(value.trim());
-            },
-          ),
+        toolbarHeight: 65.h,
+        leading: Column(
+          children: [
+            SizedBox(height: 8.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: TextField(
+                decoration: InputDecoration(
+                    hintText: "أبحث بأستخدام الآية أو رقم الصفحة أو اسم السورة",
+                    hintStyle: TextStyle(
+                      fontFamily: kFontNotoNaskhArabic,
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.r))),
+                onChanged: (value) {
+                  BlocProvider.of<QuranCubit>(context).search(value.trim());
+                },
+              ),
+            ),
+          ],
         ),
       ),
       body: SearchViewBody(),

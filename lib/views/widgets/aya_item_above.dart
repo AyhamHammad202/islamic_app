@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -62,6 +63,15 @@ class AyaItemAbove extends StatelessWidget {
                   text:
                       "{ ${ayat.ayaText.substring(0, ayat.ayaText.length - 2)} }\n${ayat.soraNameAr} الآية:${ayat.ayaNumber}",
                 ));
+                show(context: context, message: "تم النسخ");
+                AwesomeNotifications().createNotification(
+                    content: NotificationContent(
+                  id: 11,
+                  channelKey: 'test',
+                  actionType: ActionType.Default,
+                  title: 'لقد قمت بنسخ الاية',
+                  body: 'يمكنك مشاركتها في اي مكان تريد',
+                ));
               },
             ),
             CustomBotton(
@@ -76,5 +86,4 @@ class AyaItemAbove extends StatelessWidget {
       ),
     );
   }
-
 }

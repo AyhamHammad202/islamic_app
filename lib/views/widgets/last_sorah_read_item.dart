@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/cubits/quran_cubit/quran_cubit.dart';
 import 'package:islamic_app/helper.dart';
-import 'package:islamic_app/models/aya_model.dart';
 import 'package:islamic_app/models/last_read_model.dart';
 import 'package:islamic_app/views/ayat_view.dart';
 
