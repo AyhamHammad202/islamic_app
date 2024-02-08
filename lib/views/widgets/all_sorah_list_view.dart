@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islamic_app/models/sorah_model.dart';
+import 'package:islamic_app/models/surah_model.dart';
 
 import '../../cubits/quran_cubit/quran_cubit.dart';
 import 'sorah_tile.dart';
@@ -15,22 +18,27 @@ class AllSorahListView extends StatefulWidget {
 class _AllSorahListViewState extends State<AllSorahListView> {
   @override
   void initState() {
-    BlocProvider.of<QuranCubit>(context).all();
+    // BlocProvider.of<QuranCubit>(context).all();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<SorahModel> allSorah =
-        BlocProvider.of<QuranCubit>(context).allSorahOfQuran;
     return BlocBuilder<QuranCubit, QuranState>(
       builder: (context, state) {
-        return SliverList.builder(
-          itemCount: allSorah.length,
-          itemBuilder: (context, index) {
-            return SorahTile(sorah: allSorah[index]);
-          },
-        );
+        if (state is QuranDone) {
+          final List<SurahModel> allSorah =
+              BlocProvider.of<QuranCubit>(context).surahs;
+          log("soooooooooooooo  ${allSorah.length}");
+          return SliverList.builder(
+            itemCount: allSorah.length,
+            itemBuilder: (context, index) {
+              return SorahTile(sorah: allSorah[index]);
+            },
+          );
+        } else
+          return SliverToBoxAdapter(child: CircularProgressIndicator());
+        // return
       },
     );
     // return ListView.custom(

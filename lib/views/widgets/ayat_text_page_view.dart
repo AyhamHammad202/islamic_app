@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/views/ayat_view.dart';
 
 import '../../cubits/quran_cubit/quran_cubit.dart';
@@ -11,7 +12,7 @@ import 'ayat_text_list_view.dart';
 class AyatTextPageView extends StatefulWidget {
   const AyatTextPageView(
       {super.key, required this.sorah, required this.pageController});
-  final SorahModel sorah;
+  final SurahModel sorah;
 
   final PageController pageController;
   @override
@@ -45,7 +46,7 @@ class _AyatTextPageViewState extends State<AyatTextPageView> {
                 BlocProvider.of<QuranCubit>(context)
                     .getCurrentPageSora(page + 1);
                 BlocProvider.of<QuranCubit>(context)
-                    .getAllAyatOfPage(globalPage + 1);
+                    .getAllAyatOfPage(page + 1);
                 BlocProvider.of<QuranCubit>(context).setLastRead(page + 1);
                 BlocProvider.of<QuranCubit>(context).getLastRead();
                 BlocProvider.of<QuranCubit>(context)

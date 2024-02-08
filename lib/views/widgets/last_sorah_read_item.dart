@@ -46,10 +46,11 @@ class _LastSorahReadWidgetState extends State<LastSorahReadWidget> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AyatView(
-                          sorah: BlocProvider.of<QuranCubit>(context)
-                              .allSorahOfQuran[(lastRead?.soraNum) ?? 1]),
-                    ));
+                        builder: (context) => AyatView(
+                            sorah:
+                                BlocProvider.of<QuranCubit>(context).surahs[0])
+                        // BlocProvider.of<QuranCubit>(context).allSorahOfQuran[(lastRead?.soraNum) ?? 1]),
+                        ));
               });
             },
             child: Container(

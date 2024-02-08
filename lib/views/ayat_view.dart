@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:islamic_app/constant.dart';
+import 'package:islamic_app/models/surah_model.dart';
 import '../../cubits/quran_cubit/quran_cubit.dart';
 
 import 'package:islamic_app/models/sorah_model.dart';
@@ -15,7 +16,7 @@ int globalPage = 0;
 class AyatView extends StatefulWidget {
   const AyatView({super.key, required this.sorah});
   static const String id = "Ayat-View";
-  final SorahModel sorah;
+  final SurahModel sorah;
 
   @override
   State<AyatView> createState() => _AyatViewState();
@@ -71,7 +72,7 @@ class _AyatViewState extends State<AyatView> {
             if (state is QuranDone) {
               pages = BlocProvider.of<QuranCubit>(context).currentPage;
               return SvgPicture.asset(
-                "assets/images/sorahs/${pages!.first.soraNum.toString().padLeft(3, "0")}.svg",
+                "assets/images/sorahs/${1.toString().padLeft(3, "0")}.svg",
                 width: 110.w,
                 colorFilter: ColorFilter.mode(kThirdlyColor, BlendMode.srcIn),
               );

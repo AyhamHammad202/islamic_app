@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/services.dart';
 import 'package:islamic_app/database/data_client.dart';
 import 'package:islamic_app/models/aya_model.dart';
 import 'package:islamic_app/models/last_read_model.dart';
+import 'package:islamic_app/models/surah_model.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
@@ -24,7 +27,7 @@ class QuranCubit extends Cubit<QuranState> {
 
   Future<int> getFLastRead() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    return pref.getInt("lastRead")??1;
+    return pref.getInt("lastRead") ?? 1;
   }
 
   void getLastRead() async {
@@ -50,6 +53,38 @@ class QuranCubit extends Cubit<QuranState> {
       emit(QuranDone());
     } catch (e) {
       log('Database query failed: $e');
+    }
+  }
+
+  List<SurahModel> surahs = [];
+  void loadQuran() async {
+    try {
+      emit(QuranLoading());
+      String jsonString =
+          await rootBundle.loadString('assets/data/quranV2.json');
+      Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+      List<dynamic> surahsJson = jsonMap['data']['surahs'];
+      surahs = surahsJson.map((surah) => SurahModel.fromMap(surah)).toList();
+      emit(QuranDone());
+      log("number of surah ${surahs.length}");
+    } on Exception catch (e) {
+      emit(QuranFailure(exception: e));
+    }
+  }
+
+  List<AyaOfSurahModel> ayas = [];
+  void getAyasForCurrentPage(int index) {
+    try {
+      // emit(QuranLoading());
+      ayas = [];
+      for (var surah in surahs) {
+        ayas.addAll(surah.ayas.where((aya) => aya.page == index));
+      }
+      // ayas[0].text = "";
+      log("H");
+      // emit(QuranDone());
+    } on Exception catch (e) {
+      emit(QuranFailure(exception: e));
     }
   }
 

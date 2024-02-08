@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/firebase_options.dart';
+import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/services/notificiton_service.dart';
 import '../../cubits/quran_cubit/quran_cubit.dart';
 import 'package:islamic_app/router.dart';
@@ -49,9 +50,16 @@ void main() async {
     AwesomeNotifications().requestPermissionToSendNotifications();
   }
   runApp(
-    DevicePreview(
-      builder: (context) => const MyApp(),
-      enabled: false,
+    BlocProvider(
+      create: (context) {
+        QuranCubit quranCubit = QuranCubit();
+        quranCubit.loadQuran();
+        return quranCubit;
+      },
+      child: DevicePreview(
+        builder: (context) => const MyApp(),
+        enabled: false,
+      ),
     ),
   );
 }
@@ -84,26 +92,32 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => QuranCubit(),
-      child: SafeArea(
-        child: ScreenUtilInit(
-          builder: (context, child) => MaterialApp(
-            navigatorKey: MyApp.navigatorKey,
-            theme: ThemeData(
-              scaffoldBackgroundColor: kBackgroundColor,
-            ),
-            locale: Locale("ar"),
-            localizationsDelegates: [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            onGenerateRoute: onGenerateRoute,
-            debugShowCheckedModeBanner: false,
-            initialRoute: QuranView.id,
+    SizeConfig().init(context);
+    return SafeArea(
+      child: ScreenUtilInit(
+        builder: (context, child) => MaterialApp(
+          navigatorKey: MyApp.navigatorKey,
+          theme: ThemeData(
+            scaffoldBackgroundColor: kBackgroundColor,
+          ),
+          locale: Locale("ar"),
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          onGenerateRoute: onGenerateRoute,
+          debugShowCheckedModeBanner: false,
+          // initialRoute: QuranView.id,
+          home: BlocBuilder<QuranCubit, QuranState>(
+            builder: (context, state) {
+              if (state is QuranDone) {
+                return QuranView();
+              }
+              return Scaffold(body: Center(child: CircularProgressIndicator()));
+            },
           ),
         ),
       ),

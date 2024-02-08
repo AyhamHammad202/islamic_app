@@ -7,7 +7,7 @@ class FirebaseApi {
   //function to initialize notifictions
   Future<void> initNotifictions() async {
     //request permission from user
-    await _firebaseMessaging.requestPermission();
+    // await _firebaseMessaging.requestPermission();
 
     //Fetch the FCM token for the device
     // final fCMToken = await _firebaseMessaging.getToken();

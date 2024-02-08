@@ -41,13 +41,13 @@ class _SearchViewBodyState extends State<SearchViewBody> {
                           .getCurrentPageSora(ayat![index].ayaPage);
                       globalPage = ayat![index].ayaPage - 1;
                       log("Global page = ${globalPage}");
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AyatView(
-                                sorah: BlocProvider.of<QuranCubit>(context)
-                                    .allSorahOfQuran[ayat![index].soraNumber]),
-                          ));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => AyatView(
+                      //           sorah: BlocProvider.of<QuranCubit>(context)
+                      //               .allSorahOfQuran[ayat![index].soraNumber]),
+                      //     ));
                     },
                     child: AyaItem(ayat: ayat![index]),
                   ),

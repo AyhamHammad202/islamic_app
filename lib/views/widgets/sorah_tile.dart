@@ -5,13 +5,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/sorah_model.dart';
+import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/views/ayat_view.dart';
 
 import '../../cubits/quran_cubit/quran_cubit.dart';
 
 class SorahTile extends StatelessWidget {
   const SorahTile({super.key, required this.sorah});
-  final SorahModel sorah;
+  final SurahModel sorah;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +20,16 @@ class SorahTile extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       child: InkWell(
         onTap: () {
-          globalPage = sorah.pageNum - 1;
+          globalPage = sorah.ayas[0].page - 1;
           BlocProvider.of<QuranCubit>(context)
-              .getCurrentPageSora(sorah.pageNum);
-          // BlocProvider.of<QuranCubit>(context).getAllAyatOfPage(sorah.pageNum);
-          BlocProvider.of<QuranCubit>(context).setLastRead(sorah.pageNum);
-          BlocProvider.of<QuranCubit>(context).getLastRead();
-          BlocProvider.of<QuranCubit>(context).getAyatOfLastRead(sorah.pageNum);
+              .getAyasForCurrentPage(sorah.ayas[0].page);
           Navigator.pushNamed(context, AyatView.id, arguments: sorah);
+          // BlocProvider.of<QuranCubit>(context).getCurrentPageSora(sorah.pageNum);
+          // // BlocProvider.of<QuranCubit>(context).getAllAyatOfPage(sorah.pageNum);
+          // BlocProvider.of<QuranCubit>(context).setLastRead(sorah.pageNum);
+          // BlocProvider.of<QuranCubit>(context).getLastRead();
+          // BlocProvider.of<QuranCubit>(context).getAyatOfLastRead(sorah.pageNum);
+          // Navigator.pushNamed(context, AyatView.id, arguments: sorah);
         },
         child: Container(
           child: Row(
@@ -38,7 +41,7 @@ class SorahTile extends StatelessWidget {
                     kSorahNumberFramAsset,
                   ),
                   Text(
-                    "${sorah.id.toArabic()}",
+                    "${sorah.numberOfSurah.toArabic()}",
                     style: TextStyle(
                       fontFamily: kFontKufamRegular,
                       color: kThirdlyColor,
@@ -48,7 +51,7 @@ class SorahTile extends StatelessWidget {
                 ],
               ),
               SvgPicture.asset(
-                "assets/images/sorahs/${sorah.id.toString().padLeft(3, "0")}.svg",
+                "assets/images/sorahs/${sorah.numberOfSurah.toString().padLeft(3, "0")}.svg",
                 // color: kThirdlyColor,
                 colorFilter: ColorFilter.mode(kThirdlyColor, BlendMode.srcIn),
                 width: 100.w,
@@ -57,7 +60,7 @@ class SorahTile extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    sorah.nameEn,
+                    sorah.englishNameOfSurah,
                     style: TextStyle(
                       color: kThirdlyColor,
                       fontFamily: kFontKufamRegular,
@@ -67,7 +70,7 @@ class SorahTile extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "${sorah.typeAr}",
+                        "${sorah.revelationType}",
                         style: TextStyle(
                           color: kSecondlyColor,
                           fontFamily: kFontKufamRegular,
@@ -84,7 +87,7 @@ class SorahTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "${sorah.ayaCount} آية",
+                        "${sorah.ayas.length} آية",
                         style: TextStyle(
                           color: kSecondlyColor,
                           fontFamily: kFontKufamRegular,
