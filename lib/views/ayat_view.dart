@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:islamic_app/constant.dart';
+import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/models/surah_model.dart';
 import '../../cubits/quran_cubit/quran_cubit.dart';
 
@@ -23,7 +25,6 @@ class AyatView extends StatefulWidget {
 }
 
 class _AyatViewState extends State<AyatView> {
-  bool isImageView = true;
   List<PageModel>? pages;
 
   @override
@@ -36,6 +37,7 @@ class _AyatViewState extends State<AyatView> {
   Widget build(BuildContext context) {
     PageController pageController =
         PageController(initialPage: globalPage, keepPage: false);
+    QuranController quranController = Get.find();
 
     return Scaffold(
       appBar: AppBar(
@@ -56,7 +58,8 @@ class _AyatViewState extends State<AyatView> {
           IconButton(
             onPressed: () {
               setState(() {
-                isImageView = !isImageView;
+                quranController.isMushafMode.value =
+                    !quranController.isMushafMode.value;
               });
             },
             icon: Image.asset(
@@ -67,30 +70,20 @@ class _AyatViewState extends State<AyatView> {
             ),
           ),
         ],
-        title: BlocBuilder<QuranCubit, QuranState>(
-          builder: (context, state) {
-            if (state is QuranDone) {
-              pages = BlocProvider.of<QuranCubit>(context).currentPage;
-              return SvgPicture.asset(
-                "assets/images/sorahs/${1.toString().padLeft(3, "0")}.svg",
-                width: 110.w,
-                colorFilter: ColorFilter.mode(kThirdlyColor, BlendMode.srcIn),
-              );
-            } else {
-              return CircularProgressIndicator();
-            }
-          },
-        ),
       ),
-      body: isImageView
-          ? AyatImagePageView(
-              sorahModel: widget.sorah,
-              pageController: pageController,
-            )
-          : AyatTextPageView(
-              sorah: widget.sorah,
-              pageController: pageController,
-            ),
+      body: GetBuilder<QuranController>(
+        builder: (controller) {
+          return controller.isMushafMode.value
+              ? AyatImagePageView(
+                  sorahModel: widget.sorah,
+                  pageController: pageController,
+                )
+              : AyatTextPageView(
+                  sorah: widget.sorah,
+                  pageController: pageController,
+                );
+        },
+      ),
     );
   }
 }

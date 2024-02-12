@@ -1,11 +1,16 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:islamic_app/api/firebase_api.dart';
 import 'package:islamic_app/constant.dart';
+import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/firebase_options.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/services/notificiton_service.dart';
@@ -20,7 +25,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // await FirebaseApi().initNotifictions();
+  await FirebaseApi().initNotifictions();
   await AwesomeNotifications().initialize("resource://drawable/quran", [
     NotificationChannel(
       channelKey: "salatAldoha",
@@ -92,34 +97,41 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.instance;
+    firebaseAnalytics.logAppOpen();
     SizeConfig().init(context);
     return SafeArea(
       child: ScreenUtilInit(
-        builder: (context, child) => MaterialApp(
-          navigatorKey: MyApp.navigatorKey,
-          theme: ThemeData(
-            scaffoldBackgroundColor: kBackgroundColor,
-          ),
-          locale: Locale("ar"),
-          localizationsDelegates: [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          onGenerateRoute: onGenerateRoute,
-          debugShowCheckedModeBanner: false,
-          // initialRoute: QuranView.id,
-          home: BlocBuilder<QuranCubit, QuranState>(
-            builder: (context, state) {
-              if (state is QuranDone) {
-                return QuranView();
-              }
-              return Scaffold(body: Center(child: CircularProgressIndicator()));
-            },
-          ),
-        ),
+        builder: (context, child) => GetMaterialApp(
+            navigatorKey: MyApp.navigatorKey,
+            theme: ThemeData(
+              scaffoldBackgroundColor: kBackgroundColor,
+            ),
+            locale: Locale("ar"),
+            localizationsDelegates: [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            onGenerateRoute: onGenerateRoute,
+            debugShowCheckedModeBanner: false,
+            builder: BotToastInit(), //1. call BotToastInit
+            navigatorObservers: [
+              BotToastNavigatorObserver()
+            ], //2. registered route observer
+            // initialRoute: QuranView.id,
+            home: GetBuilder<QuranController>(
+              init: Get.put(QuranController()),
+              builder: (controller) {
+                return controller.surahs.isNotEmpty
+                    ? QuranView()
+                    : Scaffold(
+                        body: Text("No Data"),
+                      );
+              },
+            )),
       ),
     );
   }

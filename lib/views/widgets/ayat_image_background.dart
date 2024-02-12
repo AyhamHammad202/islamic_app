@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,8 +12,8 @@ class AyatImageBackground extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          margin:
-              EdgeInsets.only(right: 4.w, top: 32.h, bottom: 32.h),
+          height: MediaQuery.of(context).size.height / 2.5,
+          margin: EdgeInsets.only(right: 4.w, top: 32.h, bottom: 32.h),
           decoration: BoxDecoration(
             color: Color(0xffB5A397),
             borderRadius: BorderRadius.only(
@@ -25,8 +24,8 @@ class AyatImageBackground extends StatelessWidget {
         ),
         Container(
           width: double.infinity,
-          margin:
-              EdgeInsets.only(right: 8.w, top: 32.h, bottom: 32.h),
+          height: MediaQuery.of(context).size.height / 2.5,
+          margin: EdgeInsets.only(right: 8.w, top: 32.h, bottom: 32.h),
           decoration: BoxDecoration(
             color: Color(0xffD8C4B6),
             borderRadius: BorderRadius.only(
@@ -37,8 +36,8 @@ class AyatImageBackground extends StatelessWidget {
         ),
         Container(
           width: double.infinity,
-          margin:
-              EdgeInsets.only(right: 12.w, top: 32.h, bottom: 32.h),
+          height: MediaQuery.of(context).size.height / 2.5,
+          margin: EdgeInsets.only(right: 12.w, top: 32.h, bottom: 32.h),
           decoration: BoxDecoration(
             color: Color(0xffF5EFE7),
             borderRadius: BorderRadius.only(

@@ -36,6 +36,7 @@ class SurahModel {
 
 class AyaOfSurahModel {
   final int numberOfAyaInSurah;
+  final int uniqueIdOfAya;
   final String text;
   final String textOfAya;
   final String searchTextOfAya;
@@ -44,7 +45,7 @@ class AyaOfSurahModel {
   final int page;
   final bool sajda;
 
-  AyaOfSurahModel({
+  AyaOfSurahModel({required this.uniqueIdOfAya, 
     required this.numberOfAyaInSurah,
     required this.text,
     required this.textOfAya,
@@ -58,6 +59,7 @@ class AyaOfSurahModel {
   factory AyaOfSurahModel.fromMap(Map map) {
     return AyaOfSurahModel(
       numberOfAyaInSurah: map['numberInSurah'],
+      uniqueIdOfAya: map['number'],
       text: map['code_v2'],
       textOfAya: map['text'],
       searchTextOfAya: map['aya_text_emlaey'],

@@ -1,16 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:islamic_app/constant.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/helper.dart';
+import 'package:islamic_app/menu_extension.dart';
 import 'package:islamic_app/models/surah_model.dart';
 
-import '../../cubits/quran_cubit/quran_cubit.dart';
-
-class AyatImagePageView extends StatefulWidget {
+class AyatImagePageView extends StatelessWidget {
   const AyatImagePageView({
     super.key,
     required this.sorahModel,
@@ -20,100 +17,131 @@ class AyatImagePageView extends StatefulWidget {
   final PageController pageController;
 
   @override
-  State<AyatImagePageView> createState() => _AyatImagePageViewState();
-}
-
-class _AyatImagePageViewState extends State<AyatImagePageView> {
-  @override
   Widget build(BuildContext context) {
+    QuranController quranController = Get.find();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: PageView.builder(
-        controller: widget.pageController,
+        controller: pageController,
         itemCount: 604,
         itemBuilder: (context, page) {
-          BlocProvider.of<QuranCubit>(context).getAyasForCurrentPage(page + 1);
-          List<AyaOfSurahModel> ayas =
-              BlocProvider.of<QuranCubit>(context).ayas;
-          final List<LongPressGestureRecognizer> _longPressGestureRecognizer =
-              [];
-          List<bool> isSelected = [];
-          for (var i = 0; i < ayas.length; i++) {
-            isSelected.add(false);
-          }
-
+          quranController.getCurrentPageAyahsSeparatedForBasmala(page);
+          quranController.GetAyaTafser(page + 1);
           return SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 4.h),
-                  margin: EdgeInsets.symmetric(horizontal: 8.w),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
-                    color: kSecondlyColor,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        "الجزء:" + ayas.first.juz.toArabic(),
-                        style: TextStyle(
-                          fontFamily: kFontKufamRegular,
-                          fontSize: getProportionateScreenWidth(12),
-                          color: kPrimaryColor,
-                        ),
-                      ),
-                      Text(
-                        "الصفحة:" + ayas.first.page.toArabic(),
-                        style: TextStyle(
-                          fontFamily: kFontKufamRegular,
-                          fontSize: getProportionateScreenWidth(12),
-                          color: kPrimaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 16.h),
-                RichText(
-                  textDirection: TextDirection.rtl,
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: 'page${page + 1}',
-                      fontSize: getProportionateScreenWidth(22),
-                      letterSpacing: .01,
-                      wordSpacing: .01,
-                      height: 1.5.h,
-                      color: Colors.black,
-                    ),
-                    children: List.generate(
-                      ayas.length,
-                      (index) {
-                        isSelected.add(false);
-                        _longPressGestureRecognizer
-                            .add(LongPressGestureRecognizer()
-                              ..onLongPress = () {
-                                setState(() {
-                                  isSelected[index] = !isSelected[index];
-                                });
-                                log("Aya=${ayas[index].textOfAya}");
-                                log("Aya=${isSelected[index]}");
-                              });
-                        return TextSpan(
-                          text: index == 0
-                              ? "${ayas[index].text[0]} ${ayas[index].text.substring(1)}"
-                              : ayas[index].text,
-                          recognizer: _longPressGestureRecognizer[index],
-                          style: TextStyle(
-                            backgroundColor: isSelected[0] ? Colors.blue : null,
+            child: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              radius: 0,
+              onTap: () {
+                quranController.clearSelection();
+              },
+              child: SizedBox(
+                // height: 700,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                      quranController
+                          .getCurrentPageAyahsSeparatedForBasmala(page)
+                          .length, (i) {
+                    final ayas = quranController
+                        .getCurrentPageAyahsSeparatedForBasmala(page)[i];
+                    return Column(
+                      children: [
+                        ayas[0].numberOfAyaInSurah == 1
+                            ? Column(
+                                children: [
+                                  Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                          "assets/images/design/Sorah_name_ba3.svg"),
+                                      SvgPicture.asset(
+                                          "assets/images/sorahs/${quranController.getSurahNumberByAya(ayas.first).toString().padLeft(3, '0')}.svg"),
+                                    ],
+                                  ),
+                                  quranController.getSurahNumberByAya(
+                                                  ayas.first) ==
+                                              9 ||
+                                          quranController.getSurahNumberByAya(
+                                                  ayas.first) ==
+                                              1
+                                      ? SizedBox.shrink()
+                                      : SvgPicture.asset(
+                                          quranController.getSurahNumberByAya(
+                                                          ayas.first) ==
+                                                      95 ||
+                                                  quranController
+                                                          .getSurahNumberByAya(
+                                                              ayas.first) ==
+                                                      97
+                                              ? "assets/images/design/besmAllah2.svg"
+                                              : "assets/images/design/besmAllah.svg",
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2,
+                                        )
+                                ],
+                              )
+                            : SizedBox.shrink(),
+                        Obx(
+                          () => RichText(
+                            textDirection: TextDirection.rtl,
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: TextStyle(
+                                fontFamily: 'page${page + 1}',
+                                fontSize: getProportionateScreenWidth(22),
+                                letterSpacing: .01,
+                                wordSpacing: .01,
+                                height: 1.9,
+                                color: Colors.black,
+                              ),
+                              children: List.generate(
+                                ayas.length,
+                                (index) {
+                                  quranController.isSelected = quranController
+                                      .selectedAyahIndexes
+                                      .contains(ayas[index].uniqueIdOfAya);
+                                  return TextSpan(
+                                    text: index == 0
+                                        ? "${ayas[index].text[0]} ${ayas[index].text.substring(1)}"
+                                        : ayas[index].text,
+                                    style: TextStyle(
+                                        backgroundColor:
+                                            quranController.isSelected
+                                                ? Colors.lightBlue.shade300
+                                                    .withOpacity(0.3)
+                                                : null),
+                                    recognizer: LongPressGestureRecognizer(
+                                        duration: Durations.long2)
+                                      ..onLongPressStart =
+                                          (LongPressStartDetails details) {
+                                        quranController.toggleAyahSelection(
+                                            ayas[index].uniqueIdOfAya);
+                                        context.showAyahMenu(
+                                            quranController
+                                                .getSurahNumberFromPage(page),
+                                            page,
+                                            quranController
+                                                .getSurahNameFromPage(page),
+                                            index,
+                                            details: details,
+                                            ayaOfSurahModel: ayas[index]);
+                                      },
+                                  );
+                                },
+                              ),
+                            ),
                           ),
-                        );
-                      },
-                    ),
-                  ),
+                        )
+                      ],
+                    );
+                  }),
                 ),
-              ],
+              ),
             ),
           );
         },
@@ -121,17 +149,3 @@ class _AyatImagePageViewState extends State<AyatImagePageView> {
     );
   }
 }
-// Stack(
-//   alignment: Alignment.center,
-//   children: [
-//     index >= 2 ? AyatImageBackground() : SizedBox(),
-//     Image.asset(
-//       "assets/images/quran_pages/00${index + 1}.png",
-//       fit: BoxFit.contain,
-//     ),
-//     Image.asset(
-//       "assets/images/quran_pages/000${index + 1}.png",
-//       fit: BoxFit.contain,
-//     ),
-//   ],
-// );

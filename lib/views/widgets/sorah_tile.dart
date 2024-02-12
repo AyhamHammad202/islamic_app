@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:islamic_app/constant.dart';
+import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/helper.dart';
-import 'package:islamic_app/models/sorah_model.dart';
 import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/views/ayat_view.dart';
-
-import '../../cubits/quran_cubit/quran_cubit.dart';
 
 class SorahTile extends StatelessWidget {
   const SorahTile({super.key, required this.sorah});
@@ -16,13 +14,14 @@ class SorahTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    QuranController quranController = Get.find();
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       child: InkWell(
         onTap: () {
           globalPage = sorah.ayas[0].page - 1;
-          BlocProvider.of<QuranCubit>(context)
-              .getAyasForCurrentPage(sorah.ayas[0].page);
+          quranController.getCurrentPageAyas(sorah.ayas.first.page - 1);
           Navigator.pushNamed(context, AyatView.id, arguments: sorah);
           // BlocProvider.of<QuranCubit>(context).getCurrentPageSora(sorah.pageNum);
           // // BlocProvider.of<QuranCubit>(context).getAllAyatOfPage(sorah.pageNum);
