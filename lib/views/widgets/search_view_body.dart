@@ -1,65 +1,96 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:islamic_app/constant.dart';
+import 'package:islamic_app/controllers/quran_controller.dart';
+import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/views/ayat_view.dart';
-import 'package:islamic_app/views/widgets/aya_item.dart';
-import '../../cubits/quran_cubit/quran_cubit.dart';
 
-import 'package:islamic_app/models/aya_model.dart';
-
-class SearchViewBody extends StatefulWidget {
+class SearchViewBody extends StatelessWidget {
   const SearchViewBody({super.key});
 
   @override
-  State<SearchViewBody> createState() => _SearchViewBodyState();
-}
-
-class _SearchViewBodyState extends State<SearchViewBody> {
-  List<AyatModel>? ayat;
-  @override
-  void initState() {
-    BlocProvider.of<QuranCubit>(context).ayaList = [];
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    ayat = BlocProvider.of<QuranCubit>(context).ayaList;
+    QuranController quranController = Get.find();
     return SafeArea(
-      child: BlocBuilder<QuranCubit, QuranState>(
-        builder: (context, state) {
-          if (state is QuranDone) {
-            return ListView.builder(
-              itemCount: ayat!.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: GestureDetector(
-                    onTap: () {
-                      BlocProvider.of<QuranCubit>(context)
-                          .getCurrentPageSora(ayat![index].ayaPage);
-                      globalPage = ayat![index].ayaPage - 1;
-                      log("Global page = ${globalPage}");
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => AyatView(
-                      //           sorah: BlocProvider.of<QuranCubit>(context)
-                      //               .allSorahOfQuran[ayat![index].soraNumber]),
-                      //     ));
-                    },
-                    child: AyaItem(ayat: ayat![index]),
+      child: GetBuilder<QuranController>(
+        builder: (controller) {
+          return SizedBox(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List.generate(
+                  quranController.surasFoundbySearch.length,
+                  (index) => SuraSearchTile(
+                    surahModel: quranController.surasFoundbySearch[index],
                   ),
-                );
-              },
-            );
-          } else if (state is QuranSearch) {
-            return Center(child: CircularProgressIndicator());
-          }
-          return Text("Please Search");
+                ),
+              ),
+            ),
+          );
         },
       ),
     );
+  }
+}
+
+class AyaSearchTile extends StatelessWidget {
+  const AyaSearchTile({
+    super.key,
+    required this.ayaOfSurahModel,
+  });
+
+  final AyaOfSurahModel ayaOfSurahModel;
+
+  @override
+  Widget build(BuildContext context) {
+    QuranController quranController = Get.find();
+    return Column(
+      children: [
+        Text(
+          quranController
+              .surahs[quranController.getSurahNumberByAya(ayaOfSurahModel) - 1]
+              .nameOfSurah,
+        ),
+        Text(
+          ayaOfSurahModel.textOfAya,
+          style: TextStyle(
+            fontFamily: kFontUthmanicHafs,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class SuraSearchTile extends StatelessWidget {
+  const SuraSearchTile({
+    super.key,
+    required this.surahModel,
+  });
+
+  final SurahModel surahModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        child: Container(
+      padding: EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: Colors.blueAccent,
+        borderRadius: BorderRadius.circular(8.r),
+      ),
+      child: Column(
+        children: [
+          Text(
+            surahModel.nameOfSurah,
+            style: TextStyle(
+              fontFamily: kFontNotoNaskhArabic,
+            ),
+          ),
+        ],
+      ),
+    ));
   }
 }

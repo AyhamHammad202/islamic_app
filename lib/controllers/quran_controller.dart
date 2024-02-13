@@ -15,6 +15,7 @@ class QuranController extends GetxController {
   List<SurahModel> surahs = [];
   List<List<AyaOfSurahModel>> pages = [];
   List<AyaOfSurahModel> allAyas = [];
+  List<AyaOfSurahModel> ayasFoundBySearch = [];
 
   List<String> tafserOfPage = [];
 
@@ -124,5 +125,99 @@ class QuranController extends GetxController {
     });
     log('Tafser leanth======${tafserOfPage.length}');
     // refresh();
+  }
+
+  List<SurahModel> surasFoundbySearch = [];
+  void searchForAyas(String searchText) {
+    try {
+      ayasFoundBySearch.clear();
+      surasFoundbySearch.clear();
+      log("Start Searching for ${searchText}");
+      var results =
+          allAyas.where((aya) => aya.searchTextOfAya.contains(searchText));
+      results.forEach(
+        (aya) {
+          ayasFoundBySearch.add(aya);
+        },
+      );
+      var surasResults = surahs.where((sura) =>
+          removeDiacritics(sura.nameOfSurah).substring(5).contains(searchText));
+      surasResults.forEach(
+        (element) {
+          surasFoundbySearch.add(element);
+        },
+      );
+      log(removeDiacritics(surahs.first.nameOfSurah));
+      refresh();
+    } catch (e) {
+      log("Search Error ${e.toString()}");
+    }
+  }
+
+  // Map<int, int> indexMapping = {};
+  String removeDiacritics(String input) {
+    final diacriticsMap = {
+      'أ': 'ا',
+      'إ': 'ا',
+      'آ': 'ا',
+      'ٱ': 'ا',
+      'إٔ':
+          'ا', // These mappings already seem comprehensive, but double inclusion for clarity
+      'إٕ': 'ا',
+      'إٓ': 'ا',
+      'أَ': 'ا',
+      'إَ': 'ا',
+      'آَ': 'ا',
+      'إُ': 'ا',
+      'إٌ': 'ا',
+      'إً': 'ا',
+      // 'ة': 'ه',
+      'ً': '',
+      'ٌ': '',
+      'ٍ': '',
+      'َ': '',
+      'ُ': '',
+      'ِ': '',
+      'ّ': '',
+      'ْ': '',
+      'ـ': '',
+      // Adding more comprehensive handling for combinations and less common diacritics
+      'ٰ': '', // Dagger alif (small alif on top of characters)
+      'ٖ': '', // Kharijatayn (small noon)
+      'ٗ': '', // Inverted damma
+      'ٕ': '', // Small kasra
+      'ٓ': '', // Maddah above
+      'ۖ': '', // Small high seen
+      'ۗ': '', // Small high rounded zero
+      'ۘ': '', // Small high upright rectangular zero
+      'ۙ': '', // Small high dotless head of khah
+      'ۚ': '', // Small high meem isolated form
+      'ۛ': '', // Small low seen
+      'ۜ': '', // Small waw
+      '۝': '', // Small yeh
+      '۞': '', // Small high noon
+      '۟': '', // Empty centre low stop
+      '۠': '', // Empty centre high stop
+      'ۡ': '', // Rounded high stop with filled centre
+      'ۢ': '', // Small low meem
+    };
+
+    StringBuffer buffer = StringBuffer();
+    Map<int, int> indexMapping =
+        {}; // Ensure indexMapping is declared if not already globally declared
+    for (int i = 0; i < input.length; i++) {
+      String char = input[i];
+      String? mappedChar = diacriticsMap[char];
+      if (mappedChar != null) {
+        buffer.write(mappedChar);
+        if (mappedChar.isNotEmpty) {
+          indexMapping[buffer.length - 1] = i;
+        }
+      } else {
+        buffer.write(char);
+        indexMapping[buffer.length - 1] = i;
+      }
+    }
+    return buffer.toString();
   }
 }

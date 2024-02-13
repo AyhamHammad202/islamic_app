@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:159972411554:android:53f4b5979f53d1b4e7affb",
+        "android_client_info": {
+          "package_name": "com.NourAlMomen.quran"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtZhaV-sczAXzKCQE1KQwfatOYoM1bODI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:159972411554:android:d9e015fa20e5b24ae7affb",
         "android_client_info": {
           "package_name": "com.example.islamic_app"

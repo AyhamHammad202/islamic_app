@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:islamic_app/constant.dart';
-import 'package:islamic_app/cubits/quran_cubit/quran_cubit.dart';
+import 'package:islamic_app/controllers/quran_controller.dart';
 
 import 'widgets/search_view_body.dart';
 
@@ -12,15 +12,12 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    QuranController quranController = Get.find();
     return Scaffold(
-      appBar: AppBar(
-        leadingWidth: MediaQuery.of(context).size.width - 30,
-        toolbarHeight: 65.h,
-        leading: Column(
-          children: [
-            SizedBox(height: 8.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
+      body: GetBuilder<QuranController>(
+        builder: (controller) => CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
               child: TextField(
                 decoration: InputDecoration(
                     hintText: "أبحث بأستخدام الآية أو رقم الصفحة أو اسم السورة",
@@ -30,14 +27,40 @@ class SearchView extends StatelessWidget {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.r))),
                 onChanged: (value) {
-                  BlocProvider.of<QuranCubit>(context).search(value.trim());
+                  quranController.searchForAyas(value.trim());
                 },
               ),
             ),
+            SliverToBoxAdapter(
+              child: quranController.surasFoundbySearch.isNotEmpty
+                  ? SearchViewBody()
+                  : Center(
+                      child: Text("Please search"),
+                    ),
+            ),
+            SliverList.builder(
+              itemCount: quranController.ayasFoundBySearch.length,
+              itemBuilder: (context, index) {
+                return AyaSearchTile(
+                    ayaOfSurahModel: quranController.ayasFoundBySearch[index]);
+              },
+            )
+            // SizedBox(
+            //   height: 300,
+            //   child: SliverToBoxAdapter(
+            //     child: quranController.ayasFoundBySearch.isNotEmpty
+            //         ? ListView.builder(
+            //             itemCount: quranController.ayasFoundBySearch.length,
+            //             itemBuilder: (context, index) => AyaSearchTile(
+            //               ayaOfSurahModel: quranController.ayasFoundBySearch[index],
+            //             ),
+            //           )
+            //         : SizedBox.shrink(),
+            //   ),
+            // )
           ],
         ),
       ),
-      body: SearchViewBody(),
     );
   }
 }
