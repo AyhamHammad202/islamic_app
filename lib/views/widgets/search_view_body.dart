@@ -1,11 +1,9 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/models/surah_model.dart';
-import 'package:islamic_app/views/ayat_view.dart';
 
 class SearchViewBody extends StatelessWidget {
   const SearchViewBody({super.key});
@@ -55,7 +53,7 @@ class AyaSearchTile extends StatelessWidget {
         ),
         Text(
           ayaOfSurahModel.textOfAya,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: kFontUthmanicHafs,
           ),
         ),
@@ -76,7 +74,7 @@ class SuraSearchTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         child: Container(
-      padding: EdgeInsets.all(4),
+      padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         color: Colors.blueAccent,
         borderRadius: BorderRadius.circular(8.r),
@@ -85,7 +83,7 @@ class SuraSearchTile extends StatelessWidget {
         children: [
           Text(
             surahModel.nameOfSurah,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: kFontNotoNaskhArabic,
             ),
           ),

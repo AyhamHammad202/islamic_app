@@ -2,28 +2,55 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/services.dart';
 import 'package:collection/collection.dart';
-
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
-import 'package:islamic_app/database/data_client.dart';
-import 'package:islamic_app/models/surah_model.dart';
 import 'package:sqflite/sqflite.dart';
 
+import 'package:islamic_app/database/data_client.dart';
+import 'package:islamic_app/models/surah_model.dart';
+
 class QuranController extends GetxController {
-  Data2Client _client = Data2Client();
+  final DataClient _client = DataClient();
   List<SurahModel> surahs = [];
   List<List<AyaOfSurahModel>> pages = [];
   List<AyaOfSurahModel> allAyas = [];
   List<AyaOfSurahModel> ayasFoundBySearch = [];
 
-  List<String> tafserOfPage = [];
+  Map<int, String> mapOfTafser = {};
 
-  var selectedAyahIndexes = <int>[].obs;
+  RxList selectedAyahIndexes = <int>[].obs;
+  // RxList showAyahTafserIndexes = <int>[].obs;
+  RxInt globalPage = 0.obs;
+  late PageController pageController;
+  late AdvancedDrawerController advancedDrawerController;
+  late ScrollController homePageScrollerController;
   bool isSelected = false;
   PreferDirection preferDirection = PreferDirection.topCenter;
-
   RxBool isMushafMode = true.obs;
+
+  @override
+  void onInit() async {
+    super.onInit();
+    advancedDrawerController = AdvancedDrawerController();
+    homePageScrollerController = ScrollController();
+    homePageScrollerController.addListener(() {
+      // log("OFFEST ${homePageScrollerController.position}");
+      // if (homePageScrollerController.offset>homePageScrollerController) {}
+    });
+    await loadQuran();
+    await getAyaTafser();
+  }
+
+  @override
+  void onClose() {
+    log("onClose method called");
+    pageController.dispose();
+    advancedDrawerController.dispose();
+    super.onClose();
+  }
 
   void toggleAyahSelection(int index) {
     if (selectedAyahIndexes.contains(index)) {
@@ -42,12 +69,6 @@ class QuranController extends GetxController {
     } else {
       // sl<GeneralController>().showControl();
     }
-  }
-
-  @override
-  void onInit() async {
-    super.onInit();
-    await loadQuran();
   }
 
   Future<void> loadQuran() async {
@@ -79,7 +100,7 @@ class QuranController extends GetxController {
   List<AyaOfSurahModel> getCurrentPageAyas(int pageIndex) => pages[pageIndex];
 
   int getSurahNumberFromPage(int pageNumber) {
-    log("pageeeeeeee" + pageNumber.toString());
+    log("Gets Sura Number from page $pageNumber");
     return surahs
         .firstWhere(
             (s) => s.ayas.contains(getCurrentPageAyas(pageNumber).first))
@@ -101,11 +122,11 @@ class QuranController extends GetxController {
     }
   }
 
-  void GetAyaTafser(int page) async {
+  Future<void> getAyaTafser() async {
     Database? database = await _client.database;
     if (database == null || !database.isOpen) {
-      print('Database is null or closed');
-      return null;
+      log('Database is null or closed');
+      return;
     }
     List results = (await database.query("saadi",
             columns: [
@@ -115,15 +136,16 @@ class QuranController extends GetxController {
               'text',
               'pageNum',
             ],
-            where: "PageNum=${page}",
+            // where: "PageNum=$page",
             orderBy: '"index"'))
         .cast<Map>();
-    tafserOfPage = [];
-    results.forEach((element) {
-      // log(element['text']);
-      tafserOfPage.add(element['text']);
-    });
-    log('Tafser leanth======${tafserOfPage.length}');
+    // tafserOfPage = [];
+    mapOfTafser.clear();
+    for (var element in results) {
+      mapOfTafser.addAll({element['index']: element['text']});
+      // tafserOfPage.add(element['text']);
+    }
+    log('Tafser leanth======${mapOfTafser.length}');
     // refresh();
   }
 
@@ -132,22 +154,23 @@ class QuranController extends GetxController {
     try {
       ayasFoundBySearch.clear();
       surasFoundbySearch.clear();
-      log("Start Searching for ${searchText}");
+      log("Start Searching for $searchText");
+      if (searchText.isEmpty) {
+        ayasFoundBySearch.clear();
+        surasFoundbySearch.clear();
+        refresh();
+        return;
+      }
       var results =
           allAyas.where((aya) => aya.searchTextOfAya.contains(searchText));
-      results.forEach(
-        (aya) {
-          ayasFoundBySearch.add(aya);
-        },
-      );
+      for (var aya in results) {
+        ayasFoundBySearch.add(aya);
+      }
       var surasResults = surahs.where((sura) =>
           removeDiacritics(sura.nameOfSurah).substring(5).contains(searchText));
-      surasResults.forEach(
-        (element) {
-          surasFoundbySearch.add(element);
-        },
-      );
-      log(removeDiacritics(surahs.first.nameOfSurah));
+      for (var element in surasResults) {
+        surasFoundbySearch.add(element);
+      }
       refresh();
     } catch (e) {
       log("Search Error ${e.toString()}");

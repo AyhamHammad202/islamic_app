@@ -8,7 +8,8 @@ class TafserRichTextWidget extends StatelessWidget {
   final String text;
   final String fontSize;
 
-  TafserRichTextWidget({required this.text, required this.fontSize});
+  const TafserRichTextWidget(
+      {super.key, required this.text, required this.fontSize});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class TafserRichTextWidget extends StatelessWidget {
         textSpans.add(
           TextSpan(
             text: leadingText,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
             ),
           ),
@@ -36,7 +37,7 @@ class TafserRichTextWidget extends StatelessWidget {
       final strippedWord = matchedString.replaceAll(RegExp(r'[{}]'), '');
       textSpans.add(TextSpan(
         text: strippedWord,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.red,
           fontFamily: 'YourCustomFont', // Replace with your desired font
@@ -58,7 +59,8 @@ class TafserRichTextWidget extends StatelessWidget {
     return SelectableText.rich(
       TextSpan(
         style: TextStyle(
-          fontFamily: kFontNotoNaskhArabic, // Replace with another font if needed
+          fontFamily:
+              kFontNotoNaskhArabic, // Replace with another font if needed
           color: Colors.black,
           fontSize: double.parse(fontSize).sp,
         ),

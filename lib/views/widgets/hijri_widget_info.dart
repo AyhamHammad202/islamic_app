@@ -14,11 +14,11 @@ class HijriWidgetInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HijriCalendar.setLocal("ar");
-    var hijri = new HijriCalendar.now();
+    var hijri = HijriCalendar.now();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 24.h),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
         decoration: BoxDecoration(
           color: kPrimaryColor,
           borderRadius: BorderRadius.circular(8.r),
@@ -32,7 +32,7 @@ class HijriWidgetInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              "${hijri.hDay.toArabic()}",
+              hijri.hDay.toArabic(),
               // "${29.toArabic()}",
               style: TextStyle(
                 color: kThirdlyColor,
@@ -44,7 +44,7 @@ class HijriWidgetInfo extends StatelessWidget {
             ),
             SizedBox(
               height: 40.h,
-              child: VerticalDivider(
+              child: const VerticalDivider(
                 color: kThirdlyColor,
                 thickness: 2,
               ),
@@ -59,26 +59,27 @@ class HijriWidgetInfo extends StatelessWidget {
             // ),
             SvgPicture.asset(
               fromHijriIndexToImage(hijri.hMonth),
-              colorFilter: ColorFilter.mode(kThirdlyColor, BlendMode.srcIn),
+              colorFilter:
+                  const ColorFilter.mode(kThirdlyColor, BlendMode.srcIn),
             ),
-            Spacer(),
+            const Spacer(),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "${hijri.hMonth.toArabic()}",
+                  hijri.hMonth.toArabic(),
                   style: TextStyle(
                     color: kThirdlyColor,
                     fontWeight: FontWeight.w600,
                     fontSize: 40.sp,
                     fontFamily: kFontNotoNaskhArabic,
-                    height: 0.2,
+                    height: 0.4.h,
                   ),
                 ),
                 SizedBox(
                   width: 50.w,
-                  child: Divider(
+                  child: const Divider(
                     color: kSecondlyColor,
                     thickness: 2,
                     height: 10,

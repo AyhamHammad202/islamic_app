@@ -7,7 +7,7 @@ import 'package:islamic_app/helper.dart';
 class AboutUsView extends StatelessWidget {
   const AboutUsView({super.key});
   static const String id = "about-us-view";
-  final String whatsappUrl = "whatsapp://send?phone=\+9647822392275";
+  final String whatsappUrl = "whatsapp://send?phone=+9647822392275";
   final String telegramUrl = "tg://resolve?domain=a_iqi202";
 
   @override
@@ -37,7 +37,7 @@ class AboutUsView extends StatelessWidget {
                   fontFamily: kFontKufamRegular,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'أنا متحمس لتقديم تجربة رائعة لقراءة القرآن الكريم.',
                 style: TextStyle(
@@ -45,7 +45,7 @@ class AboutUsView extends StatelessWidget {
                   fontFamily: kFontKufamRegular,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'أن واجهت مشكلة ما أو كان لديك اقتراح ما,يمكنك التواصل معي.',
                 style: TextStyle(
@@ -53,12 +53,12 @@ class AboutUsView extends StatelessWidget {
                   fontFamily: kFontKufamRegular,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(FontAwesomeIcons.telegram),
+                    icon: const Icon(FontAwesomeIcons.telegram),
                     tooltip: "تواصل معي عبر التلكرام",
                     onPressed: () async {
                       const String telegramUsername = 'a_iqi202';

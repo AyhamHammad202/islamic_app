@@ -21,7 +21,7 @@ class SearchView extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                     hintText: "أبحث بأستخدام الآية أو رقم الصفحة أو اسم السورة",
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       fontFamily: kFontNotoNaskhArabic,
                     ),
                     border: OutlineInputBorder(
@@ -32,11 +32,17 @@ class SearchView extends StatelessWidget {
               ),
             ),
             SliverToBoxAdapter(
+              child: quranController.ayasFoundBySearch.isEmpty &&
+                      quranController.surasFoundbySearch.isEmpty
+                  ? const Center(
+                      child: Text("Please Search"),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+            SliverToBoxAdapter(
               child: quranController.surasFoundbySearch.isNotEmpty
-                  ? SearchViewBody()
-                  : Center(
-                      child: Text("Please search"),
-                    ),
+                  ? const SearchViewBody()
+                  : null,
             ),
             SliverList.builder(
               itemCount: quranController.ayasFoundBySearch.length,
@@ -44,7 +50,7 @@ class SearchView extends StatelessWidget {
                 return AyaSearchTile(
                     ayaOfSurahModel: quranController.ayasFoundBySearch[index]);
               },
-            )
+            ),
             // SizedBox(
             //   height: 300,
             //   child: SliverToBoxAdapter(

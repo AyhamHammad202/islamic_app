@@ -8,7 +8,7 @@ class AllJuzesListView extends StatelessWidget {
     return SliverList.builder(
       itemCount: 30,
       itemBuilder: (context, index) {
-        return JuzTile();
+        return const JuzTile();
       },
     );
   }
@@ -19,6 +19,6 @@ class JuzTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container( child: Text("1"),);
+    return const Text("1");
   }
 }

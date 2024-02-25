@@ -14,63 +14,67 @@ class TafserBottomSheet extends StatelessWidget {
     required this.ayaOfSurahModel,
     required this.page,
     required this.numberOfSura,
+    required this.numberOfAyaInPage,
   });
 
   final String tafser;
   final AyaOfSurahModel ayaOfSurahModel;
   final int page;
   final int numberOfSura;
+  final int numberOfAyaInPage;
 
   @override
   Widget build(BuildContext context) {
     QuranController quranController = Get.find();
     return SingleChildScrollView(
-      child: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    "${quranController.surahs[numberOfSura - 1].nameOfSurah}",
-                    style: TextStyle(
-                      fontFamily: kFontKufamRegular,
-                    ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  quranController.surahs[numberOfSura - 1].nameOfSurah,
+                  style: const TextStyle(
+                    fontFamily: kFontKufamRegular,
                   ),
-                  Text(
-                      "الآية:" + ayaOfSurahModel.numberOfAyaInSurah.toArabic()),
+                ),
+                Text("الآية:${ayaOfSurahModel.numberOfAyaInSurah.toArabic()}"),
+              ],
+            ),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(
+                  fontFamily: "page${page + 1}",
+                  color: Colors.black,
+                  fontSize: 20.sp,
+                ),
+                children: [
+                  TextSpan(
+                    text: numberOfAyaInPage == 0
+                        ? "${ayaOfSurahModel.text.characters.first} ${ayaOfSurahModel.text.substring(1).replaceAll("\n", "").replaceFirst(ayaOfSurahModel.text.characters.last, "")}"
+                        : ayaOfSurahModel.text
+                            .replaceAll("\n", "")
+                            .replaceFirst(
+                                ayaOfSurahModel.text.characters.last, ""),
+                  ),
+                  TextSpan(
+                    text: " ${ayaOfSurahModel.text.characters.last}",
+                    style: TextStyle(
+                      fontFamily: "page${page + 1}",
+                      color: Colors.indigo,
+                    ),
+                  )
                 ],
               ),
-              RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    fontFamily: kFontUthmanicHafs,
-                    color: Colors.black,
-                    fontSize: 20.sp,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: ayaOfSurahModel.textOfAya,
-                    ),
-                    TextSpan(
-                      text: " ${ayaOfSurahModel.text.characters.last}",
-                      style: TextStyle(
-                        fontFamily: "page${page + 1}",
-                        color: Colors.indigo,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Divider(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.w),
-                child: TafserRichTextWidget(text: tafser, fontSize: "16"),
-              )
-            ],
-          ),
+            ),
+            const Divider(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: TafserRichTextWidget(text: tafser, fontSize: "16"),
+            )
+          ],
         ),
       ),
     );

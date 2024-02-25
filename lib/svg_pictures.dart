@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-Widget tafsir_icon({double? height, double? width}) {
+Widget tafsirIcon({double? height, double? width}) {
   return SvgPicture.asset(
     'assets/svg/tafsir_icon.svg',
     width: width,
@@ -9,7 +9,7 @@ Widget tafsir_icon({double? height, double? width}) {
   );
 }
 
-Widget copy_icon({double? height, double? width}) {
+Widget copyIcon({double? height, double? width}) {
   return SvgPicture.asset(
     'assets/svg/copy_icon.svg',
     width: width,
@@ -17,7 +17,7 @@ Widget copy_icon({double? height, double? width}) {
   );
 }
 
-Widget share_icon({double? height, double? width}) {
+Widget shareIcon({double? height, double? width}) {
   return SvgPicture.asset(
     'assets/svg/share_icon.svg',
     width: width,
@@ -25,7 +25,7 @@ Widget share_icon({double? height, double? width}) {
   );
 }
 
-Widget play_arrow({double? height, double? width}) {
+Widget playArrow({double? height, double? width}) {
   return SvgPicture.asset(
     'assets/svg/play-arrow.svg',
     width: width,
@@ -33,7 +33,7 @@ Widget play_arrow({double? height, double? width}) {
   );
 }
 
-Widget pause_arrow({double? height, double? width}) {
+Widget pauseArrow({double? height, double? width}) {
   return SvgPicture.asset(
     'assets/svg/pause_arrow.svg',
     width: width,

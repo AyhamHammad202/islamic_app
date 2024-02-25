@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:islamic_app/constant.dart';
-import 'package:islamic_app/cubits/tabs/tabs_cubit.dart';
 
 import '../generated/l10n.dart';
 import 'tab_bar_item.dart';
@@ -20,7 +18,6 @@ class _TabBarListViewState extends State<TabBarListView> {
   int? tap;
   @override
   void initState() {
-    tap = BlocProvider.of<TabsCubit>(context).tab;
     super.initState();
   }
 
@@ -47,7 +44,6 @@ class _TabBarListViewState extends State<TabBarListView> {
               onTap: () {
                 setState(() {
                   tap = index;
-                  BlocProvider.of<TabsCubit>(context).changeTap(index);
                 });
               },
               child: TabBarItem(

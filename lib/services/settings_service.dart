@@ -1,22 +1,44 @@
+import 'package:get/get.dart';
+import 'package:islamic_app/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingsService {
-  Future<void> saveStringValue(String key ,String value) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, value);
+class SettingsService extends GetxService {
+  late SharedPreferences sharedPreferences;
+
+  RxInt ayaFontSize = 24.obs;
+  RxInt ayaTafserFontSize = 16.obs;
+  RxBool salatAldohaReminder = false.obs;
+  RxBool salatAlotrReminder = false.obs;
+
+  void setAyaFontSize(int size) {
+    ayaFontSize.value = size;
+    sharedPreferences.setInt(kSettingAyaFontSizeKey, size);
   }
 
-  Future<String?> getStringValue(String key) async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(key);
-  }
-  Future<void> saveBoolValue(String key ,bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setBool(key, value);
+  void setAyaTafserFontSize(int size) {
+    ayaTafserFontSize.value = size;
+    sharedPreferences.setInt(kSettingAyaTafserFontSizeKey, size);
   }
 
-  Future<bool?> getBoolValue(String key) async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(key);
+  void setSalatAldohaReminder(bool isEnabled) {
+    salatAldohaReminder.value = isEnabled;
+    sharedPreferences.setBool(kSettingSalatAldohaKey, isEnabled);
+  }
+
+  void setSalatAlotrReminder(bool isEnabled) {
+    salatAlotrReminder.value = isEnabled;
+    sharedPreferences.setBool(kSettingSalatAlotrKey, isEnabled);
+  }
+
+  Future<SettingsService> init() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    ayaFontSize.value = sharedPreferences.getInt(kSettingAyaFontSizeKey) ?? 24;
+    ayaTafserFontSize.value =
+        sharedPreferences.getInt(kSettingAyaTafserFontSizeKey) ?? 16;
+    salatAldohaReminder.value =
+        sharedPreferences.getBool(kSettingSalatAldohaKey) ?? false;
+    salatAlotrReminder.value =
+        sharedPreferences.getBool(kSettingSalatAlotrKey) ?? false;
+    return this;
   }
 }

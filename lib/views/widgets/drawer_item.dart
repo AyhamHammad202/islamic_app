@@ -5,11 +5,11 @@ import '../../constant.dart';
 
 class DrawerItem extends StatelessWidget {
   const DrawerItem({
-    Key? key,
+    super.key,
     required this.leadingIcon,
     required this.title,
     this.onTap,
-  }) : super(key: key);
+  });
   final IconData leadingIcon;
   final String title;
   final void Function()? onTap;

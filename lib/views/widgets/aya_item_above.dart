@@ -1,24 +1,29 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:islamic_app/constant.dart';
+import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/helper.dart';
-import 'package:islamic_app/models/aya_model.dart';
+import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/views/widgets/custom_botton.dart';
+import 'package:islamic_app/views/widgets/tafser_bottomsheet.dart';
 import 'package:share_plus/share_plus.dart';
 
 class AyaItemAbove extends StatelessWidget {
   const AyaItemAbove({
     super.key,
-    required this.ayat,
+    required this.aya,
+    required this.indexOfAyaInPage,
   });
 
-  final AyatModel ayat;
+  final AyaOfSurahModel aya;
+  final int indexOfAyaInPage;
 
   @override
   Widget build(BuildContext context) {
+    QuranController quranController = Get.find();
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4.h),
       child: Container(
@@ -36,7 +41,7 @@ class AyaItemAbove extends StatelessWidget {
                 SvgPicture.asset("assets/images/frame_back_comp.svg"),
                 SvgPicture.asset("assets/images/frame_colored.svg"),
                 Text(
-                  "${ayat.ayaNumber.toArabic()}",
+                  aya.numberOfAyaInSurah.toArabic(),
                   style: TextStyle(
                     fontSize: 22.sp,
                     color: Colors.white,
@@ -47,7 +52,9 @@ class AyaItemAbove extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 4.w),
               child: Text(
-                ayat.soraNameAr,
+                quranController
+                    .surahs[quranController.getSurahNumberByAya(aya) - 1]
+                    .nameOfSurah,
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: kFontKufamItalicVariableFont,
@@ -55,30 +62,44 @@ class AyaItemAbove extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             CustomBotton(
               image: "assets/images/copyyy.png",
               onTap: () async {
                 await Clipboard.setData(ClipboardData(
                   text:
-                      "{ ${ayat.ayaText.substring(0, ayat.ayaText.length - 2)} }\n${ayat.soraNameAr} الآية:${ayat.ayaNumber}",
+                      "﴿ ${aya.textOfAya} ﴾\n${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah} الآية:${aya.numberOfAyaInSurah}",
                 ));
-                show(context: context, message: "تم النسخ");
-                AwesomeNotifications().createNotification(
-                    content: NotificationContent(
-                  id: 11,
-                  channelKey: 'test',
-                  actionType: ActionType.Default,
-                  title: 'لقد قمت بنسخ الاية',
-                  body: 'يمكنك مشاركتها في اي مكان تريد',
-                ));
+                if (context.mounted) {
+                  show(context: context, message: "تم النسخ");
+                }
               },
             ),
             CustomBotton(
               image: "assets/images/sharee.png",
               onTap: () {
                 Share.share(
-                    "{ ${ayat.ayaText.substring(0, ayat.ayaText.length - 2)} }\n${ayat.soraNameAr} الآية:${ayat.ayaNumber}\nالتفسير:${ayat.taffser}");
+                    "﴿ ${aya.textOfAya} ﴾\n${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah} الآية:${aya.numberOfAyaInSurah}\nالتفسير:${quranController.mapOfTafser[aya.uniqueIdOfAya]}");
+              },
+            ),
+            CustomBotton(
+              image: "assets/svg/tafsir_icon.svg",
+              isSvg: true,
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return TafserBottomSheet(
+                      // tafser: quranController
+                      //     .tafserOfPage[indexOfAyaInPage],
+                      tafser: quranController.mapOfTafser[aya.uniqueIdOfAya]!,
+                      ayaOfSurahModel: aya,
+                      page: aya.page - 1,
+                      numberOfSura: quranController.getSurahNumberByAya(aya),
+                      numberOfAyaInPage: indexOfAyaInPage,
+                    );
+                  },
+                );
               },
             ),
           ],

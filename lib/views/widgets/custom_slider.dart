@@ -1,63 +1,45 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:islamic_app/constant.dart';
-import 'package:islamic_app/services/settings_service.dart';
 
-class CustomSlider extends StatefulWidget {
+class CustomSlider extends StatelessWidget {
   final String settingKey;
   final String displayText;
   final String fontFamily;
-  final SettingsService settingsService;
+  final int fontSize;
+  final void Function(double)? onChanged;
 
-  CustomSlider({
+  const CustomSlider({
+    super.key,
     required this.settingKey,
     required this.displayText,
     required this.fontFamily,
-    required this.settingsService,
+    required this.fontSize,
+    this.onChanged,
   });
 
   @override
-  _CustomSliderState createState() => _CustomSliderState();
-}
-
-class _CustomSliderState extends State<CustomSlider> {
-  @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: widget.settingsService.getStringValue(widget.settingKey),
-      builder: (context, snapshot) {
-        double sliderValue = double.parse(snapshot.data ?? "24");
-        return Column(
-          children: [
-            Slider(
-              activeColor: kThirdlyColor,
-              divisions: 8,
-              min: 12,
-              max: 32,
-              value: sliderValue,
-              onChanged: (value) {
-                setState(() {
-                  sliderValue = value.roundToDouble();
-                  widget.settingsService.saveStringValue(
-                    widget.settingKey,
-                    value.round().toString(),
-                  );
-                });
-              },
-            ),
-            Text('${snapshot.data ?? "24"}'),
-            Text(
-              widget.displayText,
-              style: TextStyle(
-                fontSize: double.parse(snapshot.data ?? "24").sp,
-                color: kThirdlyColor,
-                fontFamily: widget.fontFamily,
-              ),
-            ),
-          ],
-        );
-      },
+    return Column(
+      children: [
+        Slider(
+          activeColor: kThirdlyColor,
+          divisions: 8,
+          min: 12,
+          max: 32,
+          value: fontSize.toDouble(),
+          onChanged: onChanged,
+        ),
+        Text(fontSize.toString()),
+        Text(
+          displayText,
+          style: TextStyle(
+            fontSize: double.parse(fontSize.toString()).sp,
+            color: kThirdlyColor,
+            fontFamily: fontFamily,
+          ),
+        ),
+      ],
     );
   }
 }

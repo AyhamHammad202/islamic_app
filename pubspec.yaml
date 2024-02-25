@@ -30,6 +30,7 @@ environment:
 dependencies:
   awesome_notifications: ^0.8.2
   bot_toast: ^4.1.3
+  collection: ^1.18.0
   cupertino_icons: ^1.0.2
   device_preview: ^1.1.0
   firebase_analytics: ^10.8.5
@@ -38,7 +39,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_advanced_drawer: ^1.3.5
-  flutter_bloc: ^8.1.3
   flutter_launcher_icons: ^0.13.1
   flutter_localization: ^0.1.14
   flutter_localizations:
@@ -49,6 +49,7 @@ dependencies:
   gap: ^3.0.1
   get: ^4.6.6
   hijri: ^3.0.0
+  intl: ^0.18.1
   just_audio: ^0.9.36
   share_plus: ^7.2.1
   shared_preferences: ^2.2.2
@@ -56,6 +57,7 @@ dependencies:
   url_launcher: ^6.2.2
 
 dev_dependencies:
+  flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
 
@@ -116,6 +118,18 @@ flutter:
     - family: KufamItalic
       fonts:
         - asset: assets/fonts/Kufam-Italic-VariableFont_wght.ttf
+    - family: AllahNames1
+      fonts:
+        - asset: assets/fonts/allah_names_fonts/AllahNames3-4BZn9.ttf
+    - family: AllahNames2
+      fonts:
+        - asset: assets/fonts/allah_names_fonts/AllahNames4-ow1vV.ttf
+    - family: AllahNames3
+      fonts:
+        - asset: assets/fonts/allah_names_fonts/AllahNames99-0Wav4.ttf
+    - family: AllahNames4
+      fonts:
+        - asset: assets/fonts/allah_names_fonts/AllahNamesColor-gxpwY.ttf
     - family: page1
       fonts:
         - asset: assets/fonts/quran_fonts/p2001.ttf

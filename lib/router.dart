@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:islamic_app/models/sorah_model.dart';
 import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/views/about_us_view.dart';
 import 'package:islamic_app/views/ayat_view.dart';
@@ -11,15 +10,15 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
     case QuranView.id:
       return MaterialPageRoute(
-        builder: (context) => QuranView(),
+        builder: (context) => const QuranView(),
       );
     case SettingsView.id:
       return MaterialPageRoute(
-        builder: (context) => SettingsView(),
+        builder: (context) => const SettingsView(),
       );
     case AboutUsView.id:
       return MaterialPageRoute(
-        builder: (context) => AboutUsView(),
+        builder: (context) => const AboutUsView(),
       );
     case AyatView.id:
       return MaterialPageRoute(
@@ -29,11 +28,11 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
       );
     case SearchView.id:
       return MaterialPageRoute(
-        builder: (context) => SearchView(),
+        builder: (context) => const SearchView(),
       );
     default:
       return MaterialPageRoute(
-        builder: (context) => Text("DEFAULT ROUTE ERROR"),
+        builder: (context) => const Text("DEFAULT ROUTE ERROR"),
       );
   }
 }

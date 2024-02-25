@@ -16,8 +16,7 @@ extension ArabicNumerals on int {
       '8': '٨',
       '9': '٩'
     };
-    return this
-        .toString()
+    return toString()
         .split('')
         .map((char) => arabicNumerals[char] ?? char)
         .join('');

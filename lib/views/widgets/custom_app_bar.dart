@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,9 +10,9 @@ import '../../generated/l10n.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
-    Key? key,
+    super.key,
     required this.advancedDrawerController,
-  }) : super(key: key);
+  });
   final AdvancedDrawerController advancedDrawerController;
 
   @override
@@ -34,13 +33,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ],
       title: Text(
         S.of(context).quran,
-        style: TextStyle(fontFamily: kFontKufamItalic, color: kThirdlyColor),
+        style:
+            const TextStyle(fontFamily: kFontKufamItalic, color: kThirdlyColor),
       ),
       leading: IconButton(
         onPressed: () {
           advancedDrawerController.showDrawer();
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.menu_rounded,
           color: kThirdlyColor,
         ),
@@ -49,5 +49,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
