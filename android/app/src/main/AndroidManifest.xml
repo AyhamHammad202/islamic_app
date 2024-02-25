@@ -11,7 +11,7 @@
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="wa.ma" />
         </intent>
-    </queries>
+`    </queries>
     <application
         android:label="نور المؤمن"
         android:name="${applicationName}"

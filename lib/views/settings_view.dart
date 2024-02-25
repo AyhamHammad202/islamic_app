@@ -1,8 +1,6 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:islamic_app/constant.dart';
-import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/views/widgets/prayer_reminder_settings.dart';
 
