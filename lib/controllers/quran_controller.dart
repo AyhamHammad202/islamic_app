@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:islamic_app/database/data_client.dart';

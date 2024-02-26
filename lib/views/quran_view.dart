@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/bindings/bindings.dart';
 import 'package:islamic_app/constant.dart';
-import 'package:islamic_app/controllers/bookmark_controller.dart';
+import 'package:islamic_app/controllers/azkar_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/views/about_us_view.dart';
 import 'package:islamic_app/views/bookmark_view.dart';
 import 'package:islamic_app/views/settings_view.dart';
 import 'package:share_plus/share_plus.dart';
 
+import 'azkar_view.dart';
 import 'widgets/custom_app_bar.dart';
 import 'widgets/drawer_item.dart';
 import 'widgets/quran_view_body.dart';
@@ -36,7 +38,6 @@ class _QuranViewState extends State<QuranView> {
   @override
   Widget build(BuildContext context) {
     QuranController quranController = Get.find();
-    BookMarkController bookMarkController = Get.find();
     return AdvancedDrawer(
       openRatio: 0.7,
       openScale: 0.9,
@@ -64,6 +65,15 @@ class _QuranViewState extends State<QuranView> {
             leadingIcon: Icons.favorite_outline_sharp,
             onTap: () {
               Get.to(const BookmarkView());
+            },
+          ),
+          DrawerItem(
+            title: "الأذكار",
+            leadingIcon: Icons.add_task_sharp,
+            onTap: () {
+              // var azker = Get.put(AzkarController());
+              // azker.getAllTheAzkar();
+              Get.to(const AzkarView(), binding: InitialBindings());
             },
           ),
           DrawerItem(

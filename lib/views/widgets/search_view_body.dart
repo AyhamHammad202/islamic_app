@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
+import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/models/surah_model.dart';
 
 class SearchViewBody extends StatelessWidget {

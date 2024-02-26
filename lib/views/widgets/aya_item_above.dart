@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:islamic_app/constant.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/helper.dart';
-import 'package:islamic_app/models/surah_model.dart';
+import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/views/widgets/custom_botton.dart';
 import 'package:islamic_app/views/widgets/tafser_bottomsheet.dart';
 import 'package:share_plus/share_plus.dart';

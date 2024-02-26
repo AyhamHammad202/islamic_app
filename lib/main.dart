@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
         ], //2. registered route observer
         // initialRoute: QuranView.id,
         home: GetBuilder<QuranController>(
-          init: Get.put(QuranController()),
+          init: QuranController(),
           builder: (controller) {
             return controller.surahs.isNotEmpty
                 ? const QuranView()

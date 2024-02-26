@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:just_audio/just_audio.dart';
 
 import 'package:islamic_app/controllers/quran_controller.dart';
-import 'package:islamic_app/models/surah_model.dart';
 
 class AudioController extends GetxController {
   AudioPlayer audioPlayer = AudioPlayer();

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/database/data_client.dart';
-import 'package:islamic_app/models/surah_model.dart';
+import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class BookMarkController extends GetxController {
@@ -11,6 +11,7 @@ class BookMarkController extends GetxController {
   final QuranController _quranController = Get.find();
   final String _bookmarksTable = "Bookmarks";
   List<AyaOfSurahModel> ayasWithBookMark = [];
+  List<int> bookmarkedAyasID = [];
 
   @override
   void onInit() async {
@@ -56,9 +57,11 @@ class BookMarkController extends GetxController {
       log('Database is null or closed');
       return;
     }
+    bookmarkedAyasID.clear();
     ayasWithBookMark.clear();
     var results = await database.query(_bookmarksTable, orderBy: "AyaID ASC");
     for (var ayaBookmark in results) {
+      bookmarkedAyasID.add(ayaBookmark['AyaID'] as int);
       ayasWithBookMark.addAll(
         _quranController.allAyas.where(
           (aya) => aya.uniqueIdOfAya == ayaBookmark['AyaID'],

@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/controllers/audio_controller.dart';
+import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/menu_extension.dart';
+import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/services/last_read_service.dart';
 import 'package:islamic_app/svg_pictures.dart';
@@ -22,6 +24,7 @@ class AyatImagePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     QuranController quranController = Get.find();
     AudioController audioController = Get.find();
+    BookMarkController bookMarkController = Get.find();
     LastReadService settingsService = Get.find();
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -98,7 +101,12 @@ class AyatImagePageView extends StatelessWidget {
                                                       .isSelected
                                                   ? Colors.lightBlue.shade300
                                                       .withOpacity(0.3)
-                                                  : null),
+                                                  : bookMarkController
+                                                          .bookmarkedAyasID
+                                                          .contains(ayas[index]
+                                                              .uniqueIdOfAya)
+                                                      ? Colors.red
+                                                      : null),
                                           recognizer:
                                               LongPressGestureRecognizer(
                                                   duration: Durations.long2)

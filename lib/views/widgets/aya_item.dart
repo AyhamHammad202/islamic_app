@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/services/settings_service.dart';
 
+import '../../models/aya_of_surah_model.dart';
 import 'aya_item_above.dart';
 
 class AyaItem extends StatelessWidget {

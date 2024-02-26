@@ -9,10 +9,10 @@ import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/helper.dart';
-import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/views/widgets/tafser_bottomsheet.dart';
-import 'package:just_audio/just_audio.dart';
+
+import 'models/aya_of_surah_model.dart';
 
 extension ContextMenuExtension on BuildContext {
   void showAyahMenu(int surahNum, int pageIndex, int indexOfAyaInPage,
