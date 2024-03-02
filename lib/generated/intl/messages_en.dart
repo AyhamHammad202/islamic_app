@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "Search Using Sura Name or The Verse"),
         "sorahs": MessageLookupByLibrary.simpleMessage("Sorahs"),
+        "suraInfo": MessageLookupByLibrary.simpleMessage("Info About"),
         "theAyas": MessageLookupByLibrary.simpleMessage("Ayas")
       };
 }

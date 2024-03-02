@@ -37,8 +37,8 @@ class Themes {
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      surfaceTintColor: Colors.black,
-      shadowColor: Colors.black,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
       foregroundColor: Colors.black,
       titleTextStyle: GoogleFonts.tajawal(
         fontSize: 18.sp,

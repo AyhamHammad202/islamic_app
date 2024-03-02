@@ -89,7 +89,7 @@ class AyatView extends StatelessWidget {
                                     // quranController.getCurrentPageAyahsSeparatedForBasmala(pageIndex)[i];
                                     ayas.first.numberOfAyaInSurah == 1 &&
                                             !Constant.lastPlaceBannerPageIndex
-                                                .contains(page - 1)
+                                                .contains(page)
                                         ? SuraBannerWithName(
                                             aya: ayas.first,
                                             quranController: quranController,
@@ -137,7 +137,7 @@ class AyatView extends StatelessWidget {
                                     ),
                               ),
                               Text(
-                                "${S.of(context).hizb} ${quranController.pages[page].last.hizbQuarter}",
+                                "${S.of(context).hizb} ${(quranController.pages[page].last.hizbQuarter / 4).ceil()}",
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineMedium!

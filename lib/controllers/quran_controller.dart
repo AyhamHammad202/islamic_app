@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
+import 'package:islamic_app/models/surah_info.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:islamic_app/database/data_client.dart';
@@ -16,6 +17,7 @@ import 'package:islamic_app/models/surah_model.dart';
 class QuranController extends GetxController {
   final DataClient _client = DataClient();
   List<SurahModel> surahs = [];
+  List<SurahInfoModel> suarhsInfo = [];
   List<List<AyaOfSurahModel>> pages = [];
   List<AyaOfSurahModel> allAyas = [];
   List<AyaOfSurahModel> ayasFoundBySearch = [];
@@ -42,6 +44,7 @@ class QuranController extends GetxController {
       // if (homePageScrollerController.offset>homePageScrollerController) {}
     });
     await loadQuran();
+    await loadQuranSurahsInfo();
     await getAyaTafser();
   }
 
@@ -81,8 +84,8 @@ class QuranController extends GetxController {
     for (var surah in surahs) {
       allAyas.addAll(surah.ayas);
       log('Added ${surah.nameOfSurah} ayahs');
-      update();
     }
+    update();
     List.generate(
       604,
       (pageIndex) {
@@ -90,6 +93,17 @@ class QuranController extends GetxController {
       },
     );
     log('Pages Length: ${pages.length}', name: 'Quran Controller');
+  }
+
+  Future<void> loadQuranSurahsInfo() async {
+    String jsonString =
+        await rootBundle.loadString("assets/data/sura_info.json");
+    List<dynamic> jsonResponse = jsonDecode(jsonString);
+
+    for (var surah in jsonResponse) {
+      suarhsInfo.add(SurahInfoModel.fromMap(surah));
+    }
+    update();
   }
 
   List<List<AyaOfSurahModel>> getCurrentPageAyahsSeparatedForBasmala(

@@ -111,11 +111,16 @@ class MyApp extends StatelessWidget {
         home: GetBuilder<QuranController>(
           init: QuranController(),
           builder: (controller) {
-            return controller.surahs.isNotEmpty
+            return controller.suarhsInfo.isNotEmpty
                 ? const HomeView()
-                : const Scaffold(
-                    body: Center(
-                      child: CircularProgressIndicator(),
+                : Scaffold(
+                    body: SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      child: SvgPicture.asset(
+                        Assets.svgSplash,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   );
           },

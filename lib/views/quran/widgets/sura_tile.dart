@@ -7,11 +7,13 @@ import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
+import 'package:islamic_app/views/surah_info/surah_info_view.dart';
 
 class SuraTile extends StatelessWidget {
   const SuraTile({
     super.key,
-    required this.index, this.onTap,
+    required this.index,
+    this.onTap,
   });
 
   final int index;
@@ -59,7 +61,18 @@ class SuraTile extends StatelessWidget {
               style: Theme.of(context).textTheme.labelSmall,
             ),
             SizedBox(width: 8.w),
-            SvgPicturesMethods.alertCircleIcon(),
+            InkWell(
+              onTap: () {
+                Get.to(
+                  () => SurahInfoView(
+                    surahModel: quranController.surahs[index],
+                  ),
+                  transition: Transition.leftToRight,
+                  duration: const Duration(milliseconds: 300),
+                );
+              },
+              child: SvgPicturesMethods.alertCircleIcon(),
+            ),
             SizedBox(width: 8.w),
           ],
         ),

@@ -90,6 +90,16 @@ class S {
     );
   }
 
+  /// `Info About`
+  String get suraInfo {
+    return Intl.message(
+      'Info About',
+      name: 'suraInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Page`
   String get page {
     return Intl.message(

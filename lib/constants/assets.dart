@@ -89,6 +89,10 @@ class Assets {
   /// assets/svg/show_tafser_icon.svg
   static const String svgShowTafserIcon = "assets/svg/show_tafser_icon.svg";
 
+  /// Assets for svgSplash
+  /// assets/svg/splash.svg
+  static const String svgSplash = "assets/svg/splash.svg";
+
   /// Assets for svgSuraNum
   /// assets/svg/sura_num.svg
   static const String svgSuraNum = "assets/svg/sura_num.svg";

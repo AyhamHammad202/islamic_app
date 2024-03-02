@@ -79,6 +79,14 @@ class AyaInfoView extends StatelessWidget {
                   ),
                 ],
               ),
+              Gap(16.h),
+              Text(
+                aya.text.replaceAll("\n", ""),
+                style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                      fontFamily: "page${aya.page}",
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
               Divider(
                 color: Theme.of(context).colorScheme.secondary,
               ),

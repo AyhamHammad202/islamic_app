@@ -34,42 +34,46 @@ class QuranView extends StatelessWidget {
         body: Obx(() {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: InkWell(
-                    onTap: () {
-                      Get.to(
-                        () => const SearchView(),
-                        transition: Transition.fade,
-                        duration: const Duration(milliseconds: 300),
-                      );
-                    },
-                    child: const SearchTextField(),
+            child: Scrollbar(
+              thickness: 3,
+              interactive: true,
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: InkWell(
+                      onTap: () {
+                        Get.to(
+                          () => const SearchView(),
+                          transition: Transition.fade,
+                          duration: const Duration(milliseconds: 300),
+                        );
+                      },
+                      child: const SearchTextField(),
+                    ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: List.generate(
-                        2,
-                        (index) => TabWidget(
-                          title: tabsTitles[index],
-                          isSelected:
-                              index == generalController.tabSelected.value,
-                          onTap: () {
-                            generalController.tabSelected.value = index;
-                          },
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: List.generate(
+                          2,
+                          (index) => TabWidget(
+                            title: tabsTitles[index],
+                            isSelected:
+                                index == generalController.tabSelected.value,
+                            onTap: () {
+                              generalController.tabSelected.value = index;
+                            },
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                // const SurasSliverList()
-                Constant.tabsViews[generalController.tabSelected.value],
-              ],
+                  // const SurasSliverList()
+                  Constant.tabsViews[generalController.tabSelected.value],
+                ],
+              ),
             ),
           );
         }),
