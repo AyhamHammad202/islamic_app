@@ -22,11 +22,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "juz": MessageLookupByLibrary.simpleMessage("Juzes"),
+        "aya": MessageLookupByLibrary.simpleMessage("Aya"),
+        "ayas": MessageLookupByLibrary.simpleMessage("Ayas"),
+        "hizb": MessageLookupByLibrary.simpleMessage("Hizb"),
+        "juz": MessageLookupByLibrary.simpleMessage("Juz"),
+        "juzs": MessageLookupByLibrary.simpleMessage("Juzes"),
         "lastRead": MessageLookupByLibrary.simpleMessage("Last Read"),
+        "lastReadVarseNum": MessageLookupByLibrary.simpleMessage("Verse Num."),
+        "nextPray": MessageLookupByLibrary.simpleMessage("Next Pray"),
+        "page": MessageLookupByLibrary.simpleMessage("Page"),
         "pages": MessageLookupByLibrary.simpleMessage("Pages"),
         "quran": MessageLookupByLibrary.simpleMessage("Al-Quran Al-Kreem"),
         "qurter": MessageLookupByLibrary.simpleMessage("Qurters"),
-        "sorahs": MessageLookupByLibrary.simpleMessage("Sorahs")
+        "searchHint": MessageLookupByLibrary.simpleMessage(
+            "Search Using Sura Name or The Verse"),
+        "sorahs": MessageLookupByLibrary.simpleMessage("Sorahs"),
+        "theAyas": MessageLookupByLibrary.simpleMessage("Ayas")
       };
 }

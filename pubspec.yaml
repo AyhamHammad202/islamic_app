@@ -28,10 +28,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  adhan: ^2.0.0+1
   awesome_notifications: ^0.8.2
   bot_toast: ^4.1.3
-  collection: ^1.18.0
   change_app_package_name: ^1.1.0
+  collection: ^1.18.0
   cupertino_icons: ^1.0.2
   device_preview: ^1.1.0
   firebase_analytics: ^10.8.5
@@ -45,13 +46,17 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_screenutil: ^5.9.0
+  flutter_staggered_animations: ^1.1.1
   flutter_svg: ^2.0.9
   font_awesome_flutter: ^10.6.0
   gap: ^3.0.1
   get: ^4.6.6
+  get_storage: ^2.1.1
+  google_fonts: ^6.1.0
   hijri: ^3.0.0
   intl: ^0.18.1
   just_audio: ^0.9.36
+  location: ^5.0.3
   share_plus: ^7.2.1
   shared_preferences: ^2.2.2
   sqflite: ^2.3.0
@@ -74,6 +79,13 @@ flutter_launcher_icons:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+flutter_assets:
+  assets_path: assets/svg/
+  output_path: lib/constants/
+  filename: assets.dart
+  field_prefix: null
+  class_name: Assets
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -107,6 +119,9 @@ flutter:
     - family: UthmanicHafs
       fonts:
         - asset: assets/fonts/UthmanicHafs_V20.ttf
+    - family: Ajzaa
+      fonts:
+        - asset: assets/fonts/ajzaa.ttf
     - family: KufamItalicVariableFont
       fonts:
         - asset: assets/fonts/Kufam-Italic-VariableFont_wght.ttf

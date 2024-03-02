@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:islamic_app/constant.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'constants/constant.dart';
 
 extension ArabicNumerals on int {
   String toArabic() {

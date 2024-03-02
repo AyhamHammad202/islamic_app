@@ -1,16 +1,18 @@
-
 class AyaOfSurahModel {
   final int numberOfAyaInSurah;
   final int uniqueIdOfAya;
   final String text;
   final String textOfAya;
+  final int hizbQuarter;
   final String searchTextOfAya;
   final String audioUrl;
   final int juz;
   final int page;
   final bool sajda;
 
-  AyaOfSurahModel({required this.uniqueIdOfAya, 
+  AyaOfSurahModel({
+    required this.hizbQuarter,
+    required this.uniqueIdOfAya,
     required this.numberOfAyaInSurah,
     required this.text,
     required this.textOfAya,
@@ -32,7 +34,7 @@ class AyaOfSurahModel {
       juz: map['juz'],
       page: map['page'],
       // sajda: map['sajda'],
-      sajda: false,
+      sajda: false, hizbQuarter: map['hizbQuarter'],
     );
   }
 }

@@ -1,8 +1,17 @@
 {
     "quran":"Al-Quran Al-Kreem",
     "lastRead":"Last Read",
+    "lastReadVarseNum":"Verse Num.",
+    "searchHint":"Search Using Sura Name or The Verse",
+    "page":"Page",
+    "hizb":"Hizb",
+    "ayas":"Ayas",
+    "theAyas":"Ayas",
+    "aya":"Aya",
     "sorahs":"Sorahs",
     "pages":"Pages",
-    "juz":"Juzes",
-    "qurter":"Qurters"
+    "juz":"Juz",
+    "juzs":"Juzes",
+    "qurter":"Qurters",
+    "nextPray":"Next Pray"
 }

@@ -70,6 +70,76 @@ class S {
     );
   }
 
+  /// `Verse Num.`
+  String get lastReadVarseNum {
+    return Intl.message(
+      'Verse Num.',
+      name: 'lastReadVarseNum',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search Using Sura Name or The Verse`
+  String get searchHint {
+    return Intl.message(
+      'Search Using Sura Name or The Verse',
+      name: 'searchHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Page`
+  String get page {
+    return Intl.message(
+      'Page',
+      name: 'page',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hizb`
+  String get hizb {
+    return Intl.message(
+      'Hizb',
+      name: 'hizb',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ayas`
+  String get ayas {
+    return Intl.message(
+      'Ayas',
+      name: 'ayas',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ayas`
+  String get theAyas {
+    return Intl.message(
+      'Ayas',
+      name: 'theAyas',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aya`
+  String get aya {
+    return Intl.message(
+      'Aya',
+      name: 'aya',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sorahs`
   String get sorahs {
     return Intl.message(
@@ -90,11 +160,21 @@ class S {
     );
   }
 
-  /// `Juzes`
+  /// `Juz`
   String get juz {
     return Intl.message(
-      'Juzes',
+      'Juz',
       name: 'juz',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Juzes`
+  String get juzs {
+    return Intl.message(
+      'Juzes',
+      name: 'juzs',
       desc: '',
       args: [],
     );
@@ -105,6 +185,16 @@ class S {
     return Intl.message(
       'Qurters',
       name: 'qurter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next Pray`
+  String get nextPray {
+    return Intl.message(
+      'Next Pray',
+      name: 'nextPray',
       desc: '',
       args: [],
     );

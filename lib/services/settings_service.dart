@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:islamic_app/constant.dart';
+import 'package:islamic_app/constants/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsService extends GetxService {
