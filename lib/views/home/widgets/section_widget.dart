@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 class SectionWidget extends StatelessWidget {
   const SectionWidget(
@@ -15,9 +17,11 @@ class SectionWidget extends StatelessWidget {
           children: [
             const Spacer(),
             svgIcon,
+            Gap(8.h),
             Text(
               title,
               style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center,
             ),
             const Spacer(),
           ],

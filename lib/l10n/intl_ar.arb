@@ -1,6 +1,10 @@
 {
     "quran":"القرآن الكريم",
+    "allahNames":"أسماء الله الحسنى",
     "lastRead":"آخر قراءة",
+    "bookmarkAyat":"الآيات المفضلة",
+    "tasbeh":"التسبيح",
+    "time":"مرة",
     "lastReadVarseNum":"رقم الآية",
     "searchHint":"أبحث بأستخدام أسم السورة أو الآية",
     "suraInfo":"معلومات عن سورة",

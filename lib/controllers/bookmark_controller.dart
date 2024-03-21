@@ -28,9 +28,10 @@ class BookMarkController extends GetxController {
     if (ayasWithBookMark.contains(
       _quranController.allAyas[idOfAya - 1],
     )) {
+      await deleteAyaBookMark(idOfAya);
       Get.showSnackbar(
         const GetSnackBar(
-          message: "الاية موجودة بالفعل",
+          message: "تم حذف الآية من المفضلة",
           duration: Duration(seconds: 1),
         ),
       );
@@ -59,7 +60,10 @@ class BookMarkController extends GetxController {
     }
     bookmarkedAyasID.clear();
     ayasWithBookMark.clear();
-    var results = await database.query(_bookmarksTable, orderBy: "AyaID ASC");
+    var results = await database.query(
+      _bookmarksTable,
+      // orderBy: "AyaID ASC",
+    );
     for (var ayaBookmark in results) {
       bookmarkedAyasID.add(ayaBookmark['AyaID'] as int);
       ayasWithBookMark.addAll(

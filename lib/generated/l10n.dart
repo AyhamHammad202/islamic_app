@@ -60,11 +60,51 @@ class S {
     );
   }
 
+  /// `Allah Names`
+  String get allahNames {
+    return Intl.message(
+      'Allah Names',
+      name: 'allahNames',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Last Read`
   String get lastRead {
     return Intl.message(
       'Last Read',
       name: 'lastRead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bookmarked Verses`
+  String get bookmarkAyat {
+    return Intl.message(
+      'Bookmarked Verses',
+      name: 'bookmarkAyat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tasbeeh`
+  String get tasbeh {
+    return Intl.message(
+      'Tasbeeh',
+      name: 'tasbeh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get time {
+    return Intl.message(
+      'Time',
+      name: 'time',
       desc: '',
       args: [],
     );

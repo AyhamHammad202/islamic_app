@@ -22,8 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "allahNames": MessageLookupByLibrary.simpleMessage("أسماء الله الحسنى"),
         "aya": MessageLookupByLibrary.simpleMessage("آية"),
         "ayas": MessageLookupByLibrary.simpleMessage("آيات"),
+        "bookmarkAyat": MessageLookupByLibrary.simpleMessage("الآيات المفضلة"),
         "hizb": MessageLookupByLibrary.simpleMessage("الحزب"),
         "juz": MessageLookupByLibrary.simpleMessage("الجزء"),
         "juzs": MessageLookupByLibrary.simpleMessage("الأجزاء"),
@@ -38,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "أبحث بأستخدام أسم السورة أو الآية"),
         "sorahs": MessageLookupByLibrary.simpleMessage("السور"),
         "suraInfo": MessageLookupByLibrary.simpleMessage("معلومات عن سورة"),
-        "theAyas": MessageLookupByLibrary.simpleMessage("الآيات")
+        "tasbeh": MessageLookupByLibrary.simpleMessage("التسبيح"),
+        "theAyas": MessageLookupByLibrary.simpleMessage("الآيات"),
+        "time": MessageLookupByLibrary.simpleMessage("مرة")
       };
 }

@@ -34,7 +34,12 @@ class SuraBannerWithName extends StatelessWidget {
           ? Stack(
               alignment: Alignment.center,
               children: [
-                SvgPicture.asset("assets/images/design/Sorah_name_ba3.svg"),
+                SvgPicture.asset(
+                  "assets/images/design/Sorah_name_ba3.svg",
+                  width: MediaQuery.of(context).size.width,
+                  // height: MediaQuery.of(context).size.width / 2.5,
+                  fit: BoxFit.fitWidth,
+                ),
                 SvgPicture.asset(
                     "assets/images/sorahs/00${quranController.getSurahNumberByAya(aya)}.svg"),
               ],

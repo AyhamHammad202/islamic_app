@@ -9,6 +9,10 @@ class Assets {
   /// assets/svg/allah_names.svg
   static const String svgAllahNames = "assets/svg/allah_names.svg";
 
+  /// Assets for svgAllahNamesPng
+  /// assets/svg/allah_names_png.png
+  static const String svgAllahNamesPng = "assets/svg/allah_names_png.png";
+
   /// Assets for svgAzkar
   /// assets/svg/azkar.svg
   static const String svgAzkar = "assets/svg/azkar.svg";
@@ -29,6 +33,10 @@ class Assets {
   /// assets/svg/bookmark.svg
   static const String svgBookmark = "assets/svg/bookmark.svg";
 
+  /// Assets for svgBookmarkedAlready
+  /// assets/svg/bookmarked_already.svg
+  static const String svgBookmarkedAlready = "assets/svg/bookmarked_already.svg";
+
   /// Assets for svgCalendar
   /// assets/svg/calendar.svg
   static const String svgCalendar = "assets/svg/calendar.svg";
@@ -48,6 +56,14 @@ class Assets {
   /// Assets for svgMenuCurve
   /// assets/svg/menu_curve.svg
   static const String svgMenuCurve = "assets/svg/menu_curve.svg";
+
+  /// Assets for svgMesbaha
+  /// assets/svg/mesbaha.svg
+  static const String svgMesbaha = "assets/svg/mesbaha.svg";
+
+  /// Assets for svgMesbahaPng
+  /// assets/svg/mesbaha_png.png
+  static const String svgMesbahaPng = "assets/svg/mesbaha_png.png";
 
   /// Assets for svgPauseArrow
   /// assets/svg/pause_arrow.svg
@@ -108,6 +124,10 @@ class Assets {
   /// Assets for svgTasbeeh
   /// assets/svg/tasbeeh.svg
   static const String svgTasbeeh = "assets/svg/tasbeeh.svg";
+
+  /// Assets for svgTassbehPng
+  /// assets/svg/tassbeh_png.png
+  static const String svgTassbehPng = "assets/svg/tassbeh_png.png";
 
   /// Assets for svgViewBackground
   /// assets/svg/view_background.png

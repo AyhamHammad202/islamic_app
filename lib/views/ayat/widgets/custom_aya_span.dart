@@ -3,19 +3,21 @@ import 'dart:developer';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/views/ayat/ayat_view.dart';
-
 
 TextSpan span({
   required String text,
   required int pageIndex,
   required bool isSelected,
-  required double fontSize,
+  // required double fontSize,
   required int surahNum,
   required int ayahNum,
+  required int uniqueAyaId,
   required LongPressStartDetailsFunction onLongPressStart,
   required bool isFirstAyah,
 }) {
+  final BookMarkController bookMarkController = Get.find();
   if (text.isNotEmpty) {
     final String partOne = text.length < 3 ? text[0] : text[0] + text[1];
     final String? partTwo =
@@ -30,12 +32,15 @@ TextSpan span({
         text: partOne,
         style: TextStyle(
           fontFamily: 'page${pageIndex + 1}',
-          fontSize: fontSize,
-          height: 2,
-          letterSpacing: 6,
+          // fontSize: fontSize,
+          // height: 2,
+          letterSpacing: 8,
           color: Colors.black,
-          backgroundColor:
-              isSelected ? Get.theme.highlightColor : Colors.transparent,
+          backgroundColor: isSelected
+              ? Get.theme.highlightColor
+              : bookMarkController.bookmarkedAyasID.contains(uniqueAyaId)
+                  ? const Color(0xffc4975b).withOpacity(0.4)
+                  : Colors.transparent,
         ),
         recognizer: LongPressGestureRecognizer(
             duration: const Duration(milliseconds: 500))
@@ -49,13 +54,16 @@ TextSpan span({
         text: partTwo,
         style: TextStyle(
           fontFamily: 'page${pageIndex + 1}',
-          fontSize: fontSize,
-          height: 2,
+          // fontSize: fontSize,
+          // height: 2,
           letterSpacing: 2,
           // wordSpacing: wordSpacing + 10,
           color: Colors.black,
-          backgroundColor:
-              isSelected ? Get.theme.highlightColor : Colors.transparent,
+          backgroundColor: isSelected
+              ? Get.theme.highlightColor
+              : bookMarkController.bookmarkedAyasID.contains(uniqueAyaId)
+                  ? const Color(0xffc4975b).withOpacity(0.4)
+                  : Colors.transparent,
         ),
         recognizer: LongPressGestureRecognizer(
             duration: const Duration(milliseconds: 500))
@@ -67,12 +75,15 @@ TextSpan span({
       text: initialPart,
       style: TextStyle(
         fontFamily: 'page${pageIndex + 1}',
-        fontSize: fontSize,
-        height: 2,
+        // fontSize: fontSize,
+        // height: 2,
         letterSpacing: 2,
         color: Colors.black,
-        backgroundColor:
-            isSelected ? Get.theme.highlightColor : Colors.transparent,
+        backgroundColor: isSelected
+            ? Get.theme.highlightColor
+            : bookMarkController.bookmarkedAyasID.contains(uniqueAyaId)
+                ? const Color(0xffc4975b).withOpacity(0.4)
+                : Colors.transparent,
       ),
       recognizer: LongPressGestureRecognizer(
           duration: const Duration(milliseconds: 500))
@@ -83,12 +94,17 @@ TextSpan span({
       text: lastCharacter,
       style: TextStyle(
         fontFamily: 'page${pageIndex + 1}',
-        fontSize: fontSize,
-        height: 2,
+        // fontSize: fontSize,
+        // height: 2,
         letterSpacing: text.length < 3 ? 6 : 2,
         color: const Color(0xffa24308),
-        backgroundColor:
-            isSelected ? Get.theme.highlightColor : Colors.transparent,
+        // backgroundColor:
+        //     isSelected ? Get.theme.highlightColor : Colors.transparent,
+        backgroundColor: isSelected
+            ? Get.theme.highlightColor
+            : bookMarkController.bookmarkedAyasID.contains(uniqueAyaId)
+                ? const Color(0xffc4975b).withOpacity(0.4)
+                : Colors.transparent,
       ),
       recognizer: LongPressGestureRecognizer(
           duration: const Duration(milliseconds: 500))

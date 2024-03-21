@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:islamic_app/generated/l10n.dart';
+import 'package:islamic_app/svg_pictures.dart';
+import 'package:islamic_app/views/allah_names/allah_names_view.dart';
+import 'package:islamic_app/views/home/widgets/section_widget.dart';
 import 'package:islamic_app/views/quran/widgets/juzes_sliverlist.dart';
 
 import '../views/quran/widgets/suras_sliverlist.dart';
@@ -34,22 +39,25 @@ class Constant {
 
   static List<int> lastPlaceBannerPageIndex = [
     76,
-    206,
-    330,
-    340,
-    348,
-    365,
-    375,
-    413,
-    415,
-    434,
-    450,
-    496,
-    504,
-    523,
-    546,
+    207,
+    331,
+    341,
+    349,
+    366,
+    376,
+    414,
+    417,
+    435,
+    445,
+    452,
+    498,
+    506,
+    525,
+    548,
     554,
-    556,
-    583
+    555,
+    557,
+    583,
+    584
   ];
 }

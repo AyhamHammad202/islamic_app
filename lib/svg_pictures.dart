@@ -97,8 +97,16 @@ class SvgPicturesMethods {
   }
 
   static Widget tasbeehIcon({double? height, double? width}) {
+    return Image.asset(
+      Assets.svgTassbehPng,
+      width: width ?? 30.w,
+      height: height ?? 30.h,
+    );
+  }
+
+  static Widget mesbahaIcon({double? height, double? width}) {
     return SvgPicture.asset(
-      Assets.svgTasbeeh,
+      Assets.svgMesbaha,
       width: width ?? 30.w,
       height: height ?? 30.h,
     );
@@ -113,8 +121,8 @@ class SvgPicturesMethods {
   }
 
   static Widget allahNamesIcon({double? height, double? width}) {
-    return SvgPicture.asset(
-      Assets.svgAllahNames,
+    return Image.asset(
+      Assets.svgAllahNamesPng,
       width: width ?? 30.w,
       height: height ?? 30.h,
     );
@@ -131,6 +139,14 @@ class SvgPicturesMethods {
   static Widget bookmarkIcon({double? height, double? width}) {
     return SvgPicture.asset(
       Assets.svgBookmark,
+      width: width ?? 30.w,
+      height: height ?? 30.h,
+    );
+  }
+
+  static Widget bookmarkedIcon({double? height, double? width}) {
+    return SvgPicture.asset(
+      Assets.svgBookmarkedAlready,
       width: width ?? 30.w,
       height: height ?? 30.h,
     );

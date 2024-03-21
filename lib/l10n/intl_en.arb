@@ -1,6 +1,10 @@
 {
     "quran":"Al-Quran Al-Kreem",
+    "allahNames":"Allah Names",
     "lastRead":"Last Read",
+    "bookmarkAyat":"Bookmarked Verses",
+    "tasbeh":"Tasbeeh",
+    "time":"Time",
     "lastReadVarseNum":"Verse Num.",
     "searchHint":"Search Using Sura Name or The Verse",
     "suraInfo":"Info About",

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
+import 'package:hijri/hijri_calendar.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/models/surah_info.dart';
 import 'package:sqflite/sqflite.dart';
@@ -14,10 +15,13 @@ import 'package:sqflite/sqflite.dart';
 import 'package:islamic_app/database/data_client.dart';
 import 'package:islamic_app/models/surah_model.dart';
 
+import '../models/allah_name_model.dart';
+
 class QuranController extends GetxController {
   final DataClient _client = DataClient();
   List<SurahModel> surahs = [];
   List<SurahInfoModel> suarhsInfo = [];
+  List<AllahNameModel> allahNames = [];
   List<List<AyaOfSurahModel>> pages = [];
   List<AyaOfSurahModel> allAyas = [];
   List<AyaOfSurahModel> ayasFoundBySearch = [];
@@ -46,6 +50,7 @@ class QuranController extends GetxController {
     await loadQuran();
     await loadQuranSurahsInfo();
     await getAyaTafser();
+    await loadAllahNames();
   }
 
   @override
@@ -55,6 +60,43 @@ class QuranController extends GetxController {
     advancedDrawerController.dispose();
     super.onClose();
   }
+
+  int calucate(int year, int month, int day) {
+    HijriCalendar hijriCalendar = HijriCalendar();
+    DateTime start = DateTime.now();
+    DateTime end = hijriCalendar.hijriToGregorian(year, month, day);
+    if (!start.isAfter(end)) {
+      // this if the end date is aftar the start date will do this logic
+      return DateTimeRange(start: start, end: end).duration.inDays;
+    } else {
+      // this if the end date is before the start date will do the else logic
+      // end = end.copyWith(year: end.year + 1); // uncomment this if you want to make it calucate the next year occasion
+      // return DateTimeRange(start: end, end: start).duration.inDays; // you can make this like مضى X ايام
+      return 0;
+    }
+  }
+
+  double calculateProgress(int currentIndex, int total) {
+    int totalPages = total;
+    if (currentIndex < 1) {
+      return 0.0;
+    }
+    if (currentIndex > totalPages) {
+      return 100.0;
+    }
+    return (currentIndex / totalPages) * Get.width;
+  }
+//   double calculateWidth(int days) {
+//   // Assuming 1 day corresponds to 1% width
+//   double maxWidth = MediaQuery.of(context).size.width;
+//   double minWidth = 0; // Set a minimum width if needed
+
+//   // Calculate the width based on the number of days
+//   double width = (days / 100) * maxWidth;
+
+//   // Ensure the width stays within the specified range
+//   return width.clamp(minWidth, maxWidth);
+// }
 
   void toggleAyahSelection(int index) {
     if (selectedAyahIndexes.contains(index)) {
@@ -102,6 +144,17 @@ class QuranController extends GetxController {
 
     for (var surah in jsonResponse) {
       suarhsInfo.add(SurahInfoModel.fromMap(surah));
+    }
+    update();
+  }
+
+  Future<void> loadAllahNames() async {
+    String jsonString = await rootBundle.loadString("assets/data/names.json");
+    var jsonResponse = jsonDecode(jsonString);
+
+    for (var name in jsonResponse['names']) {
+      allahNames.add(AllahNameModel.fromMap(name));
+      log(name["name"]);
     }
     update();
   }

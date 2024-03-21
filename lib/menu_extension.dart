@@ -154,7 +154,10 @@ extension ContextMenuExtension on BuildContext {
                           button: true,
                           enabled: true,
                           label: 'Share Ayah',
-                          child: SvgPicturesMethods.bookmarkIcon(height: 25.0),
+                          child: bookMarkController.bookmarkedAyasID
+                                  .contains(ayaOfSurahModel.uniqueIdOfAya)
+                              ? SvgPicturesMethods.bookmarkedIcon(height: 25  )
+                              : SvgPicturesMethods.bookmarkIcon(height: 25.0),
                         ),
                         onTap: () async {
                           await bookMarkController
