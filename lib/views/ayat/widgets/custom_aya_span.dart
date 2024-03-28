@@ -34,7 +34,7 @@ TextSpan span({
           fontFamily: 'page${pageIndex + 1}',
           // fontSize: fontSize,
           // height: 2,
-          letterSpacing: 8,
+          letterSpacing: 25,
           color: Colors.black,
           backgroundColor: isSelected
               ? Get.theme.highlightColor

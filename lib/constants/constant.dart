@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:islamic_app/generated/l10n.dart';
-import 'package:islamic_app/svg_pictures.dart';
-import 'package:islamic_app/views/allah_names/allah_names_view.dart';
-import 'package:islamic_app/views/home/widgets/section_widget.dart';
 import 'package:islamic_app/views/quran/widgets/juzes_sliverlist.dart';
 
 import '../views/quran/widgets/suras_sliverlist.dart';
@@ -31,10 +27,32 @@ const String kSettingSalatAlotrKey = "salatAlotr";
 
 class Constant {
   Constant._();
+
+  static const String currentReaderKey = "currentReader";
+
   static const String backgroundImage = "assets/svg/view_background.png";
   static List<Widget> tabsViews = [
     const SurasSliverList(),
     const JuzesSliverList(),
+  ];
+
+  static List<String> readers = [
+    S.current.abdulbasitAbdusamad,
+    S.current.alMinshawi,
+    S.current.elHosary,
+    S.current.alMueaqly,
+    S.current.mohammedAyoub,
+    S.current.yasserAdDussary,
+    S.current.abuBakrAshShaatree,
+  ];
+  static List<String> readersLinks = [
+    "Abdul_Basit_Murattal_64kbps",
+    "Minshawy_Murattal_128kbps",
+    "Husary_128kbps",
+    "Muhammad_Ayyoub_128kbps",
+    "MaherAlMuaiqly128kbps",
+    "Yasser_Ad-Dussary_128kbps",
+    "Abu_Bakr_Ash-Shaatree_64kbps",
   ];
 
   static List<int> lastPlaceBannerPageIndex = [

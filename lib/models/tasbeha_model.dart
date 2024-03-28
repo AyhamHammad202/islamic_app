@@ -12,7 +12,7 @@ class TasbehaModel {
     required this.isAdded,
   });
 
-  static const String table = "tasbeh";
+  static const String table = "tasbehTable";
   static const List<String> columns = [
     'id',
     'tasbeh',

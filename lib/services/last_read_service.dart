@@ -8,7 +8,8 @@ class LastReadService extends GetxService {
   RxString lastDateRead = "${DateTime.now()}".obs;
   RxInt lastSuraNumRead = 1.obs;
   RxInt lastAyaNumRead = 1.obs;
-  void setLastRead(int page, String date, int suraNum, int ayaNum) {
+  RxInt lastAyaUniqeNumRead = 1.obs;
+  void setLastRead(int page, String date, int suraNum, int ayaNum,int uniqeNumOfAya) {
     lastPageRead.value = page;
     lastDateRead.value = date;
     lastSuraNumRead.value = suraNum;
@@ -17,6 +18,7 @@ class LastReadService extends GetxService {
     sharedPrefs.setString("lastDateRead", date);
     sharedPrefs.setInt("lastSuraNumRead", suraNum);
     sharedPrefs.setInt("lastAyaNumRead", ayaNum);
+    sharedPrefs.setInt("lastAyaUniqeNumRead", uniqeNumOfAya);
   }
 
   Future<LastReadService> init() async {
@@ -26,6 +28,7 @@ class LastReadService extends GetxService {
         sharedPrefs.getString("lastDateRead") ?? "${DateTime.now()}";
     lastSuraNumRead.value = sharedPrefs.getInt("lastSuraNumRead") ?? 1;
     lastAyaNumRead.value = sharedPrefs.getInt("lastAyaNumRead") ?? 1;
+    lastAyaUniqeNumRead.value = sharedPrefs.getInt("lastAyaUniqeNumRead") ?? 1;
     return this;
   }
 }

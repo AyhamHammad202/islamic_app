@@ -100,6 +100,26 @@ class S {
     );
   }
 
+  /// `Islamic Occasions`
+  String get islamicOccasions {
+    return Intl.message(
+      'Islamic Occasions',
+      name: 'islamicOccasions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quran Radio`
+  String get radio {
+    return Intl.message(
+      'Quran Radio',
+      name: 'radio',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Time`
   String get time {
     return Intl.message(
@@ -245,6 +265,156 @@ class S {
     return Intl.message(
       'Next Pray',
       name: 'nextPray',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ramadan`
+  String get ramadan {
+    return Intl.message(
+      'Ramadan',
+      name: 'ramadan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Eid Al-Fitr`
+  String get eid_al_fitr {
+    return Intl.message(
+      'Eid Al-Fitr',
+      name: 'eid_al_fitr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Day Of Arafah`
+  String get arafah {
+    return Intl.message(
+      'Day Of Arafah',
+      name: 'arafah',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Eid Al-Adha`
+  String get eid_al_adha {
+    return Intl.message(
+      'Eid Al-Adha',
+      name: 'eid_al_adha',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Islamic New Year`
+  String get islamic_new_year {
+    return Intl.message(
+      'Islamic New Year',
+      name: 'islamic_new_year',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Days`
+  String get days {
+    return Intl.message(
+      'Days',
+      name: 'days',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Day`
+  String get day {
+    return Intl.message(
+      'Day',
+      name: 'day',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Has Come`
+  String get hasCome {
+    return Intl.message(
+      'Has Come',
+      name: 'hasCome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Abdulbasit Abdusamad`
+  String get abdulbasitAbdusamad {
+    return Intl.message(
+      'Abdulbasit Abdusamad',
+      name: 'abdulbasitAbdusamad',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Mohammed Siddiq Al-Minshawi`
+  String get alMinshawi {
+    return Intl.message(
+      ' Mohammed Siddiq Al-Minshawi',
+      name: 'alMinshawi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mahmoud El-Hosary`
+  String get elHosary {
+    return Intl.message(
+      'Mahmoud El-Hosary',
+      name: 'elHosary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maher Al-Mueaqly`
+  String get alMueaqly {
+    return Intl.message(
+      'Maher Al-Mueaqly',
+      name: 'alMueaqly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mohammed Ayoub`
+  String get mohammedAyoub {
+    return Intl.message(
+      'Mohammed Ayoub',
+      name: 'mohammedAyoub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yasser Ad-Dussary`
+  String get yasserAdDussary {
+    return Intl.message(
+      'Yasser Ad-Dussary',
+      name: 'yasserAdDussary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Abu Bakr Ash-Shaatree`
+  String get abuBakrAshShaatree {
+    return Intl.message(
+      'Abu Bakr Ash-Shaatree',
+      name: 'abuBakrAshShaatree',
       desc: '',
       args: [],
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/services/last_read_service.dart';
@@ -18,6 +19,7 @@ class LastReadAya extends StatelessWidget {
   Widget build(BuildContext context) {
     LastReadService lastReadService = Get.find();
     QuranController quranController = Get.find();
+    AudioController audioController = Get.find();
     var formatter = DateFormat(
       'd MMMM',
       // 'ar_SA',
@@ -27,6 +29,8 @@ class LastReadAya extends StatelessWidget {
     ); // Format the current date
     return InkWell(
       onTap: () {
+        audioController.ayaUniqeId.value =
+            lastReadService.lastAyaUniqeNumRead.value;
         quranController.globalPage.value =
             lastReadService.lastPageRead.value - 1;
         quranController

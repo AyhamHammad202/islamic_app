@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/controllers/general_controller.dart';
+import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
@@ -13,6 +13,7 @@ import 'package:islamic_app/views/allah_names/allah_names_view.dart';
 import 'package:islamic_app/views/bookmark/bookmark_view.dart';
 import 'package:islamic_app/views/home/widgets/last_read_aya.dart';
 import 'package:islamic_app/views/quran/quran_view.dart';
+import 'package:islamic_app/views/radio/quran_radio_view.dart';
 import 'package:islamic_app/views/search/search_view.dart';
 import 'package:islamic_app/views/tasbeh/tasbeh_view.dart';
 
@@ -27,6 +28,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     HijriCalendar.setLocal("ar");
     var hijri = HijriCalendar.now();
+    QuranController quranController = Get.find();
     final BookMarkController bookMarkController = Get.find();
     return BackgroundImage(
       child: Scaffold(
@@ -83,6 +85,17 @@ class HomeView extends StatelessWidget {
                     ));
                   },
                 ),
+                Column(
+                  children: List.generate(
+                    quranController.tables.length,
+                    (index) => Text(
+                      quranController.tables[index],
+                      style: const TextStyle(
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
@@ -206,11 +219,22 @@ class HomeView extends StatelessWidget {
                         },
                       ),
                       SectionWidget(
-                        title: "مناسبات السنة الهجرية",
-                        svgIcon: const Icon(CupertinoIcons.alt),
+                        title: S.of(context).islamicOccasions,
+                        svgIcon: SvgPicturesMethods.occasionsIcon(),
                         onTap: () {
                           Get.to(
                             () => const YearOccasionView(),
+                            transition: Transition.rightToLeftWithFade,
+                            duration: const Duration(milliseconds: 300),
+                          );
+                        },
+                      ),
+                      SectionWidget(
+                        title: S.of(context).radio,
+                        svgIcon: SvgPicturesMethods.radioIcon(),
+                        onTap: () {
+                          Get.to(
+                            () => const QuranRadioView(),
                             transition: Transition.rightToLeftWithFade,
                             duration: const Duration(milliseconds: 300),
                           );

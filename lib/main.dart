@@ -26,6 +26,8 @@ import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/services/theme_services.dart';
 import 'package:islamic_app/version_one_views/quran_view.dart';
 import 'package:islamic_app/views/home/home_view.dart';
+import 'package:islamic_app/views/update_view/update_view.dart';
+import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 import 'constants/assets.dart';
 import 'controllers/audio_controller.dart';
@@ -40,6 +42,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   await FirebaseApi().initNotifictions();
   await initalServices();
   await GetStorage.init();
@@ -82,6 +85,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    QuranController quranController = Get.put(QuranController());
     FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.instance;
     firebaseAnalytics.logAppOpen();
     SizeConfig().init(context);
@@ -100,7 +104,7 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-        onGenerateRoute: onGenerateRoute,
+        // onGenerateRoute: onGenerateRoute,
         debugShowCheckedModeBanner: false,
         initialBinding: InitialBindings(),
         builder: BotToastInit(), //1. call BotToastInit
@@ -109,20 +113,22 @@ class MyApp extends StatelessWidget {
         ], //2. registered route observer
         // initialRoute: QuranView.id,
         home: GetBuilder<QuranController>(
-          init: QuranController(),
-          builder: (controller) {
-            return controller.suarhsInfo.isNotEmpty
-                ? const HomeView()
-                : Scaffold(
-                    body: SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      child: SvgPicture.asset(
-                        Assets.svgSplash,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  );
+          init: Get.put(QuranController()),
+          builder: (c) {
+            return quranController.isUpdateAvailable.value
+                ? const UpdateView()
+                : quranController.suarhsInfo.isNotEmpty
+                    ? const HomeView()
+                    : Scaffold(
+                        body: SizedBox(
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          child: SvgPicture.asset(
+                            Assets.svgSplash,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
           },
         ),
       ),

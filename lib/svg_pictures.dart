@@ -96,6 +96,39 @@ class SvgPicturesMethods {
     );
   }
 
+  static Widget radioBackgroundIcon({double? height, double? width}) {
+    return Image.asset(
+      Assets.svgRadioBackgroundPng,
+      fit: BoxFit.cover,
+      width: width ?? 30.w,
+      height: height ?? 30.h,
+    );
+  }
+
+  static Widget occasionsIcon({double? height, double? width}) {
+    return Image.asset(
+      Assets.svgOccasionsPng,
+      width: width ?? 30.w,
+      height: height ?? 30.h,
+    );
+  }
+
+  static Widget occasionIcon({double? height, double? width}) {
+    return Image.asset(
+      Assets.svgOccasionPng,
+      width: width ?? 30.w,
+      height: height ?? 30.h,
+    );
+  }
+
+  static Widget radioIcon({double? height, double? width}) {
+    return Image.asset(
+      Assets.svgRadioPng,
+      width: width ?? 30.w,
+      height: height ?? 30.h,
+    );
+  }
+
   static Widget tasbeehIcon({double? height, double? width}) {
     return Image.asset(
       Assets.svgTassbehPng,

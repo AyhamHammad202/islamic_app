@@ -9,6 +9,12 @@ class SettingsService extends GetxService {
   RxInt ayaTafserFontSize = 16.obs;
   RxBool salatAldohaReminder = false.obs;
   RxBool salatAlotrReminder = false.obs;
+  RxInt currentReaderIndex = 0.obs;
+
+  void setReaderIndex(int index) {
+    currentReaderIndex.value = index;
+    sharedPreferences.setInt(Constant.currentReaderKey, index);
+  }
 
   void setAyaFontSize(int size) {
     ayaFontSize.value = size;
@@ -32,6 +38,8 @@ class SettingsService extends GetxService {
 
   Future<SettingsService> init() async {
     sharedPreferences = await SharedPreferences.getInstance();
+    currentReaderIndex.value =
+        sharedPreferences.getInt(Constant.currentReaderKey) ?? 0;
     ayaFontSize.value = sharedPreferences.getInt(kSettingAyaFontSizeKey) ?? 24;
     ayaTafserFontSize.value =
         sharedPreferences.getInt(kSettingAyaTafserFontSizeKey) ?? 16;

@@ -17,46 +17,48 @@ class TasbehaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MesbahaController mesbahaController = Get.find();
-    return InkWell(
-      onTap: () {
-        Get.to(
-          () => MasbehaView(
-            tasbehaModel: mesbahaController.tasbeh[index],
-          ),
-          // transition: Transition.upToDown,
-          // duration: const Duration(
-          //   milliseconds: 300,
-          // ),
-        );
-      },
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 8.h),
-        padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 8.h),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-        ),
-        child: Row(
-          children: [
-            SvgPicturesMethods.mesbahaIcon(),
-            Gap(8.w),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    mesbahaController.tasbeh[index].tasbeha,
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                  Text(
-                    "${mesbahaController.tasbeh[index].times} ${S.of(context).time}",
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                ],
-              ),
+    return GetBuilder<MesbahaController>(builder: (c) {
+      return InkWell(
+        onTap: () {
+          Get.to(
+            () => MasbehaView(
+              tasbehaModel: mesbahaController.tasbeh[index],
             ),
-          ],
+            // transition: Transition.upToDown,
+            // duration: const Duration(
+            //   milliseconds: 300,
+            // ),
+          );
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 8.h),
+          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 8.h),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          child: Row(
+            children: [
+              SvgPicturesMethods.mesbahaIcon(),
+              Gap(8.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      mesbahaController.tasbeh[index].tasbeha,
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
+                    Text(
+                      "${mesbahaController.tasbeh[index].times} ${S.of(context).time}",
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

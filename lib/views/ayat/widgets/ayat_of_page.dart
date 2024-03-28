@@ -28,10 +28,10 @@ class AyatOfPage extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'page${page + 1}',
             fontSize: 100,
-            letterSpacing: .01,
-            wordSpacing: .01,
-            // height: 1.9,
-            color: Colors.black,
+            letterSpacing: .05,
+            wordSpacing: .05,
+            height: 1.8,
+            color: Colors.red,
           ),
           children: List.generate(ayas.length, (ayaIndex) {
             quranController.isSelected = quranController.selectedAyahIndexes

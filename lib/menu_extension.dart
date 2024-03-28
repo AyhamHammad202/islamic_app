@@ -120,14 +120,12 @@ extension ContextMenuExtension on BuildContext {
                       GetX<AudioController>(
                         builder: (controller) {
                           return GestureDetector(
-                            onTap: audioController.isLoading.value
-                                ? () {
-                                    log("LoadinGGGGGGGGGGGGGGGGGGGGGGGGGGG");
-                                  }
-                                : () async {
-                                    await audioController
-                                        .playAyah(ayaOfSurahModel);
-                                  },
+                            onTap: () async {
+                              await audioController.playAyah(ayaOfSurahModel);
+                              quranController.isClickedOnPage.value = true;
+                              cancel();
+                              // .playRadio();
+                            },
                             child: Semantics(
                               button: true,
                               enabled: true,
@@ -156,7 +154,7 @@ extension ContextMenuExtension on BuildContext {
                           label: 'Share Ayah',
                           child: bookMarkController.bookmarkedAyasID
                                   .contains(ayaOfSurahModel.uniqueIdOfAya)
-                              ? SvgPicturesMethods.bookmarkedIcon(height: 25  )
+                              ? SvgPicturesMethods.bookmarkedIcon(height: 25)
                               : SvgPicturesMethods.bookmarkIcon(height: 25.0),
                         ),
                         onTap: () async {

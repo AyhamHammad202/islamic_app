@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:developer';
 import 'dart:io';
 
@@ -6,7 +8,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DataClient {
-  final String _databaseName = "Quran.db";
+  final String _databaseName = "QuranV2.db";
 
   static Database? _database;
 
@@ -23,7 +25,18 @@ class DataClient {
   Future _openDatabase(String fileName) async {
     String databasePath = await getDatabasesPath();
     var path = join(databasePath, fileName);
-    return openDatabase(path, version: 3);
+    return openDatabase(
+      path,
+      version: 7,
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (newVersion > oldVersion) {
+          // await db.close();
+          // await deleteDatabase(db.path);
+          print("init database 222222222222222222222222");
+          await initDatabase();
+        }
+      },
+    );
   }
 
   Future initDatabase() async {

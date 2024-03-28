@@ -21,26 +21,35 @@ class TasbehView extends StatelessWidget {
             S.of(context).tasbeh,
           ),
         ),
-        body: GetBuilder<MesbahaController>(builder: (c) {
+        body: Obx(() {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-            child: ListView.builder(
-              itemCount: mesbahaController.tasbeh.length,
-              itemBuilder: (context, index) {
-                return AnimationConfiguration.staggeredList(
-                  position: index,
-                  child: FadeInAnimation(
-                    duration: Durations.medium2,
-                    child: SlideAnimation(
-                      verticalOffset: 50,
-                      child: TasbehaWidget(
-                        index: index,
+            child: mesbahaController.tasbeh.isEmpty
+                ? const Center(
+                    child: Text(
+                      "There is no thing to show",
+                      style: TextStyle(
+                        color: Colors.red,
                       ),
                     ),
+                  )
+                : ListView.builder(
+                    itemCount: mesbahaController.tasbeh.length,
+                    itemBuilder: (context, index) {
+                      return AnimationConfiguration.staggeredList(
+                        position: index,
+                        child: FadeInAnimation(
+                          duration: Durations.medium2,
+                          child: SlideAnimation(
+                            verticalOffset: 50,
+                            child: TasbehaWidget(
+                              index: index,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           );
         }),
       ),

@@ -43,20 +43,18 @@ class _AzkarViewState extends State<AzkarView> {
             return InkWell(
               onTap: () {
                 _controller.text = azkarController.azkar[index].zekr;
-                Scaffold.of(context).showBottomSheet((context) => Container(
-                      child: Column(
-                        children: [
-                          TextField(
-                            controller: _controller,
-                            onSubmitted: (value) {
-                              azkarController.updateZekr(
-                                  value, azkarController.azkar[index]);
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ],
-                      ),
-                    ));
+                Scaffold.of(context).showBottomSheet((context) => Column(
+                  children: [
+                    TextField(
+                      controller: _controller,
+                      onSubmitted: (value) {
+                        azkarController.updateZekr(
+                            value, azkarController.azkar[index]);
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ));
               },
               onLongPress: () {
                 azkarController.deleteZekr(azkarController.azkar[index]).then(

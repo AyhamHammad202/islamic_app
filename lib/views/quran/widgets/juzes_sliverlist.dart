@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/services/last_read_service.dart';
@@ -15,6 +16,7 @@ class JuzesSliverList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final QuranController quranController = Get.find();
+    final AudioController audioController = Get.find();
     final LastReadService lastReadService = Get.find();
     return AnimationLimiter(
       child: SliverList.builder(
@@ -44,6 +46,7 @@ class JuzesSliverList extends StatelessWidget {
                       transition: Transition.rightToLeft,
                       duration: const Duration(milliseconds: 300),
                     );
+                    audioController.ayaUniqeId.value = juz.uniqueIdOfAya;
                     lastReadService.setLastRead(
                       juz.page,
                       "${DateTime.now()}",
@@ -51,6 +54,7 @@ class JuzesSliverList extends StatelessWidget {
                           .surahs[quranController.getSurahNumberByAya(juz) - 1]
                           .numberOfSurah,
                       juz.numberOfAyaInSurah,
+                      juz.uniqueIdOfAya,
                     );
                   },
                 ),

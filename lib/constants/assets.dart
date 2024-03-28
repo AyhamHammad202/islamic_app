@@ -65,6 +65,14 @@ class Assets {
   /// assets/svg/mesbaha_png.png
   static const String svgMesbahaPng = "assets/svg/mesbaha_png.png";
 
+  /// Assets for svgOccasionPng
+  /// assets/svg/occasion_png.png
+  static const String svgOccasionPng = "assets/svg/occasion_png.png";
+
+  /// Assets for svgOccasionsPng
+  /// assets/svg/occasions_png.png
+  static const String svgOccasionsPng = "assets/svg/occasions_png.png";
+
   /// Assets for svgPauseArrow
   /// assets/svg/pause_arrow.svg
   static const String svgPauseArrow = "assets/svg/pause_arrow.svg";
@@ -92,6 +100,18 @@ class Assets {
   /// Assets for svgQuranImage
   /// assets/svg/quran_image.svg
   static const String svgQuranImage = "assets/svg/quran_image.svg";
+
+  /// Assets for svgRadioBackground
+  /// assets/svg/radio_background.svg
+  static const String svgRadioBackground = "assets/svg/radio_background.svg";
+
+  /// Assets for svgRadioBackgroundPng
+  /// assets/svg/radio_background_png.png
+  static const String svgRadioBackgroundPng = "assets/svg/radio_background_png.png";
+
+  /// Assets for svgRadioPng
+  /// assets/svg/radio_png.png
+  static const String svgRadioPng = "assets/svg/radio_png.png";
 
   /// Assets for svgSearch
   /// assets/svg/search.svg

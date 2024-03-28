@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/models/surah_info.dart';
+import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:islamic_app/database/data_client.dart';
@@ -18,6 +19,10 @@ import 'package:islamic_app/models/surah_model.dart';
 import '../models/allah_name_model.dart';
 
 class QuranController extends GetxController {
+  RxBool isUpdateAvailable = false.obs;
+  RxBool isUpdateCompluted = false.obs;
+  var shorebirdCodePush = ShorebirdCodePush();
+
   final DataClient _client = DataClient();
   List<SurahModel> surahs = [];
   List<SurahInfoModel> suarhsInfo = [];
@@ -25,6 +30,8 @@ class QuranController extends GetxController {
   List<List<AyaOfSurahModel>> pages = [];
   List<AyaOfSurahModel> allAyas = [];
   List<AyaOfSurahModel> ayasFoundBySearch = [];
+  List<String> tables = [];
+  RxBool isClickedOnPage = false.obs;
 
   Map<int, String> mapOfTafser = {};
 
@@ -48,9 +55,34 @@ class QuranController extends GetxController {
       // if (homePageScrollerController.offset>homePageScrollerController) {}
     });
     await loadQuran();
+    await getTableNames();
     await loadQuranSurahsInfo();
     await getAyaTafser();
     await loadAllahNames();
+    await updateApp();
+  }
+
+  Future updateApp() async {
+    shorebirdCodePush
+        .currentPatchNumber()
+        .then((value) => log('current patch number is $value'));
+    isUpdateAvailable.value =
+        await shorebirdCodePush.isNewPatchAvailableForDownload();
+    update();
+    await shorebirdCodePush.downloadUpdateIfAvailable();
+    isUpdateCompluted.value = true;
+
+    update();
+  }
+
+  Future getTableNames() async {
+    tables = [];
+    var db = await _client.database;
+    final List<Map<String, dynamic>> t2ables =
+        await db!.rawQuery('SELECT name FROM sqlite_master WHERE type="table"');
+    t2ables.map((row) {
+      tables.add(row['name']);
+    }).toList();
   }
 
   @override
@@ -86,17 +118,14 @@ class QuranController extends GetxController {
     }
     return (currentIndex / totalPages) * Get.width;
   }
-//   double calculateWidth(int days) {
-//   // Assuming 1 day corresponds to 1% width
-//   double maxWidth = MediaQuery.of(context).size.width;
-//   double minWidth = 0; // Set a minimum width if needed
 
-//   // Calculate the width based on the number of days
-//   double width = (days / 100) * maxWidth;
-
-//   // Ensure the width stays within the specified range
-//   return width.clamp(minWidth, maxWidth);
-// }
+  double calculateProgress2(
+      int currentDay, int daysUntilEvent, double totalWidth) {
+    // Assuming currentDay is the day of the month and daysUntilEvent is the total days remaining until the event
+    double progressFraction = currentDay / (currentDay + daysUntilEvent);
+    return progressFraction *
+        totalWidth; // Calculate the proportional width based on progress
+  }
 
   void toggleAyahSelection(int index) {
     if (selectedAyahIndexes.contains(index)) {
@@ -125,7 +154,7 @@ class QuranController extends GetxController {
 
     for (var surah in surahs) {
       allAyas.addAll(surah.ayas);
-      log('Added ${surah.nameOfSurah} ayahs');
+      // log('Added ${surah.nameOfSurah} ayahs');
     }
     update();
     List.generate(
@@ -134,7 +163,7 @@ class QuranController extends GetxController {
         pages.add(allAyas.where((ayah) => ayah.page == pageIndex + 1).toList());
       },
     );
-    log('Pages Length: ${pages.length}', name: 'Quran Controller');
+    // log('Pages Length: ${pages.length}', name: 'Quran Controller');
   }
 
   Future<void> loadQuranSurahsInfo() async {
@@ -154,7 +183,7 @@ class QuranController extends GetxController {
 
     for (var name in jsonResponse['names']) {
       allahNames.add(AllahNameModel.fromMap(name));
-      log(name["name"]);
+      // log(name["name"]);
     }
     update();
   }

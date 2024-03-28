@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:developer';
 
 import 'package:get/get.dart';
@@ -8,7 +10,7 @@ import '../database/data_client.dart';
 
 class MesbahaController extends GetxController {
   final DataClient _dataClient = DataClient();
-  List<TasbehaModel> tasbeh = [];
+  RxList<TasbehaModel> tasbeh = <TasbehaModel>[].obs;
   RxInt times = 0.obs;
 
   @override
@@ -24,19 +26,23 @@ class MesbahaController extends GetxController {
   }
 
   Future getAllTheTasbeh() async {
-    Database? database = await _dataClient.database;
-    if (database == null || !database.isOpen) {
-      log("The Database in AZKAR CONTROLLER IS NULL OR CLOSED");
-      return;
+    try {
+      Database? database = await _dataClient.database;
+      if (database == null || !database.isOpen) {
+        log("The Database in AZKAR CONTROLLER IS NULL OR CLOSED");
+        return;
+      }
+      tasbeh.clear();
+      var results = await database.query(
+        'tasbehTable',
+        columns: TasbehaModel.columns,
+      );
+      for (var t in results) {
+        tasbeh.add(TasbehaModel.fromMap(t));
+      }
+      refresh();
+    } on Exception catch (e) {
+      print(e.toString());
     }
-    tasbeh.clear();
-    var results = await database.query(
-      TasbehaModel.table,
-      columns: TasbehaModel.columns,
-    );
-    for (var t in results) {
-      tasbeh.add(TasbehaModel.fromMap(t));
-    }
-    refresh();
   }
 }

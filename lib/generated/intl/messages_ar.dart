@@ -22,26 +22,48 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "abdulbasitAbdusamad":
+            MessageLookupByLibrary.simpleMessage("عبدالباسط عبدالصمد"),
+        "abuBakrAshShaatree":
+            MessageLookupByLibrary.simpleMessage("أبو بكر الشاطري"),
+        "alMinshawi":
+            MessageLookupByLibrary.simpleMessage("محمد صديق المنشاوي"),
+        "alMueaqly": MessageLookupByLibrary.simpleMessage("ماهر المعيقلي"),
         "allahNames": MessageLookupByLibrary.simpleMessage("أسماء الله الحسنى"),
+        "arafah": MessageLookupByLibrary.simpleMessage("يوم عرفة"),
         "aya": MessageLookupByLibrary.simpleMessage("آية"),
         "ayas": MessageLookupByLibrary.simpleMessage("آيات"),
         "bookmarkAyat": MessageLookupByLibrary.simpleMessage("الآيات المفضلة"),
+        "day": MessageLookupByLibrary.simpleMessage("يوم"),
+        "days": MessageLookupByLibrary.simpleMessage("أيام"),
+        "eid_al_adha": MessageLookupByLibrary.simpleMessage("عيد الأضحى"),
+        "eid_al_fitr": MessageLookupByLibrary.simpleMessage("عيد الفطر"),
+        "elHosary": MessageLookupByLibrary.simpleMessage("محمود الحصري"),
+        "hasCome": MessageLookupByLibrary.simpleMessage("قد أتى"),
         "hizb": MessageLookupByLibrary.simpleMessage("الحزب"),
+        "islamicOccasions":
+            MessageLookupByLibrary.simpleMessage("مناسبات إسلامية"),
+        "islamic_new_year":
+            MessageLookupByLibrary.simpleMessage("السنة الهجرية الجديدة"),
         "juz": MessageLookupByLibrary.simpleMessage("الجزء"),
         "juzs": MessageLookupByLibrary.simpleMessage("الأجزاء"),
         "lastRead": MessageLookupByLibrary.simpleMessage("آخر قراءة"),
         "lastReadVarseNum": MessageLookupByLibrary.simpleMessage("رقم الآية"),
+        "mohammedAyoub": MessageLookupByLibrary.simpleMessage("محمد ايوب"),
         "nextPray": MessageLookupByLibrary.simpleMessage("الصلاة التالية"),
         "page": MessageLookupByLibrary.simpleMessage("الصفحة"),
         "pages": MessageLookupByLibrary.simpleMessage("الصفحات"),
         "quran": MessageLookupByLibrary.simpleMessage("القرآن الكريم"),
         "qurter": MessageLookupByLibrary.simpleMessage("الأرباع"),
+        "radio": MessageLookupByLibrary.simpleMessage("راديو القرآن"),
+        "ramadan": MessageLookupByLibrary.simpleMessage("رمضان"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "أبحث بأستخدام أسم السورة أو الآية"),
         "sorahs": MessageLookupByLibrary.simpleMessage("السور"),
         "suraInfo": MessageLookupByLibrary.simpleMessage("معلومات عن سورة"),
         "tasbeh": MessageLookupByLibrary.simpleMessage("التسبيح"),
         "theAyas": MessageLookupByLibrary.simpleMessage("الآيات"),
-        "time": MessageLookupByLibrary.simpleMessage("مرة")
+        "time": MessageLookupByLibrary.simpleMessage("مرة"),
+        "yasserAdDussary": MessageLookupByLibrary.simpleMessage("ياسر الدوسري")
       };
 }
