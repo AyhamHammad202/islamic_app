@@ -93,6 +93,7 @@ class _MyAppState extends State<MyApp> {
             theme: ThemeData(
               scaffoldBackgroundColor: kBackgroundColor,
             ),
+            themeMode: ThemeMode.light,
             locale: Locale("ar"),
             localizationsDelegates: [
               S.delegate,
