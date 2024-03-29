@@ -29,7 +29,6 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   awesome_notifications: ^0.8.2
-  change_app_package_name: ^1.1.0
   cupertino_icons: ^1.0.2
   device_preview: ^1.1.0
   firebase_core: ^2.24.2
