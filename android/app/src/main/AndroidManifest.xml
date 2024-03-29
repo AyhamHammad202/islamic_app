@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.NourAlmoman.quranapp">
+package="com.NourAlmomen.islamicapp">
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.VIBRATE" />
 <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />

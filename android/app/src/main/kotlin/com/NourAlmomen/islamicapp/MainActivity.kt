@@ -1,4 +1,4 @@
-package com.NourAlmoman.quranapp
+package com.NourAlmomen.islamicapp
 
 import io.flutter.embedding.android.FlutterActivity
 
