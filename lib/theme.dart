@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -43,7 +42,7 @@ class Themes {
       shadowColor: Colors.transparent,
       foregroundColor: Colors.black,
       titleTextStyle: GoogleFonts.tajawal(
-        fontSize: 18.sp,
+        fontSize: 16.sp,
         fontWeight: FontWeight.bold,
         color: const Color(0xff997647),
       ),
@@ -127,40 +126,121 @@ class Themes {
         )),
   );
   static final dark = ThemeData(
-      useMaterial3: true,
-      primaryColor: darkBackgroundClr,
-      appBarTheme: const AppBarTheme(
-        backgroundColor: Color(0xffFFFFFF),
-        elevation: 0,
-        surfaceTintColor: Color(0xffFFFFFF),
+    useMaterial3: true,
+    // primaryColor: lightBackgroundClr,
+    scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
+    // scaffoldBackgroundColor: Colors.transparent,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      surfaceTintColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      foregroundColor: Colors.grey.shade300,
+      titleTextStyle: GoogleFonts.tajawal(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.bold,
+        color: const Color(0xff997647),
       ),
-      textTheme: TextTheme(
-        headlineMedium: TextStyle(
-          fontSize: 32.sp,
-          color: const Color(0xff997647),
+    ),
+    highlightColor: const Color(0xffFFD08A).withOpacity(.2),
+    colorScheme: const ColorScheme(
+      brightness: Brightness.dark,
+      primary: Colors.black54,
+      onPrimary: Colors.black54,
+      secondary: Color(0xffF3E3CF),
+      onSecondary: Color(0xffD7A664),
+      secondaryContainer: Colors.black54,
+      error: Colors.red,
+      onError: Colors.red,
+      background: darkBackgroundClr,
+      onBackground: darkTextClr,
+      surface: darkBackgroundClr,
+      onSurface: Colors.black,
+    ),
+    textTheme: TextTheme(
+        headlineSmall: GoogleFonts.tajawal(
+          color: const Color(0xffC4975B),
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w500,
         ),
-      )
-      // colorScheme: const ColorScheme(
-      //   brightness: Brightness.dark,
-      //   primary: c4,
-      //   onPrimary: Colors.white,
-      //   secondary: c4,
-      //   onSecondary: c4,
-      //   error: Colors.red,
-      //   onError: Colors.red,
-      //   background: darkBackgroundClr,
-      //   onBackground: darkTextClr,
-      //   surface: darkBackgroundClr,
-      //   onSurface: darkTextClr,
-      // ),
-      // iconButtonTheme: const IconButtonThemeData(
-      //     style: ButtonStyle(iconColor: MaterialStatePropertyAll(darkiconClr))),
-      // splashColor: darkPrimaryClr.withOpacity(0.2),
-      // hoverColor: Colors.transparent,
-      // highlightColor: darkPrimaryClr.withOpacity(0.2),
-      // fontFamily: 'Ibmp',
-      // iconTheme: const IconThemeData(color: darkiconClr),
-      );
+        headlineMedium: GoogleFonts.tajawal(
+          color: const Color(0xffD7A664),
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w700,
+        ),
+        headlineLarge: GoogleFonts.tajawal(
+          color: const Color(0xff313131),
+          fontWeight: FontWeight.w500,
+          fontSize: 18.sp,
+        ),
+        displayLarge: GoogleFonts.tajawal(
+          color: const Color(0xff5A5A5A),
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w400,
+        ),
+        displaySmall: GoogleFonts.tajawal(
+          color: const Color(0xff043336),
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w700,
+        ),
+        labelSmall: GoogleFonts.tajawal(
+          color: const Color(0xff757575),
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w400,
+        ),
+        displayMedium: GoogleFonts.poppins(
+          color: const Color(0xff765B37),
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w500,
+        ),
+        bodySmall: GoogleFonts.tajawal(
+          color: Colors.white,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w400,
+        ),
+        titleSmall: TextStyle(
+          color: Colors.white,
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w700,
+        ),
+        titleMedium: GoogleFonts.tajawal(
+          color: const Color(0xff004B40),
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w700,
+        ),
+        bodyMedium: GoogleFonts.tajawal(
+          color: Colors.white,
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w500,
+        ),
+        bodyLarge: TextStyle(
+          fontFamily: kFontUthmanicHafs,
+          color: const Color(0xff043336),
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w700,
+        )),
+  );
+  // colorScheme: const ColorScheme(
+  //   brightness: Brightness.dark,
+  //   primary: c4,
+  //   onPrimary: Colors.white,
+  //   secondary: c4,
+  //   onSecondary: c4,
+  //   error: Colors.red,
+  //   onError: Colors.red,
+  //   background: darkBackgroundClr,
+  //   onBackground: darkTextClr,
+  //   surface: darkBackgroundClr,
+  //   onSurface: darkTextClr,
+  // ),
+  // iconButtonTheme: const IconButtonThemeData(
+  //     style: ButtonStyle(iconColor: MaterialStatePropertyAll(darkiconClr))),
+  // splashColor: darkPrimaryClr.withOpacity(0.2),
+  // hoverColor: Colors.transparent,
+  // highlightColor: darkPrimaryClr.withOpacity(0.2),
+  // fontFamily: 'Ibmp',
+  // iconTheme: const IconThemeData(color: darkiconClr),
 }
 
 TextStyle get textStyle => TextStyle(

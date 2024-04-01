@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/constants/constant.dart';
@@ -62,8 +65,11 @@ class AyatView extends StatelessWidget {
                         quranController.pages[page].first.numberOfAyaInSurah,
                         quranController.pages[page].first.uniqueIdOfAya,
                       );
-                      audioController.isPlaying.value||audioController.isLoading.value?  null :audioController.ayaUniqeId.value =
-                          quranController.pages[page].first.uniqueIdOfAya ;
+                      audioController.isPlaying.value ||
+                              audioController.isLoading.value
+                          ? null
+                          : audioController.ayaUniqeId.value =
+                              quranController.pages[page].first.uniqueIdOfAya;
                       quranController.globalPage.value = page;
                     },
                     itemBuilder: (context, page) {
@@ -80,101 +86,121 @@ class AyatView extends StatelessWidget {
                           quranController.isClickedOnPage.value =
                               !quranController.isClickedOnPage.value;
                         },
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                // mainAxisAlignment: MainAxisAlignment.center,
-                                // crossAxisAlignment: CrossAxisAlignment.center,
-                                children: List.generate(
-                                  quranController
-                                      .getCurrentPageAyahsSeparatedForBasmala(
-                                          page)
-                                      .length,
-                                  (index) {
-                                    final ayas = quranController
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Column(
+                                  // mainAxisSize: MainAxisSize.max,
+                                  // mainAxisAlignment: MainAxisAlignment.center,
+                                  // crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: List.generate(
+                                    quranController
                                         .getCurrentPageAyahsSeparatedForBasmala(
-                                            page)[index];
-                                    return Column(
-                                      // mainAxisAlignment: MainAxisAlignment.center,
-                                      // crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        // quranController.getCurrentPageAyahsSeparatedForBasmala(pageIndex)[i];
-                                        ayas.first.numberOfAyaInSurah == 1 &&
-                                                !Constant
-                                                    .lastPlaceBannerPageIndex
-                                                    .contains(page)
-                                            ? SuraBannerWithName(
-                                                aya: ayas.first,
+                                            page)
+                                        .length,
+                                    (index) {
+                                      final ayas = quranController
+                                          .getCurrentPageAyahsSeparatedForBasmala(
+                                              page)[index];
+                                      return Column(
+                                        // mainAxisAlignment: MainAxisAlignment.center,
+                                        // crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          // quranController.getCurrentPageAyahsSeparatedForBasmala(pageIndex)[i];
+                                          ayas.first.numberOfAyaInSurah == 1 &&
+                                                  !Constant
+                                                      .lastPlaceBannerPageIndex
+                                                      .contains(page)
+                                              ? SuraBannerWithName(
+                                                  aya: ayas.first,
+                                                  quranController:
+                                                      quranController,
+                                                )
+                                              : const SizedBox.shrink(),
+                                          ayas.first.numberOfAyaInSurah == 1 &&
+                                                  quranController
+                                                          .getSurahNumberByAya(
+                                                              ayas.first) !=
+                                                      1 &&
+                                                  quranController
+                                                          .getSurahNumberByAya(
+                                                              ayas.first) !=
+                                                      9
+                                              ? Bassmalah(
+                                                  aya: ayas.first,
+                                                  quranController:
+                                                      quranController,
+                                                )
+                                              : const SizedBox.shrink(),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 16.w),
+                                            child: FittedBox(
+                                              fit: BoxFit.fitWidth,
+                                              child: AyatOfPage(
+                                                ayas: ayas,
                                                 quranController:
                                                     quranController,
-                                              )
-                                            : const SizedBox.shrink(),
-                                        ayas.first.numberOfAyaInSurah == 1
-                                            ? Bassmalah(
-                                                aya: ayas.first,
-                                                quranController:
-                                                    quranController,
-                                              )
-                                            : const SizedBox.shrink(),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 16.w),
-                                          child: FittedBox(
-                                            fit: BoxFit.fitWidth,
-                                            child: AyatOfPage(
-                                              ayas: ayas,
-                                              quranController: quranController,
-                                              page: page,
+                                                page: page,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        LastBannar(
-                                            aya: ayas.last,
-                                            quranController: quranController),
-                                      ],
-                                    );
-                                  },
+                                          LastBannar(
+                                              aya: ayas.last,
+                                              quranController: quranController),
+                                        ],
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    "${S.of(context).juz} ${quranController.pages[page].last.juz}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium!
-                                        .copyWith(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16.sp,
-                                        ),
+                                // Gap(MediaQuery.of(context).size.height / 12),
+                                FittedBox(
+                                  fit: BoxFit.fitWidth,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text(
+                                        "${S.of(context).juz} ${quranController.pages[page].last.juz}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium!
+                                            .copyWith(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 16.sp,
+                                            ),
+                                      ),
+                                      Gap(16.w),
+                                      Text(
+                                        (page + 1).toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displaySmall!
+                                            .copyWith(
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                      ),
+                                      Gap(16.w),
+                                      Text(
+                                        "${S.of(context).hizb} ${(quranController.pages[page].last.hizbQuarter / 4).ceil()}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium!
+                                            .copyWith(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 16.sp,
+                                            ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    (page + 1).toString(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displaySmall!
-                                        .copyWith(
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                  ),
-                                  Text(
-                                    "${S.of(context).hizb} ${(quranController.pages[page].last.hizbQuarter / 4).ceil()}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium!
-                                        .copyWith(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16.sp,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -199,7 +225,7 @@ class AyatView extends StatelessWidget {
                                 quranController.isClickedOnPage.value) ||
                             quranController.isClickedOnPage.value
                         ? 25
-                        : -150,
+                        : -MediaQuery.of(context).size.height / 2.5,
                     left: 30,
                     right: 30,
                     child: AudioWidget(

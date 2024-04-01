@@ -7,7 +7,8 @@ import 'package:islamic_app/models/aya_of_surah_model.dart';
 class JuzTile extends StatelessWidget {
   const JuzTile({
     super.key,
-    required this.juz, this.onTap,
+    required this.juz,
+    this.onTap,
   });
 
   final AyaOfSurahModel juz;
@@ -47,7 +48,8 @@ class JuzTile extends StatelessWidget {
                   child: Text(
                     juz.searchTextOfAya,
                     style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.w300,
+                          // color: Colors.red,
                           overflow: TextOverflow.ellipsis,
                         ),
                   ),

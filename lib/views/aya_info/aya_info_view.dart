@@ -11,8 +11,9 @@ import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/svg_pictures.dart';
-import 'package:islamic_app/version_one_views/widgets/tafser_richtext_widget.dart';
 import 'package:share_plus/share_plus.dart';
+
+import 'widgets/tafser_richtext_widget.dart';
 
 class AyaInfoView extends StatelessWidget {
   const AyaInfoView({

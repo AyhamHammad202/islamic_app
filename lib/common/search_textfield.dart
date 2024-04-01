@@ -21,13 +21,20 @@ class SearchTextField extends StatelessWidget {
           controller: generalController.searchController,
           decoration: InputDecoration(
             hintText: S.of(context).searchHint,
+            hintStyle: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w400,
+            ),
             suffixIcon: IconButton(
               icon: generalController.searchText.value.isNotEmpty
                   ? const Icon(
                       Icons.clear,
                       color: Color(0xffDFB883),
                     )
-                  : SvgPicturesMethods.searchIcon(),
+                  : SvgPicturesMethods.searchIcon(
+                      height: 16.h,
+                      width: 16.w,
+                    ),
               onPressed: generalController.searchText.value.isNotEmpty
                   ? () {
                       generalController.searchController.clear();
@@ -40,7 +47,8 @@ class SearchTextField extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.r),
-              borderSide: const BorderSide(color: Colors.blue),
+              borderSide:
+                  BorderSide(color: Theme.of(context).colorScheme.onSecondary),
             ),
           ),
         ),

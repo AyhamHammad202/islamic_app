@@ -1,5 +1,8 @@
+import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/constants/constant.dart';
@@ -9,6 +12,7 @@ import 'package:islamic_app/services/settings_service.dart';
 import 'package:just_audio/just_audio.dart';
 
 import 'package:islamic_app/controllers/quran_controller.dart';
+import 'package:path_provider/path_provider.dart';
 
 class AudioController extends GetxController {
   final SettingsService _settingsService = Get.find();
@@ -24,6 +28,7 @@ class AudioController extends GetxController {
   Rx<Duration> currentDuration = Duration.zero.obs;
   RxInt ayaUniqeId = 0.obs;
   // RxInt currentReaderIndex = 0.obs;
+  Dio dio = Dio();
 
   @override
   void onClose() async {
@@ -38,16 +43,6 @@ class AudioController extends GetxController {
     ayaUniqeId.value = _lastReadService.lastAyaUniqeNumRead.value;
     super.onInit();
   }
-
-  // Future pauseAyahAudio() async {
-  //   await audioPlayer.pause();
-  //   _quranController.clearSelection();
-  //   audioPlayer = AudioPlayer();
-  //   isPlaying.value = false;
-  //   isLoading.value = false;
-
-  //   return;
-  // }
 
   Future playAyah(AyaOfSurahModel ayaOfSurahModel) async {
     // ayaUniqeId.value = 0;
@@ -177,6 +172,39 @@ class AudioController extends GetxController {
       } on PlayerInterruptedException catch (e) {
         log('Audio player interrupted: $e');
       }
+    }
+  }
+
+  Future<bool> isAyaDownloaded(aya) async {
+    var appPath = await getApplicationDocumentsDirectory();
+    var fullPath =
+        "${appPath.path}/reader${_quranController.surahs[_quranController.getSurahNumberByAya(aya) - 1].englishNameOfSurah}/${aya.numberOfAyaInSurah}";
+    File file = File(fullPath);
+    return file.exists();
+  }
+
+  Future downloadAya(AyaOfSurahModel aya) async {
+    try {
+      var appPath = await getApplicationDocumentsDirectory();
+      var fullPath =
+          "${appPath.path}/reader${_quranController.surahs[_quranController.getSurahNumberByAya(aya) - 1].englishNameOfSurah}/${aya.numberOfAyaInSurah}";
+      File file = File(fullPath);
+      if (!await file.exists()) {
+        log("Download aya ${aya.numberOfAyaInSurah}");
+        var donwloadUrl =
+            "https://everyayah.com/data/${Constant.readersLinks[_settingsService.currentReaderIndex.value]}/${_quranController.getSurahNumberByAya(aya).toString().padLeft(3, "0")}${aya.numberOfAyaInSurah.toString().padLeft(3, "0")}.mp3";
+
+        await dio.download(
+          donwloadUrl,
+          fullPath,
+        );
+      } else {
+        log("Aya Already downloaded");
+        await audioPlayer.setFilePath(fullPath);
+        await audioPlayer.play();
+      }
+    } catch (e) {
+      return e;
     }
   }
 

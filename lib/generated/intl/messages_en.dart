@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bookmarked Verses"),
         "day": MessageLookupByLibrary.simpleMessage("Day"),
         "days": MessageLookupByLibrary.simpleMessage("Days"),
+        "downloadAyat": MessageLookupByLibrary.simpleMessage("Download Ayat"),
         "eid_al_adha": MessageLookupByLibrary.simpleMessage("Eid Al-Adha"),
         "eid_al_fitr": MessageLookupByLibrary.simpleMessage("Eid Al-Fitr"),
         "elHosary": MessageLookupByLibrary.simpleMessage("Mahmoud El-Hosary"),
@@ -60,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ramadan": MessageLookupByLibrary.simpleMessage("Ramadan"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "Search Using Sura Name or The Verse"),
+        "sorah": MessageLookupByLibrary.simpleMessage("Sorah"),
         "sorahs": MessageLookupByLibrary.simpleMessage("Sorahs"),
         "suraInfo": MessageLookupByLibrary.simpleMessage("Info About"),
         "tasbeh": MessageLookupByLibrary.simpleMessage("Tasbeeh"),

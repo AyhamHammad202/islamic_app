@@ -120,6 +120,16 @@ class S {
     );
   }
 
+  /// `Download Ayat`
+  String get downloadAyat {
+    return Intl.message(
+      'Download Ayat',
+      name: 'downloadAyat',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Time`
   String get time {
     return Intl.message(
@@ -215,6 +225,16 @@ class S {
     return Intl.message(
       'Sorahs',
       name: 'sorahs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorah`
+  String get sorah {
+    return Intl.message(
+      'Sorah',
+      name: 'sorah',
       desc: '',
       args: [],
     );

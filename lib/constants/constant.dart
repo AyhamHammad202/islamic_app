@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:islamic_app/controllers/general_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
+import 'package:islamic_app/svg_pictures.dart';
+import 'package:islamic_app/views/allah_names/allah_names_view.dart';
+import 'package:islamic_app/views/bookmark/bookmark_view.dart';
+import 'package:islamic_app/views/dowanload_ayat/download_ayat.dart';
+import 'package:islamic_app/views/home/widgets/section_widget.dart';
+import 'package:islamic_app/views/quran/quran_view.dart';
 import 'package:islamic_app/views/quran/widgets/juzes_sliverlist.dart';
+import 'package:islamic_app/views/radio/quran_radio_view.dart';
+import 'package:islamic_app/views/tasbeh/tasbeh_view.dart';
+import 'package:islamic_app/views/year_occasion/year_occasion_view.dart';
 
 import '../views/quran/widgets/suras_sliverlist.dart';
 
@@ -40,8 +52,8 @@ class Constant {
     S.current.abdulbasitAbdusamad,
     S.current.alMinshawi,
     S.current.elHosary,
-    S.current.alMueaqly,
     S.current.mohammedAyoub,
+    S.current.alMueaqly,
     S.current.yasserAdDussary,
     S.current.abuBakrAshShaatree,
   ];
@@ -77,5 +89,102 @@ class Constant {
     557,
     583,
     584
+  ];
+
+  static List<Widget> homeSections = [
+    SectionWidget(
+      title: S.current.quran,
+      svgIcon: SvgPicturesMethods.quranBookIcon(
+        height: 50.h,
+        width: 50.w,
+      ),
+      onTap: () {
+        Get.put(() => GeneralController());
+        Get.to(
+          () => const QuranView(),
+          transition: Transition.rightToLeftWithFade,
+          duration: const Duration(milliseconds: 300),
+        );
+      },
+    ),
+    SectionWidget(
+      title: S.current.downloadAyat,
+      svgIcon: SvgPicturesMethods.quranBookIcon(
+        height: 50.h,
+        width: 50.w,
+      ),
+      onTap: () {
+        Get.to(
+          () => const DownloadAyat(),
+          transition: Transition.rightToLeftWithFade,
+          duration: const Duration(milliseconds: 300),
+        );
+      },
+    ),
+    SectionWidget(
+      title: S.current.bookmarkAyat,
+      svgIcon: SvgPicturesMethods.bookmarkIcon(
+        height: 75.h,
+        width: 75.w,
+      ),
+      onTap: () {
+        // Get.put(() => GeneralController());
+        Get.to(
+          () => const BookmarkView(),
+          transition: Transition.rightToLeftWithFade,
+          duration: const Duration(milliseconds: 300),
+        );
+      },
+    ),
+    SectionWidget(
+      title: S.current.allahNames,
+      svgIcon: SvgPicturesMethods.allahNamesIcon(
+        height: 75.h,
+        width: 75.w,
+      ),
+      onTap: () {
+        Get.to(
+          () => const AllahNamesView(),
+          transition: Transition.rightToLeftWithFade,
+          duration: const Duration(milliseconds: 300),
+        );
+      },
+    ),
+    SectionWidget(
+      title: S.current.tasbeh,
+      svgIcon: SvgPicturesMethods.tasbeehIcon(
+        height: 75.h,
+        width: 75.w,
+      ),
+      onTap: () {
+        Get.to(
+          () => const TasbehView(),
+          transition: Transition.rightToLeftWithFade,
+          duration: const Duration(milliseconds: 300),
+        );
+      },
+    ),
+    SectionWidget(
+      title: S.current.islamicOccasions,
+      svgIcon: SvgPicturesMethods.occasionsIcon(),
+      onTap: () {
+        Get.to(
+          () => const YearOccasionView(),
+          transition: Transition.rightToLeftWithFade,
+          duration: const Duration(milliseconds: 300),
+        );
+      },
+    ),
+    SectionWidget(
+      title: S.current.radio,
+      svgIcon: SvgPicturesMethods.radioIcon(),
+      onTap: () {
+        Get.to(
+          () => const QuranRadioView(),
+          transition: Transition.rightToLeftWithFade,
+          duration: const Duration(milliseconds: 300),
+        );
+      },
+    ),
   ];
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/generated/l10n.dart';
+import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/surah_model.dart';
 
 import '../../../controllers/quran_controller.dart';
@@ -39,18 +42,26 @@ class SuraSearchTile extends StatelessWidget {
           vertical: 8.h,
         ),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondaryContainer,
-          borderRadius: BorderRadius.circular(8.r),
+          color:
+              Theme.of(context).colorScheme.secondaryContainer.withOpacity(.6),
+          borderRadius: BorderRadius.circular(4.r),
           border: Border.all(
-            color: Theme.of(context)
-                .colorScheme
-                .secondaryContainer
-                .withOpacity(.5),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(.5),
           ),
         ),
-        child: Text(
-          surahModel.nameOfSurah,
-          style: Theme.of(context).textTheme.displaySmall,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${S.of(context).sorah}: ${surahModel.numberOfSurah.toArabic()}",
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+            const Gap(8),
+            Text(
+              surahModel.nameOfSurah,
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+          ],
         ),
       ),
     );

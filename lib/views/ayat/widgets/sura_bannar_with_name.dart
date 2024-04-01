@@ -37,13 +37,15 @@ class SuraBannerWithName extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   "assets/images/design/Sorah_name_ba3.svg",
-                  width: MediaQuery.of(context).size.width - 16.w,
-                  // height: MediaQuery.of(context).size.width / 2.5,
-                  fit: BoxFit.fitWidth,
+                  width: MediaQuery.of(context).size.width,
+                  // height: 200.h,
+                  // width: MediaQuery.of(context).size.width,
+                  // fit: BoxFit.fill,
                 ),
                 SvgPicture.asset(
                   "assets/images/sorahs/00${quranController.getSurahNumberByAya(aya)}.svg",
                   width: MediaQuery.sizeOf(context).width / 4,
+                  // height: 250.h,
                 ),
               ],
             )

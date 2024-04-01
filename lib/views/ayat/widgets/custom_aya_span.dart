@@ -35,7 +35,7 @@ TextSpan span({
           // fontSize: fontSize,
           // height: 2,
           letterSpacing: 25,
-          color: Colors.black,
+          color: Get.isDarkMode ? Colors.white : Colors.black,
           backgroundColor: isSelected
               ? Get.theme.highlightColor
               : bookMarkController.bookmarkedAyasID.contains(uniqueAyaId)
@@ -58,7 +58,7 @@ TextSpan span({
           // height: 2,
           letterSpacing: 2,
           // wordSpacing: wordSpacing + 10,
-          color: Colors.black,
+          color: Get.isDarkMode ? Colors.white : Colors.black,
           backgroundColor: isSelected
               ? Get.theme.highlightColor
               : bookMarkController.bookmarkedAyasID.contains(uniqueAyaId)
@@ -78,7 +78,8 @@ TextSpan span({
         // fontSize: fontSize,
         // height: 2,
         letterSpacing: 2,
-        color: Colors.black,
+        color: Get.isDarkMode ? Colors.white : Colors.black,
+
         backgroundColor: isSelected
             ? Get.theme.highlightColor
             : bookMarkController.bookmarkedAyasID.contains(uniqueAyaId)

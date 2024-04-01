@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bookmarkAyat": MessageLookupByLibrary.simpleMessage("الآيات المفضلة"),
         "day": MessageLookupByLibrary.simpleMessage("يوم"),
         "days": MessageLookupByLibrary.simpleMessage("أيام"),
+        "downloadAyat": MessageLookupByLibrary.simpleMessage("تمحيل الآيات"),
         "eid_al_adha": MessageLookupByLibrary.simpleMessage("عيد الأضحى"),
         "eid_al_fitr": MessageLookupByLibrary.simpleMessage("عيد الفطر"),
         "elHosary": MessageLookupByLibrary.simpleMessage("محمود الحصري"),
@@ -59,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ramadan": MessageLookupByLibrary.simpleMessage("رمضان"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "أبحث بأستخدام أسم السورة أو الآية"),
+        "sorah": MessageLookupByLibrary.simpleMessage("السورة"),
         "sorahs": MessageLookupByLibrary.simpleMessage("السور"),
         "suraInfo": MessageLookupByLibrary.simpleMessage("معلومات عن سورة"),
         "tasbeh": MessageLookupByLibrary.simpleMessage("التسبيح"),

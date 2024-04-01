@@ -3,23 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:islamic_app/controllers/bookmark_controller.dart';
-import 'package:islamic_app/controllers/general_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
-import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/common/background_image.dart';
-import 'package:islamic_app/views/allah_names/allah_names_view.dart';
-import 'package:islamic_app/views/bookmark/bookmark_view.dart';
 import 'package:islamic_app/views/home/widgets/last_read_aya.dart';
-import 'package:islamic_app/views/quran/quran_view.dart';
-import 'package:islamic_app/views/radio/quran_radio_view.dart';
 import 'package:islamic_app/views/search/search_view.dart';
-import 'package:islamic_app/views/tasbeh/tasbeh_view.dart';
 
 import '../../constants/constant.dart';
-import '../year_occasion/year_occasion_view.dart';
-import 'widgets/section_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -29,7 +20,6 @@ class HomeView extends StatelessWidget {
     HijriCalendar.setLocal("ar");
     var hijri = HijriCalendar.now();
     QuranController quranController = Get.find();
-    final BookMarkController bookMarkController = Get.find();
     return BackgroundImage(
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -150,97 +140,16 @@ class HomeView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const LastReadAya(),
-                  GridView.count(
+                  GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    children: [
-                      SectionWidget(
-                        title: S.of(context).quran,
-                        svgIcon: SvgPicturesMethods.quranBookIcon(
-                          height: 75,
-                          width: 75,
-                        ),
-                        onTap: () {
-                          Get.put(() => GeneralController());
-                          Get.to(
-                            () => const QuranView(),
-                            transition: Transition.rightToLeftWithFade,
-                            duration: const Duration(milliseconds: 300),
-                          );
-                        },
-                      ),
-                      SectionWidget(
-                        title: S.of(context).bookmarkAyat,
-                        svgIcon: bookMarkController.bookmarkedAyasID.isEmpty
-                            ? SvgPicturesMethods.bookmarkIcon(
-                                height: 75,
-                                width: 75,
-                              )
-                            : SvgPicturesMethods.bookmarkedIcon(
-                                height: 75,
-                                width: 75,
-                              ),
-                        onTap: () {
-                          // Get.put(() => GeneralController());
-                          Get.to(
-                            () => const BookmarkView(),
-                            transition: Transition.rightToLeftWithFade,
-                            duration: const Duration(milliseconds: 300),
-                          );
-                        },
-                      ),
-                      SectionWidget(
-                        title: S.of(context).allahNames,
-                        svgIcon: SvgPicturesMethods.allahNamesIcon(
-                          height: 75,
-                          width: 75,
-                        ),
-                        onTap: () {
-                          Get.to(
-                            () => const AllahNamesView(),
-                            transition: Transition.rightToLeftWithFade,
-                            duration: const Duration(milliseconds: 300),
-                          );
-                        },
-                      ),
-                      SectionWidget(
-                        title: S.of(context).tasbeh,
-                        svgIcon: SvgPicturesMethods.tasbeehIcon(
-                          height: 75,
-                          width: 75,
-                        ),
-                        onTap: () {
-                          Get.to(
-                            () => const TasbehView(),
-                            transition: Transition.rightToLeftWithFade,
-                            duration: const Duration(milliseconds: 300),
-                          );
-                        },
-                      ),
-                      SectionWidget(
-                        title: S.of(context).islamicOccasions,
-                        svgIcon: SvgPicturesMethods.occasionsIcon(),
-                        onTap: () {
-                          Get.to(
-                            () => const YearOccasionView(),
-                            transition: Transition.rightToLeftWithFade,
-                            duration: const Duration(milliseconds: 300),
-                          );
-                        },
-                      ),
-                      SectionWidget(
-                        title: S.of(context).radio,
-                        svgIcon: SvgPicturesMethods.radioIcon(),
-                        onTap: () {
-                          Get.to(
-                            () => const QuranRadioView(),
-                            transition: Transition.rightToLeftWithFade,
-                            duration: const Duration(milliseconds: 300),
-                          );
-                        },
-                      ),
-                    ],
+                    itemCount: Constant.homeSections.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    itemBuilder: (context, index) =>
+                        Constant.homeSections[index],
                   )
                 ],
               ),

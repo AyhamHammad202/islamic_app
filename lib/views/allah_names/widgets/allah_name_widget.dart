@@ -47,7 +47,7 @@ class AllahNameWidget extends StatelessWidget {
                 : quranController.allahNames[index].name,
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   fontSize: index == 86 ? 32.sp : 64.sp,
-                  fontFamily: "AllahNames1",
+                  fontFamily: "AllahNames  4",
                 ),
           ),
           Text(

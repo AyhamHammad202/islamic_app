@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
+import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 
 import '../../ayat/ayat_view.dart';
@@ -34,17 +36,30 @@ class AyaSearchTile extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 4.h),
         decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondaryContainer,
-            borderRadius: BorderRadius.circular(8.r),
+            color: Theme.of(context)
+                .colorScheme
+                .secondaryContainer
+                .withOpacity(.6),
+            borderRadius: BorderRadius.circular(4.r),
             border: Border.all(
-              color: Theme.of(context)
-                  .colorScheme
-                  .secondaryContainer
-                  .withOpacity(.5),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(.6),
             )),
-        child: Text(
-          aya.searchTextOfAya,
-          style: Theme.of(context).textTheme.displayLarge,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Gap(8.h),
+            Text(
+              aya.searchTextOfAya,
+              style: Theme.of(context).textTheme.displayLarge,
+            ),
+            Gap(8.h),
+            Text(
+              "${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}, ${S.current.aya}:${aya.numberOfAyaInSurah}",
+              style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
+          ],
         ),
       ),
     );

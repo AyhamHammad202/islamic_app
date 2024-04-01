@@ -24,7 +24,6 @@ import 'package:islamic_app/services/last_read_service.dart';
 import 'package:islamic_app/router.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/services/theme_services.dart';
-import 'package:islamic_app/version_one_views/quran_view.dart';
 import 'package:islamic_app/views/home/home_view.dart';
 import 'package:islamic_app/views/update_view/update_view.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
