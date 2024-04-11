@@ -121,7 +121,14 @@ extension ContextMenuExtension on BuildContext {
                         builder: (controller) {
                           return GestureDetector(
                             onTap: () async {
-                              await audioController.playAyah(ayaOfSurahModel);
+                              // await audioController.playAyah(ayaOfSurahModel);
+                              if (audioController.isPlaying.value ||
+                                  audioController.isLoading.value) {
+                                await audioController.peauseAyaFile();
+                                return;
+                              }
+                              await audioController
+                                  .playAyah(ayaOfSurahModel.uniqueIdOfAya - 1);
                               quranController.isClickedOnPage.value = true;
                               cancel();
                               // .playRadio();

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:islamic_app/constants/constant.dart';
 
 import 'package:islamic_app/controllers/audio_controller.dart';
@@ -59,10 +60,15 @@ class AudioWidget extends StatelessWidget {
                 AudioButton(
                   icon: Icons.skip_next_rounded,
                   onTap: () {
+                    if (audioController.ayaUniqeId.value == 6236) {
+                      return;
+                    }
+
                     audioController.ayaUniqeId.value++;
-                    audioController.playNext(
-                      quranController.allAyas[audioController.ayaUniqeId.value],
-                    );
+                    audioController.playAyah(audioController.ayaUniqeId.value);
+                    // audioController.playNext(
+                    //   quranController.allAyas[audioController.ayaUniqeId.value],
+                    // );
                   },
                 ),
                 AudioButton(
@@ -70,15 +76,24 @@ class AudioWidget extends StatelessWidget {
                       ? Icons.play_arrow
                       : Icons.pause,
                   onTap: () async {
-                    await audioController.playAyah(quranController
-                        .allAyas[audioController.ayaUniqeId.value - 1]);
+                    if (audioController.isPlaying.value ||
+                        audioController.isLoading.value) {
+                      await audioController.peauseAyaFile();
+                      return;
+                    }
+                    await audioController
+                        .playAyah(audioController.ayaUniqeId.value);
                   },
                 ),
                 AudioButton(
                   icon: Icons.skip_previous_rounded,
                   onTap: () {
                     // audioController.ayaUniqeId.value - 3;
-                    audioController.playBack();
+                    if (audioController.ayaUniqeId.value == 0) {
+                      return;
+                    }
+                    audioController.ayaUniqeId.value--;
+                    audioController.playAyah(audioController.ayaUniqeId.value);
                   },
                 ),
                 Text(

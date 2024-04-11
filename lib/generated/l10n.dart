@@ -110,6 +110,16 @@ class S {
     );
   }
 
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Quran Radio`
   String get radio {
     return Intl.message(
@@ -135,6 +145,36 @@ class S {
     return Intl.message(
       'Time',
       name: 'time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Theme`
+  String get darkTheme {
+    return Intl.message(
+      'Dark Theme',
+      name: 'darkTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tafser Font Size`
+  String get tafserFontSize {
+    return Intl.message(
+      'Tafser Font Size',
+      name: 'tafserFontSize',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aya Font Size`
+  String get ayaFontSize {
+    return Intl.message(
+      'Aya Font Size',
+      name: 'ayaFontSize',
       desc: '',
       args: [],
     );

@@ -47,6 +47,11 @@ class Themes {
         color: const Color(0xff997647),
       ),
     ),
+    sliderTheme: const SliderThemeData(
+      thumbColor: Color(0xffD7A664),
+      activeTrackColor: Color(0xff043336),
+      inactiveTrackColor: Color.fromARGB(255, 160, 157, 157),
+    ),
     highlightColor: const Color(0xffFFD08A).withOpacity(.2),
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
@@ -62,6 +67,7 @@ class Themes {
       surface: lightBackgroundClr,
       onSurface: Colors.black,
     ),
+
     textTheme: TextTheme(
         headlineSmall: GoogleFonts.tajawal(
           color: const Color(0xffC4975B),
@@ -99,12 +105,12 @@ class Themes {
           fontWeight: FontWeight.w500,
         ),
         bodySmall: GoogleFonts.tajawal(
-          color: Colors.white,
+          color: Colors.black,
           fontSize: 14.sp,
           fontWeight: FontWeight.w400,
         ),
         titleSmall: TextStyle(
-          color: Colors.white,
+          color: Colors.black,
           fontSize: 16.sp,
           fontWeight: FontWeight.w700,
         ),
@@ -114,7 +120,7 @@ class Themes {
           fontWeight: FontWeight.w700,
         ),
         bodyMedium: GoogleFonts.tajawal(
-          color: Colors.white,
+          color: Colors.black,
           fontSize: 16.sp,
           fontWeight: FontWeight.w500,
         ),
@@ -142,6 +148,11 @@ class Themes {
         fontWeight: FontWeight.bold,
         color: const Color(0xff997647),
       ),
+    ),
+    sliderTheme: const SliderThemeData(
+      thumbColor: Color(0xffD7A664),
+      activeTrackColor: Color.fromARGB(255, 15, 161, 172),
+      inactiveTrackColor: Color.fromARGB(255, 160, 157, 157),
     ),
     highlightColor: const Color(0xffFFD08A).withOpacity(.2),
     colorScheme: const ColorScheme(

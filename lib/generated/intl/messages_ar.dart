@@ -32,8 +32,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "allahNames": MessageLookupByLibrary.simpleMessage("أسماء الله الحسنى"),
         "arafah": MessageLookupByLibrary.simpleMessage("يوم عرفة"),
         "aya": MessageLookupByLibrary.simpleMessage("آية"),
+        "ayaFontSize": MessageLookupByLibrary.simpleMessage("حجم خط الآية"),
         "ayas": MessageLookupByLibrary.simpleMessage("آيات"),
         "bookmarkAyat": MessageLookupByLibrary.simpleMessage("الآيات المفضلة"),
+        "darkTheme": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
         "day": MessageLookupByLibrary.simpleMessage("يوم"),
         "days": MessageLookupByLibrary.simpleMessage("أيام"),
         "downloadAyat": MessageLookupByLibrary.simpleMessage("تمحيل الآيات"),
@@ -60,9 +62,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "ramadan": MessageLookupByLibrary.simpleMessage("رمضان"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "أبحث بأستخدام أسم السورة أو الآية"),
+        "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "sorah": MessageLookupByLibrary.simpleMessage("السورة"),
         "sorahs": MessageLookupByLibrary.simpleMessage("السور"),
         "suraInfo": MessageLookupByLibrary.simpleMessage("معلومات عن سورة"),
+        "tafserFontSize":
+            MessageLookupByLibrary.simpleMessage("حجم خط التفسير"),
         "tasbeh": MessageLookupByLibrary.simpleMessage("التسبيح"),
         "theAyas": MessageLookupByLibrary.simpleMessage("الآيات"),
         "time": MessageLookupByLibrary.simpleMessage("مرة"),

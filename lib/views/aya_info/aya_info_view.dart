@@ -29,73 +29,76 @@ class AyaInfoView extends StatelessWidget {
       appBar: AppBar(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-          ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}  ${S.of(context).aya} ${aya.numberOfAyaInSurah}",
-                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                  ),
-                  Gap(16.w),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () async {
-                          await Clipboard.setData(
-                            ClipboardData(
-                              text:
-                                  '﴿${aya.textOfAya}﴾ [${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}]',
-                            ),
-                          );
-                        },
-                        child: SvgPicturesMethods.copyIcon(),
-                      ),
-                      Gap(8.w),
-                      InkWell(
-                        onTap: () async {
-                          Share.share(
-                            '﴿${aya.textOfAya}﴾ [${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}]',
-                          );
-                        },
-                        child: SvgPicturesMethods.shareIcon(),
-                      ),
-                      Gap(8.w),
-                      InkWell(
-                        child: SvgPicturesMethods.bookmarkIcon(),
-                      ),
-                      Gap(8.w),
-                    ],
-                  ),
-                ],
-              ),
-              Gap(16.h),
-              Text(
-                aya.text.replaceAll("\n", ""),
-                style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                      fontFamily: "page${aya.page}",
-                      fontWeight: FontWeight.w500,
-                    ),
-              ),
-              Divider(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+            decoration: BoxDecoration(
+              border: Border.all(
                 color: Theme.of(context).colorScheme.secondary,
               ),
-              TafserRichTextWidget(
-                text: quranController.mapOfTafser[aya.uniqueIdOfAya]!,
-                fontSize: settingsService.ayaTafserFontSize.value,
-              ),
-            ],
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}  ${S.of(context).aya} ${aya.numberOfAyaInSurah}",
+                      style:
+                          Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                    ),
+                    Gap(16.w),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            await Clipboard.setData(
+                              ClipboardData(
+                                text:
+                                    '﴿${aya.textOfAya}﴾ [${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}]',
+                              ),
+                            );
+                          },
+                          child: SvgPicturesMethods.copyIcon(),
+                        ),
+                        Gap(8.w),
+                        InkWell(
+                          onTap: () async {
+                            Share.share(
+                              '﴿${aya.textOfAya}﴾ [${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}]',
+                            );
+                          },
+                          child: SvgPicturesMethods.shareIcon(),
+                        ),
+                        Gap(8.w),
+                        InkWell(
+                          child: SvgPicturesMethods.bookmarkIcon(),
+                        ),
+                        Gap(8.w),
+                      ],
+                    ),
+                  ],
+                ),
+                Gap(16.h),
+                Text(
+                  aya.text.replaceAll("\n", ""),
+                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                        fontFamily: "page${aya.page}",
+                        fontWeight: FontWeight.w500,
+                      ),
+                ),
+                Divider(
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                TafserRichTextWidget(
+                  text: quranController.mapOfTafser[aya.uniqueIdOfAya]!,
+                  fontSize: settingsService.ayaTafserFontSize.value,
+                ),
+              ],
+            ),
           ),
         ),
       ),

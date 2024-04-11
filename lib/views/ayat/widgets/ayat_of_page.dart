@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/menu_extension.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
+import 'package:islamic_app/services/settings_service.dart';
 
 import 'custom_aya_span.dart';
 
@@ -20,6 +22,7 @@ class AyatOfPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsService settingsService = Get.find();
     return Obx(() {
       return RichText(
         textAlign: TextAlign.center,
@@ -27,7 +30,7 @@ class AyatOfPage extends StatelessWidget {
         text: TextSpan(
           style: TextStyle(
             fontFamily: 'page${page + 1}',
-            fontSize: 100,
+            fontSize: settingsService.ayaFontSize.value.sp,
             letterSpacing: .05,
             wordSpacing: .05,
             height: 1.8,

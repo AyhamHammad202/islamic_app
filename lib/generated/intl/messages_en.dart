@@ -32,9 +32,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "allahNames": MessageLookupByLibrary.simpleMessage("Allah Names"),
         "arafah": MessageLookupByLibrary.simpleMessage("Day Of Arafah"),
         "aya": MessageLookupByLibrary.simpleMessage("Aya"),
+        "ayaFontSize": MessageLookupByLibrary.simpleMessage("Aya Font Size"),
         "ayas": MessageLookupByLibrary.simpleMessage("Ayas"),
         "bookmarkAyat":
             MessageLookupByLibrary.simpleMessage("Bookmarked Verses"),
+        "darkTheme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
         "day": MessageLookupByLibrary.simpleMessage("Day"),
         "days": MessageLookupByLibrary.simpleMessage("Days"),
         "downloadAyat": MessageLookupByLibrary.simpleMessage("Download Ayat"),
@@ -61,9 +63,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "ramadan": MessageLookupByLibrary.simpleMessage("Ramadan"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "Search Using Sura Name or The Verse"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sorah": MessageLookupByLibrary.simpleMessage("Sorah"),
         "sorahs": MessageLookupByLibrary.simpleMessage("Sorahs"),
         "suraInfo": MessageLookupByLibrary.simpleMessage("Info About"),
+        "tafserFontSize":
+            MessageLookupByLibrary.simpleMessage("Tafser Font Size"),
         "tasbeh": MessageLookupByLibrary.simpleMessage("Tasbeeh"),
         "theAyas": MessageLookupByLibrary.simpleMessage("Ayas"),
         "time": MessageLookupByLibrary.simpleMessage("Time"),

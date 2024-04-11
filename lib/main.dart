@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 
+import 'package:audio_service/audio_service.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:device_preview/device_preview.dart';
@@ -72,9 +73,9 @@ void main() async {
 // log('---');
 
 Future initalServices() async {
-  await Get.putAsync(() => NotificationService().init());
-  await Get.putAsync(() => LastReadService().init());
   await Get.putAsync(() => SettingsService().init());
+  await Get.putAsync(() => LastReadService().init());
+  await Get.putAsync(() => NotificationService().init());
 }
 
 class MyApp extends StatelessWidget {
@@ -96,12 +97,14 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeServices().theme,
         // themeMode: ThemeMode.light,
         locale: const Locale("ar"),
+        // locale: Get.locale,
         localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
+
         supportedLocales: S.delegate.supportedLocales,
         // onGenerateRoute: onGenerateRoute,
         debugShowCheckedModeBanner: false,
@@ -133,4 +136,5 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+  
 }

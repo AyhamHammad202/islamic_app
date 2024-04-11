@@ -4,11 +4,14 @@ import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
+import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/common/background_image.dart';
+import 'package:islamic_app/views/bookmark/bookmark_view.dart';
 import 'package:islamic_app/views/home/widgets/last_read_aya.dart';
 import 'package:islamic_app/views/search/search_view.dart';
+import 'package:islamic_app/views/settings/settings_view.dart';
 
 import '../../constants/constant.dart';
 
@@ -49,14 +52,15 @@ class HomeView extends StatelessWidget {
                 ListTile(
                   leading: SvgPicturesMethods.bookmarkIcon(),
                   title: Text(
-                    "المفضلة",
+                    S.current.bookmarkAyat,
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   onTap: () {
-                    Get.showSnackbar(const GetSnackBar(
-                      message: "ستتوفر قريبا",
-                      duration: Durations.extralong4,
-                    ));
+                    Get.to(
+                      () => const BookmarkView(),
+                      transition: Transition.rightToLeftWithFade,
+                      duration: const Duration(milliseconds: 300),
+                    );
                   },
                 ),
                 ListTile(
@@ -65,27 +69,17 @@ class HomeView extends StatelessWidget {
                     color: Colors.white,
                   ),
                   title: Text(
-                    "الأعدادات",
+                    S.current.settings,
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   onTap: () {
-                    Get.showSnackbar(const GetSnackBar(
-                      message: "ستتوفر قريبا",
-                      duration: Durations.extralong4,
-                    ));
+                    Get.to(
+                      () => const SettingsView(),
+                      transition: Transition.rightToLeftWithFade,
+                      duration: const Duration(milliseconds: 300),
+                    );
                   },
                 ),
-                Column(
-                  children: List.generate(
-                    quranController.tables.length,
-                    (index) => Text(
-                      quranController.tables[index],
-                      style: const TextStyle(
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
-                )
               ],
             ),
           ),

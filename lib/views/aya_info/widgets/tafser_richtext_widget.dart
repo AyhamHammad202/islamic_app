@@ -27,9 +27,7 @@ class TafserRichTextWidget extends StatelessWidget {
         textSpans.add(
           TextSpan(
             text: leadingText,
-            style: const TextStyle(
-              color: Colors.black,
-            ),
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         );
       }

@@ -88,119 +88,113 @@ class AyatView extends StatelessWidget {
                         },
                         child: SizedBox(
                           height: MediaQuery.of(context).size.height,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Column(
-                                  // mainAxisSize: MainAxisSize.max,
-                                  // mainAxisAlignment: MainAxisAlignment.center,
-                                  // crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: List.generate(
-                                    quranController
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Column(
+                                // mainAxisSize: MainAxisSize.max,
+                                // mainAxisAlignment: MainAxisAlignment.center,
+                                // crossAxisAlignment: CrossAxisAlignment.center,
+                                children: List.generate(
+                                  quranController
+                                      .getCurrentPageAyahsSeparatedForBasmala(
+                                          page)
+                                      .length,
+                                  (index) {
+                                    final ayas = quranController
                                         .getCurrentPageAyahsSeparatedForBasmala(
-                                            page)
-                                        .length,
-                                    (index) {
-                                      final ayas = quranController
-                                          .getCurrentPageAyahsSeparatedForBasmala(
-                                              page)[index];
-                                      return Column(
-                                        // mainAxisAlignment: MainAxisAlignment.center,
-                                        // crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          // quranController.getCurrentPageAyahsSeparatedForBasmala(pageIndex)[i];
-                                          ayas.first.numberOfAyaInSurah == 1 &&
-                                                  !Constant
-                                                      .lastPlaceBannerPageIndex
-                                                      .contains(page)
-                                              ? SuraBannerWithName(
-                                                  aya: ayas.first,
-                                                  quranController:
-                                                      quranController,
-                                                )
-                                              : const SizedBox.shrink(),
-                                          ayas.first.numberOfAyaInSurah == 1 &&
-                                                  quranController
-                                                          .getSurahNumberByAya(
-                                                              ayas.first) !=
-                                                      1 &&
-                                                  quranController
-                                                          .getSurahNumberByAya(
-                                                              ayas.first) !=
-                                                      9
-                                              ? Bassmalah(
-                                                  aya: ayas.first,
-                                                  quranController:
-                                                      quranController,
-                                                )
-                                              : const SizedBox.shrink(),
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 16.w),
-                                            child: FittedBox(
-                                              fit: BoxFit.fitWidth,
-                                              child: AyatOfPage(
-                                                ayas: ayas,
+                                            page)[index];
+                                    return Column(
+                                      // mainAxisAlignment: MainAxisAlignment.center,
+                                      // crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        // quranController.getCurrentPageAyahsSeparatedForBasmala(pageIndex)[i];
+                                        ayas.first.numberOfAyaInSurah == 1 &&
+                                                !Constant
+                                                    .lastPlaceBannerPageIndex
+                                                    .contains(page)
+                                            ? SuraBannerWithName(
+                                                aya: ayas.first,
                                                 quranController:
                                                     quranController,
-                                                page: page,
-                                              ),
+                                              )
+                                            : const SizedBox.shrink(),
+                                        ayas.first.numberOfAyaInSurah == 1 &&
+                                                quranController
+                                                        .getSurahNumberByAya(
+                                                            ayas.first) !=
+                                                    1 &&
+                                                quranController
+                                                        .getSurahNumberByAya(
+                                                            ayas.first) !=
+                                                    9
+                                            ? Bassmalah(
+                                                aya: ayas.first,
+                                                quranController:
+                                                    quranController,
+                                              )
+                                            : const SizedBox.shrink(),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 16.w),
+                                          child: FittedBox(
+                                            fit: BoxFit.fitWidth,
+                                            child: AyatOfPage(
+                                              ayas: ayas,
+                                              quranController: quranController,
+                                              page: page,
                                             ),
                                           ),
-                                          LastBannar(
-                                              aya: ayas.last,
-                                              quranController: quranController),
-                                        ],
-                                      );
-                                    },
-                                  ),
+                                        ),
+                                        LastBannar(
+                                            aya: ayas.last,
+                                            quranController: quranController),
+                                      ],
+                                    );
+                                  },
                                 ),
-                                // Gap(MediaQuery.of(context).size.height / 12),
-                                FittedBox(
-                                  fit: BoxFit.fitWidth,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text(
-                                        "${S.of(context).juz} ${quranController.pages[page].last.juz}",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium!
-                                            .copyWith(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16.sp,
-                                            ),
-                                      ),
-                                      Gap(16.w),
-                                      Text(
-                                        (page + 1).toString(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displaySmall!
-                                            .copyWith(
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                      ),
-                                      Gap(16.w),
-                                      Text(
-                                        "${S.of(context).hizb} ${(quranController.pages[page].last.hizbQuarter / 4).ceil()}",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium!
-                                            .copyWith(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16.sp,
-                                            ),
-                                      ),
-                                    ],
+                              ),
+                              // Gap(MediaQuery.of(context).size.height / 12),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    "${S.of(context).juz} ${quranController.pages[page].last.juz}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium!
+                                        .copyWith(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 16.sp,
+                                        ),
                                   ),
-                                ),
-                              ],
-                            ),
+                                  Gap(16.w),
+                                  Text(
+                                    (page + 1).toString(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall!
+                                        .copyWith(
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                  ),
+                                  Gap(16.w),
+                                  Text(
+                                    "${S.of(context).hizb} ${(quranController.pages[page].last.hizbQuarter / 4).ceil()}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium!
+                                        .copyWith(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 16.sp,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       );
