@@ -1,21 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/constants/constant.dart';
 import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
-import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/services/last_read_service.dart';
+import 'package:islamic_app/text_themes.dart';
 import 'package:islamic_app/views/ayat/widgets/audio_widget.dart';
 import 'package:islamic_app/views/ayat/widgets/bassmlah.dart';
 import 'package:islamic_app/views/ayat/widgets/sura_bannar_with_name.dart';
 
 import 'widgets/ayat_of_page.dart';
+import 'widgets/page_info.dart';
 
 class AyatView extends StatelessWidget {
   const AyatView({super.key, required this.surahModel});
@@ -43,6 +41,7 @@ class AyatView extends StatelessWidget {
                             .pages[quranController.globalPage.value].first) -
                         1]
                     .nameOfSurah,
+                style: TextThemes.suraNameTextStyle,
               );
             }),
           ),
@@ -82,7 +81,10 @@ class AyatView extends StatelessWidget {
                         hoverColor: Colors.transparent,
                         radius: 0,
                         onTap: () {
-                          quranController.clearSelection();
+                          audioController.isPlaying.value ||
+                                  audioController.isLoading.value
+                              ? null
+                              : quranController.clearSelection();
                           quranController.isClickedOnPage.value =
                               !quranController.isClickedOnPage.value;
                         },
@@ -155,44 +157,8 @@ class AyatView extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              // Gap(MediaQuery.of(context).size.height / 12),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    "${S.of(context).juz} ${quranController.pages[page].last.juz}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium!
-                                        .copyWith(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16.sp,
-                                        ),
-                                  ),
-                                  Gap(16.w),
-                                  Text(
-                                    (page + 1).toString(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displaySmall!
-                                        .copyWith(
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                  ),
-                                  Gap(16.w),
-                                  Text(
-                                    "${S.of(context).hizb} ${(quranController.pages[page].last.hizbQuarter / 4).ceil()}",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineMedium!
-                                        .copyWith(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16.sp,
-                                        ),
-                                  ),
-                                ],
+                              PageInfo(
+                                page: page,
                               ),
                             ],
                           ),
@@ -200,19 +166,6 @@ class AyatView extends StatelessWidget {
                       );
                     },
                   ),
-                  // audioController.isPlaying.value ||
-                  //         quranController.isClickedOnPage.value
-                  //     ? AnimatedPositioned(
-                  //         duration: const Duration(seconds: 2),
-                  //         bottom: 30,
-                  //         left: 30,
-                  //         right: 30,
-                  //         child: AudioWidget(
-                  //           firstAyaInPage: quranController
-                  //               .pages[quranController.globalPage.value].first,
-                  //         ),
-                  //       )
-                  //     : const SizedBox.shrink(),
                   AnimatedPositioned(
                     duration: const Duration(milliseconds: 400),
                     bottom: (audioController.isPlaying.value &&

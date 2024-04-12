@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
+import 'package:islamic_app/text_themes.dart';
 
 import '../../ayat/ayat_view.dart';
 
@@ -50,14 +51,12 @@ class AyaSearchTile extends StatelessWidget {
             Gap(8.h),
             Text(
               aya.searchTextOfAya,
-              style: Theme.of(context).textTheme.displayLarge,
+              style: TextThemes.searchAyaTextStyle,
             ),
             Gap(8.h),
             Text(
               "${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}, ${S.current.aya}:${aya.numberOfAyaInSurah}",
-              style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
+              style: TextThemes.searchInfoTextStyle,
             ),
           ],
         ),

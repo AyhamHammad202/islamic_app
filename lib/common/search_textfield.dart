@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:islamic_app/controllers/general_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/svg_pictures.dart';
+import 'package:islamic_app/text_themes.dart';
 
 class SearchTextField extends StatelessWidget {
   const SearchTextField({super.key, this.isEnabled = false, this.onChanged});
@@ -21,10 +22,7 @@ class SearchTextField extends StatelessWidget {
           controller: generalController.searchController,
           decoration: InputDecoration(
             hintText: S.of(context).searchHint,
-            hintStyle: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
-            ),
+            hintStyle: TextThemes.searchInfoTextStyle,
             suffixIcon: IconButton(
               icon: generalController.searchText.value.isNotEmpty
                   ? const Icon(

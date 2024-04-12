@@ -6,10 +6,10 @@ import 'package:islamic_app/common/search_textfield.dart';
 import 'package:islamic_app/controllers/general_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
+import 'package:islamic_app/text_themes.dart';
 import 'package:islamic_app/views/search/widgets/ayas_search_sliverlist.dart';
 
 import 'widgets/suras_found_by_search.dart';
-
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
@@ -52,12 +52,7 @@ class SearchView extends StatelessWidget {
                             padding: EdgeInsets.symmetric(vertical: 8.h),
                             child: Text(
                               "${S.of(context).sorahs} ${quranController.surasFoundbySearch.length}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displaySmall!
-                                  .copyWith(
-                                    fontSize: 20.sp,
-                                  ),
+                              style: TextThemes.searchResultsTextStyle,
                             ),
                           )
                         : const SizedBox.shrink(),
@@ -71,12 +66,7 @@ class SearchView extends StatelessWidget {
                             padding: EdgeInsets.symmetric(vertical: 8.h),
                             child: Text(
                               "${S.of(context).theAyas} ${quranController.ayasFoundBySearch.length}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displaySmall!
-                                  .copyWith(
-                                    fontSize: 20.sp,
-                                  ),
+                              style: TextThemes.searchResultsTextStyle,
                             ),
                           )
                         : const SizedBox.shrink(),

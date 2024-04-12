@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
+import 'package:islamic_app/constants/assets.dart';
 import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/common/background_image.dart';
+import 'package:islamic_app/text_themes.dart';
 import 'package:islamic_app/views/bookmark/bookmark_view.dart';
+import 'package:islamic_app/views/home/widgets/drawer_item.dart';
 import 'package:islamic_app/views/home/widgets/last_read_aya.dart';
 import 'package:islamic_app/views/search/search_view.dart';
 import 'package:islamic_app/views/settings/settings_view.dart';
@@ -34,7 +37,7 @@ class HomeView extends StatelessWidget {
           surfaceTintColor: Colors.transparent,
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.,
               children: [
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 6,
@@ -49,36 +52,25 @@ class HomeView extends StatelessWidget {
                     color: kThirdlyColor,
                   ),
                 ),
-                ListTile(
+                DrawerItem(
+                  title: S.current.bookmarkAyat,
                   leading: SvgPicturesMethods.bookmarkIcon(),
-                  title: Text(
-                    S.current.bookmarkAyat,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  onTap: () {
-                    Get.to(
-                      () => const BookmarkView(),
-                      transition: Transition.rightToLeftWithFade,
-                      duration: const Duration(milliseconds: 300),
-                    );
-                  },
+                  toScreen: const BookmarkView(),
                 ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    S.current.settings,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  onTap: () {
-                    Get.to(
-                      () => const SettingsView(),
-                      transition: Transition.rightToLeftWithFade,
-                      duration: const Duration(milliseconds: 300),
-                    );
-                  },
+                DrawerItem(
+                  title: S.current.settings,
+                  leading: Image.asset(Assets.svgSettingsPng),
+                  toScreen: const SettingsView(),
+                ),
+                DrawerItem(
+                  title: S.current.shareApp,
+                  leading: Image.asset(Assets.svgShareApp),
+                  toScreen: const BookmarkView(),
+                ),
+                DrawerItem(
+                  title: S.current.rate,
+                  leading: Image.asset(Assets.svgRatePng),
+                  toScreen: const BookmarkView(),
                 ),
               ],
             ),

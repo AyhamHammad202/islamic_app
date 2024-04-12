@@ -113,9 +113,21 @@ class Assets {
   /// assets/svg/radio_png.png
   static const String svgRadioPng = "assets/svg/radio_png.png";
 
+  /// Assets for svgRatePng
+  /// assets/svg/rate_png.png
+  static const String svgRatePng = "assets/svg/rate_png.png";
+
   /// Assets for svgSearch
   /// assets/svg/search.svg
   static const String svgSearch = "assets/svg/search.svg";
+
+  /// Assets for svgSettingsPng
+  /// assets/svg/settings_png.png
+  static const String svgSettingsPng = "assets/svg/settings_png.png";
+
+  /// Assets for svgShareApp
+  /// assets/svg/share_app.png
+  static const String svgShareApp = "assets/svg/share_app.png";
 
   /// Assets for svgShareIcon
   /// assets/svg/share_icon.svg

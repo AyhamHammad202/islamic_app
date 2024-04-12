@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:islamic_app/constants/constant.dart';
+import 'package:islamic_app/text_themes.dart';
 
 class TafserRichTextWidget extends StatelessWidget {
   final String text;
@@ -27,20 +28,22 @@ class TafserRichTextWidget extends StatelessWidget {
         textSpans.add(
           TextSpan(
             text: leadingText,
-            style: Theme.of(context).textTheme.bodySmall,
+            style: TextThemes.tafserTextStyle.copyWith(
+              fontSize: fontSize.sp,
+            ),
           ),
         );
       }
 
       final strippedWord = matchedString.replaceAll(RegExp(r'[{}]'), '');
-      textSpans.add(TextSpan(
-        text: strippedWord,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.red,
-          fontFamily: 'YourCustomFont', // Replace with your desired font
+      textSpans.add(
+        TextSpan(
+          text: strippedWord,
+          style: TextThemes.ayaInTafserTextStyle.copyWith(
+            fontSize: fontSize.sp,
+          ),
         ),
-      ));
+      );
 
       remaining = remaining.substring(match.end);
     }

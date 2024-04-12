@@ -11,6 +11,7 @@ import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/svg_pictures.dart';
+import 'package:islamic_app/text_themes.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'widgets/tafser_richtext_widget.dart';
@@ -44,11 +45,7 @@ class AyaInfoView extends StatelessWidget {
                   children: [
                     Text(
                       "${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}  ${S.of(context).aya} ${aya.numberOfAyaInSurah}",
-                      style:
-                          Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
+                      style: TextThemes.ayaInfoTextStyle,
                     ),
                     Gap(16.w),
                     Row(
@@ -85,10 +82,10 @@ class AyaInfoView extends StatelessWidget {
                 Gap(16.h),
                 Text(
                   aya.text.replaceAll("\n", ""),
-                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                        fontFamily: "page${aya.page}",
-                        fontWeight: FontWeight.w500,
-                      ),
+                  style: TextThemes.ayaTxtTextStyle.copyWith(
+                    fontFamily: "page${aya.page}",
+                  ),
+                  textAlign: TextAlign.center,
                 ),
                 Divider(
                   color: Theme.of(context).colorScheme.secondary,

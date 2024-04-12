@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/models/surah_info.dart';
-import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:islamic_app/database/data_client.dart';
@@ -19,9 +18,6 @@ import 'package:islamic_app/models/surah_model.dart';
 import '../models/allah_name_model.dart';
 
 class QuranController extends GetxController {
-  RxBool isUpdateAvailable = false.obs;
-  RxBool isUpdateCompluted = false.obs;
-  var shorebirdCodePush = ShorebirdCodePush();
 
   final DataClient _client = DataClient();
   List<SurahModel> surahs = [];
@@ -55,35 +51,13 @@ class QuranController extends GetxController {
       // if (homePageScrollerController.offset>homePageScrollerController) {}
     });
     await loadQuran();
-    await getTableNames();
     await loadQuranSurahsInfo();
     await getAyaTafser();
     await loadAllahNames();
-    await updateApp();
   }
 
-  Future updateApp() async {
-    shorebirdCodePush
-        .currentPatchNumber()
-        .then((value) => log('current patch number is $value'));
-    isUpdateAvailable.value =
-        await shorebirdCodePush.isNewPatchAvailableForDownload();
-    update();
-    await shorebirdCodePush.downloadUpdateIfAvailable();
-    isUpdateCompluted.value = true;
+ 
 
-    update();
-  }
-
-  Future getTableNames() async {
-    tables = [];
-    var db = await _client.database;
-    final List<Map<String, dynamic>> t2ables =
-        await db!.rawQuery('SELECT name FROM sqlite_master WHERE type="table"');
-    t2ables.map((row) {
-      tables.add(row['name']);
-    }).toList();
-  }
 
   @override
   void onClose() {

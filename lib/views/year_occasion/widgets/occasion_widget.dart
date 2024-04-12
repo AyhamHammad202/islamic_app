@@ -7,6 +7,7 @@ import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
+import 'package:islamic_app/text_themes.dart';
 
 class OccasionWidget extends StatelessWidget {
   const OccasionWidget(
@@ -57,14 +58,14 @@ class OccasionWidget extends StatelessWidget {
                     children: [
                       Text(
                         occasionTitle,
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        style: TextThemes.occasionTextStyle,
                       ),
                       FittedBox(
                         child: Text(
                           Localizations.localeOf(context).languageCode == "ar"
                               ? "${year.toArabic()}/${month.toArabic()}/${day.toArabic()}"
                               : "$year/$month/$day",
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: TextThemes.occasionDateTextStyle,
                         ),
                       ),
                     ],
@@ -75,7 +76,7 @@ class OccasionWidget extends StatelessWidget {
                         ? S.of(context).hasCome
                         : "${Localizations.localeOf(context).languageCode == "ar" ? leftDays.toArabic() : leftDays}\n${leftDays > 2 ? S.of(context).days : S.of(context).day}",
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.displayMedium,
+                    style: TextThemes.occasionStatueTextStyle,
                   )
                 ],
               ),

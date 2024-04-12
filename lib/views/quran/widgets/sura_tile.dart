@@ -7,6 +7,7 @@ import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
+import 'package:islamic_app/text_themes.dart';
 import 'package:islamic_app/views/surah_info/surah_info_view.dart';
 
 class SuraTile extends StatelessWidget {
@@ -33,7 +34,7 @@ class SuraTile extends StatelessWidget {
                 SvgPicturesMethods.suraNumBorderIcon(),
                 Text(
                   quranController.surahs[index].numberOfSurah.toArabic(),
-                  style: Theme.of(context).textTheme.displayMedium,
+                  style: TextThemes.suraNumTextStyle,
                 ),
               ],
             ),
@@ -51,14 +52,17 @@ class SuraTile extends StatelessWidget {
                 Gap(4.h),
                 Text(
                   "${quranController.surahs[index].ayas.length} ${S.of(context).ayas}",
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: TextThemes.suraInfoTextStyle,
                 ),
               ],
             ),
             const Spacer(),
             Text(
-              quranController.surahs[index].revelationType,
-              style: Theme.of(context).textTheme.labelSmall,
+              Get.locale == const Locale('ar')
+                  ? quranController.surahs[index].revelationType
+                      .revelationTypeAr()
+                  : quranController.surahs[index].revelationType,
+              style: TextThemes.suraInfoTextStyle,
             ),
             SizedBox(width: 8.w),
             InkWell(

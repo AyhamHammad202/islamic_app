@@ -6,6 +6,7 @@ import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/svg_pictures.dart';
+import 'package:islamic_app/text_themes.dart';
 
 class BookmarkedAya extends StatelessWidget {
   const BookmarkedAya({
@@ -31,7 +32,7 @@ class BookmarkedAya extends StatelessWidget {
           Text(
             bookMarkController.ayasWithBookMark[index].textOfAya
                 .replaceAll("\n", ""),
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: TextThemes.bookmarkedAyaTextStyle,
           ),
           Gap(8.h),
           Row(
@@ -49,9 +50,7 @@ class BookmarkedAya extends StatelessWidget {
               Gap(8.w),
               Text(
                 "${quranController.surahs[quranController.getSurahNumberByAya(bookMarkController.ayasWithBookMark[index]) - 1].nameOfSurah} ${S.of(context).aya} ${bookMarkController.ayasWithBookMark[index].numberOfAyaInSurah}",
-                style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                      fontSize: 12.sp,
-                    ),
+                style: TextThemes.bookmarkedInfoTextStyle,
               )
             ],
           )

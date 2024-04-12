@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:islamic_app/controllers/mesbaha_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/svg_pictures.dart';
+import 'package:islamic_app/text_themes.dart';
 import 'package:islamic_app/views/masbeha/masbeha_view.dart';
 
 class TasbehaWidget extends StatelessWidget {
@@ -46,11 +47,11 @@ class TasbehaWidget extends StatelessWidget {
                   children: [
                     Text(
                       mesbahaController.tasbeh[index].tasbeha,
-                      style: Theme.of(context).textTheme.headlineLarge,
+                      style: TextThemes.tasbehTextStyle,
                     ),
                     Text(
                       "${mesbahaController.tasbeh[index].times} ${S.of(context).time}",
-                      style: Theme.of(context).textTheme.labelSmall,
+                      style: TextThemes.tasbehDescTextStyle,
                     ),
                   ],
                 ),

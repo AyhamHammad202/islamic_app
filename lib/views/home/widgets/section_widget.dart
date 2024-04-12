@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:islamic_app/text_themes.dart';
 
 class SectionWidget extends StatelessWidget {
   const SectionWidget(
@@ -20,7 +21,7 @@ class SectionWidget extends StatelessWidget {
             Gap(8.h),
             Text(
               title,
-              style: Theme.of(context).textTheme.titleMedium,
+              style: TextThemes.sectionsTextStyle,
               textAlign: TextAlign.center,
             ),
             const Spacer(),

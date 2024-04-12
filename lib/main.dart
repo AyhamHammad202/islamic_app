@@ -26,7 +26,6 @@ import 'package:islamic_app/router.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/services/theme_services.dart';
 import 'package:islamic_app/views/home/home_view.dart';
-import 'package:islamic_app/views/update_view/update_view.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 import 'constants/assets.dart';
@@ -86,15 +85,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuranController quranController = Get.put(QuranController());
-    FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.instance;
-    firebaseAnalytics.logAppOpen();
+    ThemeController themeController = Get.put(ThemeController());
     SizeConfig().init(context);
     return ScreenUtilInit(
       builder: (context, child) => GetMaterialApp(
         navigatorKey: navigatorKey,
         theme: Themes.light,
         darkTheme: Themes.dark,
-        themeMode: ThemeServices().theme,
+        themeMode: themeController.theme,
         // themeMode: ThemeMode.light,
         locale: const Locale("ar"),
         // locale: Get.locale,
@@ -117,24 +115,21 @@ class MyApp extends StatelessWidget {
         home: GetBuilder<QuranController>(
           init: Get.put(QuranController()),
           builder: (c) {
-            return quranController.isUpdateAvailable.value
-                ? const UpdateView()
-                : quranController.suarhsInfo.isNotEmpty
-                    ? const HomeView()
-                    : Scaffold(
-                        body: SizedBox(
-                          height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                          child: SvgPicture.asset(
-                            Assets.svgSplash,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
+            return quranController.suarhsInfo.isNotEmpty
+                ? const HomeView()
+                : Scaffold(
+                    body: SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      child: SvgPicture.asset(
+                        Assets.svgSplash,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
           },
         ),
       ),
     );
   }
-  
 }

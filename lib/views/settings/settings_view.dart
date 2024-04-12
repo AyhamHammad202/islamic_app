@@ -1,14 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/generated/l10n.dart';
-import 'package:islamic_app/main.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/services/theme_services.dart';
+import 'package:islamic_app/text_themes.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
@@ -16,6 +14,7 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SettingsService settingsService = Get.find();
+    ThemeController themeController = Get.find();
     return BackgroundImage(
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -29,16 +28,15 @@ class SettingsView extends StatelessWidget {
               child: Column(
                 children: [
                   SwitchListTile(
-                    value: Get.isDarkMode,
+                    value: themeController.isDarkMode.value,
                     onChanged: (value) async {
-                      ThemeServices().switchThemeMode();
-                      // await Get.updateLocale(const Locale('en'));
+                      themeController.switchThemeMode();
                     },
                     hoverColor: Colors.red,
                     activeColor: Colors.amber,
                     title: Text(
                       S.current.darkTheme,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: TextThemes.settingTextStyle,
                     ),
                   ),
                   const Divider(),

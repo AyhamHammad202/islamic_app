@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:islamic_app/text_themes.dart';
 
 class InfoWidget extends StatelessWidget {
   const InfoWidget({super.key, required this.title, required this.info});
@@ -25,18 +26,12 @@ class InfoWidget extends StatelessWidget {
           children: [
             Text(
               title,
-              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+              style: TextThemes.suraInfoTitleTextStyle,
             ),
             Gap(8.h),
             Text(
               info,
-              style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                    // fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+              style: TextThemes.suraInfoDescTextStyle,
             ),
           ],
         ),

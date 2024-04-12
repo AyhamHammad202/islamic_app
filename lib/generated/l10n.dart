@@ -120,6 +120,26 @@ class S {
     );
   }
 
+  /// `Share App`
+  String get shareApp {
+    return Intl.message(
+      'Share App',
+      name: 'shareApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rate The App`
+  String get rate {
+    return Intl.message(
+      'Rate The App',
+      name: 'rate',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Quran Radio`
   String get radio {
     return Intl.message(

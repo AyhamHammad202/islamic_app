@@ -5,7 +5,9 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/controllers/mesbaha_controller.dart';
+import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/models/tasbeha_model.dart';
+import 'package:islamic_app/text_themes.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 import 'package:wave_blob/wave_blob.dart';
@@ -32,12 +34,17 @@ class MasbehaView extends StatelessWidget {
                 children: [
                   Text(
                     tasbehaModel.tasbeha,
-                    style: Theme.of(context).textTheme.headlineLarge,
+                    style: TextThemes.tasbehTextStyle,
                   ),
                   Gap(32.h),
                   Text(
                     tasbehaModel.info,
-                    style: Theme.of(context).textTheme.labelSmall,
+                    style: TextThemes.tasbehDescTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    "${tasbehaModel.times} ${S.current.time}",
+                    style: TextThemes.tasbehDescTextStyle,
                     textAlign: TextAlign.center,
                   ),
                   Gap(64.h),
@@ -95,7 +102,8 @@ class MasbehaView extends StatelessWidget {
                               shape: CircleBorder(),
                             ),
                             child: Text(
-                              "${mesbahaController.times.value}/${tasbehaModel.times}",
+                              "${mesbahaController.times.value}",
+                              style: TextThemes.timesTextStyle,
                             ),
                           ),
                         ),

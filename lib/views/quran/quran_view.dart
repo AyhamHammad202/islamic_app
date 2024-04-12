@@ -6,6 +6,7 @@ import 'package:islamic_app/controllers/general_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/common/search_textfield.dart';
+import 'package:islamic_app/text_themes.dart';
 
 import '../search/search_view.dart';
 import 'widgets/tab_widget.dart';
@@ -26,9 +27,7 @@ class QuranView extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             S.of(context).quran,
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontSize: 20.sp,
-                ),
+            style: TextThemes.quranTitleTextStyle,
           ),
         ),
         body: Obx(() {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:islamic_app/text_themes.dart';
 
 class TabWidget extends StatelessWidget {
   const TabWidget({
@@ -26,15 +27,11 @@ class TabWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(isSelected ? 8.r : 4.r)),
         child: Text(
           title,
-          style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                color: isSelected
-                    ? Theme.of(context).textTheme.displaySmall!.color
-                    : Theme.of(context)
-                        .textTheme
-                        .displaySmall!
-                        .color!
-                        .withOpacity(0.3),
-              ),
+          style: TextThemes.tabTextStyle.copyWith(
+            color: isSelected
+                ? TextThemes.tabTextStyle.color
+                : TextThemes.tabTextStyle.color!.withOpacity(0.3),
+          ),
         ),
       ),
     );

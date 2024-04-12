@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
+import 'package:islamic_app/text_themes.dart';
 
 class AllahNameWidget extends StatelessWidget {
   const AllahNameWidget({
@@ -28,31 +29,31 @@ class AllahNameWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.only(right: 8.w, left: 8.w, top: 4.h),
             decoration: BoxDecoration(
               border: Border.all(
                 color: Theme.of(context).colorScheme.onSecondary,
               ),
+              shape: BoxShape.rectangle,
             ),
             child: Text(
               "${index + 1}",
-              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                    fontSize: 14.sp,
-                  ),
+              style: TextThemes.nameIndexTextStyle,
+              textAlign: TextAlign.center,
             ),
           ),
           Text(
             index == 86
                 ? "المعطي المانع"
                 : quranController.allahNames[index].name,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  fontSize: index == 86 ? 32.sp : 64.sp,
-                  fontFamily: "AllahNames  4",
-                ),
+            style: TextStyle(
+              fontSize: index == 86 ? 32.sp : 64.sp,
+              fontFamily: "AllahNames4",
+            ),
           ),
           Text(
             quranController.allahNames[index].meaning,
-            style: Theme.of(context).textTheme.displayLarge,
+            style: TextThemes.allahNameTextStyle,
           ),
         ],
       ),

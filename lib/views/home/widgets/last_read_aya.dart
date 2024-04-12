@@ -7,6 +7,7 @@ import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/services/last_read_service.dart';
 import 'package:islamic_app/svg_pictures.dart';
+import 'package:islamic_app/text_themes.dart';
 
 import '../../ayat/ayat_view.dart';
 
@@ -62,8 +63,8 @@ class LastReadAya extends StatelessWidget {
                     SvgPicturesMethods.lastReadIcon(),
                     SizedBox(width: 16.w),
                     Text(
-                      S.of(context).lastRead,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      S.current.lastRead,
+                      style: TextThemes.lastReadTextStyle,
                     )
                   ],
                 ),
@@ -78,12 +79,12 @@ class LastReadAya extends StatelessWidget {
                       quranController
                           .surahs[lastReadService.lastSuraNumRead.value - 1]
                           .nameOfSurah,
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: TextThemes.lastSuraNameTextStyle,
                     ),
                     SizedBox(width: MediaQuery.of(context).size.width * .28),
                     Text(
                       formattedDate,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: TextThemes.lastInfoTextStyle,
                     ),
                   ],
                 ),
@@ -95,12 +96,12 @@ class LastReadAya extends StatelessWidget {
                   children: [
                     Text(
                       "${S.of(context).lastReadVarseNum} ${lastReadService.lastAyaNumRead.value}",
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: TextThemes.lastInfoTextStyle,
                     ),
                     SizedBox(width: MediaQuery.of(context).size.width * .34),
                     Text(
                       "${S.of(context).page}: ${lastReadService.lastPageRead.value}",
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: TextThemes.lastInfoTextStyle,
                     ),
                   ],
                 ),

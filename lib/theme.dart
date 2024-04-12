@@ -228,8 +228,8 @@ class Themes {
         bodyLarge: TextStyle(
           fontFamily: kFontUthmanicHafs,
           color: const Color(0xff043336),
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w700,
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w400,
         )),
   );
   // colorScheme: const ColorScheme(
@@ -254,16 +254,16 @@ class Themes {
   // iconTheme: const IconThemeData(color: darkiconClr),
 }
 
-TextStyle get textStyle => TextStyle(
-      fontFamily: 'Ibmp',
-      color: Get.isDarkMode ? darkTextClr : black,
-    );
+// TextStyle get textStyle => TextStyle(
+//       fontFamily: 'Ibmp',
+//       color: Get.isDarkMode ? darkTextClr : black,
+//     );
 
-TextStyle get headeTtextStyle => const TextStyle(
-      fontFamily: 'Ibmp',
-      fontSize: 14,
-      overflow: TextOverflow.ellipsis,
-    );
+// TextStyle get headeTtextStyle => const TextStyle(
+//       fontFamily: 'Ibmp',
+//       fontSize: 14,
+//       overflow: TextOverflow.ellipsis,
+//     );
 
 
 

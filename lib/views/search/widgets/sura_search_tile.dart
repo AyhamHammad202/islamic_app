@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/surah_model.dart';
+import 'package:islamic_app/text_themes.dart';
 
 import '../../../controllers/quran_controller.dart';
 import '../../ayat/ayat_view.dart';
@@ -54,12 +55,12 @@ class SuraSearchTile extends StatelessWidget {
           children: [
             Text(
               "${S.of(context).sorah}: ${surahModel.numberOfSurah.toArabic()}",
-              style: Theme.of(context).textTheme.labelSmall,
+              style: TextThemes.searchInfoTextStyle,
             ),
             const Gap(8),
             Text(
               surahModel.nameOfSurah,
-              style: Theme.of(context).textTheme.displaySmall,
+              style: TextThemes.searchSuraTextStyle,
             ),
           ],
         ),

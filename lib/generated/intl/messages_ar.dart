@@ -60,9 +60,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "qurter": MessageLookupByLibrary.simpleMessage("الأرباع"),
         "radio": MessageLookupByLibrary.simpleMessage("راديو القرآن"),
         "ramadan": MessageLookupByLibrary.simpleMessage("رمضان"),
+        "rate": MessageLookupByLibrary.simpleMessage("قيم التطبيق"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "أبحث بأستخدام أسم السورة أو الآية"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+        "shareApp": MessageLookupByLibrary.simpleMessage("شارك التطبيق"),
         "sorah": MessageLookupByLibrary.simpleMessage("السورة"),
         "sorahs": MessageLookupByLibrary.simpleMessage("السور"),
         "suraInfo": MessageLookupByLibrary.simpleMessage("معلومات عن سورة"),
