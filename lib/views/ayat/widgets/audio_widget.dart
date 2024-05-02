@@ -1,14 +1,15 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:islamic_app/constants/constant.dart';
 
 import 'package:islamic_app/controllers/audio_controller.dart';
-import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/services/settings_service.dart';
+import 'package:islamic_app/text_themes.dart';
+import 'package:islamic_app/views/ayat/widgets/readers.dart';
+
+import 'audio_botton.dart';
 
 class AudioWidget extends StatelessWidget {
   const AudioWidget({
@@ -21,41 +22,62 @@ class AudioWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     SettingsService settingsService = Get.find();
     AudioController audioController = Get.find();
-    QuranController quranController = Get.find();
+    // QuranController quranController = Get.find();
     return GetX<AudioController>(builder: (c) {
       return Container(
-        color: Colors.red,
-        height: 100.h,
+        // height: 100.h,
         width: MediaQuery.sizeOf(context).width,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.onSurface,
+          borderRadius: BorderRadius.circular(20.r),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            PopupMenuButton(
-              onSelected: (value) {
-                settingsService.currentReaderIndex.value = value;
-                settingsService.setReaderIndex(value);
-              },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(Constant
-                      .readers[settingsService.currentReaderIndex.value]),
-                  const Icon(Icons.arrow_drop_up_outlined),
-                ],
-              ),
-              itemBuilder: (context) {
-                return List.generate(
-                  Constant.readers.length,
-                  (index) => PopupMenuItem(
-                    value: index,
-                    child: Text(
-                      Constant.readers[index],
-                    ),
-                  ),
-                );
-              },
+            Gap(4.h),
+            Readers(settingsService: settingsService),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "${audioController.currentSura.nameOfSurah}:${audioController.currentAya.numberOfAyaInSurah}",
+                  style: TextThemes.ayaInfoTextStyle(context),
+                )
+              ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  audioController.currentDuration.value.inSeconds.toString(),
+                  style: TextThemes.ayaTimeTextStyle(context),
+                ),
+                Slider(
+                  value: audioController.isPlaying.value
+                      ? audioController.currentDuration.value.inSeconds
+                          .toDouble()
+                      : 0.0,
+                  onChanged: (value) {
+                    audioController.audioPlayer.seek(
+                      Duration(
+                        seconds: value.toInt(),
+                      ),
+                    );
+                  },
+                  max:
+                      audioController.duration.value.inSeconds.toDouble() == 0.0
+                          ? 1000.0
+                          : audioController.duration.value.inSeconds.toDouble(),
+                ),
+                Text(
+                  audioController.duration.value.inSeconds.toString(),
+                  style: TextThemes.ayaTimeTextStyle(context),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AudioButton(
                   icon: Icons.skip_next_rounded,
@@ -73,8 +95,8 @@ class AudioWidget extends StatelessWidget {
                 ),
                 AudioButton(
                   icon: !audioController.isPlaying.value
-                      ? Icons.play_arrow
-                      : Icons.pause,
+                      ? Icons.play_circle_fill_rounded
+                      : Icons.pause_circle_filled_rounded,
                   onTap: () async {
                     if (audioController.isPlaying.value ||
                         audioController.isLoading.value) {
@@ -96,46 +118,12 @@ class AudioWidget extends StatelessWidget {
                     audioController.playAyah(audioController.ayaUniqeId.value);
                   },
                 ),
-                Text(
-                  audioController.currentDuration.value.inSeconds.toString(),
-                ),
-                Slider(
-                  value: audioController.currentDuration.value.inSeconds
-                      .toDouble(),
-                  onChanged: (value) {
-                    audioController.audioPlayer
-                        .seek(Duration(seconds: value.toInt()));
-                  },
-                  max: audioController.duration.value.inSeconds.toDouble(),
-                ),
-                Text(
-                  audioController.duration.value.inSeconds.toString(),
-                ),
               ],
             ),
+            Gap(4.h),
           ],
         ),
       );
     });
-  }
-}
-
-class AudioButton extends StatelessWidget {
-  const AudioButton({
-    super.key,
-    this.onTap,
-    required this.icon,
-  });
-  final void Function()? onTap;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    // AudioController audioController = Get.find();
-    // QuranController quranController = Get.find();
-    return GestureDetector(
-      onTap: onTap,
-      child: Icon(icon),
-    );
   }
 }

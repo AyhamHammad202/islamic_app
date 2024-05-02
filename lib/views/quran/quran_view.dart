@@ -27,7 +27,7 @@ class QuranView extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             S.of(context).quran,
-            style: TextThemes.quranTitleTextStyle,
+            style: TextThemes.quranTitleTextStyle(context),
           ),
         ),
         body: Obx(() {

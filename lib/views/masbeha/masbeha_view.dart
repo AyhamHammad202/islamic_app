@@ -34,17 +34,17 @@ class MasbehaView extends StatelessWidget {
                 children: [
                   Text(
                     tasbehaModel.tasbeha,
-                    style: TextThemes.tasbehTextStyle,
+                    style: TextThemes.tasbehTextStyle(context),
                   ),
                   Gap(32.h),
                   Text(
                     tasbehaModel.info,
-                    style: TextThemes.tasbehDescTextStyle,
+                    style: TextThemes.tasbehDescTextStyle(context),
                     textAlign: TextAlign.center,
                   ),
                   Text(
                     "${tasbehaModel.times} ${S.current.time}",
-                    style: TextThemes.tasbehDescTextStyle,
+                    style: TextThemes.tasbehDescTextStyle(context),
                     textAlign: TextAlign.center,
                   ),
                   Gap(64.h),
@@ -103,7 +103,7 @@ class MasbehaView extends StatelessWidget {
                             ),
                             child: Text(
                               "${mesbahaController.times.value}",
-                              style: TextThemes.timesTextStyle,
+                              style: TextThemes.timesTextStyle(context),
                             ),
                           ),
                         ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:islamic_app/generated/l10n.dart';
-import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/text_themes.dart';
 
@@ -27,12 +26,12 @@ class JuzTile extends StatelessWidget {
               children: [
                 Text(
                   "${S.of(context).juz} ${juz.juz}",
-                  style: TextThemes.juzTextStyle,
+                  style: TextThemes.juzTextStyle(context),
                 ),
                 const Spacer(),
                 Text(
                   "${S.of(context).page} ${juz.page.toString().padLeft(3, "0")}",
-                  style: TextThemes.juzPageTextStyle,
+                  style: TextThemes.juzPageTextStyle(context),
                 ),
                 Gap(32.w)
               ],
@@ -41,13 +40,13 @@ class JuzTile extends StatelessWidget {
               children: [
                 Text(
                   "۞",
-                  style: TextThemes.juzTextStyle,
+                  style: TextThemes.juzTextStyle(context),
                 ),
                 Gap(4.w),
                 Expanded(
                   child: Text(
                     juz.searchTextOfAya,
-                    style: TextThemes.ayaOfJuzTextStyle,
+                    style: TextThemes.ayaOfJuzTextStyle(context),
                     overflow: TextOverflow.ellipsis,
                   ),
                 )

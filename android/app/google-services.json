@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:159972411554:android:53f4b5979f53d1b4e7affb",
         "android_client_info": {
-          "package_name": "com.NourAlmomen.islamicapp"
+          "package_name": "com.NourAlMomen.quran"
         }
       },
       "oauth_client": [],
@@ -26,9 +26,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:159972411554:android:d9e015fa20e5b24ae7affb",
+        "mobilesdk_app_id": "1:159972411554:android:fe3131ad693e6288e7affb",
         "android_client_info": {
-          "package_name": "com.example.islamic_app"
+          "package_name": "com.NourAlmomen.islamicapp"
         }
       },
       "oauth_client": [],

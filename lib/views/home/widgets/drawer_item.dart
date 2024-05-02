@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:islamic_app/text_themes.dart';
 
 class DrawerItem extends StatelessWidget {
@@ -8,10 +7,10 @@ class DrawerItem extends StatelessWidget {
       {super.key,
       required this.title,
       required this.leading,
-      required this.toScreen});
+      required this.onTap});
   final String title;
   final Widget leading;
-  final Widget toScreen;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +22,9 @@ class DrawerItem extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: TextThemes.drawerItemTextStyle,
+        style: TextThemes.drawerItemTextStyle(context),
       ),
-      onTap: () {
-        Get.to(
-          () => toScreen,
-          transition: Transition.rightToLeftWithFade,
-          duration: const Duration(milliseconds: 300),
-        );
-      },
+      onTap: onTap,
     );
   }
 }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:islamic_app/constants/constant.dart';
 
 // const Color white = Colors.white;
 // const Color black = Colors.black;
@@ -52,6 +50,7 @@ class Themes {
       activeTrackColor: Color(0xff043336),
       inactiveTrackColor: Color.fromARGB(255, 160, 157, 157),
     ),
+    
     highlightColor: const Color(0xffFFD08A).withOpacity(.2),
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
@@ -65,71 +64,8 @@ class Themes {
       background: darkBackgroundClr,
       onBackground: darkTextClr,
       surface: lightBackgroundClr,
-      onSurface: Colors.black,
+      onSurface: Color(0xff132D2E),
     ),
-
-    textTheme: TextTheme(
-        headlineSmall: GoogleFonts.tajawal(
-          color: const Color(0xffC4975B),
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
-        ),
-        headlineMedium: GoogleFonts.tajawal(
-          color: const Color(0xffD7A664),
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w700,
-        ),
-        headlineLarge: GoogleFonts.tajawal(
-          color: const Color(0xff313131),
-          fontWeight: FontWeight.w500,
-          fontSize: 18.sp,
-        ),
-        displayLarge: GoogleFonts.tajawal(
-          color: const Color(0xff5A5A5A),
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w400,
-        ),
-        displaySmall: GoogleFonts.tajawal(
-          color: const Color(0xff043336),
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w700,
-        ),
-        labelSmall: GoogleFonts.tajawal(
-          color: const Color(0xff757575),
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w400,
-        ),
-        displayMedium: GoogleFonts.poppins(
-          color: const Color(0xff765B37),
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w500,
-        ),
-        bodySmall: GoogleFonts.tajawal(
-          color: Colors.black,
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w400,
-        ),
-        titleSmall: TextStyle(
-          color: Colors.black,
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w700,
-        ),
-        titleMedium: GoogleFonts.tajawal(
-          color: const Color(0xff004B40),
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w700,
-        ),
-        bodyMedium: GoogleFonts.tajawal(
-          color: Colors.black,
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
-        ),
-        bodyLarge: TextStyle(
-          fontFamily: kFontUthmanicHafs,
-          color: const Color(0xff043336),
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w700,
-        )),
   );
   static final dark = ThemeData(
     useMaterial3: true,
@@ -167,128 +103,7 @@ class Themes {
       background: darkBackgroundClr,
       onBackground: darkTextClr,
       surface: darkBackgroundClr,
-      onSurface: Colors.black,
+      onSurface: Color(0xff132D2E),
     ),
-    textTheme: TextTheme(
-        headlineSmall: GoogleFonts.tajawal(
-          color: const Color(0xffC4975B),
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
-        ),
-        headlineMedium: GoogleFonts.tajawal(
-          color: const Color(0xffD7A664),
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w700,
-        ),
-        headlineLarge: GoogleFonts.tajawal(
-          color: const Color(0xff313131),
-          fontWeight: FontWeight.w500,
-          fontSize: 18.sp,
-        ),
-        displayLarge: GoogleFonts.tajawal(
-          color: const Color(0xff5A5A5A),
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w400,
-        ),
-        displaySmall: GoogleFonts.tajawal(
-          color: const Color(0xff043336),
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w700,
-        ),
-        labelSmall: GoogleFonts.tajawal(
-          color: const Color(0xff757575),
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w400,
-        ),
-        displayMedium: GoogleFonts.poppins(
-          color: const Color(0xff765B37),
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w500,
-        ),
-        bodySmall: GoogleFonts.tajawal(
-          color: Colors.white,
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w400,
-        ),
-        titleSmall: TextStyle(
-          color: Colors.white,
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w700,
-        ),
-        titleMedium: GoogleFonts.tajawal(
-          color: const Color(0xff004B40),
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w700,
-        ),
-        bodyMedium: GoogleFonts.tajawal(
-          color: Colors.white,
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
-        ),
-        bodyLarge: TextStyle(
-          fontFamily: kFontUthmanicHafs,
-          color: const Color(0xff043336),
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w400,
-        )),
   );
-  // colorScheme: const ColorScheme(
-  //   brightness: Brightness.dark,
-  //   primary: c4,
-  //   onPrimary: Colors.white,
-  //   secondary: c4,
-  //   onSecondary: c4,
-  //   error: Colors.red,
-  //   onError: Colors.red,
-  //   background: darkBackgroundClr,
-  //   onBackground: darkTextClr,
-  //   surface: darkBackgroundClr,
-  //   onSurface: darkTextClr,
-  // ),
-  // iconButtonTheme: const IconButtonThemeData(
-  //     style: ButtonStyle(iconColor: MaterialStatePropertyAll(darkiconClr))),
-  // splashColor: darkPrimaryClr.withOpacity(0.2),
-  // hoverColor: Colors.transparent,
-  // highlightColor: darkPrimaryClr.withOpacity(0.2),
-  // fontFamily: 'Ibmp',
-  // iconTheme: const IconThemeData(color: darkiconClr),
 }
-
-// TextStyle get textStyle => TextStyle(
-//       fontFamily: 'Ibmp',
-//       color: Get.isDarkMode ? darkTextClr : black,
-//     );
-
-// TextStyle get headeTtextStyle => const TextStyle(
-//       fontFamily: 'Ibmp',
-//       fontSize: 14,
-//       overflow: TextOverflow.ellipsis,
-//     );
-
-
-
-// colorScheme: const ColorScheme(
-      //   brightness: Brightness.light,
-      //   primary: c3,
-      //   onPrimary: Colors.black,
-      //   secondary: c3,
-      //   onSecondary: c3,
-      //   error: Colors.red,
-      //   onError: Colors.red,
-      //   background: c1,
-      //   onBackground: black,
-      //   surface: c1,
-      //   onSurface: black,
-      // ),
-      // iconButtonTheme: const IconButtonThemeData(
-      //   style: ButtonStyle(
-      //     iconColor: MaterialStatePropertyAll(
-      //       ligthiconClr,
-      //     ),
-      //   ),
-      // ),
-      // splashColor: ligthPrimaryClr.withOpacity(0.2),
-      // hoverColor: Colors.transparent,
-      // highlightColor: ligthPrimaryClr.withOpacity(0.2),
-      // fontFamily: 'Ibmp',
-      // iconTheme: const IconThemeData(color: ligthiconClr),

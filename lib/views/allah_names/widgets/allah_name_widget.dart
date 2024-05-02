@@ -38,7 +38,7 @@ class AllahNameWidget extends StatelessWidget {
             ),
             child: Text(
               "${index + 1}",
-              style: TextThemes.nameIndexTextStyle,
+              style: TextThemes.nameIndexTextStyle(context),
               textAlign: TextAlign.center,
             ),
           ),
@@ -53,7 +53,7 @@ class AllahNameWidget extends StatelessWidget {
           ),
           Text(
             quranController.allahNames[index].meaning,
-            style: TextThemes.allahNameTextStyle,
+            style: TextThemes.allahNameTextStyle(context),
           ),
         ],
       ),

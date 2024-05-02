@@ -47,11 +47,11 @@ class TasbehaWidget extends StatelessWidget {
                   children: [
                     Text(
                       mesbahaController.tasbeh[index].tasbeha,
-                      style: TextThemes.tasbehTextStyle,
+                      style: TextThemes.tasbehTextStyle(context),
                     ),
                     Text(
                       "${mesbahaController.tasbeh[index].times} ${S.of(context).time}",
-                      style: TextThemes.tasbehDescTextStyle,
+                      style: TextThemes.tasbehDescTextStyle(context),
                     ),
                   ],
                 ),

@@ -9,12 +9,12 @@ import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/common/background_image.dart';
-import 'package:islamic_app/text_themes.dart';
 import 'package:islamic_app/views/bookmark/bookmark_view.dart';
 import 'package:islamic_app/views/home/widgets/drawer_item.dart';
 import 'package:islamic_app/views/home/widgets/last_read_aya.dart';
 import 'package:islamic_app/views/search/search_view.dart';
 import 'package:islamic_app/views/settings/settings_view.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../constants/constant.dart';
 
@@ -55,22 +55,44 @@ class HomeView extends StatelessWidget {
                 DrawerItem(
                   title: S.current.bookmarkAyat,
                   leading: SvgPicturesMethods.bookmarkIcon(),
-                  toScreen: const BookmarkView(),
+                  onTap: () {
+                    Get.to(
+                      () => const BookmarkView(),
+                      transition: Transition.rightToLeftWithFade,
+                      duration: const Duration(milliseconds: 300),
+                    );
+                  },
                 ),
                 DrawerItem(
                   title: S.current.settings,
                   leading: Image.asset(Assets.svgSettingsPng),
-                  toScreen: const SettingsView(),
+                  onTap: () {
+                    Get.to(
+                      () => const SettingsView(),
+                      transition: Transition.rightToLeftWithFade,
+                      duration: const Duration(milliseconds: 300),
+                    );
+                  },
                 ),
                 DrawerItem(
                   title: S.current.shareApp,
                   leading: Image.asset(Assets.svgShareApp),
-                  toScreen: const BookmarkView(),
+                  onTap: () async {
+                    Share.share(
+                      "${S.current.shareAppText} ${Constant.appUrl}",
+                    );
+                  },
                 ),
                 DrawerItem(
                   title: S.current.rate,
                   leading: Image.asset(Assets.svgRatePng),
-                  toScreen: const BookmarkView(),
+                  onTap: () {
+                    openUrl(
+                      url: Constant.appUrl,
+                      errorMessage: "There is an error",
+                      context: context,
+                    );
+                  },
                 ),
               ],
             ),

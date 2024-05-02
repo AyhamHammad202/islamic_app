@@ -32,7 +32,7 @@ class BookmarkedAya extends StatelessWidget {
           Text(
             bookMarkController.ayasWithBookMark[index].textOfAya
                 .replaceAll("\n", ""),
-            style: TextThemes.bookmarkedAyaTextStyle,
+            style: TextThemes.bookmarkedAyaTextStyle(context),
           ),
           Gap(8.h),
           Row(
@@ -50,7 +50,7 @@ class BookmarkedAya extends StatelessWidget {
               Gap(8.w),
               Text(
                 "${quranController.surahs[quranController.getSurahNumberByAya(bookMarkController.ayasWithBookMark[index]) - 1].nameOfSurah} ${S.of(context).aya} ${bookMarkController.ayasWithBookMark[index].numberOfAyaInSurah}",
-                style: TextThemes.bookmarkedInfoTextStyle,
+                style: TextThemes.bookmarkedInfoTextStyle(context),
               )
             ],
           )

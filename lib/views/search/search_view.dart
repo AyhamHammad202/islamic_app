@@ -52,7 +52,7 @@ class SearchView extends StatelessWidget {
                             padding: EdgeInsets.symmetric(vertical: 8.h),
                             child: Text(
                               "${S.of(context).sorahs} ${quranController.surasFoundbySearch.length}",
-                              style: TextThemes.searchResultsTextStyle,
+                              style: TextThemes.searchResultsTextStyle(context),
                             ),
                           )
                         : const SizedBox.shrink(),
@@ -66,7 +66,7 @@ class SearchView extends StatelessWidget {
                             padding: EdgeInsets.symmetric(vertical: 8.h),
                             child: Text(
                               "${S.of(context).theAyas} ${quranController.ayasFoundBySearch.length}",
-                              style: TextThemes.searchResultsTextStyle,
+                              style: TextThemes.searchResultsTextStyle(context),
                             ),
                           )
                         : const SizedBox.shrink(),

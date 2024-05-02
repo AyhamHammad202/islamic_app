@@ -36,7 +36,7 @@ class SettingsView extends StatelessWidget {
                     activeColor: Colors.amber,
                     title: Text(
                       S.current.darkTheme,
-                      style: TextThemes.settingTextStyle,
+                      style: TextThemes.settingTextStyle(context),
                     ),
                   ),
                   const Divider(),
@@ -45,9 +45,15 @@ class SettingsView extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text(S.current.tafserFontSize),
+                          Text(
+                            S.current.tafserFontSize,
+                            style: TextThemes.settingTextStyle(context),
+                          ),
                           Gap(32.w),
-                          Text(settingsService.ayaTafserFontSize.toString())
+                          Text(
+                            settingsService.ayaTafserFontSize.toString(),
+                            style: TextThemes.settingTextStyle(context),
+                          )
                         ],
                       ),
                       Slider(
@@ -69,9 +75,15 @@ class SettingsView extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text(S.current.ayaFontSize),
+                          Text(
+                            S.current.ayaFontSize,
+                            style: TextThemes.settingTextStyle(context),
+                          ),
                           Gap(32.w),
-                          Text(settingsService.ayaFontSize.toString())
+                          Text(
+                            settingsService.ayaFontSize.toString(),
+                            style: TextThemes.settingTextStyle(context),
+                          )
                         ],
                       ),
                       Slider(

@@ -30,6 +30,7 @@ class AyatView extends StatelessWidget {
       child: PopScope(
         onPopInvoked: (didPop) {
           quranController.selectedAyahIndexes.clear();
+          audioController.peauseAyaFile();
         },
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -41,7 +42,7 @@ class AyatView extends StatelessWidget {
                             .pages[quranController.globalPage.value].first) -
                         1]
                     .nameOfSurah,
-                style: TextThemes.suraNameTextStyle,
+                style: TextThemes.suraNameTextStyle(context),
               );
             }),
           ),

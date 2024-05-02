@@ -26,12 +26,12 @@ class InfoWidget extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextThemes.suraInfoTitleTextStyle,
+              style: TextThemes.suraInfoTitleTextStyle(context),
             ),
             Gap(8.h),
             Text(
               info,
-              style: TextThemes.suraInfoDescTextStyle,
+              style: TextThemes.suraInfoDescTextStyle(context),
             ),
           ],
         ),

@@ -140,6 +140,16 @@ class S {
     );
   }
 
+  /// `I wanted to share with you an application that I've found to be very beneficial. It's a Quran app that provides a comprehensive experience for exploring the Holy Quran. \n Here is the URL:`
+  String get shareAppText {
+    return Intl.message(
+      'I wanted to share with you an application that I\'ve found to be very beneficial. It\'s a Quran app that provides a comprehensive experience for exploring the Holy Quran. \n Here is the URL:',
+      name: 'shareAppText',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Quran Radio`
   String get radio {
     return Intl.message(

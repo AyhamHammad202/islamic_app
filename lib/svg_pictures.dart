@@ -82,7 +82,7 @@ class SvgPicturesMethods {
 
   static Widget prayTimesIcon({double? height, double? width}) {
     return SvgPicture.asset(
-      Assets.svgPrayTimes,
+      Assets.svgPrayerTime,
       width: width ?? 30.w,
       height: height ?? 30.h,
     );
@@ -90,7 +90,7 @@ class SvgPicturesMethods {
 
   static Widget azkarIcon({double? height, double? width}) {
     return SvgPicture.asset(
-      Assets.svgAzkar,
+      Assets.svgAzkarDuaa,
       width: width ?? 30.w,
       height: height ?? 30.h,
     );
@@ -106,8 +106,8 @@ class SvgPicturesMethods {
   }
 
   static Widget occasionsIcon({double? height, double? width}) {
-    return Image.asset(
-      Assets.svgOccasionsPng,
+    return SvgPicture.asset(
+      Assets.svgOccasionSection,
       width: width ?? 30.w,
       height: height ?? 30.h,
     );
@@ -122,16 +122,16 @@ class SvgPicturesMethods {
   }
 
   static Widget radioIcon({double? height, double? width}) {
-    return Image.asset(
-      Assets.svgRadioPng,
+    return SvgPicture.asset(
+      Assets.svgRadio,
       width: width ?? 30.w,
       height: height ?? 30.h,
     );
   }
 
   static Widget tasbeehIcon({double? height, double? width}) {
-    return Image.asset(
-      Assets.svgTassbehPng,
+    return SvgPicture.asset(
+      Assets.svgTesbeh,
       width: width ?? 30.w,
       height: height ?? 30.h,
     );
@@ -147,15 +147,15 @@ class SvgPicturesMethods {
 
   static Widget qublaDirectonIcon({double? height, double? width}) {
     return SvgPicture.asset(
-      Assets.svgQublaDirecton,
+      Assets.svgCompass,
       width: width ?? 30.w,
       height: height ?? 30.h,
     );
   }
 
   static Widget allahNamesIcon({double? height, double? width}) {
-    return Image.asset(
-      Assets.svgAllahNamesPng,
+    return SvgPicture.asset(
+      Assets.svgAllah,
       width: width ?? 30.w,
       height: height ?? 30.h,
     );

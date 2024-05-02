@@ -5,7 +5,6 @@ import 'package:islamic_app/controllers/general_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/views/allah_names/allah_names_view.dart';
-import 'package:islamic_app/views/bookmark/bookmark_view.dart';
 import 'package:islamic_app/views/home/widgets/section_widget.dart';
 import 'package:islamic_app/views/quran/quran_view.dart';
 import 'package:islamic_app/views/quran/widgets/juzes_sliverlist.dart';
@@ -38,6 +37,9 @@ const String kSettingSalatAlotrKey = "salatAlotr";
 
 class Constant {
   Constant._();
+
+  static const String appUrl =
+      "https://play.google.com/store/apps/details?id=com.NourAlmomen.islamicapp";
 
   static const String currentReaderKey = "currentReader";
 
@@ -95,7 +97,7 @@ class Constant {
     554,
     555,
     557,
-    583,
+    // 583,
     584
   ];
 
@@ -133,8 +135,8 @@ class Constant {
     SectionWidget(
       title: S.current.allahNames,
       svgIcon: SvgPicturesMethods.allahNamesIcon(
-        height: 75.h,
-        width: 75.w,
+        height: 50.h,
+        width: 50.w,
       ),
       onTap: () {
         Get.to(
@@ -147,8 +149,8 @@ class Constant {
     SectionWidget(
       title: S.current.tasbeh,
       svgIcon: SvgPicturesMethods.tasbeehIcon(
-        height: 75.h,
-        width: 75.w,
+        height: 50.h,
+        width: 50.w,
       ),
       onTap: () {
         Get.to(
@@ -160,7 +162,10 @@ class Constant {
     ),
     SectionWidget(
       title: S.current.islamicOccasions,
-      svgIcon: SvgPicturesMethods.occasionsIcon(),
+      svgIcon: SvgPicturesMethods.occasionsIcon(
+        height: 50.h,
+        width: 50.w,
+      ),
       onTap: () {
         Get.to(
           () => const YearOccasionView(),
@@ -171,7 +176,10 @@ class Constant {
     ),
     SectionWidget(
       title: S.current.radio,
-      svgIcon: SvgPicturesMethods.radioIcon(),
+      svgIcon: SvgPicturesMethods.radioIcon(
+        height: 50.h,
+        width: 50.w,
+      ),
       onTap: () {
         Get.to(
           () => const QuranRadioView(),

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -128,7 +126,7 @@ extension ContextMenuExtension on BuildContext {
                                 return;
                               }
                               await audioController
-                                  .playAyah(ayaOfSurahModel.uniqueIdOfAya - 1);
+                                  .playAyah(ayaOfSurahModel.uniqueIdOfAya);
                               quranController.isClickedOnPage.value = true;
                               cancel();
                               // .playRadio();

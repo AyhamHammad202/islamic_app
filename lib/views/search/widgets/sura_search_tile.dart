@@ -55,12 +55,12 @@ class SuraSearchTile extends StatelessWidget {
           children: [
             Text(
               "${S.of(context).sorah}: ${surahModel.numberOfSurah.toArabic()}",
-              style: TextThemes.searchInfoTextStyle,
+              style: TextThemes.searchInfoTextStyle(context),
             ),
             const Gap(8),
             Text(
               surahModel.nameOfSurah,
-              style: TextThemes.searchSuraTextStyle,
+              style: TextThemes.searchSuraTextStyle(context),
             ),
           ],
         ),

@@ -14,7 +14,10 @@ class ThemeController extends GetxController {
 
   _saveThemToStorage(bool isDarkMode) => _storage.write(_key, isDarkMode);
 
-  bool loadThemFromStorage() => _storage.read(_key) ?? false;
+  bool loadThemFromStorage() {
+    isDarkMode.value = _storage.read(_key) ?? false;
+    return isDarkMode.value;
+  }
 
   ThemeMode get theme =>
       loadThemFromStorage() ? ThemeMode.dark : ThemeMode.light;

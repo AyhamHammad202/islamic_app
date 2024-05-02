@@ -28,7 +28,7 @@ class TafserRichTextWidget extends StatelessWidget {
         textSpans.add(
           TextSpan(
             text: leadingText,
-            style: TextThemes.tafserTextStyle.copyWith(
+            style: TextThemes.tafserTextStyle(context).copyWith(
               fontSize: fontSize.sp,
             ),
           ),
@@ -39,7 +39,7 @@ class TafserRichTextWidget extends StatelessWidget {
       textSpans.add(
         TextSpan(
           text: strippedWord,
-          style: TextThemes.ayaInTafserTextStyle.copyWith(
+          style: TextThemes.ayaInTafserTextStyle(context).copyWith(
             fontSize: fontSize.sp,
           ),
         ),
@@ -62,7 +62,7 @@ class TafserRichTextWidget extends StatelessWidget {
         style: TextStyle(
           fontFamily:
               kFontNotoNaskhArabic, // Replace with another font if needed
-          color: Colors.black,
+          // color: Colors.black,
           fontSize: fontSize.sp,
         ),
         children: textSpans,

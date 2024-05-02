@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 
@@ -17,6 +18,10 @@ class Bassmalah extends StatelessWidget {
           ? "assets/images/design/besmAllah2.svg"
           : "assets/images/design/besmAllah.svg",
       width: MediaQuery.of(context).size.width / 2,
+      colorFilter: ColorFilter.mode(
+        Get.isDarkMode ? Colors.white : Colors.black,
+        BlendMode.srcIn,
+      ),
     );
   }
 }

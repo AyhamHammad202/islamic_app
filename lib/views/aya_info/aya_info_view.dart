@@ -45,7 +45,7 @@ class AyaInfoView extends StatelessWidget {
                   children: [
                     Text(
                       "${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}  ${S.of(context).aya} ${aya.numberOfAyaInSurah}",
-                      style: TextThemes.ayaInfoTextStyle,
+                      style: TextThemes.ayaInfoTextStyle(context),
                     ),
                     Gap(16.w),
                     Row(
@@ -82,7 +82,7 @@ class AyaInfoView extends StatelessWidget {
                 Gap(16.h),
                 Text(
                   aya.text.replaceAll("\n", ""),
-                  style: TextThemes.ayaTxtTextStyle.copyWith(
+                  style: TextThemes.ayaTxtTextStyle(context).copyWith(
                     fontFamily: "page${aya.page}",
                   ),
                   textAlign: TextAlign.center,

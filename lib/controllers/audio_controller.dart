@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/models/surah_model.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -45,6 +45,18 @@ class AudioController extends GetxController {
     super.onInit();
   }
 
+  AyaOfSurahModel get currentAya =>
+      _quranController.allAyas[ayaUniqeId.value - 1];
+  SurahModel get currentSura => _quranController
+      .surahs[_quranController.getSurahNumberByAya(currentAya) - 1];
+  String get currentReaderUrl =>
+      Constant.readersLinks[_settingsService.currentReaderIndex.value];
+  String get currentReader =>
+      Constant.readers[_settingsService.currentReaderIndex.value];
+
+  String get ayaPath =>
+      "/reader/$currentReaderUrl/${currentSura.englishNameOfSurah}/${currentAya.numberOfAyaInSurah}";
+
   Future peauseAyaFile() async {
     if (isPlaying.value || isLoading.value) {
       await audioPlayer.pause();
@@ -75,6 +87,8 @@ class AudioController extends GetxController {
       if (playerState.processingState == ProcessingState.completed) {
         isPlaying.value = false;
         _quranController.selectedAyahIndexes.clear();
+        currentDuration.value = const Duration(seconds: 0);
+        // duration.value = Duration.zero;
         ayaUniqeId.value = ayaUniqeId.value + 1;
         await playAyah(ayaUniqeId.value);
         // await playNext(ayaOfSurahModel);
@@ -87,15 +101,14 @@ class AudioController extends GetxController {
     log(ayaUniqeId.value.toString());
     if (ayaUniqeId.value >= 0 && ayaUniqeId.value < 6236) {
       var appPath = await getApplicationDocumentsDirectory();
-      var fullPath =
-          "${appPath.path}/reader/${Constant.readersNamesDownload[_settingsService.currentReaderIndex.value]}/${_quranController.surahs[_quranController.getSurahNumberByAya(_quranController.allAyas[ayaUniqeId.value]) - 1].englishNameOfSurah}/${_quranController.allAyas[ayaUniqeId.value].numberOfAyaInSurah}";
+      var fullPath = "${appPath.path}$ayaPath";
       File file = File(fullPath);
       if (await file.exists()) {
         log("aya already downloaded and it will play");
         await playAyaFile(file);
       } else {
         log("aya doesnt been downloaded and it will download");
-        await downloadAya(file, _quranController.allAyas[ayaUniqeId.value]);
+        await downloadAya(file);
         await playAyaFile(file);
       }
     }
@@ -104,12 +117,13 @@ class AudioController extends GetxController {
   Future playAyaFile(File ayaFile) async {
     try {
       _quranController.clearSelection();
-      _quranController.selectedAyahIndexes.add(ayaUniqeId.value + 1);
+      _quranController.selectedAyahIndexes.add(currentAya.uniqueIdOfAya);
       await audioPlayer.setAudioSource(
         AudioSource.file(
           ayaFile.path,
         ),
       );
+
       if ((_quranController.allAyas[ayaUniqeId.value].page !=
           _quranController.allAyas[ayaUniqeId.value - 1].page)) {
         _quranController.pageController.animateToPage(
@@ -124,7 +138,7 @@ class AudioController extends GetxController {
     }
   }
 
-  Future downloadAya(File file, AyaOfSurahModel aya) async {
+  Future downloadAya(File file) async {
     try {
       // var appPath = await getApplicationDocumentsDirectory();
       // var fullPath =
@@ -134,7 +148,7 @@ class AudioController extends GetxController {
       if (!await file.exists()) {
         // log("Download aya ${aya.numberOfAyaInSurah}");
         var donwloadUrl =
-            "https://everyayah.com/data/${Constant.readersLinks[_settingsService.currentReaderIndex.value]}/${_quranController.getSurahNumberByAya(aya).toString().padLeft(3, "0")}${aya.numberOfAyaInSurah.toString().padLeft(3, "0")}.mp3";
+            "https://everyayah.com/data/$currentReaderUrl/${currentSura.numberOfSurah.toString().padLeft(3, "0")}${currentAya.numberOfAyaInSurah.toString().padLeft(3, "0")}.mp3";
 
         await dio.download(
           donwloadUrl,

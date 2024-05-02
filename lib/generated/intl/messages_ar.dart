@@ -65,6 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "أبحث بأستخدام أسم السورة أو الآية"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "shareApp": MessageLookupByLibrary.simpleMessage("شارك التطبيق"),
+        "shareAppText": MessageLookupByLibrary.simpleMessage(
+            "أردت أن أشارككم تطبيقا وجدته مفيدا جدا. إنه تطبيق للقرآن يوفر تجربة شاملة لاستكشاف القرآن الكريم. هنا هو عنوان URL:"),
         "sorah": MessageLookupByLibrary.simpleMessage("السورة"),
         "sorahs": MessageLookupByLibrary.simpleMessage("السور"),
         "suraInfo": MessageLookupByLibrary.simpleMessage("معلومات عن سورة"),

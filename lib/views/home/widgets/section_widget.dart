@@ -21,7 +21,7 @@ class SectionWidget extends StatelessWidget {
             Gap(8.h),
             Text(
               title,
-              style: TextThemes.sectionsTextStyle,
+              style: TextThemes.sectionsTextStyle(context),
               textAlign: TextAlign.center,
             ),
             const Spacer(),

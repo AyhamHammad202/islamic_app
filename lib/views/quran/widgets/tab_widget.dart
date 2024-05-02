@@ -27,10 +27,10 @@ class TabWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(isSelected ? 8.r : 4.r)),
         child: Text(
           title,
-          style: TextThemes.tabTextStyle.copyWith(
+          style: TextThemes.tabTextStyle(context).copyWith(
             color: isSelected
-                ? TextThemes.tabTextStyle.color
-                : TextThemes.tabTextStyle.color!.withOpacity(0.3),
+                ? TextThemes.tabTextStyle(context).color
+                : TextThemes.tabTextStyle(context).color!.withOpacity(0.3),
           ),
         ),
       ),

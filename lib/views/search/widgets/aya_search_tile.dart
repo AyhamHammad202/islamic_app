@@ -51,12 +51,12 @@ class AyaSearchTile extends StatelessWidget {
             Gap(8.h),
             Text(
               aya.searchTextOfAya,
-              style: TextThemes.searchAyaTextStyle,
+              style: TextThemes.searchAyaTextStyle(context),
             ),
             Gap(8.h),
             Text(
               "${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}, ${S.current.aya}:${aya.numberOfAyaInSurah}",
-              style: TextThemes.searchInfoTextStyle,
+              style: TextThemes.searchInfoTextStyle(context),
             ),
           ],
         ),

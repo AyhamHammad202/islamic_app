@@ -34,7 +34,7 @@ class SuraTile extends StatelessWidget {
                 SvgPicturesMethods.suraNumBorderIcon(),
                 Text(
                   quranController.surahs[index].numberOfSurah.toArabic(),
-                  style: TextThemes.suraNumTextStyle,
+                  style: TextThemes.suraNumTextStyle(context),
                 ),
               ],
             ),
@@ -52,7 +52,7 @@ class SuraTile extends StatelessWidget {
                 Gap(4.h),
                 Text(
                   "${quranController.surahs[index].ayas.length} ${S.of(context).ayas}",
-                  style: TextThemes.suraInfoTextStyle,
+                  style: TextThemes.suraInfoTextStyle(context),
                 ),
               ],
             ),
@@ -62,7 +62,7 @@ class SuraTile extends StatelessWidget {
                   ? quranController.surahs[index].revelationType
                       .revelationTypeAr()
                   : quranController.surahs[index].revelationType,
-              style: TextThemes.suraInfoTextStyle,
+              style: TextThemes.suraInfoTextStyle(context),
             ),
             SizedBox(width: 8.w),
             InkWell(

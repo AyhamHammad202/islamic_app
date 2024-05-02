@@ -58,14 +58,14 @@ class OccasionWidget extends StatelessWidget {
                     children: [
                       Text(
                         occasionTitle,
-                        style: TextThemes.occasionTextStyle,
+                        style: TextThemes.occasionTextStyle(context),
                       ),
                       FittedBox(
                         child: Text(
                           Localizations.localeOf(context).languageCode == "ar"
                               ? "${year.toArabic()}/${month.toArabic()}/${day.toArabic()}"
                               : "$year/$month/$day",
-                          style: TextThemes.occasionDateTextStyle,
+                          style: TextThemes.occasionDateTextStyle(context),
                         ),
                       ),
                     ],
@@ -76,7 +76,7 @@ class OccasionWidget extends StatelessWidget {
                         ? S.of(context).hasCome
                         : "${Localizations.localeOf(context).languageCode == "ar" ? leftDays.toArabic() : leftDays}\n${leftDays > 2 ? S.of(context).days : S.of(context).day}",
                     textAlign: TextAlign.center,
-                    style: TextThemes.occasionStatueTextStyle,
+                    style: TextThemes.occasionStatueTextStyle(context),
                   )
                 ],
               ),

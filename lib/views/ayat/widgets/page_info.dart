@@ -25,17 +25,17 @@ class PageInfo extends StatelessWidget {
       children: [
         Text(
           "${S.of(context).juz} ${quranController.pages[page].last.juz}",
-          style:TextThemes.pageInfoTextStyle,
+          style:TextThemes.pageInfoTextStyle(context),
         ),
         Gap(16.w),
         Text(
           (page + 1).toString(),
-          style: TextThemes.pageNumTextStyle
+          style: TextThemes.pageNumTextStyle(context)
         ),
         Gap(16.w),
         Text(
           "${S.of(context).hizb} ${(quranController.pages[page].last.hizbQuarter / 4).ceil()}",
-          style: TextThemes.pageInfoTextStyle,
+          style: TextThemes.pageInfoTextStyle(context),
         ),
       ],
     );

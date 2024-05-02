@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -30,8 +32,9 @@ class LastReadAya extends StatelessWidget {
     ); // Format the current date
     return InkWell(
       onTap: () {
-        audioController.ayaUniqeId.value =
-            lastReadService.lastAyaUniqeNumRead.value;
+        audioController.ayaUniqeId.value = quranController
+            .pages[lastReadService.lastPageRead.value - 1].first.uniqueIdOfAya;
+        log("hellllllllllllllllllllllllllllllllll ${audioController.ayaUniqeId.value}");
         quranController.globalPage.value =
             lastReadService.lastPageRead.value - 1;
         quranController
@@ -64,7 +67,7 @@ class LastReadAya extends StatelessWidget {
                     SizedBox(width: 16.w),
                     Text(
                       S.current.lastRead,
-                      style: TextThemes.lastReadTextStyle,
+                      style: TextThemes.lastReadTextStyle(context),
                     )
                   ],
                 ),
@@ -79,12 +82,12 @@ class LastReadAya extends StatelessWidget {
                       quranController
                           .surahs[lastReadService.lastSuraNumRead.value - 1]
                           .nameOfSurah,
-                      style: TextThemes.lastSuraNameTextStyle,
+                      style: TextThemes.lastSuraNameTextStyle(context),
                     ),
                     SizedBox(width: MediaQuery.of(context).size.width * .28),
                     Text(
                       formattedDate,
-                      style: TextThemes.lastInfoTextStyle,
+                      style: TextThemes.lastInfoTextStyle(context),
                     ),
                   ],
                 ),
@@ -96,12 +99,12 @@ class LastReadAya extends StatelessWidget {
                   children: [
                     Text(
                       "${S.of(context).lastReadVarseNum} ${lastReadService.lastAyaNumRead.value}",
-                      style: TextThemes.lastInfoTextStyle,
+                      style: TextThemes.lastInfoTextStyle(context),
                     ),
                     SizedBox(width: MediaQuery.of(context).size.width * .34),
                     Text(
                       "${S.of(context).page}: ${lastReadService.lastPageRead.value}",
-                      style: TextThemes.lastInfoTextStyle,
+                      style: TextThemes.lastInfoTextStyle(context),
                     ),
                   ],
                 ),

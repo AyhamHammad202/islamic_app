@@ -20,9 +20,10 @@ class SearchTextField extends StatelessWidget {
           enabled: isEnabled,
           onChanged: onChanged,
           controller: generalController.searchController,
+          style: TextThemes.searchTextTextStyle(context),
           decoration: InputDecoration(
             hintText: S.of(context).searchHint,
-            hintStyle: TextThemes.searchInfoTextStyle,
+            hintStyle: TextThemes.searchInfoTextStyle(context),
             suffixIcon: IconButton(
               icon: generalController.searchText.value.isNotEmpty
                   ? const Icon(
