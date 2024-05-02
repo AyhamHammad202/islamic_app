@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
@@ -25,6 +26,7 @@ class AyaInfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final QuranController quranController = Get.find();
+    final BookMarkController bookMarkController = Get.find();
     final SettingsService settingsService = Get.find();
     return Scaffold(
       appBar: AppBar(),
@@ -73,6 +75,10 @@ class AyaInfoView extends StatelessWidget {
                         Gap(8.w),
                         InkWell(
                           child: SvgPicturesMethods.bookmarkIcon(),
+                          onTap: () async {
+                            await bookMarkController
+                                .addAyaBookMark(aya.uniqueIdOfAya);
+                          },
                         ),
                         Gap(8.w),
                       ],
