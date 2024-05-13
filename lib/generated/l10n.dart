@@ -470,6 +470,26 @@ class S {
     );
   }
 
+  /// `Mahmoud El-Hosary Muallim`
+  String get HusaryMuallim {
+    return Intl.message(
+      'Mahmoud El-Hosary Muallim',
+      name: 'HusaryMuallim',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ali Jaber`
+  String get AliJaber {
+    return Intl.message(
+      'Ali Jaber',
+      name: 'AliJaber',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Maher Al-Mueaqly`
   String get alMueaqly {
     return Intl.message(
@@ -505,6 +525,66 @@ class S {
     return Intl.message(
       'Abu Bakr Ash-Shaatree',
       name: 'abuBakrAshShaatree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nasser Alqatami`
+  String get Nasser_Alqatami {
+    return Intl.message(
+      'Nasser Alqatami',
+      name: 'Nasser_Alqatami',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mishari Alafasy`
+  String get Alafasy {
+    return Intl.message(
+      'Mishari Alafasy',
+      name: 'Alafasy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ahmed Al-Ajamy`
+  String get ahmedAjamy {
+    return Intl.message(
+      'Ahmed Al-Ajamy',
+      name: 'ahmedAjamy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ahmed Ghamadi`
+  String get ahmedGhamadi {
+    return Intl.message(
+      'Ahmed Ghamadi',
+      name: 'ahmedGhamadi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Various Recitations`
+  String get VariousRecitations {
+    return Intl.message(
+      'Various Recitations',
+      name: 'VariousRecitations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mohammed Al-Luhaidan Radio`
+  String get MohammedLuhaidanRadio {
+    return Intl.message(
+      'Mohammed Al-Luhaidan Radio',
+      name: 'MohammedLuhaidanRadio',
       desc: '',
       args: [],
     );

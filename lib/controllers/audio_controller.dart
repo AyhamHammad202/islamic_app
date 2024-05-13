@@ -27,6 +27,7 @@ class AudioController extends GetxController {
   Rx<Duration> duration = Duration.zero.obs;
   Rx<Duration> currentDuration = Duration.zero.obs;
   RxInt ayaUniqeId = 0.obs;
+  RxInt currentRadioChannelIndex = 0.obs;
   // RxInt currentReaderIndex = 0.obs;
   Dio dio = Dio();
 
@@ -188,8 +189,7 @@ class AudioController extends GetxController {
       await radioAudioPlayer.setAudioSource(
         AudioSource.uri(
           Uri.parse(
-            // "https://everyayah.com/data/MaherAlMuaiqly128kbps/${_quranController.getSurahNumberByAya(_quranController.allAyas[ayaUniqeId.value - 1]).toString().padLeft(3, "0")}${_quranController.allAyas[ayaUniqeId.value - 1].numberOfAyaInSurah.toString().padLeft(3, "0")}.mp3",
-            "https://Qurango.net/radio/tarateel",
+            Constant.radioLinks[currentRadioChannelIndex.value],
           ),
         ),
       );
@@ -201,3 +201,4 @@ class AudioController extends GetxController {
     }
   }
 }
+

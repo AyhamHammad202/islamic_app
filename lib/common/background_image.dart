@@ -8,6 +8,7 @@ class BackgroundImage extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
+    // ThemeController themeController = Get.find();
     return Scaffold(
       body: Stack(
         children: [
@@ -16,6 +17,7 @@ class BackgroundImage extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
+            // color: themeController.isDarkMode.value ? Colors.amber : null,
           ),
           Container(
             height: MediaQuery.of(context).size.height,

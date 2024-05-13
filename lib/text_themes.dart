@@ -293,4 +293,12 @@ class TextThemes {
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,
       );
+
+  //Radio Screen
+  static TextStyle radioChannelTextStyle(BuildContext context) =>
+      GoogleFonts.tajawal(
+        color: const Color(0xff043336),
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w500,
+      );
 }
