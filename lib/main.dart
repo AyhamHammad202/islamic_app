@@ -52,6 +52,17 @@ void main() async {
       enabled: false,
     ),
   );
+  var audioHandler = await AudioService.init(
+    builder: () => MyAudioHandler(),
+    config: const AudioServiceConfig(
+      // Configure your audio service
+      androidNotificationChannelId: 'com.mycompany.myapp.audio',
+      androidNotificationChannelName: 'Audio Service Demo',
+      androidNotificationOngoing: true,
+      androidStopForegroundOnPause: true,
+    ),
+  );
+  audioHandler.playMediaItem(const MediaItem(id: "1", title: "eeee"));
 }
 
 // log('My Prayer Times');

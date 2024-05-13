@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
+import 'package:audio_service/audio_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -120,9 +121,8 @@ class AudioController extends GetxController {
       _quranController.clearSelection();
       _quranController.selectedAyahIndexes.add(currentAya.uniqueIdOfAya);
       await audioPlayer.setAudioSource(
-        AudioSource.file(
-          ayaFile.path,
-        ),
+        AudioSource.file(ayaFile.path,
+            tag: const MediaItem(id: "1", title: "hello")),
       );
 
       if ((_quranController.allAyas[ayaUniqeId.value].page !=
@@ -188,10 +188,10 @@ class AudioController extends GetxController {
       log("SET URL");
       await radioAudioPlayer.setAudioSource(
         AudioSource.uri(
-          Uri.parse(
-            Constant.radioLinks[currentRadioChannelIndex.value],
-          ),
-        ),
+            Uri.parse(
+              Constant.radioLinks[currentRadioChannelIndex.value],
+            ),
+            tag: const MediaItem(id: "2", title: "EEEEEE")),
       );
       log("SET URL DONE");
       await radioAudioPlayer.play();
@@ -202,3 +202,29 @@ class AudioController extends GetxController {
   }
 }
 
+class MyAudioHandler extends BaseAudioHandler {
+  final _player = AudioPlayer();
+
+  MyAudioHandler() {
+    _player.playbackEventStream.map(_transformEvent).pipe(playbackState);
+  }
+
+  PlaybackState _transformEvent(PlaybackEvent event) {
+    return PlaybackState(
+      controls: [
+        MediaControl.pause,
+        MediaControl.stop,
+        MediaControl.skipToNext,
+        MediaControl.skipToPrevious,
+      ],
+      systemActions: {
+        MediaAction.seek,
+      },
+      processingState: AudioProcessingState.ready,
+      playing: _player.playing,
+      updatePosition: event.updatePosition,
+      speed: _player.speed,
+      bufferedPosition: event.bufferedPosition,
+    );
+  }
+}
