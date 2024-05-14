@@ -4,12 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/common/share_model_sheet.dart';
 import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/views/aya_info/aya_info_view.dart';
+import 'package:share_plus/share_plus.dart';
 
 import 'models/aya_of_surah_model.dart';
 
@@ -71,21 +73,6 @@ extension ContextMenuExtension on BuildContext {
                             transition: Transition.downToUp,
                             duration: const Duration(milliseconds: 300),
                           );
-                          // showModalBottomSheet(
-                          //   context: this,
-                          //   builder: (context) {
-                          //     return TafserBottomSheet(
-                          //       // tafser: quranController
-                          //       //     .tafserOfPage[indexOfAyaInPage],
-                          //       tafser: quranController.mapOfTafser[
-                          //           ayaOfSurahModel.uniqueIdOfAya]!,
-                          //       ayaOfSurahModel: ayaOfSurahModel,
-                          //       page: pageIndex,
-                          //       numberOfSura: surahNum,
-                          //       numberOfAyaInPage: indexOfAyaInPage,
-                          //     );
-                          //   },
-                          // );
                           quranController.clearSelection();
                           cancel();
                         },
@@ -156,7 +143,7 @@ extension ContextMenuExtension on BuildContext {
                         child: Semantics(
                           button: true,
                           enabled: true,
-                          label: 'Share Ayah',
+                          label: 'BookMark Ayah',
                           child: bookMarkController.bookmarkedAyasID
                                   .contains(ayaOfSurahModel.uniqueIdOfAya)
                               ? SvgPicturesMethods.bookmarkedIcon(height: 25)
@@ -168,6 +155,42 @@ extension ContextMenuExtension on BuildContext {
                           // show(context: this, message: تم النسخ");
                           quranController.clearSelection();
                           cancel();
+                        },
+                      ),
+                      const Gap(6),
+                      const SizedBox(height: 18, child: VerticalDivider()),
+                      const Gap(6),
+                      GestureDetector(
+                        child: Semantics(
+                          button: true,
+                          enabled: true,
+                          label: 'Share Ayah',
+                          child: SvgPicturesMethods.shareIcon(height: 25.0),
+                        ),
+                        onTap: () async {
+                          showModalBottomSheet(
+                            context: this,
+                            builder: (context) {
+                              return ShareModelSheet(
+                                aya: ayaOfSurahModel,
+                              );
+                            },
+                          );
+                          // audioController.ayaUniqeId.value =
+                          //     ayaOfSurahModel.uniqueIdOfAya;
+                          // final file = File(
+                          //   audioController.ayaPath,
+                          // );
+                          // if (!await file.exists()) {
+                          //   await audioController.downloadAya(file);
+
+                          //   await Share.shareXFiles([XFile(file.path)],
+                          //       text: "HHHHHHH");
+                          // }
+                          // await Share.shareXFiles([XFile(file.path)],
+                          //     text: "HHHHHHH");
+                          // quranController.clearSelection();
+                          // cancel();
                         },
                       ),
                     ],

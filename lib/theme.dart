@@ -50,7 +50,7 @@ class Themes {
       activeTrackColor: Color(0xff043336),
       inactiveTrackColor: Color.fromARGB(255, 160, 157, 157),
     ),
-    
+
     highlightColor: const Color(0xffFFD08A).withOpacity(.2),
     colorScheme: const ColorScheme(
       brightness: Brightness.light,

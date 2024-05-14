@@ -30,27 +30,29 @@ class LastReadAya extends StatelessWidget {
     String formattedDate = formatter.format(
       DateTime.tryParse(lastReadService.lastDateRead.value) ?? DateTime.now(),
     ); // Format the current date
-    return InkWell(
-      onTap: () {
-        audioController.ayaUniqeId.value = quranController
-            .pages[lastReadService.lastPageRead.value - 1].first.uniqueIdOfAya;
-        log("hellllllllllllllllllllllllllllllllll ${audioController.ayaUniqeId.value}");
-        quranController.globalPage.value =
-            lastReadService.lastPageRead.value - 1;
-        quranController
-            .getCurrentPageAyas(lastReadService.lastPageRead.value - 1);
-        Get.to(
-          AyatView(
-            surahModel: quranController
-                .surahs[lastReadService.lastSuraNumRead.value - 1],
-          ),
-          transition: Transition.upToDown,
-          duration: const Duration(milliseconds: 300),
-        );
-      },
-      child: GetX<LastReadService>(builder: (service) {
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 0.w),
+    return GetX<LastReadService>(builder: (service) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 0.w),
+        child: InkWell(
+          highlightColor: Colors.transparent,
+          onTap: () {
+            audioController.ayaUniqeId.value = quranController
+                .pages[lastReadService.lastPageRead.value - 1]
+                .first
+                .uniqueIdOfAya;
+            quranController.globalPage.value =
+                lastReadService.lastPageRead.value - 1;
+            quranController
+                .getCurrentPageAyas(lastReadService.lastPageRead.value - 1);
+            Get.to(
+              AyatView(
+                surahModel: quranController
+                    .surahs[lastReadService.lastSuraNumRead.value - 1],
+              ),
+              transition: Transition.upToDown,
+              duration: const Duration(milliseconds: 300),
+            );
+          },
           child: Stack(
             // alignment: Alignment.center,
             children: [
@@ -111,8 +113,8 @@ class LastReadAya extends StatelessWidget {
               )
             ],
           ),
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 }

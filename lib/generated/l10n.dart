@@ -560,10 +560,10 @@ class S {
     );
   }
 
-  /// `Ahmed Ghamadi`
+  /// `Saad Ghamadi`
   String get ahmedGhamadi {
     return Intl.message(
-      'Ahmed Ghamadi',
+      'Saad Ghamadi',
       name: 'ahmedGhamadi',
       desc: '',
       args: [],

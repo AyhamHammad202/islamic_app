@@ -17,24 +17,23 @@ import 'package:islamic_app/services/settings_service.dart';
 class AudioController extends GetxController {
   final SettingsService _settingsService = Get.find();
   final LastReadService _lastReadService = Get.find();
+  late final Directory appPath;
   AudioPlayer audioPlayer = AudioPlayer();
-  AudioPlayer radioAudioPlayer = AudioPlayer();
   final QuranController _quranController = Get.find<QuranController>();
-  RxBool radioIsPlaying = false.obs;
-  RxBool radioIsLoading = false.obs;
   RxBool isPlaying = false.obs;
   RxBool isLoading = false.obs;
+  RxBool isDownloading = false.obs;
+  RxDouble downloadingProgress = 0.0.obs;
   Rx<Duration> duration = Duration.zero.obs;
   Rx<Duration> currentDuration = Duration.zero.obs;
-  RxInt ayaUniqeId = 0.obs;
-  RxInt currentRadioChannelIndex = 0.obs;
+  RxInt ayaUniqeId = 1.obs;
+  File? currentAyaPath;
   // RxInt currentReaderIndex = 0.obs;
   Dio dio = Dio();
 
   @override
   void onClose() async {
     await audioPlayer.pause();
-    await radioAudioPlayer.pause();
     _quranController.selectedAyahIndexes.clear();
     super.onClose();
   }
@@ -42,6 +41,7 @@ class AudioController extends GetxController {
   @override
   void onInit() async {
     ayaUniqeId.value = _lastReadService.lastAyaUniqeNumRead.value;
+    appPath = await getApplicationDocumentsDirectory();
     await initAudioPlayerStateStream();
     super.onInit();
   }
@@ -56,7 +56,14 @@ class AudioController extends GetxController {
       Constant.readers[_settingsService.currentReaderIndex.value];
 
   String get ayaPath =>
-      "/reader/$currentReaderUrl/${currentSura.englishNameOfSurah}/${currentAya.numberOfAyaInSurah}";
+      "${appPath.path}/reader/$currentReaderUrl/${currentSura.englishNameOfSurah}/${currentAya.numberOfAyaInSurah}.mp3";
+ 
+  bool get isInDifferentPage =>
+      (currentAya.page !=
+          _quranController.allAyas[ayaUniqeId.value - 2].page) ||
+      (currentAya.page != _quranController.allAyas[ayaUniqeId.value].page);
+
+  // File get ayaFile=>
 
   Future peauseAyaFile() async {
     if (isPlaying.value || isLoading.value) {
@@ -84,16 +91,20 @@ class AudioController extends GetxController {
       if (playerState.processingState == ProcessingState.loading) {
         isLoading.value = true;
         isPlaying.value = false;
+        // currentDuration.value = Duration.zero;
       }
       if (playerState.processingState == ProcessingState.completed) {
         isPlaying.value = false;
         _quranController.selectedAyahIndexes.clear();
-        currentDuration.value = const Duration(seconds: 0);
+        // currentDuration.value = Duration.zero;
         // duration.value = Duration.zero;
         ayaUniqeId.value = ayaUniqeId.value + 1;
         await playAyah(ayaUniqeId.value);
         // await playNext(ayaOfSurahModel);
       }
+    });
+    audioPlayer.positionStream.listen((position) {
+      currentDuration.value = position;
     });
   }
 
@@ -101,9 +112,9 @@ class AudioController extends GetxController {
     ayaUniqeId.value = ayaID;
     log(ayaUniqeId.value.toString());
     if (ayaUniqeId.value >= 0 && ayaUniqeId.value < 6236) {
-      var appPath = await getApplicationDocumentsDirectory();
-      var fullPath = "${appPath.path}$ayaPath";
-      File file = File(fullPath);
+      // var appPath = await getApplicationDocumentsDirectory();
+      // var fullPath = "${appPath.path}$ayaPath";
+      File file = File(ayaPath);
       if (await file.exists()) {
         log("aya already downloaded and it will play");
         await playAyaFile(file);
@@ -124,15 +135,15 @@ class AudioController extends GetxController {
           ayaFile.path,
         ),
       );
-
-      if ((_quranController.allAyas[ayaUniqeId.value].page !=
-          _quranController.allAyas[ayaUniqeId.value - 1].page)) {
+      if (isInDifferentPage) {
         _quranController.pageController.animateToPage(
-          _quranController.allAyas[ayaUniqeId.value - 1].page,
+          currentAya.page - 1,
           duration: const Duration(milliseconds: 200),
           curve: Curves.bounceIn,
         );
       }
+      log('Audio player interrupted: $ayaFile');
+      await audioPlayer.seek(currentDuration.value);
       await audioPlayer.play();
     } on PlayerInterruptedException catch (e) {
       log('Audio player interrupted: $e');
@@ -141,21 +152,22 @@ class AudioController extends GetxController {
 
   Future downloadAya(File file) async {
     try {
-      // var appPath = await getApplicationDocumentsDirectory();
-      // var fullPath =
-      //     "${appPath.path}/reader${Constant.readers[_settingsService.currentReaderIndex.value]}/${_quranController.surahs[_quranController.getSurahNumberByAya(aya) - 1].englishNameOfSurah}/${aya.numberOfAyaInSurah}";
-      // File file = File(fullPath);
       log(file.path);
       if (!await file.exists()) {
-        // log("Download aya ${aya.numberOfAyaInSurah}");
+        isDownloading.value = true;
         var donwloadUrl =
             "https://everyayah.com/data/$currentReaderUrl/${currentSura.numberOfSurah.toString().padLeft(3, "0")}${currentAya.numberOfAyaInSurah.toString().padLeft(3, "0")}.mp3";
 
         await dio.download(
           donwloadUrl,
           file.path,
+          onReceiveProgress: (received, total) {
+            if (total <= 0) return;
+            downloadingProgress.value = (received / total * 100);
+          },
         );
-        // log("Downloaded aya ${aya.numberOfAyaInSurah}");
+        isDownloading.value = false;
+        downloadingProgress.value = 0.0;
       } else {
         log("Aya Already downloaded");
       }
@@ -163,42 +175,4 @@ class AudioController extends GetxController {
       return e;
     }
   }
-
-  Future pauseRadio() async {
-    await radioAudioPlayer.pause();
-    log("STOOOOOOOOOOOP");
-    radioIsPlaying.value = false;
-    radioIsLoading.value = false;
-    return;
-  }
-
-  Future playRadio() async {
-    log("TRY TO PLAY");
-    try {
-      radioAudioPlayer.playerStateStream.listen((playerState) async {
-        if (playerState.playing) {
-          radioIsPlaying.value = true;
-          radioIsLoading.value = false;
-        }
-        if (playerState.processingState == ProcessingState.loading) {
-          radioIsLoading.value = true;
-          radioIsPlaying.value = false;
-        }
-      });
-      log("SET URL");
-      await radioAudioPlayer.setAudioSource(
-        AudioSource.uri(
-          Uri.parse(
-            Constant.radioLinks[currentRadioChannelIndex.value],
-          ),
-        ),
-      );
-      log("SET URL DONE");
-      await radioAudioPlayer.play();
-      log("PLAY");
-    } on PlayerInterruptedException catch (e) {
-      log('Audio player interrupted: $e');
-    }
-  }
 }
-

@@ -1,3 +1,4 @@
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -46,36 +47,50 @@ class AudioWidget extends StatelessWidget {
                 )
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  audioController.currentDuration.value.inSeconds.toString(),
-                  style: TextThemes.ayaTimeTextStyle(context),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * .7,
+              child: ProgressBar(
+                progress: audioController.currentDuration.value,
+                total: audioController.duration.value,
+                timeLabelLocation: TimeLabelLocation.below,
+                timeLabelTextStyle: const TextStyle(
+                  color: Colors.white,
                 ),
-                Slider(
-                  value: audioController.isPlaying.value
-                      ? audioController.currentDuration.value.inSeconds
-                          .toDouble()
-                      : 0.0,
-                  onChanged: (value) {
-                    audioController.audioPlayer.seek(
-                      Duration(
-                        seconds: value.toInt(),
-                      ),
-                    );
-                  },
-                  max:
-                      audioController.duration.value.inSeconds.toDouble() == 0.0
-                          ? 1000.0
-                          : audioController.duration.value.inSeconds.toDouble(),
-                ),
-                Text(
-                  audioController.duration.value.inSeconds.toString(),
-                  style: TextThemes.ayaTimeTextStyle(context),
-                ),
-              ],
+                onSeek: (duration) {
+                  audioController.audioPlayer.seek(duration);
+                },
+              ),
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Text(
+            //       audioController.currentDuration.value.inSeconds.toString(),
+            //       style: TextThemes.ayaTimeTextStyle(context),
+            //     ),
+            //     Slider(
+            //       value: audioController.isPlaying.value
+            //           ? audioController.currentDuration.value.inSeconds
+            //               .toDouble()
+            //           : 0.0,
+            //       onChanged: (value) {
+            //         audioController.audioPlayer.seek(
+            //           Duration(
+            //             seconds: value.toInt(),
+            //           ),
+            //         );
+            //       },
+            //       max:
+            //           audioController.duration.value.inSeconds.toDouble() == 0.0
+            //               ? 1000.0
+            //               : audioController.duration.value.inSeconds.toDouble(),
+            //     ),
+            //     Text(
+            //       audioController.duration.value.inSeconds.toString(),
+            //       style: TextThemes.ayaTimeTextStyle(context),
+            //     ),
+            //   ],
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

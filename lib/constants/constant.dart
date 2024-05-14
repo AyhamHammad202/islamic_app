@@ -77,7 +77,7 @@ class Constant {
     "ناصر القطامي",
     "مشاري العفاسي",
     "أحمد العجمي",
-    "أحمد الغامدي",
+    "سعد الغامدي",
   ];
   static List<String> readersLinks = [
     "Abdul_Basit_Murattal_64kbps",
@@ -92,7 +92,7 @@ class Constant {
     "Nasser_Alqatami_128kbps",
     "Alafasy_128kbps",
     "ahmed_ibn_ali_al_ajamy_128kbps",
-        "Ghamadi_40kbps"
+    "Ghamadi_40kbps"
   ];
 
   static List<String> radioNames = [

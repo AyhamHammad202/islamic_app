@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/constants/constant.dart';
+import 'package:islamic_app/controllers/radio_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/views/radio/widgets/radio_channel.dart';
 
@@ -15,11 +17,17 @@ class RadioSelectView extends StatelessWidget {
         appBar: AppBar(
           title: Text(S.current.radio),
         ),
-        body: ListView.builder(
-          itemCount: Constant.radioLinks.length,
-          itemBuilder: (context, index) {
-            return RadioChannel(index: index);
-          },
+        body: GetBuilder<RadioController>(
+          builder: (radioController) {
+            return ListView.builder(
+              itemCount: radioController.radioes.length,
+              itemBuilder: (context, index) {
+                return RadioChannel(
+                  radioModel: radioController.radioes[index],
+                );
+              },
+            );
+          }
         ),
       ),
     );

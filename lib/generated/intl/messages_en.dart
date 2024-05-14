@@ -37,7 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "abuBakrAshShaatree":
             MessageLookupByLibrary.simpleMessage("Abu Bakr Ash-Shaatree"),
         "ahmedAjamy": MessageLookupByLibrary.simpleMessage("Ahmed Al-Ajamy"),
-        "ahmedGhamadi": MessageLookupByLibrary.simpleMessage("Ahmed Ghamadi"),
+        "ahmedGhamadi": MessageLookupByLibrary.simpleMessage("Saad Ghamadi"),
         "alMinshawi": MessageLookupByLibrary.simpleMessage(
             " Mohammed Siddiq Al-Minshawi"),
         "alMueaqly": MessageLookupByLibrary.simpleMessage("Maher Al-Mueaqly"),

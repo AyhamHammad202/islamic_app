@@ -5,6 +5,7 @@ import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/controllers/general_controller.dart';
 import 'package:islamic_app/controllers/mesbaha_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
+import 'package:islamic_app/controllers/radio_controller.dart';
 
 class InitialBindings extends Bindings {
   @override
@@ -14,6 +15,7 @@ class InitialBindings extends Bindings {
     Get.lazyPut(() => MesbahaController(), fenix: true);
     Get.lazyPut(() => GeneralController(), fenix: true);
     Get.lazyPut(() => AzkarController(), fenix: true);
+    Get.lazyPut(() => RadioController(), fenix: true);
     Get.put<AudioController>(AudioController());
   }
 }

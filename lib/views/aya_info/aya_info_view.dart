@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/common/share_model_sheet.dart';
 import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
@@ -66,9 +67,7 @@ class AyaInfoView extends StatelessWidget {
                         Gap(8.w),
                         InkWell(
                           onTap: () async {
-                            Share.share(
-                              '﴿${aya.textOfAya}﴾ [${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}]',
-                            );
+                            ShareModelSheet(aya: aya);
                           },
                           child: SvgPicturesMethods.shareIcon(),
                         ),

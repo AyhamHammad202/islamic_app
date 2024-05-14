@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:islamic_app/constants/constant.dart';
-import 'package:islamic_app/controllers/audio_controller.dart';
+import 'package:islamic_app/models/radio_model.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/text_themes.dart';
 import 'package:islamic_app/views/radio/quran_radio_view.dart';
 
 class RadioChannel extends StatelessWidget {
-  const RadioChannel({super.key, required this.index});
-  final int index;
+  const RadioChannel({super.key, required this.radioModel});
+  final RadioModel radioModel;
   @override
   Widget build(BuildContext context) {
-    AudioController audioController = Get.find();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
       child: InkWell(
         onTap: () {
-          audioController.currentRadioChannelIndex.value = index;
+          // audioController.currentRadioChannelIndex.value = index;
           Get.to(
-            () => const QuranRadioView(),
+            () => QuranRadioView(radioModel: radioModel),
             transition: Transition.rightToLeftWithFade,
             duration: const Duration(milliseconds: 300),
           );
@@ -38,7 +36,9 @@ class RadioChannel extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  Constant.radioNames[index],
+                  Get.locale == const Locale('ar')
+                      ? radioModel.arabicName
+                      : radioModel.englishName,
                   style: TextThemes.radioChannelTextStyle(context),
                 ),
                 const Spacer(),
