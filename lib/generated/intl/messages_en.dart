@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(verses, all) => "Downloaded ${verses} Verse Out of ${all}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Alafasy": MessageLookupByLibrary.simpleMessage("Mishari Alafasy"),
@@ -48,10 +50,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "ayas": MessageLookupByLibrary.simpleMessage("Ayas"),
         "bookmarkAyat":
             MessageLookupByLibrary.simpleMessage("Bookmarked Verses"),
+        "close": MessageLookupByLibrary.simpleMessage("Close"),
         "darkTheme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
         "day": MessageLookupByLibrary.simpleMessage("Day"),
         "days": MessageLookupByLibrary.simpleMessage("Days"),
+        "download": MessageLookupByLibrary.simpleMessage("Download"),
         "downloadAyat": MessageLookupByLibrary.simpleMessage("Download Ayat"),
+        "downloaded": m0,
         "eid_al_adha": MessageLookupByLibrary.simpleMessage("Eid Al-Adha"),
         "eid_al_fitr": MessageLookupByLibrary.simpleMessage("Eid Al-Fitr"),
         "elHosary": MessageLookupByLibrary.simpleMessage("Mahmoud El-Hosary"),

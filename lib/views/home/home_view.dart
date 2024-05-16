@@ -10,6 +10,7 @@ import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/views/bookmark/bookmark_view.dart';
+import 'package:islamic_app/views/download_ayas/downlodad_ayas_view.dart';
 import 'package:islamic_app/views/home/widgets/drawer_item.dart';
 import 'package:islamic_app/views/home/widgets/last_read_aya.dart';
 import 'package:islamic_app/views/search/search_view.dart';
@@ -58,6 +59,17 @@ class HomeView extends StatelessWidget {
                   onTap: () {
                     Get.to(
                       () => const BookmarkView(),
+                      transition: Transition.rightToLeftWithFade,
+                      duration: const Duration(milliseconds: 300),
+                    );
+                  },
+                ),
+                DrawerItem(
+                  title: S.current.downloadAyat,
+                  leading: SvgPicturesMethods.playAudioIcon(),
+                  onTap: () {
+                    Get.to(
+                      () => const DownloadAyasView(),
                       transition: Transition.rightToLeftWithFade,
                       duration: const Duration(milliseconds: 300),
                     );

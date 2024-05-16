@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:audio_service/audio_service.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:device_preview/device_preview.dart';
@@ -25,6 +24,7 @@ import 'package:islamic_app/router.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/services/theme_services.dart';
 import 'package:islamic_app/views/home/home_view.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 import 'constants/assets.dart';
@@ -40,7 +40,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+ 
   await FirebaseApi().initNotifictions();
   await initalServices();
   await GetStorage.init();

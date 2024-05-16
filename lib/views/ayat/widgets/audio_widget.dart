@@ -96,13 +96,13 @@ class AudioWidget extends StatelessWidget {
               children: [
                 AudioButton(
                   icon: Icons.skip_next_rounded,
-                  onTap: () {
+                  onTap: () async {
                     if (audioController.ayaUniqeId.value == 6236) {
                       return;
                     }
-
+                    await audioController.peauseAyaFile();
                     audioController.ayaUniqeId.value++;
-                    audioController.playAyah(audioController.ayaUniqeId.value);
+                    await audioController.playAyah(audioController.currentAya);
                     // audioController.playNext(
                     //   quranController.allAyas[audioController.ayaUniqeId.value],
                     // );
@@ -118,19 +118,21 @@ class AudioWidget extends StatelessWidget {
                       await audioController.peauseAyaFile();
                       return;
                     }
-                    await audioController
-                        .playAyah(audioController.ayaUniqeId.value);
+                    await audioController.playAyah(audioController.currentAya);
                   },
                 ),
                 AudioButton(
                   icon: Icons.skip_previous_rounded,
-                  onTap: () {
+                  onTap: () async {
                     // audioController.ayaUniqeId.value - 3;
-                    if (audioController.ayaUniqeId.value == 0) {
+                    if (audioController.ayaUniqeId.value > 1) {
+                      await audioController.peauseAyaFile();
+                      audioController.ayaUniqeId.value--;
+                      await audioController
+                          .playAyah(audioController.currentAya);
                       return;
                     }
-                    audioController.ayaUniqeId.value--;
-                    audioController.playAyah(audioController.ayaUniqeId.value);
+                    return;
                   },
                 ),
               ],

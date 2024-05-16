@@ -1,0 +1,95 @@
+{
+    "data": [
+        {
+            "id":1,
+            "nameAr": "عبدالباسط عبدالصمد",
+            "nameEn": "Abdulbasit Abdusamad",
+            "link": "Abdul_Basit_Murattal_64kbps",
+            "image":"assets/readers/abdelbassetabdessamad.png"
+        },
+        {
+            "id":2,
+            "nameAr": "محمد صديق المنشاوي",
+            "nameEn": "Mohammed Siddiq Al-Minshawi",
+            "link": "Minshawy_Murattal_128kbps",
+            "image":"assets/readers/mohamedseddikelmenchaoui.png"
+        },
+        {
+            "id":3,
+            "nameAr": "محمود الحصري",
+            "nameEn": "Mahmoud El-Hosary",
+            "link": "Husary_128kbps",
+            "image":"assets/readers/mahmoudkhalilalhussary.png"
+        },
+        {
+            "id":4,
+            "nameAr":"محمود الحصري معلم",
+            "nameEn": "Mahmoud El-Hosary Muallim",
+            "link": "Husary_Muallim_128kbps",
+            "image":"assets/readers/mahmoudkhalilalhussary.png"
+        },
+        {
+            "id":5,
+            "nameAr": "علي جابر",
+            "nameEn": "Ali Jaber",
+            "link": "Ali_Jaber_64kbps",
+            "image":"assets/readers/alijaber.png"
+        },
+        {
+            "id":6,
+            "nameAr": "محمد ايوب",
+            "nameEn": "Mohammed Ayoub",
+            "link": "Muhammad_Ayyoub_128kbps",
+            "image":"assets/readers/mohamedayoub.png"
+        },
+        {
+            "id":7,
+            "nameAr": "ماهر المعيقلي",
+            "nameEn": "Maher Al-Mueaqly",
+            "link": "MaherAlMuaiqly128kbps",
+            "image":"assets/readers/maheralmueaqly.png"
+        },
+        {
+            "id":8,
+            "nameAr": "ياسر الدوسري",
+            "nameEn": "Yasser Ad-Dussary",
+            "link": "Yasser_Ad-Dussary_128kbps",
+            "image":"assets/readers/yasseraldossari.png"
+        },
+        {
+            "id":9,
+            "nameAr": "أبو بكر الشاطري",
+            "nameEn": "Abu Bakr Ash-Shaatree",
+            "link": "Abu_Bakr_Ash-Shaatree_64kbps",
+            "image":"assets/readers/alshatri.png"
+        },
+        {
+            "id":10,
+            "nameAr": "ناصر القطامي",
+            "nameEn": "Nasser Alqatami",
+            "link": "Nasser_Alqatami_128kbps",
+            "image":"assets/readers/nasseralqatami.png"
+        },
+        {
+            "id":11,
+            "nameAr": "مشاري العفاسي",
+            "nameEn": "Mishari Alafasy",
+            "link": "Alafasy_128kbps",
+            "image":"assets/readers/misharyrashidalafasy.png"
+        },
+        {
+            "id":12,
+            "nameAr": "أحمد العجمي",
+            "nameEn": "Ahmed Al-Ajamy",
+            "link": "ahmed_ibn_ali_al_ajamy_128kbps",
+            "image":"assets/readers/ahmedalajmi.png"
+        },
+        {
+            "id":12,
+            "nameAr": "سعد الغامدي",
+            "nameEn": "Saad Ghamadi",
+            "link": "Ghamadi_40kbps",
+            "image":"assets/readers/saadelghamidi.png"
+        }
+    ]
+}

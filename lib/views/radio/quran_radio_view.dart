@@ -80,7 +80,7 @@ class QuranRadioView extends StatelessWidget {
                             await radioController.pauseRadio();
                             return;
                           }
-                          await radioController.playRadio(radioModel.link);
+                          await radioController.playRadio(radioModel);
                           // AwesomeNotifications().createNotification(content: NotificationContent(id: id, channelKey: channelKey).
                           return;
                         },

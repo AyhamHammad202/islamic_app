@@ -6,20 +6,24 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/common/custom_button.dart';
 import 'package:islamic_app/controllers/audio_controller.dart';
+import 'package:islamic_app/controllers/readers_controller.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
+import 'package:islamic_app/models/surah_model.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ShareModelSheet extends StatelessWidget {
-  const ShareModelSheet({super.key, required this.aya});
+  const ShareModelSheet({super.key, required this.aya, required this.surah});
   final AyaOfSurahModel aya;
+  final SurahModel surah;
 
   @override
   Widget build(BuildContext context) {
     AudioController audioController = Get.find();
+    ReadersController readersController = Get.find();
     return Obx(() {
       return AbsorbPointer(
-        absorbing: audioController.isDownloading.value,
+        absorbing: readersController.isDownloading.value,
         child: Stack(
           children: [
             Container(
@@ -37,24 +41,33 @@ class ShareModelSheet extends StatelessWidget {
                       final file = File(
                         audioController.ayaPath,
                       );
+                      final file2 = File(
+                        audioController.ayaPath,
+                      );
                       if (!await file.exists()) {
-                        await audioController.downloadAya(file);
+                        await readersController.downloadAya(
+                          file,
+                          aya,
+                          surah,
+                          audioController.currentReader,
+                        );
 
                         await Share.shareXFiles([
                           XFile(file.path,
                               name:
-                                  "${audioController.currentSura.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}"),
+                                  "${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}"),
+                          XFile(file2.path),
                         ],
                             text:
-                                "${audioController.currentSura.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}");
+                                "${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}");
                       }
                       await Share.shareXFiles([
                         XFile(file.path,
                             name:
-                                "${audioController.currentSura.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}"),
+                                "${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}"),
                       ],
                           text:
-                              "${audioController.currentSura.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}");
+                              "${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}");
                     },
                   ),
                   Gap(16.h),
@@ -62,14 +75,14 @@ class ShareModelSheet extends StatelessWidget {
                     title: 'شارك الآية كنص',
                     onTap: () {
                       Share.share(
-                        '﴿${aya.textOfAya}﴾ [${audioController.currentSura.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}]',
+                        '﴿${aya.textOfAya}﴾ [${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}]',
                       );
                     },
                   ),
                 ],
               ),
             ),
-            audioController.isDownloading.value
+            readersController.isDownloading.value
                 ? Align(
                     alignment: Alignment.center,
                     child: CircularProgressIndicator(

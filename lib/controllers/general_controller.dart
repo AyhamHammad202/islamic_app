@@ -11,6 +11,7 @@ class GeneralController extends GetxController {
   @override
   void onInit() {
     log("SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+   
     super.onInit();
   }
 

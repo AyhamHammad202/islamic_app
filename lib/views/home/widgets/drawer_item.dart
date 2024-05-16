@@ -3,11 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:islamic_app/text_themes.dart';
 
 class DrawerItem extends StatelessWidget {
-  const DrawerItem(
-      {super.key,
-      required this.title,
-      required this.leading,
-      required this.onTap});
+  const DrawerItem({
+    super.key,
+    required this.title,
+    required this.leading,
+    required this.onTap,
+  });
   final String title;
   final Widget leading;
   final void Function()? onTap;

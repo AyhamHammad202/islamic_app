@@ -145,7 +145,7 @@ class TextThemes {
         color: const Color(0xff5A5A5A),
       );
   static TextStyle suraNameTextStyle(BuildContext context) =>
-      GoogleFonts.tajawal(
+      GoogleFonts.notoKufiArabic(
         fontSize: 20.sp,
         fontWeight: FontWeight.w700,
         color: const Color(0xff365C5E),
@@ -299,6 +299,30 @@ class TextThemes {
       GoogleFonts.tajawal(
         color: const Color(0xff043336),
         fontSize: 16.sp,
+        fontWeight: FontWeight.w500,
+      );
+  //Download Screen
+  static TextStyle suraDownloadedTextStyle(BuildContext context) =>
+      GoogleFonts.cairo(
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.white
+            : const Color(0xff043336),
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w500,
+      );
+  static TextStyle closeTextStyle(BuildContext context) => GoogleFonts.tajawal(
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.white
+            : const Color(0xff043336),
+        fontSize: 12.sp,
+        fontWeight: FontWeight.w500,
+      );
+  static TextStyle downloadInfoTextStyle(BuildContext context) =>
+      GoogleFonts.tajawal(
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.white
+            : const Color(0xff043336),
+        fontSize: 12.sp,
         fontWeight: FontWeight.w500,
       );
 }

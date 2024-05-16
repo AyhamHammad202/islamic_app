@@ -11,6 +11,9 @@
     "shareAppText":"I wanted to share with you an application that I've found to be very beneficial. It's a Quran app that provides a comprehensive experience for exploring the Holy Quran. \n Here is the URL:",
     "radio":"Quran Radio",
     "downloadAyat":"Download Ayat",
+    "download":"Download",
+    "downloaded":"Downloaded {verses} Verse Out of {all}",
+    "close":"Close",
     "time":"Time",
     "darkTheme":"Dark Theme",
     "tafserFontSize":"Tafser Font Size",
@@ -51,6 +54,6 @@
     "Alafasy":"Mishari Alafasy",
     "ahmedAjamy":"Ahmed Al-Ajamy",
     "ahmedGhamadi":"Saad Ghamadi",
-    "VariousRecitations":"Various Recitations",
+"VariousRecitations":"Various Recitations",
     "MohammedLuhaidanRadio":"Mohammed Al-Luhaidan Radio"
 }

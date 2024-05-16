@@ -42,9 +42,15 @@ class Themes {
       titleTextStyle: GoogleFonts.tajawal(
         fontSize: 16.sp,
         fontWeight: FontWeight.bold,
-        color: const Color(0xff997647),
+        color: const Color(0xff043336),
       ),
     ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      linearTrackColor: darkiconClr,
+      circularTrackColor: darkBackgroundClr,
+      color: ligthPrimaryClr,
+    ),
+    dividerColor: const Color(0xff997647),
     sliderTheme: const SliderThemeData(
       thumbColor: Color(0xffD7A664),
       activeTrackColor: Color(0xff043336),
@@ -85,6 +91,12 @@ class Themes {
         color: const Color(0xff997647),
       ),
     ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      linearTrackColor: lightBackgroundClr,
+      circularTrackColor: lightBackgroundClr,
+      color: darkPrimaryClr,
+    ),
+    dividerColor: const Color(0xffFFD08A).withOpacity(.2),
     sliderTheme: const SliderThemeData(
       thumbColor: Color(0xffD7A664),
       activeTrackColor: Color.fromARGB(255, 15, 161, 172),

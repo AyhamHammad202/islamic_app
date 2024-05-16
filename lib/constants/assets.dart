@@ -184,5 +184,12 @@ class Assets {
   /// Assets for svgViewBackground
   /// assets/svg/view_background.png
   static const String svgViewBackground = "assets/svg/view_background.png";
+
+
+
+
+  /// Assets for readersAbdelbasset
+  /// assets/readers/abdelbasset.png
+  static const String readersAbdelbasset = "assets/readers/abdelbasset.png";
 }
 

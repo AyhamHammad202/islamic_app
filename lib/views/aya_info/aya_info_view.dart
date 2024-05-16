@@ -11,6 +11,7 @@ import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 
 import 'package:islamic_app/models/aya_of_surah_model.dart';
+import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/text_themes.dart';
@@ -21,9 +22,10 @@ import 'widgets/tafser_richtext_widget.dart';
 class AyaInfoView extends StatelessWidget {
   const AyaInfoView({
     super.key,
-    required this.aya,
+    required this.aya, required this.surahModel,
   });
   final AyaOfSurahModel aya;
+  final SurahModel surahModel;
   @override
   Widget build(BuildContext context) {
     final QuranController quranController = Get.find();
@@ -67,7 +69,10 @@ class AyaInfoView extends StatelessWidget {
                         Gap(8.w),
                         InkWell(
                           onTap: () async {
-                            ShareModelSheet(aya: aya);
+                            ShareModelSheet(
+                              aya: aya,
+                              surah: surahModel,
+                            );
                           },
                           child: SvgPicturesMethods.shareIcon(),
                         ),

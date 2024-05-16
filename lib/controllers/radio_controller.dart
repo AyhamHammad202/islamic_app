@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/models/radio_model.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -14,7 +16,7 @@ class RadioController extends GetxController {
   List<RadioModel> radioes = [];
 
   @override
-  onInit()async {
+  onInit() async {
     await loadRadioes();
     super.onInit();
   }
@@ -38,7 +40,7 @@ class RadioController extends GetxController {
     return;
   }
 
-  Future playRadio(String link) async {
+  Future playRadio(RadioModel radioModel) async {
     try {
       radioAudioPlayer.playerStateStream.listen((playerState) async {
         if (playerState.playing) {
@@ -53,10 +55,19 @@ class RadioController extends GetxController {
       await radioAudioPlayer.setAudioSource(
         AudioSource.uri(
           Uri.parse(
-            link,
+            radioModel.link,
           ),
         ),
       );
+      // AwesomeNotifications().createNotification(
+      //   content: NotificationContent(
+      //     notificationLayout: NotificationLayout.MediaPlayer,
+      //     id: 10,
+      //     channelKey: 'progress_bar',
+      //     title: radioModel.arabicName,
+      //     locked: radioIsPlaying.value,
+      //   ),
+      // );
       await radioAudioPlayer.play();
     } on PlayerInterruptedException catch (e) {
       log('Audio player interrupted: $e');

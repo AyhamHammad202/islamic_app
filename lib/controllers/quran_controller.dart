@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/models/surah_info.dart';
+import 'package:islamic_app/services/notificiton_service.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:islamic_app/database/data_client.dart';
@@ -18,7 +20,6 @@ import 'package:islamic_app/models/surah_model.dart';
 import '../models/allah_name_model.dart';
 
 class QuranController extends GetxController {
-
   final DataClient _client = DataClient();
   List<SurahModel> surahs = [];
   List<SurahInfoModel> suarhsInfo = [];
@@ -55,9 +56,6 @@ class QuranController extends GetxController {
     await getAyaTafser();
     await loadAllahNames();
   }
-
- 
-
 
   @override
   void onClose() {

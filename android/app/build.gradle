@@ -43,6 +43,9 @@ android {
     namespace "com.NourAlmomen.islamicapp"
     compileSdkVersion 34
     ndkVersion flutter.ndkVersion
+     if (project.android.hasProperty("namespace")) {
+        namespace 'com.NourAlmomen.islamicapp'
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -95,6 +98,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.airbnb.android:lottie:3.7.0"
     implementation "com.android.support.constraint:constraint-layout:2.8.4"
+    implementation 'androidx.media:media:1.6.0'
 }
 repositories {
     mavenCentral() 

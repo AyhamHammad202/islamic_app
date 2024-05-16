@@ -34,41 +34,50 @@ import 'package:get/get.dart';
 // }
 
 class NotificationService extends GetxService {
-  Future<NotificationService> init()async {
+  Future<NotificationService> init() async {
     await AwesomeNotifications().initialize("resource://drawable/quran", [
-    NotificationChannel(
-      channelKey: "salatAldoha",
-      channelName: "صلاة الضحى",
-      channelDescription: "التذكير بصلاة الضحى",
-      groupKey: "salatReminder",
-      icon: "resource://drawable/quran",
-      enableLights: true,
-      importance: NotificationImportance.High,
-      channelShowBadge: true,
-    ),
-    NotificationChannel(
-      channelKey: "salatAlotr",
-      channelName: "صلاة الوتر",
-      channelDescription: "التذكير بصلاة الوتر",
-      groupKey: "salatReminder",
-      icon: "resource://drawable/quran",
-      enableLights: true,
-      importance: NotificationImportance.High,
-      channelShowBadge: true,
-    )
-  ], channelGroups: [
-    NotificationChannelGroup(
-        channelGroupKey: "salatReminder", channelGroupName: "salatGroub")
-  ]);
-  if (!await AwesomeNotifications().isNotificationAllowed()) {
-    AwesomeNotifications().requestPermissionToSendNotifications();
-  }
+      NotificationChannel(
+        channelKey: "salatAldoha",
+        channelName: "صلاة الضحى",
+        channelDescription: "التذكير بصلاة الضحى",
+        groupKey: "salatReminder",
+        icon: "resource://drawable/quran",
+        enableLights: true,
+        importance: NotificationImportance.High,
+        channelShowBadge: true,
+      ),
+      NotificationChannel(
+        channelKey: "salatAlotr",
+        channelName: "صلاة الوتر",
+        channelDescription: "التذكير بصلاة الوتر",
+        groupKey: "salatReminder",
+        icon: "resource://drawable/quran",
+        enableLights: true,
+        importance: NotificationImportance.High,
+        channelShowBadge: true,
+      ),
+      NotificationChannel(
+        channelKey: 'progress_bar',
+        channelDescription: "نسبة التحميل",
+        channelName: "Downloading progress",
+        groupKey: "salatReminder",
+        icon: "resource://drawable/quran",
+        enableLights: true,
+        importance: NotificationImportance.High,
+        channelShowBadge: true,
+      )
+    ], channelGroups: [
+      NotificationChannelGroup(
+          channelGroupKey: "salatReminder", channelGroupName: "salatGroub")
+    ]);
+    if (!await AwesomeNotifications().isNotificationAllowed()) {
+      AwesomeNotifications().requestPermissionToSendNotifications();
+    }
     return this;
   }
 }
 
-
-//these lines were init state in MyApp Widget
+// // these lines were init state in MyApp Widget
 // AwesomeNotifications().setListeners(
 //   onActionReceivedMethod: NotificationController.onActionReceivedMethod,
 //   onNotificationCreatedMethod:

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/constants/constant.dart';
+import 'package:islamic_app/controllers/readers_controller.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/text_themes.dart';
+
+import 'reader_widget.dart';
 
 class Readers extends StatelessWidget {
   const Readers({
@@ -14,8 +17,14 @@ class Readers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ReadersController readersController = Get.find();
     return Obx(() {
       return PopupMenuButton(
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.sizeOf(context).width,
+          maxHeight: MediaQuery.sizeOf(context).height * .7,
+        ),
+        offset: Offset.fromDirection(2),
         onSelected: (value) {
           settingsService.currentReaderIndex.value = value;
           settingsService.setReaderIndex(value);
@@ -27,17 +36,11 @@ class Readers extends StatelessWidget {
         color: Theme.of(context).colorScheme.onSurface,
         itemBuilder: (context) {
           return List.generate(
-            Constant.readers.length,
+            readersController.readers.length,
             (index) => PopupMenuItem(
               value: index,
-              child: Column(
-                children: [
-                  Text(
-                    Constant.readers[index],
-                    style: TextThemes.readerTextStyle(context),
-                  ),
-                  const Divider(),
-                ],
+              child: ReaderWidget(
+                readerModel: readersController.readers[index],
               ),
             ),
           );

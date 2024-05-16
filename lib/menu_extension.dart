@@ -11,7 +11,6 @@ import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/views/aya_info/aya_info_view.dart';
-import 'package:share_plus/share_plus.dart';
 
 import 'models/aya_of_surah_model.dart';
 
@@ -68,7 +67,10 @@ extension ContextMenuExtension on BuildContext {
                         ),
                         onTap: () {
                           Get.to(
-                            () => AyaInfoView(aya: ayaOfSurahModel),
+                            () => AyaInfoView(
+                              aya: ayaOfSurahModel,
+                              surahModel: quranController.surahs[surahNum-1],
+                            ),
                             // curve: Curves.bounceOut,
                             transition: Transition.downToUp,
                             duration: const Duration(milliseconds: 300),
@@ -112,8 +114,7 @@ extension ContextMenuExtension on BuildContext {
                                 await audioController.peauseAyaFile();
                                 return;
                               }
-                              await audioController
-                                  .playAyah(ayaOfSurahModel.uniqueIdOfAya);
+                              await audioController.playAyah(ayaOfSurahModel);
                               quranController.isClickedOnPage.value = true;
                               cancel();
                               // .playRadio();
@@ -173,6 +174,7 @@ extension ContextMenuExtension on BuildContext {
                             builder: (context) {
                               return ShareModelSheet(
                                 aya: ayaOfSurahModel,
+                                surah: quranController.surahs[surahNum - 1],
                               );
                             },
                           );

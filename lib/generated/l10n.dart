@@ -170,6 +170,36 @@ class S {
     );
   }
 
+  /// `Download`
+  String get download {
+    return Intl.message(
+      'Download',
+      name: 'download',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Downloaded {verses} Verse Out of {all}`
+  String downloaded(Object verses, Object all) {
+    return Intl.message(
+      'Downloaded $verses Verse Out of $all',
+      name: 'downloaded',
+      desc: '',
+      args: [verses, all],
+    );
+  }
+
+  /// `Close`
+  String get close {
+    return Intl.message(
+      'Close',
+      name: 'close',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Time`
   String get time {
     return Intl.message(

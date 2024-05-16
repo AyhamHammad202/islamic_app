@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(verses, all) => "تم تحميل ${verses} آية من  ${all}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Alafasy": MessageLookupByLibrary.simpleMessage("مشاري العفاسي"),
@@ -46,10 +48,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "ayaFontSize": MessageLookupByLibrary.simpleMessage("حجم خط الآية"),
         "ayas": MessageLookupByLibrary.simpleMessage("آيات"),
         "bookmarkAyat": MessageLookupByLibrary.simpleMessage("الآيات المفضلة"),
+        "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
         "darkTheme": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
         "day": MessageLookupByLibrary.simpleMessage("يوم"),
         "days": MessageLookupByLibrary.simpleMessage("أيام"),
-        "downloadAyat": MessageLookupByLibrary.simpleMessage("تمحيل الآيات"),
+        "download": MessageLookupByLibrary.simpleMessage("تحميل"),
+        "downloadAyat": MessageLookupByLibrary.simpleMessage("تحميل الآيات"),
+        "downloaded": m0,
         "eid_al_adha": MessageLookupByLibrary.simpleMessage("عيد الأضحى"),
         "eid_al_fitr": MessageLookupByLibrary.simpleMessage("عيد الفطر"),
         "elHosary": MessageLookupByLibrary.simpleMessage("محمود الحصري"),

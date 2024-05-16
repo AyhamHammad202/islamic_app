@@ -6,16 +6,20 @@ import 'package:islamic_app/controllers/general_controller.dart';
 import 'package:islamic_app/controllers/mesbaha_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/controllers/radio_controller.dart';
+import 'package:islamic_app/controllers/readers_controller.dart';
+import 'package:islamic_app/controllers/update_controller.dart';
 
 class InitialBindings extends Bindings {
   @override
-  void dependencies() {
-    Get.put<QuranController>(QuranController());
-    Get.lazyPut(() => BookMarkController(), fenix: true);
-    Get.lazyPut(() => MesbahaController(), fenix: true);
-    Get.lazyPut(() => GeneralController(), fenix: true);
-    Get.lazyPut(() => AzkarController(), fenix: true);
-    Get.lazyPut(() => RadioController(), fenix: true);
-    Get.put<AudioController>(AudioController());
+  void dependencies() async {
+    await Get.putAsync<QuranController>(() async => QuranController());
+    await Get.putAsync(() async => ReadersController());
+    await Get.putAsync(() async => AudioController());
+    await Get.putAsync(() async => UpdateController());
+    await Get.putAsync(() async => BookMarkController());
+    await Get.putAsync(() async => MesbahaController());
+    await Get.putAsync(() async => GeneralController());
+    await Get.putAsync(() async => AzkarController());
+    await Get.putAsync(() async => RadioController());
   }
 }
