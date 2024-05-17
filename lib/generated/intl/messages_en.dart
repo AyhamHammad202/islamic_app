@@ -85,6 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareApp": MessageLookupByLibrary.simpleMessage("Share App"),
         "shareAppText": MessageLookupByLibrary.simpleMessage(
             "I wanted to share with you an application that I\'ve found to be very beneficial. It\'s a Quran app that provides a comprehensive experience for exploring the Holy Quran. \n Here is the URL:"),
+        "sharedBy":
+            MessageLookupByLibrary.simpleMessage("Shared by Nour Al Momen App"),
         "sorah": MessageLookupByLibrary.simpleMessage("Sorah"),
         "sorahs": MessageLookupByLibrary.simpleMessage("Sorahs"),
         "suraInfo": MessageLookupByLibrary.simpleMessage("Info About"),

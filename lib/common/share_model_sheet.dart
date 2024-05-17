@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -7,10 +5,8 @@ import 'package:get/get.dart';
 import 'package:islamic_app/common/custom_button.dart';
 import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/controllers/readers_controller.dart';
-import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/models/surah_model.dart';
-import 'package:share_plus/share_plus.dart';
 
 class ShareModelSheet extends StatelessWidget {
   const ShareModelSheet({super.key, required this.aya, required this.surah});
@@ -37,46 +33,19 @@ class ShareModelSheet extends StatelessWidget {
                   CustomButton(
                     title: 'شارك الآية كصوت',
                     onTap: () async {
-                      audioController.ayaUniqeId.value = aya.uniqueIdOfAya;
-                      final file = File(
-                        audioController.ayaPath,
+                      readersController.shareAudio(
+                        audioController,
+                        readersController,
+                        aya,
+                        surah,
                       );
-                      final file2 = File(
-                        audioController.ayaPath,
-                      );
-                      if (!await file.exists()) {
-                        await readersController.downloadAya(
-                          file,
-                          aya,
-                          surah,
-                          audioController.currentReader,
-                        );
-
-                        await Share.shareXFiles([
-                          XFile(file.path,
-                              name:
-                                  "${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}"),
-                          XFile(file2.path),
-                        ],
-                            text:
-                                "${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}");
-                      }
-                      await Share.shareXFiles([
-                        XFile(file.path,
-                            name:
-                                "${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}"),
-                      ],
-                          text:
-                              "${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}");
                     },
                   ),
                   Gap(16.h),
                   CustomButton(
                     title: 'شارك الآية كنص',
                     onTap: () {
-                      Share.share(
-                        '﴿${aya.textOfAya}﴾ [${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}]',
-                      );
+                      readersController.shareText(aya, surah);
                     },
                   ),
                 ],

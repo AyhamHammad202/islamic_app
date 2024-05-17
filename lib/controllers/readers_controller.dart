@@ -6,12 +6,15 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
+import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/models/reader_model.dart';
 import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ReadersController extends GetxController {
   // final QuranController _quranController = Get.find();
@@ -160,5 +163,30 @@ class ReadersController extends GetxController {
     } catch (e) {
       return e;
     }
+  }
+
+  Future<void> shareAudio(
+    AudioController audioController,
+    ReadersController readersController,
+    AyaOfSurahModel aya,
+    SurahModel surah,
+  ) async {
+    audioController.ayaUniqeId.value = aya.uniqueIdOfAya;
+    final file = File(audioController.ayaPath);
+    if (!await file.exists()) {
+      await readersController.downloadAya(
+          file, aya, surah, audioController.currentReader);
+    }
+    await Share.shareXFiles([
+      XFile(file.path,
+          name: '${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}'),
+    ],
+        text:
+            '${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}z\n${S.current.sharedBy}');
+  }
+
+  void shareText(AyaOfSurahModel aya, SurahModel surah) {
+    Share.share(
+        '﴿${aya.textOfAya}﴾ [${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}]\n${S.current.sharedBy}');
   }
 }

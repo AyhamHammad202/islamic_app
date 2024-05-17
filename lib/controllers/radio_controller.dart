@@ -1,10 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/models/radio_model.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -59,15 +56,6 @@ class RadioController extends GetxController {
           ),
         ),
       );
-      // AwesomeNotifications().createNotification(
-      //   content: NotificationContent(
-      //     notificationLayout: NotificationLayout.MediaPlayer,
-      //     id: 10,
-      //     channelKey: 'progress_bar',
-      //     title: radioModel.arabicName,
-      //     locked: radioIsPlaying.value,
-      //   ),
-      // );
       await radioAudioPlayer.play();
     } on PlayerInterruptedException catch (e) {
       log('Audio player interrupted: $e');

@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Shared by Nour Al Momen App`
+  String get sharedBy {
+    return Intl.message(
+      'Shared by Nour Al Momen App',
+      name: 'sharedBy',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Al-Quran Al-Kreem`
   String get quran {
     return Intl.message(

@@ -83,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareApp": MessageLookupByLibrary.simpleMessage("شارك التطبيق"),
         "shareAppText": MessageLookupByLibrary.simpleMessage(
             "أردت أن أشارككم تطبيقا وجدته مفيدا جدا. إنه تطبيق للقرآن يوفر تجربة شاملة لاستكشاف القرآن الكريم. هنا هو عنوان URL:"),
+        "sharedBy": MessageLookupByLibrary.simpleMessage(
+            "شارك من قبل تطبيق نور المؤمن"),
         "sorah": MessageLookupByLibrary.simpleMessage("السورة"),
         "sorahs": MessageLookupByLibrary.simpleMessage("السور"),
         "suraInfo": MessageLookupByLibrary.simpleMessage("معلومات عن سورة"),
