@@ -49,7 +49,13 @@ class Readers extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              Constant.readers[settingsService.currentReaderIndex.value],
+              Get.locale!.languageCode == 'ar'
+                  ? readersController
+                      .readers[settingsService.currentReaderIndex.value]
+                      .arabicName
+                  : readersController
+                      .readers[settingsService.currentReaderIndex.value]
+                      .englishName,
               style: TextThemes.readerTextStyle(context),
             ),
             const Icon(

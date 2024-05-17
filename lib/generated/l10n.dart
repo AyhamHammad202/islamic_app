@@ -480,151 +480,21 @@ class S {
     );
   }
 
-  /// `Abdulbasit Abdusamad`
-  String get abdulbasitAbdusamad {
+  /// `Share the verse as audio`
+  String get shareAyaAudio {
     return Intl.message(
-      'Abdulbasit Abdusamad',
-      name: 'abdulbasitAbdusamad',
+      'Share the verse as audio',
+      name: 'shareAyaAudio',
       desc: '',
       args: [],
     );
   }
 
-  /// ` Mohammed Siddiq Al-Minshawi`
-  String get alMinshawi {
+  /// `Share the verse as text`
+  String get shareAyaText {
     return Intl.message(
-      ' Mohammed Siddiq Al-Minshawi',
-      name: 'alMinshawi',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Mahmoud El-Hosary`
-  String get elHosary {
-    return Intl.message(
-      'Mahmoud El-Hosary',
-      name: 'elHosary',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Mahmoud El-Hosary Muallim`
-  String get HusaryMuallim {
-    return Intl.message(
-      'Mahmoud El-Hosary Muallim',
-      name: 'HusaryMuallim',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ali Jaber`
-  String get AliJaber {
-    return Intl.message(
-      'Ali Jaber',
-      name: 'AliJaber',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Maher Al-Mueaqly`
-  String get alMueaqly {
-    return Intl.message(
-      'Maher Al-Mueaqly',
-      name: 'alMueaqly',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Mohammed Ayoub`
-  String get mohammedAyoub {
-    return Intl.message(
-      'Mohammed Ayoub',
-      name: 'mohammedAyoub',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Yasser Ad-Dussary`
-  String get yasserAdDussary {
-    return Intl.message(
-      'Yasser Ad-Dussary',
-      name: 'yasserAdDussary',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Abu Bakr Ash-Shaatree`
-  String get abuBakrAshShaatree {
-    return Intl.message(
-      'Abu Bakr Ash-Shaatree',
-      name: 'abuBakrAshShaatree',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Nasser Alqatami`
-  String get Nasser_Alqatami {
-    return Intl.message(
-      'Nasser Alqatami',
-      name: 'Nasser_Alqatami',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Mishari Alafasy`
-  String get Alafasy {
-    return Intl.message(
-      'Mishari Alafasy',
-      name: 'Alafasy',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ahmed Al-Ajamy`
-  String get ahmedAjamy {
-    return Intl.message(
-      'Ahmed Al-Ajamy',
-      name: 'ahmedAjamy',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Saad Ghamadi`
-  String get ahmedGhamadi {
-    return Intl.message(
-      'Saad Ghamadi',
-      name: 'ahmedGhamadi',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Various Recitations`
-  String get VariousRecitations {
-    return Intl.message(
-      'Various Recitations',
-      name: 'VariousRecitations',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Mohammed Al-Luhaidan Radio`
-  String get MohammedLuhaidanRadio {
-    return Intl.message(
-      'Mohammed Al-Luhaidan Radio',
-      name: 'MohammedLuhaidanRadio',
+      'Share the verse as text',
+      name: 'shareAyaText',
       desc: '',
       args: [],
     );

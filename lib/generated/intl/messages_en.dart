@@ -24,25 +24,6 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "Alafasy": MessageLookupByLibrary.simpleMessage("Mishari Alafasy"),
-        "AliJaber": MessageLookupByLibrary.simpleMessage("Ali Jaber"),
-        "HusaryMuallim":
-            MessageLookupByLibrary.simpleMessage("Mahmoud El-Hosary Muallim"),
-        "MohammedLuhaidanRadio":
-            MessageLookupByLibrary.simpleMessage("Mohammed Al-Luhaidan Radio"),
-        "Nasser_Alqatami":
-            MessageLookupByLibrary.simpleMessage("Nasser Alqatami"),
-        "VariousRecitations":
-            MessageLookupByLibrary.simpleMessage("Various Recitations"),
-        "abdulbasitAbdusamad":
-            MessageLookupByLibrary.simpleMessage("Abdulbasit Abdusamad"),
-        "abuBakrAshShaatree":
-            MessageLookupByLibrary.simpleMessage("Abu Bakr Ash-Shaatree"),
-        "ahmedAjamy": MessageLookupByLibrary.simpleMessage("Ahmed Al-Ajamy"),
-        "ahmedGhamadi": MessageLookupByLibrary.simpleMessage("Saad Ghamadi"),
-        "alMinshawi": MessageLookupByLibrary.simpleMessage(
-            " Mohammed Siddiq Al-Minshawi"),
-        "alMueaqly": MessageLookupByLibrary.simpleMessage("Maher Al-Mueaqly"),
         "allahNames": MessageLookupByLibrary.simpleMessage("Allah Names"),
         "arafah": MessageLookupByLibrary.simpleMessage("Day Of Arafah"),
         "aya": MessageLookupByLibrary.simpleMessage("Aya"),
@@ -59,7 +40,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "downloaded": m0,
         "eid_al_adha": MessageLookupByLibrary.simpleMessage("Eid Al-Adha"),
         "eid_al_fitr": MessageLookupByLibrary.simpleMessage("Eid Al-Fitr"),
-        "elHosary": MessageLookupByLibrary.simpleMessage("Mahmoud El-Hosary"),
         "hasCome": MessageLookupByLibrary.simpleMessage("Has Come"),
         "hizb": MessageLookupByLibrary.simpleMessage("Hizb"),
         "islamicOccasions":
@@ -70,7 +50,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "juzs": MessageLookupByLibrary.simpleMessage("Juzes"),
         "lastRead": MessageLookupByLibrary.simpleMessage("Last Read"),
         "lastReadVarseNum": MessageLookupByLibrary.simpleMessage("Verse Num."),
-        "mohammedAyoub": MessageLookupByLibrary.simpleMessage("Mohammed Ayoub"),
         "nextPray": MessageLookupByLibrary.simpleMessage("Next Pray"),
         "page": MessageLookupByLibrary.simpleMessage("Page"),
         "pages": MessageLookupByLibrary.simpleMessage("Pages"),
@@ -85,6 +64,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareApp": MessageLookupByLibrary.simpleMessage("Share App"),
         "shareAppText": MessageLookupByLibrary.simpleMessage(
             "I wanted to share with you an application that I\'ve found to be very beneficial. It\'s a Quran app that provides a comprehensive experience for exploring the Holy Quran. \n Here is the URL:"),
+        "shareAyaAudio":
+            MessageLookupByLibrary.simpleMessage("Share the verse as audio"),
+        "shareAyaText":
+            MessageLookupByLibrary.simpleMessage("Share the verse as text"),
         "sharedBy":
             MessageLookupByLibrary.simpleMessage("Shared by Nour Al Momen App"),
         "sorah": MessageLookupByLibrary.simpleMessage("Sorah"),
@@ -94,8 +77,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tafser Font Size"),
         "tasbeh": MessageLookupByLibrary.simpleMessage("Tasbeeh"),
         "theAyas": MessageLookupByLibrary.simpleMessage("Ayas"),
-        "time": MessageLookupByLibrary.simpleMessage("Time"),
-        "yasserAdDussary":
-            MessageLookupByLibrary.simpleMessage("Yasser Ad-Dussary")
+        "time": MessageLookupByLibrary.simpleMessage("Time")
       };
 }

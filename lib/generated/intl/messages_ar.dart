@@ -24,24 +24,6 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "Alafasy": MessageLookupByLibrary.simpleMessage("مشاري العفاسي"),
-        "AliJaber": MessageLookupByLibrary.simpleMessage("علي جابر"),
-        "HusaryMuallim":
-            MessageLookupByLibrary.simpleMessage("محمود الحصري معلم"),
-        "MohammedLuhaidanRadio":
-            MessageLookupByLibrary.simpleMessage("راديو محمد اللحيدان"),
-        "Nasser_Alqatami": MessageLookupByLibrary.simpleMessage("ناصر القطامي"),
-        "VariousRecitations":
-            MessageLookupByLibrary.simpleMessage("تلاوات منوعة"),
-        "abdulbasitAbdusamad":
-            MessageLookupByLibrary.simpleMessage("عبدالباسط عبدالصمد"),
-        "abuBakrAshShaatree":
-            MessageLookupByLibrary.simpleMessage("أبو بكر الشاطري"),
-        "ahmedAjamy": MessageLookupByLibrary.simpleMessage("أحمد العجمي"),
-        "ahmedGhamadi": MessageLookupByLibrary.simpleMessage("سعد الغامدي"),
-        "alMinshawi":
-            MessageLookupByLibrary.simpleMessage("محمد صديق المنشاوي"),
-        "alMueaqly": MessageLookupByLibrary.simpleMessage("ماهر المعيقلي"),
         "allahNames": MessageLookupByLibrary.simpleMessage("أسماء الله الحسنى"),
         "arafah": MessageLookupByLibrary.simpleMessage("يوم عرفة"),
         "aya": MessageLookupByLibrary.simpleMessage("آية"),
@@ -57,7 +39,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "downloaded": m0,
         "eid_al_adha": MessageLookupByLibrary.simpleMessage("عيد الأضحى"),
         "eid_al_fitr": MessageLookupByLibrary.simpleMessage("عيد الفطر"),
-        "elHosary": MessageLookupByLibrary.simpleMessage("محمود الحصري"),
         "hasCome": MessageLookupByLibrary.simpleMessage("قد أتى"),
         "hizb": MessageLookupByLibrary.simpleMessage("الحزب"),
         "islamicOccasions":
@@ -68,7 +49,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "juzs": MessageLookupByLibrary.simpleMessage("الأجزاء"),
         "lastRead": MessageLookupByLibrary.simpleMessage("آخر قراءة"),
         "lastReadVarseNum": MessageLookupByLibrary.simpleMessage("رقم الآية"),
-        "mohammedAyoub": MessageLookupByLibrary.simpleMessage("محمد ايوب"),
         "nextPray": MessageLookupByLibrary.simpleMessage("الصلاة التالية"),
         "page": MessageLookupByLibrary.simpleMessage("الصفحة"),
         "pages": MessageLookupByLibrary.simpleMessage("الصفحات"),
@@ -83,6 +63,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareApp": MessageLookupByLibrary.simpleMessage("شارك التطبيق"),
         "shareAppText": MessageLookupByLibrary.simpleMessage(
             "أردت أن أشارككم تطبيقا وجدته مفيدا جدا. إنه تطبيق للقرآن يوفر تجربة شاملة لاستكشاف القرآن الكريم. هنا هو عنوان URL:"),
+        "shareAyaAudio":
+            MessageLookupByLibrary.simpleMessage("شارك الآية كصوت"),
+        "shareAyaText": MessageLookupByLibrary.simpleMessage("شارك الآية كنص"),
         "sharedBy": MessageLookupByLibrary.simpleMessage(
             "شارك من قبل تطبيق نور المؤمن"),
         "sorah": MessageLookupByLibrary.simpleMessage("السورة"),
@@ -92,7 +75,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("حجم خط التفسير"),
         "tasbeh": MessageLookupByLibrary.simpleMessage("التسبيح"),
         "theAyas": MessageLookupByLibrary.simpleMessage("الآيات"),
-        "time": MessageLookupByLibrary.simpleMessage("مرة"),
-        "yasserAdDussary": MessageLookupByLibrary.simpleMessage("ياسر الدوسري")
+        "time": MessageLookupByLibrary.simpleMessage("مرة")
       };
 }

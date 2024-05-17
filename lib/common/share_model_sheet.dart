@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:islamic_app/common/custom_button.dart';
 import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/controllers/readers_controller.dart';
+import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/models/surah_model.dart';
 
@@ -31,7 +32,8 @@ class ShareModelSheet extends StatelessWidget {
               child: Column(
                 children: [
                   CustomButton(
-                    title: 'شارك الآية كصوت',
+                    title: S.current.shareAyaAudio,
+                   
                     onTap: () async {
                       readersController.shareAudio(
                         audioController,
@@ -43,7 +45,7 @@ class ShareModelSheet extends StatelessWidget {
                   ),
                   Gap(16.h),
                   CustomButton(
-                    title: 'شارك الآية كنص',
+                    title: S.current.shareAyaText,
                     onTap: () {
                       readersController.shareText(aya, surah);
                     },

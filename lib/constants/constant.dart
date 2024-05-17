@@ -49,60 +49,6 @@ class Constant {
     const JuzesSliverList(),
   ];
 
-  static List<String> readers = [
-    S.current.abdulbasitAbdusamad,
-    S.current.alMinshawi,
-    S.current.elHosary,
-    S.current.HusaryMuallim,
-    S.current.AliJaber,
-    S.current.mohammedAyoub,
-    S.current.alMueaqly,
-    S.current.yasserAdDussary,
-    S.current.abuBakrAshShaatree,
-    S.current.Nasser_Alqatami,
-    S.current.Alafasy,
-    S.current.ahmedAjamy,
-    S.current.ahmedGhamadi,
-  ];
-  // static List<String> readersNamesDownload = [
-  //   "عبدالباسط عبدالصمد",
-  //   "المنشاوي",
-  //   "الحصري",
-  //   "الحصري معلم",
-  //   "علي جابر",
-  //   "محمد أيوب",
-  //   "ماهر المعيقلي",
-  //   "ياسر الدوسري",
-  //   "أبو بكر الشاطري",
-  //   "ناصر القطامي",
-  //   "مشاري العفاسي",
-  //   "أحمد العجمي",
-  //   "سعد الغامدي",
-  // ];
-  static List<String> readersLinks = [
-    "Abdul_Basit_Murattal_64kbps",
-    "Minshawy_Murattal_128kbps",
-    "Husary_128kbps",
-    "Husary_Muallim_128kbps",
-    "Ali_Jaber_64kbps",
-    "Muhammad_Ayyoub_128kbps",
-    "MaherAlMuaiqly128kbps",
-    "Yasser_Ad-Dussary_128kbps",
-    "Abu_Bakr_Ash-Shaatree_64kbps",
-    "Nasser_Alqatami_128kbps",
-    "Alafasy_128kbps",
-    "ahmed_ibn_ali_al_ajamy_128kbps",
-    "Ghamadi_40kbps"
-  ];
-
-  static List<String> radioNames = [
-    S.current.VariousRecitations,
-    S.current.MohammedLuhaidanRadio,
-  ];
-  static List<String> radioLinks = [
-    "https://Qurango.net/radio/tarateel",
-    "https://backup.qurango.net/radio/mohammed_allohaidan",
-  ];
 
   static List<int> lastPlaceBannerPageIndex = [
     76,
