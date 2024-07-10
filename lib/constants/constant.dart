@@ -5,14 +5,20 @@ import 'package:islamic_app/controllers/general_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/views/allah_names/allah_names_view.dart';
+import 'package:islamic_app/views/download_ayas/downlodad_ayas_view.dart';
+import 'package:islamic_app/views/home/widgets/drawer_item.dart';
 import 'package:islamic_app/views/home/widgets/section_widget.dart';
 import 'package:islamic_app/views/quran/quran_view.dart';
 import 'package:islamic_app/views/quran/widgets/juzes_sliverlist.dart';
 import 'package:islamic_app/views/radio/radio_select_view.dart';
+import 'package:islamic_app/views/settings/settings_view.dart';
 import 'package:islamic_app/views/tasbeh/tasbeh_view.dart';
 import 'package:islamic_app/views/year_occasion/year_occasion_view.dart';
+import 'package:share_plus/share_plus.dart';
 
+import '../views/bookmark/bookmark_view.dart';
 import '../views/quran/widgets/suras_sliverlist.dart';
+import 'assets.dart';
 
 const Color kBackgroundColor = Color(0xffFFFBF8);
 const Color kPrimaryColor = Color(0xffFFEEDC);
@@ -48,7 +54,6 @@ class Constant {
     const SurasSliverList(),
     const JuzesSliverList(),
   ];
-
 
   static List<int> lastPlaceBannerPageIndex = [
     76,
@@ -158,6 +163,51 @@ class Constant {
           () => const RadioSelectView(),
           transition: Transition.rightToLeftWithFade,
           duration: const Duration(milliseconds: 300),
+        );
+      },
+    ),
+  ];
+
+  static List<Widget> drawerItems = [
+    DrawerItem(
+      title: S.current.bookmarkAyat,
+      leading: SvgPicturesMethods.bookmarkIcon(),
+      onTap: () {
+        Get.to(
+          () => const BookmarkView(),
+          transition: Transition.rightToLeftWithFade,
+          duration: const Duration(milliseconds: 300),
+        );
+      },
+    ),
+    DrawerItem(
+      title: S.current.downloadAyat,
+      leading: SvgPicturesMethods.playAudioIcon(),
+      onTap: () {
+        Get.to(
+          () => const DownloadAyasView(),
+          transition: Transition.rightToLeftWithFade,
+          duration: const Duration(milliseconds: 300),
+        );
+      },
+    ),
+    DrawerItem(
+      title: S.current.settings,
+      leading: Image.asset(Assets.svgSettingsPng),
+      onTap: () {
+        Get.to(
+          () => const SettingsView(),
+          transition: Transition.rightToLeftWithFade,
+          duration: const Duration(milliseconds: 300),
+        );
+      },
+    ),
+    DrawerItem(
+      title: S.current.shareApp,
+      leading: Image.asset(Assets.svgShareApp),
+      onTap: () async {
+        Share.share(
+          "${S.current.shareAppText} ${Constant.appUrl}",
         );
       },
     ),

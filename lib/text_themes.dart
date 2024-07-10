@@ -33,9 +33,9 @@ class TextThemes {
 
   static TextStyle lastInfoTextStyle(BuildContext context) {
     return GoogleFonts.tajawal(
-      fontSize: 16.sp,
+      fontSize: 14.sp,
       fontWeight: FontWeight.w400,
-      color: const Color(0xffFFFFFF),
+      color: const Color(0xffB6BEBE),
     );
   }
 

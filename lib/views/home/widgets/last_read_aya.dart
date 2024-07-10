@@ -70,7 +70,12 @@ class LastReadAya extends StatelessWidget {
                     Text(
                       S.current.lastRead,
                       style: TextThemes.lastReadTextStyle(context),
-                    )
+                    ),
+                    SizedBox(width: MediaQuery.of(context).size.width * .1),
+                    Text(
+                      formattedDate,
+                      style: TextThemes.lastInfoTextStyle(context),
+                    ),
                   ],
                 ),
               ),
@@ -86,11 +91,6 @@ class LastReadAya extends StatelessWidget {
                           .nameOfSurah,
                       style: TextThemes.lastSuraNameTextStyle(context),
                     ),
-                    SizedBox(width: MediaQuery.of(context).size.width * .28),
-                    Text(
-                      formattedDate,
-                      style: TextThemes.lastInfoTextStyle(context),
-                    ),
                   ],
                 ),
               ),
@@ -103,7 +103,7 @@ class LastReadAya extends StatelessWidget {
                       "${S.of(context).lastReadVarseNum} ${lastReadService.lastAyaNumRead.value}",
                       style: TextThemes.lastInfoTextStyle(context),
                     ),
-                    SizedBox(width: MediaQuery.of(context).size.width * .34),
+                    SizedBox(width: MediaQuery.of(context).size.width * .24),
                     Text(
                       "${S.of(context).page}: ${lastReadService.lastPageRead.value}",
                       style: TextThemes.lastInfoTextStyle(context),

@@ -4,19 +4,13 @@ import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:islamic_app/constants/assets.dart';
 import 'package:islamic_app/controllers/bookmark_controller.dart';
-import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/common/background_image.dart';
-import 'package:islamic_app/views/bookmark/bookmark_view.dart';
-import 'package:islamic_app/views/download_ayas/downlodad_ayas_view.dart';
 import 'package:islamic_app/views/home/widgets/drawer_item.dart';
 import 'package:islamic_app/views/home/widgets/last_read_aya.dart';
 import 'package:islamic_app/views/search/search_view.dart';
-import 'package:islamic_app/views/settings/settings_view.dart';
-import 'package:share_plus/share_plus.dart';
-
 import '../../constants/constant.dart';
 
 class HomeView extends StatelessWidget {
@@ -26,7 +20,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     HijriCalendar.setLocal("ar");
     var hijri = HijriCalendar.now();
-    QuranController quranController = Get.find();
+    // QuranController quranController = Get.find();
     return BackgroundImage(
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -53,47 +47,9 @@ class HomeView extends StatelessWidget {
                     color: kThirdlyColor,
                   ),
                 ),
-                DrawerItem(
-                  title: S.current.bookmarkAyat,
-                  leading: SvgPicturesMethods.bookmarkIcon(),
-                  onTap: () {
-                    Get.to(
-                      () => const BookmarkView(),
-                      transition: Transition.rightToLeftWithFade,
-                      duration: const Duration(milliseconds: 300),
-                    );
-                  },
-                ),
-                DrawerItem(
-                  title: S.current.downloadAyat,
-                  leading: SvgPicturesMethods.playAudioIcon(),
-                  onTap: () {
-                    Get.to(
-                      () => const DownloadAyasView(),
-                      transition: Transition.rightToLeftWithFade,
-                      duration: const Duration(milliseconds: 300),
-                    );
-                  },
-                ),
-                DrawerItem(
-                  title: S.current.settings,
-                  leading: Image.asset(Assets.svgSettingsPng),
-                  onTap: () {
-                    Get.to(
-                      () => const SettingsView(),
-                      transition: Transition.rightToLeftWithFade,
-                      duration: const Duration(milliseconds: 300),
-                    );
-                  },
-                ),
-                DrawerItem(
-                  title: S.current.shareApp,
-                  leading: Image.asset(Assets.svgShareApp),
-                  onTap: () async {
-                    Share.share(
-                      "${S.current.shareAppText} ${Constant.appUrl}",
-                    );
-                  },
+                ...List.generate(
+                  Constant.drawerItems.length,
+                  (index) => Constant.drawerItems[index],
                 ),
                 DrawerItem(
                   title: S.current.rate,
@@ -118,12 +74,22 @@ class HomeView extends StatelessWidget {
           title: Builder(builder: (context) {
             return Row(
               children: [
-                SvgPicturesMethods.calendarIcon(),
-                Padding(
-                  padding: EdgeInsets.only(top: 4.h),
-                  child: Text(
-                    "${hijri.dayWeName}, ${hijri.hDay.toArabic()} ${hijri.longMonthName} ${hijri.hYear.toArabic()} هـ",
-                  ),
+                Column(
+                  
+                  children: [
+                    const Text('السلام عليكم'),
+                    Row(
+                      children: [
+                        SvgPicturesMethods.calendarIcon(),
+                        Padding(
+                          padding: EdgeInsets.only(top: 4.h),
+                          child: Text(
+                            "${hijri.dayWeName}, ${hijri.hDay.toArabic()} ${hijri.longMonthName} ${hijri.hYear.toArabic()} هـ",
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 const Spacer(),
                 Padding(
@@ -166,7 +132,7 @@ class HomeView extends StatelessWidget {
                     itemCount: Constant.homeSections.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                      crossAxisCount: 3,
                     ),
                     itemBuilder: (context, index) =>
                         Constant.homeSections[index],

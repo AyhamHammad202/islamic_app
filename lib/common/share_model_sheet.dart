@@ -33,7 +33,6 @@ class ShareModelSheet extends StatelessWidget {
                 children: [
                   CustomButton(
                     title: S.current.shareAyaAudio,
-                   
                     onTap: () async {
                       readersController.shareAudio(
                         audioController,
