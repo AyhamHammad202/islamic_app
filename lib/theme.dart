@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -45,6 +46,15 @@ class Themes {
         color: const Color(0xff043336),
       ),
     ),
+    textSelectionTheme: const TextSelectionThemeData(
+      selectionColor: Color(0xff997647),
+      selectionHandleColor: Color(0xff997647),
+      cursorColor: Color(0xff043336),
+    ),
+    
+    popupMenuTheme: const PopupMenuThemeData(
+      color: Color(0xff997647),
+    ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       linearTrackColor: darkiconClr,
       circularTrackColor: darkBackgroundClr,
@@ -76,7 +86,7 @@ class Themes {
   static final dark = ThemeData(
     useMaterial3: true,
     // primaryColor: lightBackgroundClr,
-    scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),
+    scaffoldBackgroundColor: const Color.fromARGB(255, 36, 33, 30),
 
     // scaffoldBackgroundColor: Colors.transparent,
     appBarTheme: AppBarTheme(
@@ -90,6 +100,15 @@ class Themes {
         fontWeight: FontWeight.bold,
         color: const Color(0xff997647),
       ),
+    ),
+    textSelectionTheme: const TextSelectionThemeData(
+      selectionColor: Color(0xff997647),
+      selectionHandleColor: Color(0xff997647),
+      cursorColor: Color(0xff043336),
+    ),
+    
+    popupMenuTheme: const PopupMenuThemeData(
+      color: Color(0xff997647),
     ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       linearTrackColor: lightBackgroundClr,
@@ -107,7 +126,7 @@ class Themes {
       brightness: Brightness.dark,
       primary: Colors.black54,
       onPrimary: Colors.black54,
-      secondary: Color(0xffF3E3CF),
+      secondary: Color(0xff2E2A26),
       onSecondary: Color(0xffD7A664),
       secondaryContainer: Colors.black54,
       error: Colors.red,

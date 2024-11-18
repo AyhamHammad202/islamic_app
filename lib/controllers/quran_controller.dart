@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:math' as Math;
 
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +9,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
 import 'package:hijri/hijri_calendar.dart';
-import 'package:islamic_app/models/aya_of_surah_model.dart';
-import 'package:islamic_app/models/surah_info.dart';
-import 'package:islamic_app/services/notificiton_service.dart';
+import 'package:islamic_app/constants/constant.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:islamic_app/database/data_client.dart';
+import 'package:islamic_app/helper.dart';
+import 'package:islamic_app/models/aya_of_surah_model.dart';
+import 'package:islamic_app/models/quran_duaa_model.dart';
+import 'package:islamic_app/models/surah_info.dart';
 import 'package:islamic_app/models/surah_model.dart';
 
 import '../models/allah_name_model.dart';
@@ -24,11 +26,15 @@ class QuranController extends GetxController {
   List<SurahModel> surahs = [];
   List<SurahInfoModel> suarhsInfo = [];
   List<AllahNameModel> allahNames = [];
+  List<QuranDuaaModel> quranDuaas = [];
   List<List<AyaOfSurahModel>> pages = [];
   List<AyaOfSurahModel> allAyas = [];
   List<AyaOfSurahModel> ayasFoundBySearch = [];
   List<String> tables = [];
   RxBool isClickedOnPage = false.obs;
+  RxInt randomSura = 1.obs;
+  RxInt randomAyaFromSura = 1.obs;
+  RxInt randomAya = 1.obs;
 
   Map<int, String> mapOfTafser = {};
 
@@ -51,7 +57,9 @@ class QuranController extends GetxController {
       // log("OFFEST ${homePageScrollerController.position}");
       // if (homePageScrollerController.offset>homePageScrollerController) {}
     });
+    await quranDuaasNames();
     await loadQuran();
+    randomAyaSelect();
     await loadQuranSurahsInfo();
     await getAyaTafser();
     await loadAllahNames();
@@ -65,7 +73,7 @@ class QuranController extends GetxController {
     super.onClose();
   }
 
-  int calucate(int year, int month, int day) {
+  int calculate(int year, int month, int day) {
     HijriCalendar hijriCalendar = HijriCalendar();
     DateTime start = DateTime.now();
     DateTime end = hijriCalendar.hijriToGregorian(year, month, day);
@@ -88,15 +96,8 @@ class QuranController extends GetxController {
     if (currentIndex > totalPages) {
       return 100.0;
     }
-    return (currentIndex / totalPages) * Get.width;
-  }
-
-  double calculateProgress2(
-      int currentDay, int daysUntilEvent, double totalWidth) {
-    // Assuming currentDay is the day of the month and daysUntilEvent is the total days remaining until the event
-    double progressFraction = currentDay / (currentDay + daysUntilEvent);
-    return progressFraction *
-        totalWidth; // Calculate the proportional width based on progress
+    return ((currentIndex / totalPages) *
+        Get.context!.customOrientation(Get.width * .8, Get.width * .4));
   }
 
   void toggleAyahSelection(int index) {
@@ -146,6 +147,33 @@ class QuranController extends GetxController {
     for (var surah in jsonResponse) {
       suarhsInfo.add(SurahInfoModel.fromMap(surah));
     }
+    update();
+  }
+
+  Future<void> quranDuaasNames() async {
+    String jsonString =
+        await rootBundle.loadString("assets/data/quran_duaa.json");
+    var jsonResponse = jsonDecode(jsonString);
+
+    for (var name in jsonResponse['surahs']) {
+      quranDuaas.add(QuranDuaaModel.fromMap(name));
+    }
+    randomDuaa();
+    update();
+  }
+
+  void randomDuaa() {
+    randomSura = Math.Random().nextInt(quranDuaas.length - 1).obs;
+    randomAyaFromSura =
+        Math.Random().nextInt(quranDuaas[randomSura.value].ayas.length).obs;
+    log("dsshiac");
+    update();
+  }
+
+  void randomAyaSelect() {
+    // randomSura = Math.Random().nextInt(quranDuaas.length - 1).obs;
+    randomAya = Math.Random().nextInt(allAyas.length).obs;
+    log("dsshiac");
     update();
   }
 
@@ -248,58 +276,12 @@ class QuranController extends GetxController {
 
   // Map<int, int> indexMapping = {};
   String removeDiacritics(String input) {
-    final diacriticsMap = {
-      'أ': 'ا',
-      'إ': 'ا',
-      'آ': 'ا',
-      'ٱ': 'ا',
-      'إٔ':
-          'ا', // These mappings already seem comprehensive, but double inclusion for clarity
-      'إٕ': 'ا',
-      'إٓ': 'ا',
-      'أَ': 'ا',
-      'إَ': 'ا',
-      'آَ': 'ا',
-      'إُ': 'ا',
-      'إٌ': 'ا',
-      'إً': 'ا',
-      // 'ة': 'ه',
-      'ً': '',
-      'ٌ': '',
-      'ٍ': '',
-      'َ': '',
-      'ُ': '',
-      'ِ': '',
-      'ّ': '',
-      'ْ': '',
-      'ـ': '',
-      // Adding more comprehensive handling for combinations and less common diacritics
-      'ٰ': '', // Dagger alif (small alif on top of characters)
-      'ٖ': '', // Kharijatayn (small noon)
-      'ٗ': '', // Inverted damma
-      'ٕ': '', // Small kasra
-      'ٓ': '', // Maddah above
-      'ۖ': '', // Small high seen
-      'ۗ': '', // Small high rounded zero
-      'ۘ': '', // Small high upright rectangular zero
-      'ۙ': '', // Small high dotless head of khah
-      'ۚ': '', // Small high meem isolated form
-      'ۛ': '', // Small low seen
-      'ۜ': '', // Small waw
-      '۝': '', // Small yeh
-      '۞': '', // Small high noon
-      '۟': '', // Empty centre low stop
-      '۠': '', // Empty centre high stop
-      'ۡ': '', // Rounded high stop with filled centre
-      'ۢ': '', // Small low meem
-    };
-
     StringBuffer buffer = StringBuffer();
     Map<int, int> indexMapping =
         {}; // Ensure indexMapping is declared if not already globally declared
     for (int i = 0; i < input.length; i++) {
       String char = input[i];
-      String? mappedChar = diacriticsMap[char];
+      String? mappedChar = Constant.diacriticsMap[char];
       if (mappedChar != null) {
         buffer.write(mappedChar);
         if (mappedChar.isNotEmpty) {

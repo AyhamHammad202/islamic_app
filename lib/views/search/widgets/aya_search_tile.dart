@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
@@ -20,11 +21,15 @@ class AyaSearchTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final QuranController quranController = Get.find();
+    final AudioController audioController = Get.find();
     return InkWell(
       onTap: () {
         quranController.globalPage.value = aya.page - 1;
         quranController.getCurrentPageAyas(aya.page - 1);
         quranController.selectedAyahIndexes.add(aya.uniqueIdOfAya);
+        audioController.ayaUniqeId.value = aya.uniqueIdOfAya;
+        quranController.globalPage.value = aya.page - 1;
+        quranController.getCurrentPageAyas(aya.page - 1);
         Get.to(
           AyatView(
             surahModel: quranController
@@ -36,12 +41,13 @@ class AyaSearchTile extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 4.h),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
         decoration: BoxDecoration(
             color: Theme.of(context)
                 .colorScheme
                 .secondaryContainer
                 .withOpacity(.6),
-            borderRadius: BorderRadius.circular(4.r),
+            borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
               color: Theme.of(context).colorScheme.secondary.withOpacity(.6),
             )),

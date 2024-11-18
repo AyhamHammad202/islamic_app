@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:islamic_app/controllers/general_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/views/allah_names/allah_names_view.dart';
+import 'package:islamic_app/views/azkar_categories/azkar_categories_view.dart';
 import 'package:islamic_app/views/download_ayas/downlodad_ayas_view.dart';
-import 'package:islamic_app/views/home/widgets/drawer_item.dart';
+import 'package:islamic_app/views/more_view/widgets/more_item.dart';
 import 'package:islamic_app/views/home/widgets/section_widget.dart';
-import 'package:islamic_app/views/quran/quran_view.dart';
-import 'package:islamic_app/views/quran/widgets/juzes_sliverlist.dart';
+import 'package:islamic_app/views/quran/widgets/juzes_listview.dart';
 import 'package:islamic_app/views/radio/radio_select_view.dart';
 import 'package:islamic_app/views/settings/settings_view.dart';
 import 'package:islamic_app/views/tasbeh/tasbeh_view.dart';
 import 'package:islamic_app/views/year_occasion/year_occasion_view.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../views/bookmark/bookmark_view.dart';
-import '../views/quran/widgets/suras_sliverlist.dart';
+import '../views/quran/widgets/suras_listview.dart';
 import 'assets.dart';
 
 const Color kBackgroundColor = Color(0xffFFFBF8);
@@ -44,6 +42,9 @@ const String kSettingSalatAlotrKey = "salatAlotr";
 class Constant {
   Constant._();
 
+  static const String bookLottie = "assets/lottie/open_book.json";
+  static const String searchLottie = "assets/lottie/search.json";
+
   static const String appUrl =
       "https://play.google.com/store/apps/details?id=com.NourAlmomen.islamicapp";
 
@@ -51,9 +52,55 @@ class Constant {
 
   static const String backgroundImage = "assets/svg/view_background.png";
   static List<Widget> tabsViews = [
-    const SurasSliverList(),
-    const JuzesSliverList(),
+    const SurasListView(),
+    const JuzesListView(),
   ];
+
+  static const diacriticsMap = {
+    'أ': 'ا',
+    'إ': 'ا',
+    'آ': 'ا',
+    'ٱ': 'ا',
+    'إٔ':
+        'ا', // These mappings already seem comprehensive, but double inclusion for clarity
+    'إٕ': 'ا',
+    'إٓ': 'ا',
+    'أَ': 'ا',
+    'إَ': 'ا',
+    'آَ': 'ا',
+    'إُ': 'ا',
+    'إٌ': 'ا',
+    'إً': 'ا',
+    // 'ة': 'ه',
+    'ً': '',
+    'ٌ': '',
+    'ٍ': '',
+    'َ': '',
+    'ُ': '',
+    'ِ': '',
+    'ّ': '',
+    'ْ': '',
+    'ـ': '',
+    // Adding more comprehensive handling for combinations and less common diacritics
+    'ٰ': '', // Dagger alif (small alif on top of characters)
+    'ٖ': '', // Kharijatayn (small noon)
+    'ٗ': '', // Inverted damma
+    'ٕ': '', // Small kasra
+    'ٓ': '', // Maddah above
+    'ۖ': '', // Small high seen
+    'ۗ': '', // Small high rounded zero
+    'ۘ': '', // Small high upright rectangular zero
+    'ۙ': '', // Small high dotless head of khah
+    'ۚ': '', // Small high meem isolated form
+    'ۛ': '', // Small low seen
+    'ۜ': '', // Small waw
+    '۝': '', // Small yeh
+    '۞': '', // Small high noon
+    '۟': '', // Empty centre low stop
+    '۠': '', // Empty centre high stop
+    'ۡ': '', // Rounded high stop with filled centre
+    'ۢ': '', // Small low meem
+  };
 
   static List<int> lastPlaceBannerPageIndex = [
     76,
@@ -79,46 +126,70 @@ class Constant {
     584
   ];
 
+  // static List<Widget> homeNavItems = [
+  //   NavItem(
+  //     icon: SvgPicturesMethods.navHomeIcon(),
+  //     title: S.current.navhome,
+  //   ),
+  //   NavItem(
+  //     icon: SvgPicturesMethods.navQuranIcon(),
+  //     title: S.current.navquran,
+  //     onTap: () {
+  //       Get.put(() => GeneralController());
+  //       Get.to(
+  //         () => const QuranView(),
+  //         transition: Transition.rightToLeftWithFade,
+  //         duration: const Duration(milliseconds: 300),
+  //       );
+  //     },
+  //   ),
+  //   NavItem(
+  //     icon: SvgPicturesMethods.navArchiveIcon(),
+  //     title: S.current.navbookmark,
+  //     onTap: () {
+  //       Get.to(
+  //         () => const BookmarkView(),
+  //         transition: Transition.rightToLeftWithFade,
+  //         duration: const Duration(milliseconds: 300),
+  //       );
+  //     },
+  //   ),
+  //   NavItem(
+  //     icon: SvgPicturesMethods.navMenuIcon(),
+  //     title: S.current.navmore,
+  //     onTap: () {
+  //       Get.to(
+  //         () => const MoreView(),
+  //         transition: Transition.rightToLeftWithFade,
+  //         duration: const Duration(milliseconds: 300),
+  //       );
+  //     },
+  //   ),
+  // ];
   static List<Widget> homeSections = [
     SectionWidget(
-      title: S.current.quran,
-      svgIcon: SvgPicturesMethods.quranBookIcon(
+      title: S.current.azkar,
+      svgIcon: SvgPicturesMethods.azkarIcon(
         height: 50.h,
         width: 50.w,
       ),
       onTap: () {
-        Get.put(() => GeneralController());
         Get.to(
-          () => const QuranView(),
+          () => const AzkarCategoriesView(),
           transition: Transition.rightToLeftWithFade,
           duration: const Duration(milliseconds: 300),
         );
       },
     ),
-    // SectionWidget(
-    //   title: S.current.bookmarkAyat,
-    //   svgIcon: SvgPicturesMethods.bookmarkIcon(
-    //     height: 75.h,
-    //     width: 75.w,
-    //   ),
-    //   onTap: () {
-    //     // Get.put(() => GeneralController());
-    //     Get.to(
-    //       () => const BookmarkView(),
-    //       transition: Transition.rightToLeftWithFade,
-    //       duration: const Duration(milliseconds: 300),
-    //     );
-    //   },
-    // ),
     SectionWidget(
-      title: S.current.allahNames,
-      svgIcon: SvgPicturesMethods.allahNamesIcon(
+      title: S.current.islamicOccasions,
+      svgIcon: SvgPicturesMethods.occasionsIcon(
         height: 50.h,
         width: 50.w,
       ),
       onTap: () {
         Get.to(
-          () => const AllahNamesView(),
+          () => const YearOccasionView(),
           transition: Transition.rightToLeftWithFade,
           duration: const Duration(milliseconds: 300),
         );
@@ -139,14 +210,14 @@ class Constant {
       },
     ),
     SectionWidget(
-      title: S.current.islamicOccasions,
-      svgIcon: SvgPicturesMethods.occasionsIcon(
+      title: S.current.allahNames,
+      svgIcon: SvgPicturesMethods.allahNamesIcon(
         height: 50.h,
         width: 50.w,
       ),
       onTap: () {
         Get.to(
-          () => const YearOccasionView(),
+          () => const AllahNamesView(),
           transition: Transition.rightToLeftWithFade,
           duration: const Duration(milliseconds: 300),
         );
@@ -168,19 +239,20 @@ class Constant {
     ),
   ];
 
+  static List<String> homeNavItemsIconsTitles = [
+    Assets.svgHome,
+    Assets.svgQuran,
+    Assets.svgArchive,
+    Assets.svgMenuV2,
+  ];
+  static List<String> homeNavItemsTitles = [
+    S.current.navhome,
+    S.current.navquran,
+    S.current.navbookmark,
+    S.current.navmore,
+  ];
   static List<Widget> drawerItems = [
-    DrawerItem(
-      title: S.current.bookmarkAyat,
-      leading: SvgPicturesMethods.bookmarkIcon(),
-      onTap: () {
-        Get.to(
-          () => const BookmarkView(),
-          transition: Transition.rightToLeftWithFade,
-          duration: const Duration(milliseconds: 300),
-        );
-      },
-    ),
-    DrawerItem(
+    MoreItem(
       title: S.current.downloadAyat,
       leading: SvgPicturesMethods.playAudioIcon(),
       onTap: () {
@@ -191,7 +263,7 @@ class Constant {
         );
       },
     ),
-    DrawerItem(
+    MoreItem(
       title: S.current.settings,
       leading: Image.asset(Assets.svgSettingsPng),
       onTap: () {
@@ -202,7 +274,7 @@ class Constant {
         );
       },
     ),
-    DrawerItem(
+    MoreItem(
       title: S.current.shareApp,
       leading: Image.asset(Assets.svgShareApp),
       onTap: () async {

@@ -60,7 +60,7 @@ class NotificationService extends GetxService {
         channelKey: 'progress_bar',
         channelDescription: "نسبة التحميل",
         channelName: "Downloading progress",
-        groupKey: "salatReminder",
+        groupKey: "download",
         icon: "resource://drawable/quran",
         enableLights: true,
         importance: NotificationImportance.High,
@@ -68,7 +68,9 @@ class NotificationService extends GetxService {
       )
     ], channelGroups: [
       NotificationChannelGroup(
-          channelGroupKey: "salatReminder", channelGroupName: "salatGroub")
+          channelGroupKey: "salatReminder", channelGroupName: "salatGroub"),
+      NotificationChannelGroup(
+          channelGroupKey: "download", channelGroupName: "downloadGroub")
     ]);
     if (!await AwesomeNotifications().isNotificationAllowed()) {
       AwesomeNotifications().requestPermissionToSendNotifications();

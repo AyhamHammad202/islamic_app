@@ -148,7 +148,7 @@ class ReadersController extends GetxController {
             channelKey: 'progress_bar',
             title: S.current.download,
             body:
-                'Downloading ${surah.englishNameOfSurah}:${(downloadedAyatCount.value / surah.ayas.length * 100).toInt()}%',
+                '${Get.locale.toString() == "en" ? surah.englishNameOfSurah : surah.nameOfSurah}: ${S.current.downloadAyat} ${(downloadedAyatCount.value / surah.ayas.length * 100).toInt()}%',
             progress:
                 (downloadedAyatCount.value / surah.ayas.length * 100).toInt(),
             locked: isDownloading.value,

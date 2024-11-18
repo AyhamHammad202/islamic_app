@@ -178,21 +178,6 @@ extension ContextMenuExtension on BuildContext {
                               );
                             },
                           );
-                          // audioController.ayaUniqeId.value =
-                          //     ayaOfSurahModel.uniqueIdOfAya;
-                          // final file = File(
-                          //   audioController.ayaPath,
-                          // );
-                          // if (!await file.exists()) {
-                          //   await audioController.downloadAya(file);
-
-                          //   await Share.shareXFiles([XFile(file.path)],
-                          //       text: "HHHHHHH");
-                          // }
-                          // await Share.shareXFiles([XFile(file.path)],
-                          //     text: "HHHHHHH");
-                          // quranController.clearSelection();
-                          // cancel();
                         },
                       ),
                     ],

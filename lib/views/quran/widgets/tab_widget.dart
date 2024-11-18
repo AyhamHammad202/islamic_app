@@ -19,18 +19,21 @@ class TabWidget extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
+        margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
         decoration: BoxDecoration(
             color: isSelected
                 ? Theme.of(context).colorScheme.secondary
                 : Theme.of(context).colorScheme.secondary.withOpacity(0.3),
             borderRadius: BorderRadius.circular(isSelected ? 8.r : 4.r)),
-        child: Text(
-          title,
-          style: TextThemes.tabTextStyle(context).copyWith(
-            color: isSelected
-                ? TextThemes.tabTextStyle(context).color
-                : TextThemes.tabTextStyle(context).color!.withOpacity(0.3),
+        child: Center(
+          child: Text(
+            title,
+            style: TextThemes.tabTextStyle(context).copyWith(
+              color: isSelected
+                  ? TextThemes.tabTextStyle(context).color
+                  : TextThemes.tabTextStyle(context).color!.withOpacity(0.3),
+            ),
           ),
         ),
       ),

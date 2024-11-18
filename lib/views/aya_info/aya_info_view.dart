@@ -15,14 +15,14 @@ import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/text_themes.dart';
-import 'package:share_plus/share_plus.dart';
 
 import 'widgets/tafser_richtext_widget.dart';
 
 class AyaInfoView extends StatelessWidget {
   const AyaInfoView({
     super.key,
-    required this.aya, required this.surahModel,
+    required this.aya,
+    required this.surahModel,
   });
   final AyaOfSurahModel aya;
   final SurahModel surahModel;
@@ -63,6 +63,9 @@ class AyaInfoView extends StatelessWidget {
                                     '﴿${aya.textOfAya}﴾ [${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}]',
                               ),
                             );
+                            if (context.mounted) {
+                              show(context: context, message: "تم النسخ");
+                            }
                           },
                           child: SvgPicturesMethods.copyIcon(),
                         ),

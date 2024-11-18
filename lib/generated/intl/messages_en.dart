@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "aya": MessageLookupByLibrary.simpleMessage("Aya"),
         "ayaFontSize": MessageLookupByLibrary.simpleMessage("Aya Font Size"),
         "ayas": MessageLookupByLibrary.simpleMessage("Ayas"),
+        "azkar": MessageLookupByLibrary.simpleMessage("Al-Azkar"),
         "bookmarkAyat":
             MessageLookupByLibrary.simpleMessage("Bookmarked Verses"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
@@ -50,13 +51,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "juzs": MessageLookupByLibrary.simpleMessage("Juzes"),
         "lastRead": MessageLookupByLibrary.simpleMessage("Last Read"),
         "lastReadVarseNum": MessageLookupByLibrary.simpleMessage("Verse Num."),
+        "navbookmark":
+            MessageLookupByLibrary.simpleMessage("Bookmarked Verses"),
+        "navhome": MessageLookupByLibrary.simpleMessage("Home"),
+        "navmore": MessageLookupByLibrary.simpleMessage("More"),
+        "navquran": MessageLookupByLibrary.simpleMessage("Quran"),
         "nextPray": MessageLookupByLibrary.simpleMessage("Next Pray"),
         "page": MessageLookupByLibrary.simpleMessage("Page"),
         "pages": MessageLookupByLibrary.simpleMessage("Pages"),
         "quran": MessageLookupByLibrary.simpleMessage("Al-Quran Al-Kreem"),
+        "quranDuaas": MessageLookupByLibrary.simpleMessage("Quran Duaas"),
         "qurter": MessageLookupByLibrary.simpleMessage("Qurters"),
         "radio": MessageLookupByLibrary.simpleMessage("Quran Radio"),
         "ramadan": MessageLookupByLibrary.simpleMessage("Ramadan"),
+        "randomAya": MessageLookupByLibrary.simpleMessage("Random Aya"),
         "rate": MessageLookupByLibrary.simpleMessage("Rate The App"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "Search Using Sura Name or The Verse"),
@@ -77,6 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tafser Font Size"),
         "tasbeh": MessageLookupByLibrary.simpleMessage("Tasbeeh"),
         "theAyas": MessageLookupByLibrary.simpleMessage("Ayas"),
-        "time": MessageLookupByLibrary.simpleMessage("Time")
+        "time": MessageLookupByLibrary.simpleMessage("Time"),
+        "times": MessageLookupByLibrary.simpleMessage("Times")
       };
 }

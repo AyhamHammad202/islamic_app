@@ -33,30 +33,32 @@ class QuranView extends StatelessWidget {
         body: Obx(() {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Scrollbar(
-              thickness: 3,
-              interactive: true,
-              child: CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: InkWell(
-                      onTap: () {
-                        Get.to(
-                          () => const SearchView(),
-                          transition: Transition.fade,
-                          duration: const Duration(milliseconds: 300),
-                        );
-                      },
-                      child: const SearchTextField(),
-                    ),
+            child: DefaultTabController(
+              length: 2,
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.to(
+                        () => const SearchView(),
+                        transition: Transition.fade,
+                        duration: const Duration(milliseconds: 300),
+                      );
+                    },
+                    child: const SearchTextField(),
                   ),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: List.generate(
-                          2,
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.h),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      child: TabBar(
+                        tabs: List.generate(
+                          tabsTitles.length,
                           (index) => TabWidget(
                             title: tabsTitles[index],
                             isSelected:
@@ -69,8 +71,18 @@ class QuranView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // const SurasSliverList()
-                  Constant.tabsViews[generalController.tabSelected.value],
+                  Expanded(
+                    child: PageView.builder(
+                      itemBuilder: (context, index) {
+                        return Constant
+                            .tabsViews[generalController.tabSelected.value];
+                      },
+                      itemCount: 2,
+                      onPageChanged: (value) {
+                        generalController.tabSelected.value = value;
+                      },
+                    ),
+                  )
                 ],
               ),
             ),

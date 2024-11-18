@@ -28,9 +28,6 @@ class TafserRichTextWidget extends StatelessWidget {
         textSpans.add(
           TextSpan(
             text: leadingText,
-            style: TextThemes.tafserTextStyle(context).copyWith(
-              fontSize: fontSize.sp,
-            ),
           ),
         );
       }
@@ -59,16 +56,12 @@ class TafserRichTextWidget extends StatelessWidget {
 
     return SelectableText.rich(
       TextSpan(
-        style: TextStyle(
-          fontFamily:
-              kFontNotoNaskhArabic, // Replace with another font if needed
-          // color: Colors.black,
-          fontSize: fontSize.sp,
-        ),
+        style: TextThemes.tafserTextStyle(context, fontSize),
         children: textSpans,
       ),
       textAlign: TextAlign.justify,
-      selectionHeightStyle: BoxHeightStyle.strut,
+      selectionHeightStyle: BoxHeightStyle.max,
+      selectionWidthStyle: BoxWidthStyle.tight,
     );
   }
 }

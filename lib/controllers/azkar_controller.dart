@@ -1,7 +1,11 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/zekr_model.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../database/data_client.dart';
@@ -9,6 +13,8 @@ import '../database/data_client.dart';
 class AzkarController extends GetxController {
   final DataClient _dataClient = DataClient();
   List<ZekrModel> azkar = [];
+  List<ZekrModel> filterdAzkar = [];
+  List<String> categories = [];
 
   @override
   void onInit() async {
@@ -27,8 +33,8 @@ class AzkarController extends GetxController {
         columns: ZekrModel.columns, where: "isDeleted = 0");
     for (var zekr in results) {
       azkar.add(ZekrModel.fromMap(zekr));
-      log("ZEKR ${zekr['id']}");
     }
+    getAllAzkarCategories();
     refresh();
   }
 
@@ -84,5 +90,36 @@ class AzkarController extends GetxController {
         "UPDATE ${ZekrModel.table} SET zekr=defaultZekr,isDeleted=0 WHERE id=${zekrModel.id}");
     await getAllTheAzkar();
     refresh();
+  }
+
+  void getAllAzkarCategories() {
+    categories.assignAll(azkar.map((e) => e.category).toSet().toList());
+  }
+
+  void getFilterdAzkar(String category) async {
+    filterdAzkar.clear();
+    filterdAzkar.addAll(
+      azkar.where((z) => z.category == category),
+    );
+  }
+
+  Future shareZkar(ZekrModel zekrModel, BuildContext context) async {
+    try {
+      await Share.share(zekrModel.zekr);
+    } on Exception {
+      if (context.mounted) {
+        show(context: context, message: "حدث خطأ");
+      }
+    }
+  }
+
+  Future copyZkar(ZekrModel zekrModel, BuildContext context) async {
+    try {
+      await Clipboard.setData(ClipboardData(text: zekrModel.zekr));
+    } on Exception {
+      if (context.mounted) {
+        show(context: context, message: "حدث خطأ");
+      }
+    }
   }
 }

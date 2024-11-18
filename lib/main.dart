@@ -23,7 +23,7 @@ import 'package:islamic_app/services/last_read_service.dart';
 import 'package:islamic_app/router.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/services/theme_services.dart';
-import 'package:islamic_app/views/home/home_view.dart';
+import 'package:islamic_app/views/home/general_view.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
@@ -40,7 +40,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
- 
+
   await FirebaseApi().initNotifictions();
   await initalServices();
   await GetStorage.init();
@@ -116,7 +116,7 @@ class MyApp extends StatelessWidget {
           init: Get.put(QuranController()),
           builder: (c) {
             return quranController.suarhsInfo.isNotEmpty
-                ? const HomeView()
+                ? const GeneralView()
                 : Scaffold(
                     body: SizedBox(
                       height: MediaQuery.of(context).size.height,

@@ -3,12 +3,13 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
+import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/services/last_read_service.dart';
 import 'package:islamic_app/views/ayat/ayat_view.dart';
-import 'package:islamic_app/views/quran/widgets/sura_tile.dart';
+import 'package:islamic_app/views/quran/widgets/juz_tile.dart';
 
-class SurasSliverList extends StatelessWidget {
-  const SurasSliverList({
+class JuzesListView extends StatelessWidget {
+  const JuzesListView({
     super.key,
   });
 
@@ -18,38 +19,42 @@ class SurasSliverList extends StatelessWidget {
     final AudioController audioController = Get.find();
     final LastReadService lastReadService = Get.find();
     return AnimationLimiter(
-      child: SliverList.builder(
-        itemCount: quranController.surahs.length,
+      child: ListView.builder(
+        itemCount: 30,
         itemBuilder: (context, index) {
+          AyaOfSurahModel juz =
+              quranController.allAyas.firstWhere((a) => a.juz == index + 1);
           return AnimationConfiguration.staggeredList(
             position: index,
-            duration: const Duration(milliseconds: 450),
+            duration: const Duration(milliseconds: 500),
             child: SlideAnimation(
               horizontalOffset: 50,
               child: FadeInAnimation(
-                child: SuraTile(
-                  index: index,
+                child: JuzTile(
+                  juz: juz,
                   onTap: () {
-                    quranController.globalPage.value =
-                        quranController.surahs[index].ayas[0].page - 1;
+                    quranController.globalPage.value = juz.page - 1;
+                    // quranController.surahs[index].ayas[0].page - 1;
                     quranController.getCurrentPageAyas(
-                        quranController.surahs[index].ayas.first.page - 1);
+                      juz.page - 1,
+                    );
                     Get.to(
                       AyatView(
-                        surahModel: quranController.surahs[index],
+                        surahModel: quranController.surahs[
+                            quranController.getSurahNumberByAya(juz) - 1],
                       ),
                       transition: Transition.rightToLeft,
                       duration: const Duration(milliseconds: 300),
                     );
-                    audioController.ayaUniqeId.value =
-                        quranController.surahs[index].ayas.first.uniqueIdOfAya;
+                    audioController.ayaUniqeId.value = juz.uniqueIdOfAya;
                     lastReadService.setLastRead(
-                      quranController.surahs[index].ayas.first.page,
+                      juz.page,
                       "${DateTime.now()}",
-                      quranController.surahs[index].numberOfSurah,
                       quranController
-                          .surahs[index].ayas.first.numberOfAyaInSurah,
-                      quranController.surahs[index].ayas.first.uniqueIdOfAya,
+                          .surahs[quranController.getSurahNumberByAya(juz) - 1]
+                          .numberOfSurah,
+                      juz.numberOfAyaInSurah,
+                      juz.uniqueIdOfAya,
                     );
                   },
                 ),

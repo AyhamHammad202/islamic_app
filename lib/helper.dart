@@ -23,40 +23,72 @@ extension ArabicNumerals on int {
         .join('');
   }
 }
+
 extension Translate on int {
   String toArabicOrdinal() {
     switch (this) {
-      case 1: return 'الأول';
-      case 2: return 'الثاني';
-      case 3: return 'الثالث';
-      case 4: return 'الرابع';
-      case 5: return 'الخامس';
-      case 6: return 'السادس';
-      case 7: return 'السابع';
-      case 8: return 'الثامن';
-      case 9: return 'التاسع';
-      case 10: return 'العاشر';
-      case 11: return 'الحادي عشر';
-      case 12: return 'الثاني عشر';
-      case 13: return 'الثالث عشر';
-      case 14: return 'الرابع عشر';
-      case 15: return 'الخامس عشر';
-      case 16: return 'السادس عشر';
-      case 17: return 'السابع عشر';
-      case 18: return 'الثامن عشر';
-      case 19: return 'التاسع عشر';
-      case 20: return 'العشرون';
-      case 21: return 'الحادي والعشرون';
-      case 22: return 'الثاني والعشرون';
-      case 23: return 'الثالث والعشرون';
-      case 24: return 'الرابع والعشرون';
-      case 25: return 'الخامس والعشرون';
-      case 26: return 'السادس والعشرون';
-      case 27: return 'السابع والعشرون';
-      case 28: return 'الثامن والعشرون';
-      case 29: return 'التاسع والعشرون';
-      case 30: return 'الثلاثون';
-      default: return 'Number out of range';
+      case 1:
+        return 'الأول';
+      case 2:
+        return 'الثاني';
+      case 3:
+        return 'الثالث';
+      case 4:
+        return 'الرابع';
+      case 5:
+        return 'الخامس';
+      case 6:
+        return 'السادس';
+      case 7:
+        return 'السابع';
+      case 8:
+        return 'الثامن';
+      case 9:
+        return 'التاسع';
+      case 10:
+        return 'العاشر';
+      case 11:
+        return 'الحادي عشر';
+      case 12:
+        return 'الثاني عشر';
+      case 13:
+        return 'الثالث عشر';
+      case 14:
+        return 'الرابع عشر';
+      case 15:
+        return 'الخامس عشر';
+      case 16:
+        return 'السادس عشر';
+      case 17:
+        return 'السابع عشر';
+      case 18:
+        return 'الثامن عشر';
+      case 19:
+        return 'التاسع عشر';
+      case 20:
+        return 'العشرون';
+      case 21:
+        return 'الحادي والعشرون';
+      case 22:
+        return 'الثاني والعشرون';
+      case 23:
+        return 'الثالث والعشرون';
+      case 24:
+        return 'الرابع والعشرون';
+      case 25:
+        return 'الخامس والعشرون';
+      case 26:
+        return 'السادس والعشرون';
+      case 27:
+        return 'السابع والعشرون';
+      case 28:
+        return 'الثامن والعشرون';
+      case 29:
+        return 'التاسع والعشرون';
+      case 30:
+        return 'الثلاثون';
+      default:
+        return 'Number out of range';
     }
   }
 }
@@ -92,6 +124,13 @@ extension ArabicRevelationType on String {
   }
 }
 
+extension CustomOrientation on BuildContext {
+  dynamic customOrientation(var n1, var n2) {
+    Orientation orientation = MediaQuery.orientationOf(this);
+    return orientation == Orientation.portrait ? n1 : n2;
+  }
+}
+
 Future<void> openUrl(
     {required String url,
     required String errorMessage,
@@ -122,7 +161,7 @@ void show(
         margin: EdgeInsets.symmetric(horizontal: marginFromHorizontal ?? 0),
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: Theme.of(context).colorScheme.onSecondary,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(

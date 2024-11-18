@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/common/search_textfield.dart';
+import 'package:islamic_app/constants/constant.dart';
 import 'package:islamic_app/controllers/general_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/text_themes.dart';
 import 'package:islamic_app/views/search/widgets/ayas_search_sliverlist.dart';
+import 'package:lottie/lottie.dart';
 
 import 'widgets/suras_found_by_search.dart';
 
@@ -25,6 +27,8 @@ class SearchView extends StatelessWidget {
           if (didPop) {
             quranController.ayasFoundBySearch.clear();
             quranController.surasFoundbySearch.clear();
+            generalController.searchController.clear();
+            generalController.searchText.value = '';
           }
         },
         child: Scaffold(
@@ -72,6 +76,17 @@ class SearchView extends StatelessWidget {
                         : const SizedBox.shrink(),
                   ),
                   const AyasSearchSliverList(),
+                  if (quranController.ayasFoundBySearch.isEmpty &&
+                      quranController.surasFoundbySearch.isEmpty)
+                    SliverToBoxAdapter(
+                      child: Center(
+                        heightFactor: 1.7,
+                        child: Lottie.asset(
+                          Constant.searchLottie,
+                          width: MediaQuery.of(context).size.width / 1.5,
+                        ),
+                      ),
+                    ),
                 ],
               ),
             );

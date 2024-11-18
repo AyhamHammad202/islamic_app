@@ -29,8 +29,13 @@ class DownloadAyasView extends StatelessWidget {
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: ListView.builder(
+          child: GridView.builder(
             itemCount: readersController.readers.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+            ),
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {

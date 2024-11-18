@@ -17,6 +17,14 @@ class Assets {
   /// assets/svg/allah_names_png.png
   static const String svgAllahNamesPng = "assets/svg/allah_names_png.png";
 
+  /// Assets for svgArchive
+  /// assets/svg/archive.svg
+  static const String svgArchive = "assets/svg/archive.svg";
+
+  /// Assets for svgArrow
+  /// assets/svg/arrow.svg
+  static const String svgArrow = "assets/svg/arrow.svg";
+
   /// Assets for svgAzkar
   /// assets/svg/azkar.svg
   static const String svgAzkar = "assets/svg/azkar.svg";
@@ -57,6 +65,22 @@ class Assets {
   /// assets/svg/copy_icon.svg
   static const String svgCopyIcon = "assets/svg/copy_icon.svg";
 
+  /// Assets for svgDownload
+  /// assets/svg/download.svg
+  static const String svgDownload = "assets/svg/download.svg";
+
+  /// Assets for svgDownloaded
+  /// assets/svg/downloaded.svg
+  static const String svgDownloaded = "assets/svg/downloaded.svg";
+
+  /// Assets for svgFrame
+  /// assets/svg/frame.svg
+  static const String svgFrame = "assets/svg/frame.svg";
+
+  /// Assets for svgHome
+  /// assets/svg/home.svg
+  static const String svgHome = "assets/svg/home.svg";
+
   /// Assets for svgLastReadBack
   /// assets/svg/last_read_back.svg
   static const String svgLastReadBack = "assets/svg/last_read_back.svg";
@@ -69,6 +93,10 @@ class Assets {
   /// assets/svg/menu_curve.svg
   static const String svgMenuCurve = "assets/svg/menu_curve.svg";
 
+  /// Assets for svgMenuV2
+  /// assets/svg/menuV2.svg
+  static const String svgMenuV2 = "assets/svg/menuV2.svg";
+
   /// Assets for svgMesbaha
   /// assets/svg/mesbaha.svg
   static const String svgMesbaha = "assets/svg/mesbaha.svg";
@@ -76,6 +104,10 @@ class Assets {
   /// Assets for svgMesbahaPng
   /// assets/svg/mesbaha_png.png
   static const String svgMesbahaPng = "assets/svg/mesbaha_png.png";
+
+  /// Assets for svgMic
+  /// assets/svg/mic.svg
+  static const String svgMic = "assets/svg/mic.svg";
 
   /// Assets for svgOccasionPng
   /// assets/svg/occasion_png.png
@@ -113,6 +145,10 @@ class Assets {
   /// assets/svg/prayer_time.svg
   static const String svgPrayerTime = "assets/svg/prayer_time.svg";
 
+  /// Assets for svgQuran
+  /// assets/svg/quran.svg
+  static const String svgQuran = "assets/svg/quran.svg";
+
   /// Assets for svgQuranImage
   /// assets/svg/quran_image.svg
   static const String svgQuranImage = "assets/svg/quran_image.svg";
@@ -140,6 +176,10 @@ class Assets {
   /// Assets for svgSearch
   /// assets/svg/search.svg
   static const String svgSearch = "assets/svg/search.svg";
+
+  /// Assets for svgSearchV2
+  /// assets/svg/searchV2.svg
+  static const String svgSearchV2 = "assets/svg/searchV2.svg";
 
   /// Assets for svgSettingsPng
   /// assets/svg/settings_png.png
@@ -184,12 +224,5 @@ class Assets {
   /// Assets for svgViewBackground
   /// assets/svg/view_background.png
   static const String svgViewBackground = "assets/svg/view_background.png";
-
-
-
-
-  /// Assets for readersAbdelbasset
-  /// assets/readers/abdelbasset.png
-  static const String readersAbdelbasset = "assets/readers/abdelbasset.png";
 }
 

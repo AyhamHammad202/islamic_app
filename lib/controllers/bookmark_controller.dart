@@ -29,12 +29,6 @@ class BookMarkController extends GetxController {
       _quranController.allAyas[idOfAya - 1],
     )) {
       await deleteAyaBookMark(idOfAya);
-      Get.showSnackbar(
-        const GetSnackBar(
-          message: "تم حذف الآية من المفضلة",
-          duration: Duration(seconds: 1),
-        ),
-      );
       return;
     }
     database.insert(
@@ -42,12 +36,6 @@ class BookMarkController extends GetxController {
       {
         'AyaID': idOfAya,
       },
-    );
-    Get.showSnackbar(
-      const GetSnackBar(
-        message: "الاية أضيفت",
-        duration: Duration(seconds: 1),
-      ),
     );
     await getAllAyasBookMarks();
   }

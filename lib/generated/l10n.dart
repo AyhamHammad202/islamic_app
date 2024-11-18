@@ -70,6 +70,76 @@ class S {
     );
   }
 
+  /// `Al-Azkar`
+  String get azkar {
+    return Intl.message(
+      'Al-Azkar',
+      name: 'azkar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quran Duaas`
+  String get quranDuaas {
+    return Intl.message(
+      'Quran Duaas',
+      name: 'quranDuaas',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Random Aya`
+  String get randomAya {
+    return Intl.message(
+      'Random Aya',
+      name: 'randomAya',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get navhome {
+    return Intl.message(
+      'Home',
+      name: 'navhome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quran`
+  String get navquran {
+    return Intl.message(
+      'Quran',
+      name: 'navquran',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bookmarked Verses`
+  String get navbookmark {
+    return Intl.message(
+      'Bookmarked Verses',
+      name: 'navbookmark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More`
+  String get navmore {
+    return Intl.message(
+      'More',
+      name: 'navmore',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Allah Names`
   String get allahNames {
     return Intl.message(
@@ -215,6 +285,16 @@ class S {
     return Intl.message(
       'Time',
       name: 'time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Times`
+  String get times {
+    return Intl.message(
+      'Times',
+      name: 'times',
       desc: '',
       args: [],
     );

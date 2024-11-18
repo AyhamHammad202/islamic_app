@@ -5,18 +5,57 @@ import 'package:islamic_app/constants/constant.dart';
 
 class TextThemes {
   //Home Screen
-  static TextStyle sectionsTextStyle(BuildContext context) {
-    return GoogleFonts.tajawal(
+  static TextStyle dateTextStyle(BuildContext context) {
+    return GoogleFonts.rubik(
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w700,
+      color: const Color(0xff997647),
+    );
+  }
+
+  static TextStyle quranDuaaTitleTextStyle(BuildContext context) {
+    return GoogleFonts.rubik(
       fontSize: 16.sp,
       fontWeight: FontWeight.w700,
       color: Theme.of(context).brightness == Brightness.dark
-          ? const Color(0xff40C9A2)
+          ? const Color(0xff997647)
+          : const Color(0xff132D2E),
+    );
+  }
+
+  static TextStyle quranDuaaTextStyle(BuildContext context) {
+    return TextStyle(
+      fontSize: 18.sp,
+      fontFamily: kFontUthmanicHafs,
+      fontWeight: FontWeight.w500,
+      color: Theme.of(context).brightness == Brightness.dark
+          ? const Color.fromARGB(255, 158, 226, 207)
+          : const Color(0xff313131),
+    );
+  }
+
+  static TextStyle navTextStyle(BuildContext context, bool isSelected) {
+    return GoogleFonts.rubik(
+      fontSize: 12.sp,
+      fontWeight: isSelected ? FontWeight.bold : FontWeight.w400,
+      color: Theme.of(context).brightness == Brightness.dark
+          ? Colors.white
+          : const Color(0xff132D2E),
+    );
+  }
+
+  static TextStyle sectionsTextStyle(BuildContext context) {
+    return GoogleFonts.rubik(
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w700,
+      color: Theme.of(context).brightness == Brightness.dark
+          ? const Color(0xff997647)
           : const Color(0xff004B40),
     );
   }
 
   static TextStyle lastReadTextStyle(BuildContext context) {
-    return GoogleFonts.tajawal(
+    return GoogleFonts.rubik(
       fontSize: 16.sp,
       fontWeight: FontWeight.w500,
       color: const Color(0xffFFFFFF),
@@ -24,7 +63,7 @@ class TextThemes {
   }
 
   static TextStyle lastSuraNameTextStyle(BuildContext context) {
-    return GoogleFonts.tajawal(
+    return GoogleFonts.rubik(
       fontSize: 18.sp,
       fontWeight: FontWeight.w700,
       color: const Color(0xffFFFFFF),
@@ -32,10 +71,35 @@ class TextThemes {
   }
 
   static TextStyle lastInfoTextStyle(BuildContext context) {
-    return GoogleFonts.tajawal(
+    return GoogleFonts.rubik(
       fontSize: 14.sp,
       fontWeight: FontWeight.w400,
       color: const Color(0xffB6BEBE),
+    );
+  }
+
+  //Azkar Screen
+  static TextStyle categoryTextStyle(BuildContext context) {
+    return GoogleFonts.tajawal(
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w500,
+      color: const Color(0xff232323),
+    );
+  }
+
+  static TextStyle zkarTextStyle(BuildContext context) {
+    return GoogleFonts.cairo(
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w400,
+      color: const Color(0xff313131),
+    );
+  }
+
+  static TextStyle zkarTimesTextStyle(BuildContext context) {
+    return GoogleFonts.tajawal(
+      fontSize: 20.sp,
+      fontWeight: FontWeight.w700,
+      color: const Color(0xffDFB883),
     );
   }
 
@@ -122,7 +186,9 @@ class TextThemes {
       GoogleFonts.tajawal(
         fontSize: 16.sp,
         fontWeight: FontWeight.w400,
-        color: const Color(0xff5A5A5A),
+        color: Theme.of(context).brightness == Brightness.dark
+            ? const Color.fromARGB(255, 202, 156, 95)
+            : const Color(0xff5A5A5A),
       );
   static TextStyle juzPageTextStyle(BuildContext context) =>
       GoogleFonts.tajawal(
@@ -145,15 +211,19 @@ class TextThemes {
         color: const Color(0xff5A5A5A),
       );
   static TextStyle suraNameTextStyle(BuildContext context) =>
-      GoogleFonts.notoKufiArabic(
-        fontSize: 20.sp,
+      GoogleFonts.notoNaskhArabic(
+        fontSize: 24.sp,
         fontWeight: FontWeight.w700,
-        color: const Color(0xff365C5E),
+        color: Theme.of(context).brightness == Brightness.dark
+            ? const Color(0xff997647)
+            : const Color(0xff365C5E),
       );
-  static TextStyle readerTextStyle(BuildContext context) => GoogleFonts.tajawal(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w500,
-        color: Colors.white,
+  static TextStyle readerTextStyle(BuildContext context) => GoogleFonts.cairo(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w400,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? const Color(0xff997647)
+            : Colors.black,
       );
   static TextStyle ayaTimeTextStyle(BuildContext context) =>
       GoogleFonts.tajawal(
@@ -176,8 +246,10 @@ class TextThemes {
             ? Colors.white
             : const Color(0xff2D2D2D),
       );
-  static TextStyle tafserTextStyle(BuildContext context) => GoogleFonts.tajawal(
+  static TextStyle tafserTextStyle(BuildContext context, int fontSize) =>
+      TextStyle(
         fontSize: 14.sp,
+        fontFamily: kFontNotoNaskhArabic,
         fontWeight: FontWeight.w400,
         color: Theme.of(context).brightness == Brightness.dark
             ? Colors.white
@@ -188,7 +260,7 @@ class TextThemes {
         fontSize: 14.sp,
         fontWeight: FontWeight.w400,
         color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.white
+            ? const Color(0xff997647)
             : const Color(0xff365C5E),
       );
 
@@ -251,10 +323,10 @@ class TextThemes {
       GoogleFonts.tajawal(
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,
-        color: const Color(0xffC4975B),
+        color: const Color.fromARGB(255, 240, 140, 9),
       );
   static TextStyle occasionStatueTextStyle(BuildContext context) =>
-      GoogleFonts.poppins(
+      GoogleFonts.tajawal(
         fontSize: 14.sp,
         fontWeight: FontWeight.w500,
         color: Theme.of(context).brightness == Brightness.dark
@@ -265,7 +337,9 @@ class TextThemes {
   //Bookmark screen
   static TextStyle bookmarkedAyaTextStyle(BuildContext context) => TextStyle(
         fontFamily: kFontUthmanicHafs,
-        color: const Color(0xff043336),
+        color: Theme.of(context).brightness == Brightness.dark
+            ? const Color(0xff997647)
+            : const Color(0xff043336),
         fontSize: 20.sp,
         fontWeight: FontWeight.w400,
       );
@@ -276,12 +350,14 @@ class TextThemes {
         color: const Color(0xffA0A0A0),
       );
 
-  //Drawer
-  static TextStyle drawerItemTextStyle(BuildContext context) =>
+  //More View
+  static TextStyle moreItemTextStyle(BuildContext context) =>
       GoogleFonts.tajawal(
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.white
+            : Colors.black,
         fontSize: 16.sp,
-        fontWeight: FontWeight.w400,
-        color: const Color(0xffE6EBEB),
+        fontWeight: FontWeight.w500,
       );
 
   //Settings screen
@@ -297,7 +373,9 @@ class TextThemes {
   //Radio Screen
   static TextStyle radioChannelTextStyle(BuildContext context) =>
       GoogleFonts.tajawal(
-        color: const Color(0xff043336),
+        color: Theme.of(context).brightness == Brightness.dark
+            ? const Color(0xff997647)
+            : const Color(0xff043336),
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,
       );

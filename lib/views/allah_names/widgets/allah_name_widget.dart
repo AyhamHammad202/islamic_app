@@ -43,17 +43,17 @@ class AllahNameWidget extends StatelessWidget {
             ),
           ),
           Text(
-            index == 86
-                ? "المعطي المانع"
-                : quranController.allahNames[index].name,
+            quranController.allahNames[index].name,
             style: TextStyle(
               fontSize: index == 86 ? 32.sp : 64.sp,
               fontFamily: "AllahNames4",
             ),
           ),
           Text(
-            quranController.allahNames[index].meaning,
+            quranController.allahNames[index].meaning.substring(
+                quranController.allahNames[index].meaning.indexOf(':') + 2),
             style: TextThemes.allahNameTextStyle(context),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

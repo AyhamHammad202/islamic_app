@@ -26,59 +26,58 @@ class SuraTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: SizedBox(
-        child: Row(
-          children: [
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                SvgPicturesMethods.suraNumBorderIcon(),
-                Text(
-                  quranController.surahs[index].numberOfSurah.toArabic(),
-                  style: TextThemes.suraNumTextStyle(context),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                SvgPicture.asset(
-                  "assets/images/sorahs/00${quranController.surahs[index].numberOfSurah}.svg",
-                  height: 42.h,
-                  width: 100.w,
-                  colorFilter: const ColorFilter.mode(
-                    Color(0xffD7A664),
-                    BlendMode.srcIn,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.h),
+          child: Row(
+            children: [
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  SvgPicturesMethods.suraNumBorderIcon(),
+                  Text(
+                    quranController.surahs[index].numberOfSurah.toArabic(),
+                    style: TextThemes.suraNumTextStyle(context),
                   ),
+                ],
+              ),
+              SvgPicture.asset(
+                "assets/images/sorahs/00${quranController.surahs[index].numberOfSurah}.svg",
+                height: 42.h,
+                width: 100.w,
+                colorFilter: const ColorFilter.mode(
+                  Color(0xffD7A664),
+                  BlendMode.srcIn,
                 ),
-                Gap(4.h),
-                Text(
-                  "${quranController.surahs[index].ayas.length} ${S.of(context).ayas}",
-                  style: TextThemes.suraInfoTextStyle(context),
-                ),
-              ],
-            ),
-            const Spacer(),
-            Text(
-              Get.locale == const Locale('ar')
-                  ? quranController.surahs[index].revelationType
-                      .revelationTypeAr()
-                  : quranController.surahs[index].revelationType,
-              style: TextThemes.suraInfoTextStyle(context),
-            ),
-            SizedBox(width: 8.w),
-            InkWell(
-              onTap: () {
-                Get.to(
-                  () => SurahInfoView(
-                    surahModel: quranController.surahs[index],
-                  ),
-                  transition: Transition.leftToRight,
-                  duration: const Duration(milliseconds: 300),
-                );
-              },
-              child: SvgPicturesMethods.alertCircleIcon(),
-            ),
-            SizedBox(width: 8.w),
-          ],
+              ),
+              const Spacer(),
+              Text(
+                "${quranController.surahs[index].ayas.length.toString().padLeft(3, '0')} - ",
+                style: TextThemes.suraInfoTextStyle(context),
+              ),
+              Gap(4.h),
+              Text(
+                Get.locale == const Locale('ar')
+                    ? quranController.surahs[index].revelationType
+                        .revelationTypeAr()
+                    : quranController.surahs[index].revelationType,
+                style: TextThemes.suraInfoTextStyle(context),
+              ),
+              SizedBox(width: 8.w),
+              InkWell(
+                onTap: () {
+                  Get.to(
+                    () => SurahInfoView(
+                      surahModel: quranController.surahs[index],
+                    ),
+                    transition: Transition.leftToRight,
+                    duration: const Duration(milliseconds: 300),
+                  );
+                },
+                child: SvgPicturesMethods.alertCircleIcon(),
+              ),
+              SizedBox(width: 8.w),
+            ],
+          ),
         ),
       ),
     );

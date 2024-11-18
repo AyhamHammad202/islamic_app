@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:islamic_app/constants/assets.dart';
 
 class SvgPicturesMethods {
@@ -39,9 +40,55 @@ class SvgPicturesMethods {
 
   static Widget searchIcon({double? height, double? width}) {
     return SvgPicture.asset(
-      Assets.svgSearch,
+      Assets.svgSearchV2,
       width: width ?? 30.w,
       height: height ?? 30.h,
+    );
+  }
+
+  static Widget arrowIcon({double? height, double? width}) {
+    return SvgPicture.asset(
+      Assets.svgArrow,
+      width: width ?? 15.w,
+      height: height ?? 15.h,
+    );
+  }
+
+  static Widget downloadIcon({double? height, double? width}) {
+    return SvgPicture.asset(
+      Assets.svgDownload,
+      width: width ?? 15.w,
+      height: height ?? 15.h,
+      colorFilter: const ColorFilter.mode(Color(0xff997647), BlendMode.srcIn),
+    );
+  }
+
+  static Widget downloadedIcon({double? height, double? width}) {
+    return SvgPicture.asset(
+      Assets.svgDownloaded,
+      width: width ?? 15.w,
+      height: height ?? 15.h,
+      colorFilter: const ColorFilter.mode(Color(0xff997647), BlendMode.srcIn),
+    );
+  }
+
+  static Widget micIcon({double? height, double? width}) {
+    return SvgPicture.asset(
+      Assets.svgMic,
+      width: width ?? 15.w,
+      height: height ?? 15.h,
+      colorFilter: Get.isDarkMode
+          ? const ColorFilter.mode(Color(0xff997647), BlendMode.srcIn)
+          : null,
+    );
+  }
+
+  static Widget frameIcon({double? height, double? width}) {
+    return SvgPicture.asset(
+      Assets.svgFrame,
+      width: width ?? 15.w,
+      height: height ?? 15.h,
+      colorFilter: const ColorFilter.mode(Color(0xff997647), BlendMode.srcIn),
     );
   }
 

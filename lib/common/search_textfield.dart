@@ -26,13 +26,14 @@ class SearchTextField extends StatelessWidget {
             hintStyle: TextThemes.searchInfoTextStyle(context),
             suffixIcon: IconButton(
               icon: generalController.searchText.value.isNotEmpty
-                  ? const Icon(
+                  ? Icon(
                       Icons.clear,
-                      color: Color(0xffDFB883),
+                      color: const Color(0xffDFB883),
+                      size: 28.r,
                     )
                   : SvgPicturesMethods.searchIcon(
-                      height: 16.h,
-                      width: 16.w,
+                      height: 28.h,
+                      width: 28.w,
                     ),
               onPressed: generalController.searchText.value.isNotEmpty
                   ? () {

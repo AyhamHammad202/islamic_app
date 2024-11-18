@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -24,65 +25,67 @@ class OccasionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuranController quranController = Get.find();
-    int leftDays = quranController.calucate(year, month, day);
+    int leftDays = quranController.calculate(year, month, day);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      child: Stack(
-        children: [
-          Container(
-            width: quranController.calculateProgress2(
-              HijriCalendar.now().hDay,
-              leftDays,
-              MediaQuery.sizeOf(context).width,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8.r),
+        child: Stack(
+          children: [
+            LinearProgressIndicator(
+              value: (1.0 - (leftDays / 365)).clamp(0.0, 1.0),
+              minHeight: MediaQuery.sizeOf(context).height / 13,
+              color: Theme.of(context)
+                  .colorScheme
+                  .secondaryContainer
+                  .withOpacity(1),
+              // color: Colors.red,
             ),
-            height: MediaQuery.sizeOf(context).height / 13,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.r),
-              color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.4),
-            ),
-          ),
-          Container(
-            height: MediaQuery.sizeOf(context).height / 13,
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.4),
-              borderRadius: BorderRadius.circular(8.r),
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(left: 16.w, right: 8.w),
-              child: Row(
-                children: [
-                  SvgPicturesMethods.occasionIcon(),
-                  Gap(8.w),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        occasionTitle,
-                        style: TextThemes.occasionTextStyle(context),
-                      ),
-                      FittedBox(
-                        child: Text(
-                          Localizations.localeOf(context).languageCode == "ar"
-                              ? "${year.toArabic()}/${month.toArabic()}/${day.toArabic()}"
-                              : "$year/$month/$day",
-                          style: TextThemes.occasionDateTextStyle(context),
+            Container(
+              height: MediaQuery.sizeOf(context).height / 13,
+              decoration: BoxDecoration(
+                color:
+                    Theme.of(context).colorScheme.onSecondary.withOpacity(0.8),
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(left: 16.w, right: 8.w),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SvgPicturesMethods.occasionIcon(),
+                    Gap(8.w),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Gap(8.h),
+                        Text(
+                          occasionTitle,
+                          style: TextThemes.occasionTextStyle(context),
                         ),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Text(
-                    leftDays == 0
-                        ? S.of(context).hasCome
-                        : "${Localizations.localeOf(context).languageCode == "ar" ? leftDays.toArabic() : leftDays}\n${leftDays > 2 ? S.of(context).days : S.of(context).day}",
-                    textAlign: TextAlign.center,
-                    style: TextThemes.occasionStatueTextStyle(context),
-                  )
-                ],
+                        Expanded(
+                          child: Text(
+                            Localizations.localeOf(context).languageCode == "ar"
+                                ? "${year.toArabic()}/${month.toArabic()}/${day.toArabic()}"
+                                : "$year/$month/$day",
+                            style: TextThemes.occasionStatueTextStyle(context),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    Text(
+                      leftDays == 0
+                          ? S.of(context).hasCome
+                          : "${Localizations.localeOf(context).languageCode == "ar" ? leftDays.toArabic() : leftDays}\n${leftDays > 2 ? S.of(context).days : S.of(context).day}",
+                      textAlign: TextAlign.center,
+                      style: TextThemes.occasionStatueTextStyle(context),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

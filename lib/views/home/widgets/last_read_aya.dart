@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -110,7 +108,12 @@ class LastReadAya extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+              Positioned(
+                left: 25.w,
+                top: 40.h,
+                child: SvgPicturesMethods.quranBookIcon(height: 50.h),
+              ),
             ],
           ),
         ),

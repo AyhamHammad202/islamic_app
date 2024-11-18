@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "aya": MessageLookupByLibrary.simpleMessage("آية"),
         "ayaFontSize": MessageLookupByLibrary.simpleMessage("حجم خط الآية"),
         "ayas": MessageLookupByLibrary.simpleMessage("آيات"),
+        "azkar": MessageLookupByLibrary.simpleMessage("الأذكار"),
         "bookmarkAyat": MessageLookupByLibrary.simpleMessage("الآيات المفضلة"),
         "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
         "darkTheme": MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
@@ -49,13 +50,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "juzs": MessageLookupByLibrary.simpleMessage("الأجزاء"),
         "lastRead": MessageLookupByLibrary.simpleMessage("آخر قراءة"),
         "lastReadVarseNum": MessageLookupByLibrary.simpleMessage("رقم الآية"),
+        "navbookmark": MessageLookupByLibrary.simpleMessage("الآيات المفضلة"),
+        "navhome": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+        "navmore": MessageLookupByLibrary.simpleMessage("المزيد"),
+        "navquran": MessageLookupByLibrary.simpleMessage("القرآن"),
         "nextPray": MessageLookupByLibrary.simpleMessage("الصلاة التالية"),
         "page": MessageLookupByLibrary.simpleMessage("الصفحة"),
         "pages": MessageLookupByLibrary.simpleMessage("الصفحات"),
         "quran": MessageLookupByLibrary.simpleMessage("القرآن الكريم"),
+        "quranDuaas": MessageLookupByLibrary.simpleMessage("أدعية قرآنية"),
         "qurter": MessageLookupByLibrary.simpleMessage("الأرباع"),
         "radio": MessageLookupByLibrary.simpleMessage("راديو القرآن"),
         "ramadan": MessageLookupByLibrary.simpleMessage("رمضان"),
+        "randomAya": MessageLookupByLibrary.simpleMessage("آية عشوائية"),
         "rate": MessageLookupByLibrary.simpleMessage("قيم التطبيق"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "أبحث بأستخدام أسم السورة أو الآية"),
@@ -75,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("حجم خط التفسير"),
         "tasbeh": MessageLookupByLibrary.simpleMessage("التسبيح"),
         "theAyas": MessageLookupByLibrary.simpleMessage("الآيات"),
-        "time": MessageLookupByLibrary.simpleMessage("مرة")
+        "time": MessageLookupByLibrary.simpleMessage("مرة"),
+        "times": MessageLookupByLibrary.simpleMessage("مرات")
       };
 }

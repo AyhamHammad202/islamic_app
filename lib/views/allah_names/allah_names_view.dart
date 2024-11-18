@@ -23,23 +23,26 @@ class AllahNamesView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: AnimationLimiter(
             child: GetBuilder<QuranController>(
-              builder: (c) => ListView.builder(
-                itemCount: c.allahNames.length,
-                itemBuilder: (context, index) {
-                  return AnimationConfiguration.staggeredList(
-                    position: index,
-                    child: FadeInAnimation(
-                      duration: Durations.medium2,
-                      child: SlideAnimation(
-                        verticalOffset: 50,
-                        child: AllahNameWidget(
-                          index: index,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
+              builder: (c) {
+                c.allahNames.removeAt(86);
+                return ListView.builder(
+                  itemCount: c.allahNames.length,
+                  itemBuilder: (context, index) {
+                    return AnimationConfiguration.staggeredList(
+                            position: index,
+                            child: FadeInAnimation(
+                              duration: Durations.medium2,
+                              child: SlideAnimation(
+                                verticalOffset: 50,
+                                child: AllahNameWidget(
+                                  index: index,
+                                ),
+                              ),
+                            ),
+                          );
+                  },
+                );
+              },
             ),
           ),
         ),

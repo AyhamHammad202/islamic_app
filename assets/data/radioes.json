@@ -6,9 +6,34 @@
             "link": "https://Qurango.net/radio/tarateel"
         },
         {
-            "nameAr": "راديو محمد اللحيدان",
-            "nameEn": "Mohammed Al-Luhaidan Radio",
+            "nameAr": "محمد اللحيدان",
+            "nameEn": "Mohammed Al-Luhaidan",
             "link": "https://backup.qurango.net/radio/mohammed_allohaidan"
+        },
+        {
+            "nameAr": "أحمد بن علي العجمي",
+            "nameEn": "Ahmed bin Ali Al-Ajmi",
+            "link": "https://backup.qurango.net/radio/ahmad_alajmy"
+        },
+        {
+            "nameAr": "إدريس أبكر",
+            "nameEn": "Idris Abkar",
+            "link": "https://backup.qurango.net/radio/idrees_abkr"
+        },
+        {
+            "nameAr": "عبدالباسط عبدالصمد",
+            "nameEn": "Abdul Basit Abdul Samad",
+            "link": "https://backup.qurango.net/radio/abdulbasit_abdulsamad"
+        },
+        {
+            "nameAr": "محمد صديق المنشاوي",
+            "nameEn": "Muhammad Siddiq Al-Minshawi",
+            "link": "https://backup.qurango.net/radio/mohammed_siddiq_alminshawi"
+        },
+        {
+            "nameAr": "عبدالرحمن السديس",
+            "nameEn": "Abdullrahman Alsudais",
+            "link": "https://backup.qurango.net/radio/abdulrahman_alsudaes"
         }
     ]
 }
