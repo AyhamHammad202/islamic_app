@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:islamic_app/models/tasbeha_model.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:vibration/vibration.dart';
 
 import '../database/data_client.dart';
 
@@ -22,6 +23,8 @@ class MesbahaController extends GetxController {
   void incretment(int index) {
     if (times.value < tasbeh[index].times) {
       times.value++;
+    } else {
+      Vibration.vibrate(duration: 500);
     }
   }
 

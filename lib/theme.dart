@@ -51,7 +51,7 @@ class Themes {
       selectionHandleColor: Color(0xff997647),
       cursorColor: Color(0xff043336),
     ),
-    
+
     popupMenuTheme: const PopupMenuThemeData(
       color: Color(0xff997647),
     ),
@@ -77,8 +77,6 @@ class Themes {
       secondaryContainer: Color(0xffFBF6F0),
       error: Colors.red,
       onError: Colors.red,
-      background: darkBackgroundClr,
-      onBackground: darkTextClr,
       surface: lightBackgroundClr,
       onSurface: Color(0xff132D2E),
     ),
@@ -106,7 +104,7 @@ class Themes {
       selectionHandleColor: Color(0xff997647),
       cursorColor: Color(0xff043336),
     ),
-    
+
     popupMenuTheme: const PopupMenuThemeData(
       color: Color(0xff997647),
     ),
@@ -131,8 +129,6 @@ class Themes {
       secondaryContainer: Colors.black54,
       error: Colors.red,
       onError: Colors.red,
-      background: darkBackgroundClr,
-      onBackground: darkTextClr,
       surface: darkBackgroundClr,
       onSurface: Color(0xff132D2E),
     ),

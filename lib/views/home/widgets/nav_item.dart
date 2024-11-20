@@ -39,8 +39,8 @@ class NavItem extends StatelessWidget {
                         ? Colors.black45
                         : Colors.white54,
                     BlendMode.srcIn),
-            width: 30.w,
-            height: 25.h,
+            width: 25.w,
+            height: 20.h,
           ),
           Text(
             title,

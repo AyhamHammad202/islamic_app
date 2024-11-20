@@ -15,9 +15,7 @@ class MoreView extends StatelessWidget {
     return BackgroundImage(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: Text(S.current.navmore),
-        ),
+        appBar: AppBar(),
         body: SingleChildScrollView(
           child: Column(
             children: [

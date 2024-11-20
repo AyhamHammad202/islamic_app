@@ -26,6 +26,12 @@ class QuranRadioView extends StatelessWidget {
           // appBar: AppBar(
           //   title: Text(S.current.radio),
           // ),
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            title: Text(Get.locale == const Locale('ar')
+                ? radioModel.arabicName
+                : radioModel.englishName),
+          ),
           body: Obx(() {
             return Stack(
               alignment: Alignment.center,

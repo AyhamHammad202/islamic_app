@@ -54,23 +54,6 @@ void main() async {
   );
 }
 
-// log('My Prayer Times');
-// final myCoordinates = Coordinates(
-// 33.380688, 43.652749); // Replace with your own location lat, lng.
-// final params = CalculationMethod.umm_al_qura.getParameters();
-// params.madhab = Madhab.hanafi;
-// final prayerTimes = PrayerTimes.today(myCoordinates, params);
-
-// log("---Today's Prayer Times in Your Local Timezone(${prayerTimes.fajr.timeZoneName})---");
-// log(DateFormat.jm().format(prayerTimes.fajr));
-// log(DateFormat.jm().format(prayerTimes.sunrise));
-// log(DateFormat.jm().format(prayerTimes.dhuhr));
-// log(DateFormat.jm().format(prayerTimes.asr));
-// log(DateFormat.jm().format(prayerTimes.maghrib));
-// log(DateFormat.jm().format(prayerTimes.isha));
-
-// log('---');
-
 Future initalServices() async {
   await Get.putAsync(() => SettingsService().init());
   await Get.putAsync(() => LastReadService().init());

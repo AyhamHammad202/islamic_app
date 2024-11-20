@@ -31,7 +31,7 @@ class AyatOfPage extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'page${page + 1}',
             fontSize: settingsService.ayaFontSize.value.sp,
-            letterSpacing: .05,
+            letterSpacing: .04,
             wordSpacing: .05,
             height: 1.8,
             color: Colors.red,

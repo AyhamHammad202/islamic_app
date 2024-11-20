@@ -223,7 +223,7 @@ class TextThemes {
         fontWeight: FontWeight.w400,
         color: Theme.of(context).brightness == Brightness.dark
             ? const Color(0xff997647)
-            : Colors.black,
+            : Color(0xff997647),
       );
   static TextStyle ayaTimeTextStyle(BuildContext context) =>
       GoogleFonts.tajawal(
@@ -302,7 +302,7 @@ class TextThemes {
       );
   static TextStyle tasbehDescTextStyle(BuildContext context) =>
       GoogleFonts.tajawal(
-        fontSize: 12.sp,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w700,
         color: const Color(0xffA0A0A0),
       );

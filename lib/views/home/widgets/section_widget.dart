@@ -14,18 +14,23 @@ class SectionWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Card(
-        child: Column(
-          children: [
-            const Spacer(),
-            svgIcon,
-            Gap(8.h),
-            Text(
-              title,
-              style: TextThemes.sectionsTextStyle(context),
-              textAlign: TextAlign.center,
-            ),
-            const Spacer(),
-          ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 2.w),
+          child: Column(
+            children: [
+              const Spacer(),
+              svgIcon,
+              Gap(8.h),
+              FittedBox(
+                child: Text(
+                  title,
+                  style: TextThemes.sectionsTextStyle(context),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const Spacer(),
+            ],
+          ),
         ),
       ),
     );

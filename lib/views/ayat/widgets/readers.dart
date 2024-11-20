@@ -29,6 +29,7 @@ class Readers extends StatelessWidget {
           settingsService.currentReaderIndex.value = value;
           settingsService.setReaderIndex(value);
         },
+        
         popUpAnimationStyle: AnimationStyle(
           curve: Curves.easeIn,
           reverseCurve: Curves.easeInOut,

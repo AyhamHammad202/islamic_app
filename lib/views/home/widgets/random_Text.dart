@@ -42,6 +42,7 @@ class RandomText extends StatelessWidget {
               IconButton(
                 onPressed: onTap,
                 icon: const Icon(Icons.refresh),
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
             ],
           ),

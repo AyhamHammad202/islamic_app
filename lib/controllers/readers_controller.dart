@@ -150,7 +150,7 @@ class ReadersController extends GetxController {
             body:
                 '${Get.locale.toString() == "en" ? surah.englishNameOfSurah : surah.nameOfSurah}: ${S.current.downloadAyat} ${(downloadedAyatCount.value / surah.ayas.length * 100).toInt()}%',
             progress:
-                (downloadedAyatCount.value / surah.ayas.length * 100).toInt(),
+                (downloadedAyatCount.value / surah.ayas.length * 100),
             locked: isDownloading.value,
           ),
         );
