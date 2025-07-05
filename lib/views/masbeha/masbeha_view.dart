@@ -18,7 +18,7 @@ class MasbehaView extends StatelessWidget {
     final MesbahaController mesbahaController = Get.find();
     return BackgroundImage(
       child: PopScope(
-        onPopInvoked: (didPop) {
+        onPopInvokedWithResult: (didPop,r) {
           mesbahaController.times.value = 0;
         },
         child: Scaffold(

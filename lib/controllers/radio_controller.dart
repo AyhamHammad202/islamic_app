@@ -1,9 +1,14 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/constants/constant.dart';
+import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/models/radio_model.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
+import 'package:path_provider/path_provider.dart';
 
 class RadioController extends GetxController {
   RxBool radioIsPlaying = false.obs;
@@ -36,6 +41,20 @@ class RadioController extends GetxController {
     radioIsLoading.value = false;
     return;
   }
+  Future stopRadio() async {
+    await radioAudioPlayer.stop();
+    radioIsPlaying.value = false;
+    radioIsLoading.value = false;
+    return;
+  }
+
+  Future<Uri> _loadAssetAsUri(String assetPath) async {
+    final ByteData data = await rootBundle.load(assetPath);
+    final Directory tempDir = await getTemporaryDirectory();
+    final File file = File('${tempDir.path}/jpg');
+    await file.writeAsBytes(data.buffer.asUint8List(), flush: true);
+    return file.uri;
+  }
 
   Future playRadio(RadioModel radioModel) async {
     try {
@@ -53,6 +72,14 @@ class RadioController extends GetxController {
         AudioSource.uri(
           Uri.parse(
             radioModel.link,
+          ),
+          tag: MediaItem(
+            id: '1',
+            title: radioModel.arabicName,
+            displayTitle: S.current.radio,
+            displaySubtitle: radioModel.arabicName,
+            artUri: await _loadAssetAsUri(kAppIconAsset),
+            duration: radioAudioPlayer.duration,
           ),
         ),
       );

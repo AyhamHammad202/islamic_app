@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:islamic_app/constants/constant.dart';
 import 'package:islamic_app/controllers/readers_controller.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/text_themes.dart';

@@ -5,6 +5,7 @@ import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/controllers/radio_controller.dart';
 import 'package:islamic_app/models/radio_model.dart';
 import 'package:islamic_app/svg_pictures.dart';
+import 'package:lottie/lottie.dart';
 
 class QuranRadioView extends StatelessWidget {
   const QuranRadioView({super.key, required this.radioModel});
@@ -12,20 +13,16 @@ class QuranRadioView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // AudioController audioController = Get.find();
     RadioController radioController = Get.find();
     return BackgroundImage(
       child: PopScope(
-        onPopInvoked: (didPop) async {
+        onPopInvokedWithResult: (didPop, result) {
           if (didPop) {
-            await radioController.pauseRadio();
+            radioController.stopRadio();
           }
         },
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          // appBar: AppBar(
-          //   title: Text(S.current.radio),
-          // ),
           extendBodyBehindAppBar: true,
           appBar: AppBar(
             title: Text(Get.locale == const Locale('ar')
@@ -64,7 +61,8 @@ class QuranRadioView extends StatelessWidget {
                           ),
                           child: Center(
                             child: radioController.radioIsLoading.value
-                                ? const CircularProgressIndicator()
+                                ? LottieBuilder.asset(
+                                    "assets/lottie/loading.json")
                                 : AnimatedCrossFade(
                                     secondChild: const Icon(
                                       CupertinoIcons.play_arrow_solid,

@@ -18,7 +18,7 @@ class DownloadingDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop,r) {
         if (didPop) {
           readersController.cancelToken
               .cancel("User exist from downloading page");

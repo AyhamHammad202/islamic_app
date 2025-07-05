@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/generated/l10n.dart';
@@ -45,6 +46,23 @@ class YearOccasionView extends StatelessWidget {
           itemBuilder: (context, index) {
             // index == months.length ? index = 0 : index = index;
             int dis = index % months.length;
+            if (index == 4) {
+              return Column(
+                children: [
+                  Divider(
+                    indent: 80.w,
+                    endIndent: 80.w,
+                    color: Theme.of(context).dividerColor,
+                  ),
+                  OccasionWidget(
+                    occasionTitle: titles[dis],
+                    year: years[index <= months.length - 2 ? 0 : 1],
+                    month: months[dis],
+                    day: days[dis],
+                  ),
+                ],
+              );
+            }
             return OccasionWidget(
               occasionTitle: titles[dis],
               year: years[index <= months.length - 2 ? 0 : 1],

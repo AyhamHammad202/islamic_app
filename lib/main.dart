@@ -25,6 +25,7 @@ import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/services/theme_services.dart';
 import 'package:islamic_app/views/home/general_view.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 import 'constants/assets.dart';
@@ -32,6 +33,7 @@ import 'controllers/audio_controller.dart';
 import 'controllers/azkar_controller.dart';
 import 'controllers/bookmark_controller.dart';
 import 'controllers/general_controller.dart';
+import 'controllers/radio_controller.dart';
 import 'generated/l10n.dart';
 import 'theme.dart';
 
@@ -46,6 +48,12 @@ void main() async {
   await GetStorage.init();
   Get.put(QuranController());
   Get.put(ThemeController());
+
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
   runApp(
     DevicePreview(
       builder: (context) => const MyApp(),

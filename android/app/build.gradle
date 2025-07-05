@@ -40,7 +40,7 @@ if (keyPropertiesFile.exists()) {
 android {
     namespace "com.NourAlmomen.islamicapp"
     compileSdkVersion 34
-    ndkVersion flutter.ndkVersion
+    ndkVersion "25.1.8937393"
      if (project.android.hasProperty("namespace")) {
         namespace 'com.NourAlmomen.islamicapp'
     }

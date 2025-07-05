@@ -8,7 +8,7 @@ class UpdateController extends GetxController {
 
   @override
   onInit() async {
-    await checkForUpdates();
+    // await checkForUpdates();
     log(_appUpdateInfo.packageName);
     super.onInit();
   }

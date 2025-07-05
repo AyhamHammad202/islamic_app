@@ -5,7 +5,7 @@ import 'package:hijri/hijri_calendar.dart';
 import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/constants/constant.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
-import 'package:islamic_app/views/home/widgets/random_Text.dart';
+import 'package:islamic_app/views/home/widgets/random_text.dart';
 
 import '../../generated/l10n.dart';
 import 'widgets/home_app_bar.dart';

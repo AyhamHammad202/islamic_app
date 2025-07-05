@@ -23,6 +23,9 @@ class MesbahaController extends GetxController {
   void incretment(int index) {
     if (times.value < tasbeh[index].times) {
       times.value++;
+      if (times.value % 10 == 0) {
+        Vibration.vibrate(duration: 300);
+      }
     } else {
       Vibration.vibrate(duration: 500);
     }

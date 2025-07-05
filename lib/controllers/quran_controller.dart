@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:math' as Math;
+import 'dart:math' as math;
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:collection/collection.dart';
@@ -73,7 +73,7 @@ class QuranController extends GetxController {
     super.onClose();
   }
 
-  int calculate(int year, int month, int day) {
+    int calculate(int year, int month, int day) {
     HijriCalendar hijriCalendar = HijriCalendar();
     DateTime start = DateTime.now();
     DateTime end = hijriCalendar.hijriToGregorian(year, month, day);
@@ -163,16 +163,16 @@ class QuranController extends GetxController {
   }
 
   void randomDuaa() {
-    randomSura = Math.Random().nextInt(quranDuaas.length - 1).obs;
+    randomSura = math.Random().nextInt(quranDuaas.length - 1).obs;
     randomAyaFromSura =
-        Math.Random().nextInt(quranDuaas[randomSura.value].ayas.length).obs;
+        math.Random().nextInt(quranDuaas[randomSura.value].ayas.length).obs;
     log("dsshiac");
     update();
   }
 
   void randomAyaSelect() {
     // randomSura = Math.Random().nextInt(quranDuaas.length - 1).obs;
-    randomAya = Math.Random().nextInt(allAyas.length).obs;
+    randomAya = math.Random().nextInt(allAyas.length).obs;
     log("dsshiac");
     update();
   }

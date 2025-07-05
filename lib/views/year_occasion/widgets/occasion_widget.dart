@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:hijri/hijri_calendar.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
@@ -35,17 +33,16 @@ class OccasionWidget extends StatelessWidget {
             LinearProgressIndicator(
               value: (1.0 - (leftDays / 365)).clamp(0.0, 1.0),
               minHeight: MediaQuery.sizeOf(context).height / 13,
-              color: Theme.of(context)
-                  .colorScheme
-                  .secondaryContainer
-                  .withOpacity(1),
+              color: Theme.of(context).colorScheme.onSecondary.withOpacity(1),
               // color: Colors.red,
             ),
             Container(
               height: MediaQuery.sizeOf(context).height / 13,
               decoration: BoxDecoration(
-                color:
-                    Theme.of(context).colorScheme.onSecondary.withOpacity(0.8),
+                color: Theme.of(context)
+                    .colorScheme
+                    .secondaryContainer
+                    .withOpacity(0.4),
               ),
               child: Padding(
                 padding: EdgeInsets.only(left: 16.w, right: 8.w),

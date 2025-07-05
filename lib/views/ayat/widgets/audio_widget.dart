@@ -61,36 +61,6 @@ class AudioWidget extends StatelessWidget {
                 },
               ),
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     Text(
-            //       audioController.currentDuration.value.inSeconds.toString(),
-            //       style: TextThemes.ayaTimeTextStyle(context),
-            //     ),
-            //     Slider(
-            //       value: audioController.isPlaying.value
-            //           ? audioController.currentDuration.value.inSeconds
-            //               .toDouble()
-            //           : 0.0,
-            //       onChanged: (value) {
-            //         audioController.audioPlayer.seek(
-            //           Duration(
-            //             seconds: value.toInt(),
-            //           ),
-            //         );
-            //       },
-            //       max:
-            //           audioController.duration.value.inSeconds.toDouble() == 0.0
-            //               ? 1000.0
-            //               : audioController.duration.value.inSeconds.toDouble(),
-            //     ),
-            //     Text(
-            //       audioController.duration.value.inSeconds.toString(),
-            //       style: TextThemes.ayaTimeTextStyle(context),
-            //     ),
-            //   ],
-            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -103,9 +73,6 @@ class AudioWidget extends StatelessWidget {
                     await audioController.peauseAyaFile();
                     audioController.ayaUniqeId.value++;
                     await audioController.playAyah(audioController.currentAya);
-                    // audioController.playNext(
-                    //   quranController.allAyas[audioController.ayaUniqeId.value],
-                    // );
                   },
                 ),
                 AudioButton(

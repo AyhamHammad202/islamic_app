@@ -11,6 +11,7 @@ import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/views/aya_info/aya_info_view.dart';
+import 'package:lottie/lottie.dart';
 
 import 'models/aya_of_surah_model.dart';
 
@@ -69,7 +70,7 @@ extension ContextMenuExtension on BuildContext {
                           Get.to(
                             () => AyaInfoView(
                               aya: ayaOfSurahModel,
-                              surahModel: quranController.surahs[surahNum-1],
+                              surahModel: quranController.surahs[surahNum - 1],
                             ),
                             // curve: Curves.bounceOut,
                             transition: Transition.downToUp,
@@ -109,8 +110,10 @@ extension ContextMenuExtension on BuildContext {
                           return GestureDetector(
                             onTap: () async {
                               // await audioController.playAyah(ayaOfSurahModel);
-                              if (audioController.isPlaying.value ||
-                                  audioController.isLoading.value) {
+                              if ((audioController.isPlaying.value ||
+                                      audioController.isLoading.value) &&
+                                  audioController.currentAya.uniqueIdOfAya ==
+                                      ayaOfSurahModel.uniqueIdOfAya) {
                                 await audioController.peauseAyaFile();
                                 return;
                               }
@@ -124,11 +127,21 @@ extension ContextMenuExtension on BuildContext {
                               enabled: true,
                               label: 'Play Ayah',
                               child: audioController.isLoading.value
-                                  ? const SizedBox(
+                                  ? SizedBox(
                                       height: 25,
-                                      child: CircularProgressIndicator(),
+                                      child: ColorFiltered(
+                                        colorFilter: ColorFilter.mode(
+                                          Color(0xffd6a663),
+                                          BlendMode.srcIn,
+                                        ),
+                                        child: Lottie.asset(
+                                          "assets/lottie/loading.json",
+                                        ),
+                                      ),
                                     )
-                                  : audioController.isPlaying.value
+                                  : audioController.currentAya.uniqueIdOfAya ==
+                                              ayaOfSurahModel.uniqueIdOfAya &&
+                                          audioController.isPlaying.value
                                       ? pauseArrow(height: 25.0)
                                       : SvgPicturesMethods.playAudioIcon(
                                           height: 25,

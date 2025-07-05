@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:islamic_app/constants/constant.dart';
 import 'package:islamic_app/text_themes.dart';
 
 class TafserRichTextWidget extends StatelessWidget {

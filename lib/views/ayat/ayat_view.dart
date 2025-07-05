@@ -28,9 +28,9 @@ class AyatView extends StatelessWidget {
         PageController(initialPage: quranController.globalPage.value);
     return BackgroundImage(
       child: PopScope(
-        onPopInvoked: (didPop) {
+        onPopInvokedWithResult: (didPop, results) {
           quranController.selectedAyahIndexes.clear();
-          audioController.peauseAyaFile();
+          audioController.stopAudioPlayer();
         },
         child: Scaffold(
           backgroundColor: Colors.transparent,

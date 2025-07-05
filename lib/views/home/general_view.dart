@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/controllers/general_controller.dart';
-import 'package:islamic_app/generated/l10n.dart';
-import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/views/home/widgets/nav_item.dart';
 import '../../constants/constant.dart';
 

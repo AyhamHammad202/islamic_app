@@ -23,7 +23,7 @@ class SearchView extends StatelessWidget {
     return BackgroundImage(
       child: PopScope(
         canPop: true,
-        onPopInvoked: (didPop) {
+        onPopInvokedWithResult: (didPop,r) {
           if (didPop) {
             quranController.ayasFoundBySearch.clear();
             quranController.surasFoundbySearch.clear();

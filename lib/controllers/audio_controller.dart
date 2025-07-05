@@ -3,11 +3,14 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/controllers/readers_controller.dart';
+import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/models/reader_model.dart';
 import 'package:islamic_app/models/surah_model.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/models/aya_of_surah_model.dart';
@@ -59,7 +62,6 @@ class AudioController extends GetxController {
   bool get isInDifferentPage =>
       currentAya.page - 1 != _quranController.pageController.page;
 
-
   Future peauseAyaFile() async {
     if (isPlaying.value || isLoading.value) {
       await audioPlayer.pause();
@@ -70,6 +72,14 @@ class AudioController extends GetxController {
     }
   }
 
+  Future stopAudioPlayer() async {
+    await audioPlayer.stop();
+    _quranController.clearSelection();
+    isPlaying.value = false;
+    isLoading.value = false;
+    return;
+  }
+
   Future initAudioPlayerStateStream() async {
     audioPlayer.playerStateStream.listen((playerState) async {
       if (playerState.playing) {
@@ -78,6 +88,7 @@ class AudioController extends GetxController {
         duration.value = audioPlayer.duration ?? Duration.zero;
         audioPlayer.positionStream.listen((position) {
           currentDuration.value = position;
+          duration.value = audioPlayer.duration ?? Duration.zero;
         });
       }
 
@@ -110,6 +121,7 @@ class AudioController extends GetxController {
       } else {
         Get.find<ReadersController>().cancelToken = CancelToken();
         log("aya doesnt been downloaded and it will download");
+        isLoading.value = true;
         await _readersController.downloadAya(
           file,
           aya,
@@ -123,15 +135,37 @@ class AudioController extends GetxController {
     }
   }
 
+  Future<Uri> _loadAssetAsUri(String assetPath) async {
+    final ByteData data = await rootBundle.load(assetPath);
+    final Directory tempDir = await getTemporaryDirectory();
+    final File file = File('${tempDir.path}.jpg');
+    await file.writeAsBytes(data.buffer.asUint8List(), flush: true);
+    return file.uri;
+  }
+
   Future playAyaFile(File ayaFile) async {
     try {
       _quranController.clearSelection();
       _quranController.selectedAyahIndexes.add(currentAya.uniqueIdOfAya);
       await audioPlayer.setAudioSource(
-        AudioSource.file(
-          ayaFile.path,
-        ),
+        AudioSource.file(ayaFile.path,
+            tag: MediaItem(
+              id: currentAya.uniqueIdOfAya.toString(),
+              title: Get.locale.toString() == "en"
+                  ? currentSura.englishNameOfSurah
+                  : currentSura.nameOfSurah,
+              displayTitle: Get.locale.toString() == "en"
+                  ? "${currentSura.englishNameOfSurah} | ${S.current.aya}-${currentAya.numberOfAyaInSurah}"
+                  : "${currentSura.nameOfSurah} | ${S.current.aya}-${currentAya.numberOfAyaInSurah}",
+              artist: Get.locale.toString() == "en"
+                  ? _readersController.currentReader.englishName
+                  : _readersController.currentReader.arabicName,
+              duration: duration.value,
+              artUri:
+                  await _loadAssetAsUri(_readersController.currentReader.image),
+            )),
       );
+      duration.value = audioPlayer.duration ?? Duration.zero;
       if (isInDifferentPage) {
         _quranController.pageController.animateToPage(
           currentAya.page - 1,

@@ -6,7 +6,6 @@ import 'package:islamic_app/views/bookmark/bookmark_view.dart';
 import 'package:islamic_app/views/home/home_view.dart';
 import 'package:islamic_app/views/more_view/more_view.dart';
 import 'package:islamic_app/views/quran/quran_view.dart';
-import 'package:vibration/vibration.dart';
 
 class GeneralController extends GetxController {
   List<Widget> homeNavViews = const [
