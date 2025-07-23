@@ -36,7 +36,18 @@ class ReadersController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     appPath = await getApplicationDocumentsDirectory();
+    // تهيئة cancelToken - Initialize cancelToken
+    cancelToken = CancelToken();
     await loadReaders();
+  }
+
+  @override
+  void onClose() {
+    // إلغاء أي عمليات تحميل جارية - Cancel any ongoing downloads
+    if (!cancelToken.isCancelled) {
+      cancelToken.cancel('Controller disposed');
+    }
+    super.onClose();
   }
 
   Future<void> loadReaders() async {
@@ -79,8 +90,13 @@ class ReadersController extends GetxController {
 
       isDownloading.value = true;
 
+      // إنشاء مجلد الملف إذا لم يكن موجود - Create file directory if not exists
+      await file.parent.create(recursive: true);
+
       final downloadUrl =
           "https://everyayah.com/data/${reader.link}/${surah.surahNumber.toString().padLeft(3, "0")}${aya.ayahNumber.toString().padLeft(3, "0")}.mp3";
+
+      log('تحميل الآية من: $downloadUrl', name: 'ReadersController');
 
       await dio.download(
         downloadUrl,
@@ -96,19 +112,27 @@ class ReadersController extends GetxController {
       downloadedAyatCount.value++;
       downloadingProgress.value = 0.0;
       isDownloading.value = false;
+
+      log('تم تحميل الآية بنجاح: ${file.path}', name: 'ReadersController');
     } on DioException catch (e) {
       if (e.type == DioExceptionType.cancel) {
         isDownloading.value = false;
         isCanceled.value = true;
-        log("Download cancelled");
+        log("تم إلغاء التحميل - Download cancelled", name: 'ReadersController');
+      } else {
+        isDownloading.value = false;
+        log("خطأ في تحميل الآية - Error downloading ayah: ${e.message}",
+            name: 'ReadersController');
       }
     } catch (e) {
       isDownloading.value = false;
-      log("Error downloading ayah: $e");
+      log("خطأ في تحميل الآية - Error downloading ayah: $e",
+          name: 'ReadersController');
     }
   }
 
   Future<void> downloadSuraAyas(SurahModel surah, ReaderModel reader) async {
+    // إنشاء cancelToken جديد لكل عملية تحميل - Create new cancelToken for each download operation
     cancelToken = CancelToken();
     isCanceled.value = false;
     downloadedAyatCount.value = 0;

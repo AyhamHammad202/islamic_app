@@ -30,14 +30,17 @@
       android:networkSecurityConfig="@xml/network_security_config">
 
     <!-- Main Activity -->
-    <activity
-        android:name="com.NourAlmomen.islamicapp.MainActivity"
-        android:exported="true"
-        android:launchMode="singleTop"
-        android:theme="@style/LaunchTheme"
-        android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-        android:hardwareAccelerated="true"
-        android:windowSoftInputMode="adjustResize">
+
+        <activity
+            android:name="com.ryanheise.audioservice.AudioServiceActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:exported="true"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:showWhenLocked="true"
+            android:theme="@style/LaunchTheme"
+            android:turnScreenOn="true"
+            android:windowSoftInputMode="adjustResize">
 
       <meta-data android:name="io.flutter.embedding.android.NormalTheme"
           android:resource="@style/NormalTheme" />
@@ -49,31 +52,22 @@
     </activity>
 
     <!-- Audio Service for just_audio_background -->
-    <service
-        android:name="com.ryanheise.audioservice.AudioService"
-        android:exported="true"
-        android:foregroundServiceType="mediaPlayback"
-        tools:ignore="Instantiatable">
-      <intent-filter>
-        <action android:name="android.media.browse.MediaBrowserService" />
-      </intent-filter>
-    </service>
+        <service
+            android:name="com.ryanheise.audioservice.AudioService"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
 
-    <!-- MediaSessionService (optional with some audio configs) -->
-    <service
-        android:name="androidx.media3.session.MediaSessionService"
-        android:exported="true"
-        android:foregroundServiceType="mediaPlayback" />
-
-    <!-- Media Button Receiver -->
-    <receiver
-        android:name="com.ryanheise.audioservice.MediaButtonReceiver"
-        android:exported="true"
-        tools:ignore="Instantiatable">
-      <intent-filter>
-        <action android:name="android.intent.action.MEDIA_BUTTON" />
-      </intent-filter>
-    </receiver>
+        <receiver
+            android:name="com.ryanheise.audioservice.MediaButtonReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
 
     <!-- Flutter Embedding Version -->
     <meta-data android:name="flutterEmbedding"

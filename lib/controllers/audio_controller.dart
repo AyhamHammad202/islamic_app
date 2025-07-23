@@ -2,23 +2,28 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:audio_service/audio_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 import 'package:path_provider/path_provider.dart';
-
-import 'package:islamic_app/controllers/quran_controller.dart';
-import 'package:islamic_app/controllers/readers_controller.dart';
-import 'package:islamic_app/generated/l10n.dart';
-import 'package:islamic_app/models/reader_model.dart';
-import 'package:islamic_app/services/last_read_service.dart';
-import 'package:islamic_app/services/settings_service.dart';
 import 'package:quran_library/quran.dart';
 
+import '/controllers/quran_controller.dart';
+import '/controllers/readers_controller.dart';
+import '/generated/l10n.dart';
+import '/models/reader_model.dart';
+import '/services/last_read_service.dart';
+import '/services/settings_service.dart';
+import 'audio_player_handler.dart';
+
 class AudioController extends GetxController {
+  static AudioController get instance =>
+      GetInstance().putOrFind(() => AudioController());
+
   final SettingsService _settingsService = Get.find();
   final LastReadService _lastReadService = Get.find();
   final ReadersController _readersController = Get.find();
@@ -37,6 +42,8 @@ class AudioController extends GetxController {
   final Rx<Duration> duration = Duration.zero.obs;
   final Rx<Duration> currentDuration = Duration.zero.obs;
   final RxInt ayaUniqeId = 1.obs;
+  late Directory dir;
+  Uri? cachedArtUri; // تحويل إلى متغير اختياري - Make variable optional
 
   // Getters
   AyahModel get currentAya => _quranController.ayas[ayaUniqeId.value - 1];
@@ -52,9 +59,24 @@ class AudioController extends GetxController {
   // Lifecycle
   @override
   Future<void> onInit() async {
+    // تهيئة ayaUniqeId - Initialize ayaUniqeId
     ayaUniqeId.value = _lastReadService.lastAyaUniqeNumRead.value;
+
+    // تهيئة appPath - Initialize appPath
     appPath = await getApplicationDocumentsDirectory();
+
+    // تهيئة Audio Player streams - Initialize Audio Player streams
     await _initAudioPlayerStreams();
+
+    // انتظار تحميل الموارد المطلوبة - Wait for required resources to load
+    await Future.wait([
+      getCachedArtUri().then((v) => cachedArtUri = v),
+      getApplicationDocumentsDirectory().then((v) => dir = v),
+    ]);
+
+    // تهيئة خدمة الصوت بعد تحميل cachedArtUri - Initialize audio service after cachedArtUri is loaded
+    await initAudioService();
+
     super.onInit();
   }
 
@@ -148,14 +170,7 @@ class AudioController extends GetxController {
       await audioPlayer.setAudioSource(
         AudioSource.file(
           ayaFile.path,
-          tag: MediaItem(
-            id: currentAya.ayahUQNumber.toString(),
-            title: _getLocalizedSuraName(),
-            displayTitle: "${_getLocalizedSuraName()} | ${S.current.aya}-${currentAya.ayahNumber}",
-            artist: _getLocalizedReaderName(),
-            duration: duration.value,
-            artUri: await _loadAssetAsUri(currentReader.image),
-          ),
+          tag: mediaItem,
         ),
       );
 
@@ -199,4 +214,38 @@ class AudioController extends GetxController {
         ? currentReader.englishName
         : currentReader.arabicName;
   }
+
+  Future<void> initAudioService() async {
+    await AudioService.init(
+      builder: () => AudioPlayerHandler.instance,
+      config: const AudioServiceConfig(
+        androidNotificationChannelId: 'com.NourAlmomen.islamicapp.audio',
+        androidNotificationChannelName: 'Audio playback',
+        androidNotificationOngoing: true,
+        androidStopForegroundOnPause: true,
+      ),
+    );
+  }
+
+  Future<Uri> getCachedArtUri() async {
+    final file = await DefaultCacheManager().getSingleFile(
+        'https://raw.githubusercontent.com/alheekmahlib/thegarlanded/master/Photos/ios-1024.png');
+    return await file.exists()
+        ? file.uri
+        : Uri.parse(
+            'https://raw.githubusercontent.com/alheekmahlib/thegarlanded/master/Photos/ios-1024.png');
+  }
+
+  MediaItem get mediaItem => MediaItem(
+        id: currentAya.ayahUQNumber.toString(),
+        title: _getLocalizedSuraName(),
+        displayTitle:
+            "${_getLocalizedSuraName()} | ${S.current.aya}-${currentAya.ayahNumber}",
+        artist: _getLocalizedReaderName(),
+        duration: duration.value,
+        // استخدام قيمة افتراضية إذا لم يتم تحميل cachedArtUri - Use default value if cachedArtUri not loaded
+        artUri: cachedArtUri ??
+            Uri.parse(
+                'https://raw.githubusercontent.com/alheekmahlib/thegarlanded/master/Photos/ios-1024.png'),
+      );
 }

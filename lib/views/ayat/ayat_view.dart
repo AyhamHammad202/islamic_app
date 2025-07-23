@@ -2,10 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/common/background_image.dart';
-import 'package:islamic_app/constants/assets.dart';
 import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
@@ -78,7 +76,8 @@ class AyatView extends StatelessWidget {
                     onAyahLongPress: (details, ayah) {
                       context.showAyahMenu(
                         QuranLibrary()
-                            .getCurrentSurahDataByAyah(ayah: ayah)
+                            .getCurrentSurahDataByAyahUniqueNumber(
+                                ayahUniqueNumber: ayah.ayahUQNumber)
                             .surahNumber,
                         ayah.page,
                         ayah.ayahUQNumber,

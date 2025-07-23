@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/constants/constant.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/models/radio_model.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 import 'package:path_provider/path_provider.dart';
 
 class RadioController extends GetxController {
@@ -41,6 +42,7 @@ class RadioController extends GetxController {
     radioIsLoading.value = false;
     return;
   }
+
   Future stopRadio() async {
     await radioAudioPlayer.stop();
     radioIsPlaying.value = false;
