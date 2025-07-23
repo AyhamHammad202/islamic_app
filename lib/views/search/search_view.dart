@@ -23,10 +23,10 @@ class SearchView extends StatelessWidget {
     return BackgroundImage(
       child: PopScope(
         canPop: true,
-        onPopInvokedWithResult: (didPop,r) {
+        onPopInvokedWithResult: (didPop, r) {
           if (didPop) {
-            quranController.ayasFoundBySearch.clear();
-            quranController.surasFoundbySearch.clear();
+            quranController.searchedAyas.clear();
+            quranController.searchedSurahs.clear();
             generalController.searchController.clear();
             generalController.searchText.value = '';
           }
@@ -44,18 +44,19 @@ class SearchView extends StatelessWidget {
                       isEnabled: true,
                       onChanged: (value) {
                         generalController.searchText.value = value;
-                        quranController.searchForAyas(
-                          value.trim(),
-                        );
+                        quranController.search(value);
+                        // quranController.searchForAyas(
+                        //   value.trim(),
+                        // );
                       },
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: quranController.surasFoundbySearch.isNotEmpty
+                    child: quranController.searchedSurahs.isNotEmpty
                         ? Padding(
                             padding: EdgeInsets.symmetric(vertical: 8.h),
                             child: Text(
-                              "${S.of(context).sorahs} ${quranController.surasFoundbySearch.length}",
+                              "${S.of(context).sorahs} ${quranController.searchedSurahs.length}",
                               style: TextThemes.searchResultsTextStyle(context),
                             ),
                           )
@@ -65,19 +66,19 @@ class SearchView extends StatelessWidget {
                     child: SurasFoundBySearch(quranController: quranController),
                   ),
                   SliverToBoxAdapter(
-                    child: quranController.ayasFoundBySearch.isNotEmpty
+                    child: quranController.searchedAyas.isNotEmpty
                         ? Padding(
                             padding: EdgeInsets.symmetric(vertical: 8.h),
                             child: Text(
-                              "${S.of(context).theAyas} ${quranController.ayasFoundBySearch.length}",
+                              "${S.of(context).theAyas} ${quranController.searchedAyas.length}",
                               style: TextThemes.searchResultsTextStyle(context),
                             ),
                           )
                         : const SizedBox.shrink(),
                   ),
                   const AyasSearchSliverList(),
-                  if (quranController.ayasFoundBySearch.isEmpty &&
-                      quranController.surasFoundbySearch.isEmpty)
+                  if (quranController.searchedAyas.isEmpty &&
+                      quranController.searchedSurahs.isEmpty)
                     SliverToBoxAdapter(
                       child: Center(
                         heightFactor: 1.7,

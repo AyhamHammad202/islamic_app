@@ -29,17 +29,17 @@ class AllahNamesView extends StatelessWidget {
                   itemCount: c.allahNames.length,
                   itemBuilder: (context, index) {
                     return AnimationConfiguration.staggeredList(
-                            position: index,
-                            child: FadeInAnimation(
-                              duration: Durations.medium2,
-                              child: SlideAnimation(
-                                verticalOffset: 50,
-                                child: AllahNameWidget(
-                                  index: index,
-                                ),
-                              ),
-                            ),
-                          );
+                      position: index,
+                      child: FadeInAnimation(
+                        duration: Durations.medium2,
+                        child: SlideAnimation(
+                          verticalOffset: 50,
+                          child: AllahNameWidget(
+                            index: index,
+                          ),
+                        ),
+                      ),
+                    );
                   },
                 );
               },

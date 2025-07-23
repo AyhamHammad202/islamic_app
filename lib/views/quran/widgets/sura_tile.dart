@@ -8,6 +8,7 @@ import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/text_themes.dart';
 import 'package:islamic_app/views/surah_info/surah_info_view.dart';
+import 'package:quran_library/quran_library.dart';
 
 class SuraTile extends StatelessWidget {
   const SuraTile({
@@ -34,13 +35,13 @@ class SuraTile extends StatelessWidget {
                 children: [
                   SvgPicturesMethods.suraNumBorderIcon(),
                   Text(
-                    quranController.surahs[index].numberOfSurah.toArabic(),
+                    quranController.surahs[index].surahNumber.toArabic(),
                     style: TextThemes.suraNumTextStyle(context),
                   ),
                 ],
               ),
               SvgPicture.asset(
-                "assets/images/sorahs/00${quranController.surahs[index].numberOfSurah}.svg",
+                "assets/images/sorahs/00${quranController.surahs[index].surahNumber}.svg",
                 height: 42.h,
                 width: 100.w,
                 colorFilter: const ColorFilter.mode(
@@ -50,15 +51,12 @@ class SuraTile extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                "${quranController.surahs[index].ayas.length.toString().padLeft(3, '0')} - ",
+                "${quranController.surahs[index].ayahs.length.toString().padLeft(3, '0')} - ",
                 style: TextThemes.suraInfoTextStyle(context),
               ),
               Gap(4.h),
               Text(
-                Get.locale == const Locale('ar')
-                    ? quranController.surahs[index].revelationType
-                        .revelationTypeAr()
-                    : quranController.surahs[index].revelationType,
+                QuranLibrary().getSurahInfo(surahNumber: index).revelationType,
                 style: TextThemes.suraInfoTextStyle(context),
               ),
               SizedBox(width: 8.w),

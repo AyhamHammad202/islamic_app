@@ -9,184 +9,166 @@ import 'package:get/get.dart';
 import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
-import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/models/reader_model.dart';
-import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:quran_library/quran.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ReadersController extends GetxController {
-  // final QuranController _quranController = Get.find();
   final SettingsService _settingsService = Get.find();
-  // final AudioController _audioController = Get.find();
-  List<ReaderModel> readers = [];
   final Dio dio = Dio();
-  CancelToken cancelToken = CancelToken();
-  RxBool isDownloading = false.obs;
-  RxBool isCanceled = false.obs;
-  RxDouble downloadingProgress = 0.0.obs;
-  RxInt downloadedAyatCount = 0.obs;
-  RxMap<String, bool> suraDownloadStatus = <String, bool>{}.obs;
-  late Directory appPath;
 
-  @override
-  onInit() async {
-    appPath = await getApplicationDocumentsDirectory();
-    await loadReaders();
-    super.onInit();
-  }
+  final RxBool isDownloading = false.obs;
+  final RxBool isCanceled = false.obs;
+  final RxDouble downloadingProgress = 0.0.obs;
+  final RxInt downloadedAyatCount = 0.obs;
+  final RxMap<String, bool> suraDownloadStatus = <String, bool>{}.obs;
+
+  late Directory appPath;
+  late CancelToken cancelToken;
+  List<ReaderModel> readers = [];
 
   ReaderModel get currentReader =>
       readers[_settingsService.currentReaderIndex.value];
 
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+    appPath = await getApplicationDocumentsDirectory();
+    await loadReaders();
+  }
+
   Future<void> loadReaders() async {
-    String jsonString = await rootBundle.loadString("assets/data/readers.json");
-    Map<String, dynamic> jsonResponse = jsonDecode(jsonString);
-    List<dynamic> radioesJson = jsonResponse['data'];
-    readers = radioesJson
-        .map(
-          (e) => ReaderModel.fromMap(e),
-        )
-        .toList();
+    final jsonString = await rootBundle.loadString("assets/data/readers.json");
+    final Map<String, dynamic> jsonResponse = jsonDecode(jsonString);
+    final List<dynamic> readersJson = jsonResponse['data'];
+    readers = readersJson.map((e) => ReaderModel.fromMap(e)).toList();
     update();
   }
 
-  Future<bool> isAyaDownloaded(File aya, ReaderModel readerModel) async {
+  Future<bool> isAyaDownloaded(File file) async {
     try {
-      if (await aya.exists()) {
-        return true;
-      }
-      return false;
+      return await file.exists();
     } catch (e) {
-      log(e.toString());
+      log("Error checking file existence: $e");
       return false;
     }
   }
 
-  Future<bool> isSuraDownloaded(
-      SurahModel sura, ReaderModel readerModel) async {
-    try {
-      for (var aya in sura.ayas) {
-        bool isDownloaded = await isAyaDownloaded(
-            File(
-                "${appPath.path}/reader/${readerModel.link}/${sura.englishNameOfSurah}/${aya.numberOfAyaInSurah}.mp3"),
-            readerModel);
-        if (!isDownloaded) {
-          return false; // return false as soon as one Aya is not downloaded
-        }
-      }
-      return true; // return true only if all Ayas are downloaded
-    } catch (e) {
-      log(e.toString());
-      return false;
+  Future<bool> isSuraDownloaded(SurahModel sura, ReaderModel reader) async {
+    for (var aya in sura.ayahs) {
+      final file = _getAyaFile(reader, sura, aya);
+      if (!await isAyaDownloaded(file)) return false;
     }
+    return true;
   }
 
-  void checkIfSuraDownloaded(SurahModel sura, ReaderModel readerModel) async {
-    bool isDownloaded = await isSuraDownloaded(sura, readerModel);
-    String key = '${sura.englishNameOfSurah}-${readerModel.englishName}';
-    suraDownloadStatus[key] = isDownloaded;
+  void checkIfSuraDownloaded(SurahModel sura, ReaderModel reader) async {
+    final key = '${sura.englishName}-${reader.englishName}';
+    suraDownloadStatus[key] = await isSuraDownloaded(sura, reader);
   }
 
-  Future downloadAya(File file, AyaOfSurahModel aya, SurahModel surah,
-      ReaderModel readerModel) async {
+  Future<void> downloadAya(
+      File file, AyahModel aya, SurahModel surah, ReaderModel reader) async {
     try {
-      log(file.path);
-      if (!await file.exists()) {
-        isDownloading.value = true;
-        var donwloadUrl =
-            "https://everyayah.com/data/${readerModel.link}/${surah.numberOfSurah.toString().padLeft(3, "0")}${aya.numberOfAyaInSurah.toString().padLeft(3, "0")}.mp3";
-        await dio.download(
-          donwloadUrl,
-          file.path,
-          cancelToken: cancelToken,
-          onReceiveProgress: (received, total) async {
-            if (total <= 0) return;
-            downloadingProgress.value = (received / total * 100);
-          },
-        );
+      if (await file.exists()) {
         downloadedAyatCount.value++;
-        isDownloading.value = false;
-        downloadingProgress.value = 0.0;
-      } else {
-        log("Aya Already downloaded");
-        downloadedAyatCount.value++;
+        return;
       }
+
+      isDownloading.value = true;
+
+      final downloadUrl =
+          "https://everyayah.com/data/${reader.link}/${surah.surahNumber.toString().padLeft(3, "0")}${aya.ayahNumber.toString().padLeft(3, "0")}.mp3";
+
+      await dio.download(
+        downloadUrl,
+        file.path,
+        cancelToken: cancelToken,
+        onReceiveProgress: (received, total) {
+          if (total > 0) {
+            downloadingProgress.value = (received / total) * 100;
+          }
+        },
+      );
+
+      downloadedAyatCount.value++;
+      downloadingProgress.value = 0.0;
+      isDownloading.value = false;
     } on DioException catch (e) {
       if (e.type == DioExceptionType.cancel) {
         isDownloading.value = false;
-        log("cancled download");
         isCanceled.value = true;
-        return;
+        log("Download cancelled");
       }
     } catch (e) {
       isDownloading.value = false;
-      return e;
+      log("Error downloading ayah: $e");
     }
   }
 
-  Future downloadSuraAyas(SurahModel surah, ReaderModel readerModel) async {
-    try {
-      log(readerModel.englishName);
-      cancelToken = CancelToken();
-      downloadedAyatCount = 0.obs;
-      isCanceled = false.obs;
+  Future<void> downloadSuraAyas(SurahModel surah, ReaderModel reader) async {
+    cancelToken = CancelToken();
+    isCanceled.value = false;
+    downloadedAyatCount.value = 0;
 
-      for (var aya in surah.ayas) {
-        await downloadAya(
-          File(
-              "${appPath.path}/reader/${readerModel.link}/${surah.englishNameOfSurah}/${aya.numberOfAyaInSurah}.mp3"),
-          aya,
-          surah,
-          readerModel,
-        );
-        AwesomeNotifications().createNotification(
-          content: NotificationContent(
-            notificationLayout: NotificationLayout.ProgressBar,
-            id: 10,
-            channelKey: 'progress_bar',
-            title: S.current.download,
-            body:
-                '${Get.locale.toString() == "en" ? surah.englishNameOfSurah : surah.nameOfSurah}: ${S.current.downloadAyat} ${(downloadedAyatCount.value / surah.ayas.length * 100).toInt()}%',
-            progress:
-                (downloadedAyatCount.value / surah.ayas.length * 100),
-            locked: isDownloading.value,
-          ),
-        );
-        log("downloaded aya ${aya.numberOfAyaInSurah}");
-        if (isCanceled.value) {
-          return;
-        }
-      }
-      checkIfSuraDownloaded(surah, readerModel);
-    } catch (e) {
-      return e;
+    for (var aya in surah.ayahs) {
+      final file = _getAyaFile(reader, surah, aya);
+      await downloadAya(file, aya, surah, reader);
+
+      if (isCanceled.value) break;
+
+      final progress = (downloadedAyatCount.value / surah.ayahs.length) * 100;
+
+      AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          notificationLayout: NotificationLayout.ProgressBar,
+          id: 10,
+          channelKey: 'progress_bar',
+          title: S.current.download,
+          body:
+              '${Get.locale.toString() == "en" ? surah.englishName : surah.arabicName}: ${S.current.downloadAyat} ${progress.toInt()}%',
+          progress: progress,
+          locked: isDownloading.value,
+        ),
+      );
     }
+
+    checkIfSuraDownloaded(surah, reader);
   }
 
   Future<void> shareAudio(
     AudioController audioController,
-    ReadersController readersController,
-    AyaOfSurahModel aya,
+    AyahModel aya,
     SurahModel surah,
   ) async {
-    audioController.ayaUniqeId.value = aya.uniqueIdOfAya;
+    audioController.ayaUniqeId.value = aya.ayahUQNumber;
     final file = File(audioController.ayaPath);
+
     if (!await file.exists()) {
-      await readersController.downloadAya(
-          file, aya, surah, audioController.currentReader);
+      await downloadAya(file, aya, surah, audioController.currentReader);
     }
-    await Share.shareXFiles([
-      XFile(file.path,
-          name: '${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}'),
-    ],
-        text:
-            '${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}z\n${S.current.sharedBy}');
+
+    await Share.shareXFiles(
+      [
+        XFile(file.path,
+            name: '${surah.arabicName}-${aya.ayahNumber.toArabic()}'),
+      ],
+      text:
+          '${surah.arabicName}-${aya.ayahNumber.toArabic()}\n${S.current.sharedBy}',
+    );
   }
 
-  void shareText(AyaOfSurahModel aya, SurahModel surah) {
+  void shareText(AyahModel aya, SurahModel surah) {
     Share.share(
-        '﴿${aya.textOfAya}﴾ [${surah.nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}]\n${S.current.sharedBy}');
+      '﴿${aya.ayaTextEmlaey}﴾ [${surah.arabicName}-${aya.ayahNumber.toArabic()}]\n${S.current.sharedBy}',
+    );
+  }
+
+  File _getAyaFile(ReaderModel reader, SurahModel surah, AyahModel aya) {
+    return File(
+      "${appPath.path}/reader/${reader.link}/${surah.englishName}/${aya.ayahNumber}.mp3",
+    );
   }
 }

@@ -3,140 +3,47 @@ import 'dart:developer';
 import 'dart:math' as math;
 
 import 'package:bot_toast/bot_toast.dart';
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
-import 'package:hijri/hijri_calendar.dart';
-import 'package:islamic_app/constants/constant.dart';
-import 'package:sqflite/sqflite.dart';
-
-import 'package:islamic_app/database/data_client.dart';
-import 'package:islamic_app/helper.dart';
-import 'package:islamic_app/models/aya_of_surah_model.dart';
+import 'package:islamic_app/models/allah_name_model.dart';
 import 'package:islamic_app/models/quran_duaa_model.dart';
 import 'package:islamic_app/models/surah_info.dart';
-import 'package:islamic_app/models/surah_model.dart';
-
-import '../models/allah_name_model.dart';
+import 'package:quran_library/quran_library.dart';
 
 class QuranController extends GetxController {
-  final DataClient _client = DataClient();
   List<SurahModel> surahs = [];
+  List<AyahModel> ayas = [];
+  List<List<AyahModel>> pages = [];
+  List<AyahModel> searchedSurahs = [];
+  List<AyahModel> searchedAyas = [];
+  RxBool isLoading = false.obs;
+  RxBool isClickedOnPage = false.obs;
+  PreferDirection preferDirection = PreferDirection.topCenter;
   List<SurahInfoModel> suarhsInfo = [];
+
   List<AllahNameModel> allahNames = [];
   List<QuranDuaaModel> quranDuaas = [];
-  List<List<AyaOfSurahModel>> pages = [];
-  List<AyaOfSurahModel> allAyas = [];
-  List<AyaOfSurahModel> ayasFoundBySearch = [];
-  List<String> tables = [];
-  RxBool isClickedOnPage = false.obs;
   RxInt randomSura = 1.obs;
   RxInt randomAyaFromSura = 1.obs;
   RxInt randomAya = 1.obs;
 
-  Map<int, String> mapOfTafser = {};
-
-  RxList selectedAyahIndexes = <int>[].obs;
-  // RxList showAyahTafserIndexes = <int>[].obs;
-  RxInt globalPage = 0.obs;
-  late PageController pageController;
-  late AdvancedDrawerController advancedDrawerController;
-  late ScrollController homePageScrollerController;
-  bool isSelected = false;
-  PreferDirection preferDirection = PreferDirection.topCenter;
-  RxBool isMushafMode = true.obs;
-
   @override
   void onInit() async {
-    super.onInit();
-    advancedDrawerController = AdvancedDrawerController();
-    homePageScrollerController = ScrollController();
-    homePageScrollerController.addListener(() {
-      // log("OFFEST ${homePageScrollerController.position}");
-      // if (homePageScrollerController.offset>homePageScrollerController) {}
-    });
-    await quranDuaasNames();
     await loadQuran();
-    randomAyaSelect();
+    await loadTafser();
     await loadQuranSurahsInfo();
-    await getAyaTafser();
+    await quranDuaasNames();
+    randomAyaSelect();
     await loadAllahNames();
-  }
 
-  @override
-  void onClose() {
-    log("onClose method called");
-    pageController.dispose();
-    advancedDrawerController.dispose();
-    super.onClose();
-  }
-
-    int calculate(int year, int month, int day) {
-    HijriCalendar hijriCalendar = HijriCalendar();
-    DateTime start = DateTime.now();
-    DateTime end = hijriCalendar.hijriToGregorian(year, month, day);
-    if (!start.isAfter(end)) {
-      // this if the end date is aftar the start date will do this logic
-      return DateTimeRange(start: start, end: end).duration.inDays;
-    } else {
-      // this if the end date is before the start date will do the else logic
-      // end = end.copyWith(year: end.year + 1); // uncomment this if you want to make it calucate the next year occasion
-      // return DateTimeRange(start: end, end: start).duration.inDays; // you can make this like مضى X ايام
-      return 0;
-    }
-  }
-
-  double calculateProgress(int currentIndex, int total) {
-    int totalPages = total;
-    if (currentIndex < 1) {
-      return 0.0;
-    }
-    if (currentIndex > totalPages) {
-      return 100.0;
-    }
-    return ((currentIndex / totalPages) *
-        Get.context!.customOrientation(Get.width * .8, Get.width * .4));
-  }
-
-  void toggleAyahSelection(int index) {
-    if (selectedAyahIndexes.contains(index)) {
-      selectedAyahIndexes.remove(index);
-    } else {
-      selectedAyahIndexes.clear();
-      selectedAyahIndexes.add(index);
-      selectedAyahIndexes.refresh();
-    }
-    selectedAyahIndexes.refresh();
-  }
-
-  void clearSelection() {
-    if (selectedAyahIndexes.isNotEmpty) {
-      selectedAyahIndexes.clear();
-    } else {
-      // sl<GeneralController>().showControl();
-    }
+    super.onInit();
   }
 
   Future<void> loadQuran() async {
-    String jsonString = await rootBundle.loadString("assets/data/quranV2.json");
-    Map<String, dynamic> jsonResponse = jsonDecode(jsonString);
-    List<dynamic> surahsJson = jsonResponse['data']['surahs'];
-    surahs = surahsJson.map((e) => SurahModel.fromMap(e)).toList();
-
-    for (var surah in surahs) {
-      allAyas.addAll(surah.ayas);
-      // log('Added ${surah.nameOfSurah} ayahs');
-    }
-    update();
-    List.generate(
-      604,
-      (pageIndex) {
-        pages.add(allAyas.where((ayah) => ayah.page == pageIndex + 1).toList());
-      },
-    );
-    // log('Pages Length: ${pages.length}', name: 'Quran Controller');
+    surahs = QuranLibrary().quranCtrl.state.surahs;
+    ayas = QuranLibrary().quranCtrl.state.allAyahs;
+    pages = QuranLibrary().quranCtrl.state.pages;
+    log(surahs.length.toString());
   }
 
   Future<void> loadQuranSurahsInfo() async {
@@ -150,6 +57,69 @@ class QuranController extends GetxController {
     update();
   }
 
+  Future<void> search(String text) async {
+    searchAyahs(text);
+    surahSearchMethod(text);
+    log("SEarchedSURAS =${searchedSurahs.length}");
+    update();
+  }
+
+  void searchAyahs(String text) async {
+    if (text.trim().isEmpty) {
+      log("Empty search query, skipping search.");
+      searchedAyas.clear();
+      update();
+      return;
+    }
+
+    searchedAyas.clear();
+    _setLoading(true);
+
+    try {
+      final values = QuranLibrary().search(text.toArabic());
+      if (values.isNotEmpty) {
+        searchedAyas.assignAll(values);
+        _setLoading(false);
+        update();
+      } else {
+        _setLoading(false);
+        update();
+      }
+    } catch (e) {
+      _setLoading(false);
+      update();
+    }
+  }
+
+  void surahSearchMethod(String text) async {
+    searchedSurahs.clear();
+    _setLoading(true);
+    update();
+    try {
+      final values = QuranLibrary().surahSearch(text);
+      if (values.isNotEmpty) {
+        // Use a map to track unique Surahs
+        var uniqueSurahs = <int, AyahModel>{};
+        for (var aya in values) {
+          if (!uniqueSurahs.containsKey(aya.surahNumber)) {
+            uniqueSurahs[aya.surahNumber!] = aya;
+          }
+        }
+        searchedSurahs.assignAll(uniqueSurahs.values);
+        _setLoading(false);
+        update();
+      } else {
+        searchedSurahs.clear();
+        _setLoading(false);
+        update();
+      }
+    } catch (e) {
+      searchedSurahs.clear();
+      _setLoading(false);
+      update();
+    }
+  }
+
   Future<void> quranDuaasNames() async {
     String jsonString =
         await rootBundle.loadString("assets/data/quran_duaa.json");
@@ -158,6 +128,7 @@ class QuranController extends GetxController {
     for (var name in jsonResponse['surahs']) {
       quranDuaas.add(QuranDuaaModel.fromMap(name));
     }
+
     randomDuaa();
     update();
   }
@@ -166,14 +137,13 @@ class QuranController extends GetxController {
     randomSura = math.Random().nextInt(quranDuaas.length - 1).obs;
     randomAyaFromSura =
         math.Random().nextInt(quranDuaas[randomSura.value].ayas.length).obs;
-    log("dsshiac");
+    log("Random Duaa Selected");
     update();
   }
 
   void randomAyaSelect() {
-    // randomSura = Math.Random().nextInt(quranDuaas.length - 1).obs;
-    randomAya = math.Random().nextInt(allAyas.length).obs;
-    log("dsshiac");
+    randomAya = math.Random().nextInt(ayas.length).obs;
+    log("Random Aya Selected");
     update();
   }
 
@@ -183,115 +153,19 @@ class QuranController extends GetxController {
 
     for (var name in jsonResponse['names']) {
       allahNames.add(AllahNameModel.fromMap(name));
-      // log(name["name"]);
     }
+
     update();
   }
 
-  List<List<AyaOfSurahModel>> getCurrentPageAyahsSeparatedForBasmala(
-          int pageIndex) =>
-      pages[pageIndex]
-          .splitBetween((f, s) => f.numberOfAyaInSurah > s.numberOfAyaInSurah)
-          .toList();
-
-  List<AyaOfSurahModel> getCurrentPageAyas(int pageIndex) => pages[pageIndex];
-
-  int getSurahNumberFromPage(int pageNumber) {
-    log("Gets Sura Number from page $pageNumber");
-    return surahs
-        .firstWhere(
-            (s) => s.ayas.contains(getCurrentPageAyas(pageNumber).first))
-        .numberOfSurah;
+  Future<void> loadTafser() async {
+    await QuranLibrary().initTafsir();
   }
+  // TafsirTableData getAyaTafsir(AyahModel aya) async  {
+  //   tafsir =await QuranLibrary().getTafsirOfAyah(ayahUniqNumber: aya.ayahUQNumber);
+  // }
 
-  int getSurahNumberByAya(AyaOfSurahModel aya) =>
-      surahs.firstWhere((s) => s.ayas.contains(aya)).numberOfSurah;
-
-  String getSurahNameFromPage(int pageNumber) {
-    try {
-      return surahs
-          .firstWhere(
-              (s) => s.ayas.contains(getCurrentPageAyas(pageNumber).first))
-          .nameOfSurah;
-    } catch (e) {
-      // Handle the error or return a default/fallback value
-      return "Surah not found"; // Or any other fallback logic you prefer
-    }
-  }
-
-  Future<void> getAyaTafser() async {
-    Database? database = await _client.database;
-    if (database == null || !database.isOpen) {
-      log('Database is null or closed');
-      return;
-    }
-    List results = (await database.query("saadi",
-            columns: [
-              '"index"',
-              'sura',
-              'aya',
-              'text',
-              'pageNum',
-            ],
-            // where: "PageNum=$page",
-            orderBy: '"index"'))
-        .cast<Map>();
-    // tafserOfPage = [];
-    mapOfTafser.clear();
-    for (var element in results) {
-      mapOfTafser.addAll({element['index']: element['text']});
-      // tafserOfPage.add(element['text']);
-    }
-    log('Tafser leanth======${mapOfTafser.length}');
-    // refresh();
-  }
-
-  List<SurahModel> surasFoundbySearch = [];
-  void searchForAyas(String searchText) {
-    try {
-      ayasFoundBySearch.clear();
-      surasFoundbySearch.clear();
-      log("Start Searching for $searchText");
-      if (searchText.isEmpty) {
-        ayasFoundBySearch.clear();
-        surasFoundbySearch.clear();
-        refresh();
-        return;
-      }
-      var results =
-          allAyas.where((aya) => aya.searchTextOfAya.contains(searchText));
-      for (var aya in results) {
-        ayasFoundBySearch.add(aya);
-      }
-      var surasResults = surahs.where((sura) =>
-          removeDiacritics(sura.nameOfSurah).substring(5).contains(searchText));
-      for (var element in surasResults) {
-        surasFoundbySearch.add(element);
-      }
-      refresh();
-    } catch (e) {
-      log("Search Error ${e.toString()}");
-    }
-  }
-
-  // Map<int, int> indexMapping = {};
-  String removeDiacritics(String input) {
-    StringBuffer buffer = StringBuffer();
-    Map<int, int> indexMapping =
-        {}; // Ensure indexMapping is declared if not already globally declared
-    for (int i = 0; i < input.length; i++) {
-      String char = input[i];
-      String? mappedChar = Constant.diacriticsMap[char];
-      if (mappedChar != null) {
-        buffer.write(mappedChar);
-        if (mappedChar.isNotEmpty) {
-          indexMapping[buffer.length - 1] = i;
-        }
-      } else {
-        buffer.write(char);
-        indexMapping[buffer.length - 1] = i;
-      }
-    }
-    return buffer.toString();
+  void _setLoading(bool value) {
+    isLoading.value = value;
   }
 }

@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/controllers/bookmark_controller.dart';
-import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/text_themes.dart';
+import 'package:quran_library/quran.dart';
 
 class BookmarkedAya extends StatelessWidget {
   const BookmarkedAya({
@@ -19,7 +19,7 @@ class BookmarkedAya extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BookMarkController bookMarkController = Get.find();
-    final QuranController quranController = Get.find();
+    Get.find();
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondaryContainer,
@@ -30,7 +30,7 @@ class BookmarkedAya extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            bookMarkController.ayasWithBookMark[index].textOfAya
+            bookMarkController.ayasWithBookMark[index].text
                 .replaceAll("\n", ""),
             style: TextThemes.bookmarkedAyaTextStyle(context),
           ),
@@ -40,7 +40,7 @@ class BookmarkedAya extends StatelessWidget {
               InkWell(
                 onTap: () {
                   bookMarkController.deleteAyaBookMark(
-                    bookMarkController.ayasWithBookMark[index].uniqueIdOfAya,
+                    bookMarkController.ayasWithBookMark[index].ayahUQNumber,
                   );
                 },
                 child: SvgPicturesMethods.bookmarkedIcon(
@@ -49,7 +49,7 @@ class BookmarkedAya extends StatelessWidget {
               ),
               Gap(8.w),
               Text(
-                "${quranController.surahs[quranController.getSurahNumberByAya(bookMarkController.ayasWithBookMark[index]) - 1].nameOfSurah} ${S.of(context).aya} ${bookMarkController.ayasWithBookMark[index].numberOfAyaInSurah}",
+                "${QuranLibrary().getCurrentSurahDataByAyah(ayah: bookMarkController.ayasWithBookMark[index]).arabicName} ${S.of(context).aya} ${bookMarkController.ayasWithBookMark[index].ayahNumber}",
                 style: TextThemes.bookmarkedInfoTextStyle(context),
               )
             ],

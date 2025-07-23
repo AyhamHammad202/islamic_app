@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:islamic_app/generated/l10n.dart';
-import 'package:islamic_app/models/aya_of_surah_model.dart';
 import 'package:islamic_app/text_themes.dart';
+import 'package:quran_library/quran_library.dart';
 
 class JuzTile extends StatelessWidget {
   const JuzTile({
@@ -12,7 +12,7 @@ class JuzTile extends StatelessWidget {
     this.onTap,
   });
 
-  final AyaOfSurahModel juz;
+  final AyahModel juz;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class JuzTile extends StatelessWidget {
                 Gap(4.w),
                 Expanded(
                   child: Text(
-                    juz.searchTextOfAya,
+                    juz.ayaTextEmlaey,
                     style: TextThemes.ayaOfJuzTextStyle(context),
                     overflow: TextOverflow.ellipsis,
                   ),

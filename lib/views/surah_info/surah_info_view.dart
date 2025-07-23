@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
-import 'package:islamic_app/models/surah_model.dart';
+// import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/views/surah_info/widgets/info_widget.dart';
+import 'package:quran_library/quran.dart';
 
 class SurahInfoView extends StatelessWidget {
   const SurahInfoView({super.key, required this.surahModel});
@@ -21,7 +22,7 @@ class SurahInfoView extends StatelessWidget {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: Text(
-              "${S.of(context).suraInfo} ${quranController.suarhsInfo[surahModel.numberOfSurah - 1].suraName}",
+              "${S.of(context).suraInfo} ${quranController.suarhsInfo[surahModel.surahNumber].suraName}",
             ),
           ),
           body: SingleChildScrollView(
@@ -30,44 +31,44 @@ class SurahInfoView extends StatelessWidget {
                 InfoWidget(
                   title: "أسمائها",
                   info: quranController
-                      .suarhsInfo[surahModel.numberOfSurah - 1].itsNames,
+                      .suarhsInfo[surahModel.surahNumber - 1].itsNames,
                 ),
                 InfoWidget(
                   title: "عدد آياتها",
                   info: quranController
-                      .suarhsInfo[surahModel.numberOfSurah - 1].ayat,
+                      .suarhsInfo[surahModel.surahNumber - 1].ayat,
                 ),
                 InfoWidget(
                   title: "معاني أسمائها",
                   info: quranController
-                      .suarhsInfo[surahModel.numberOfSurah - 1].itsNameMeaning,
+                      .suarhsInfo[surahModel.surahNumber - 1].itsNameMeaning,
                 ),
                 InfoWidget(
                   title: "سبب تسميتها",
                   info: quranController
-                      .suarhsInfo[surahModel.numberOfSurah - 1].reasonOfName,
+                      .suarhsInfo[surahModel.surahNumber - 1].reasonOfName,
                 ),
                 InfoWidget(
                   title: "سبب نزولها",
                   info: quranController
-                      .suarhsInfo[surahModel.numberOfSurah - 1].reasonOfNuzolha,
+                      .suarhsInfo[surahModel.surahNumber - 1].reasonOfNuzolha,
                 ),
                 InfoWidget(
                   title: "مناسباتها",
                   info: quranController
-                      .suarhsInfo[surahModel.numberOfSurah - 1].munasaba
+                      .suarhsInfo[surahModel.surahNumber - 1].munasaba
                       .join(),
                 ),
                 InfoWidget(
                   title: "فضلها",
                   info: quranController
-                      .suarhsInfo[surahModel.numberOfSurah - 1].fadluha
+                      .suarhsInfo[surahModel.surahNumber - 1].fadluha
                       .join(),
                 ),
                 InfoWidget(
                   title: "مقصدها",
                   info: quranController
-                      .suarhsInfo[surahModel.numberOfSurah - 1].maqsad,
+                      .suarhsInfo[surahModel.surahNumber - 1].maqsad,
                 ),
               ],
             ),

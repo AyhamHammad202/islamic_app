@@ -2,36 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
-import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/text_themes.dart';
+import 'package:quran_library/quran.dart';
 
-import '../../../controllers/quran_controller.dart';
 import '../../ayat/ayat_view.dart';
 
 class SuraSearchTile extends StatelessWidget {
   const SuraSearchTile({
     super.key,
-    required this.surahModel,
+    required this.ayahModel,
   });
 
-  final SurahModel surahModel;
+  final AyahModel ayahModel;
 
   @override
   Widget build(BuildContext context) {
     final QuranController quranController = Get.find();
     return InkWell(
       onTap: () {
-        quranController.globalPage.value = surahModel.ayas[0].page - 1;
-        quranController.getCurrentPageAyas(surahModel.ayas.first.page - 1);
+        // quranController.globalPage.value = ayahModel.ayahs[0].page - 1;
+        // quranController.getCurrentPageAyas(ayahModel.ayahs.first.page - 1);
         Get.to(
           AyatView(
-            surahModel: surahModel,
-          ),
+              // surahModel: quranController.surahs[ayahModel.surahNumber!],
+              ),
           transition: Transition.rightToLeft,
           duration: const Duration(milliseconds: 300),
         );
+        QuranLibrary().jumpToSurah(ayahModel.surahNumber!);
       },
       child: Container(
         margin: EdgeInsets.symmetric(
@@ -54,12 +55,12 @@ class SuraSearchTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "${S.of(context).sorah}: ${surahModel.numberOfSurah.toArabic()}",
+              "${S.of(context).sorah}: ${ayahModel.surahNumber!.toArabic()}",
               style: TextThemes.searchInfoTextStyle(context),
             ),
             const Gap(8),
             Text(
-              surahModel.nameOfSurah,
+              quranController.surahs[ayahModel.surahNumber! - 1].arabicName,
               style: TextThemes.searchSuraTextStyle(context),
             ),
           ],

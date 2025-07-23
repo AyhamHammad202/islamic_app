@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:islamic_app/controllers/quran_controller.dart';
+import 'package:islamic_app/controllers/occasion_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/svg_pictures.dart';
@@ -22,7 +22,7 @@ class OccasionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuranController quranController = Get.find();
+    OccasionController quranController = Get.find();
     int leftDays = quranController.calculate(year, month, day);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),

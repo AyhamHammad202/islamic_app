@@ -2,7 +2,6 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id "com.google.gms.google-services"
 }
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
@@ -39,7 +38,7 @@ if (keyPropertiesFile.exists()) {
 
 android {
     namespace "com.NourAlmomen.islamicapp"
-    compileSdkVersion 34
+    compileSdkVersion 35
     ndkVersion "25.1.8937393"
      if (project.android.hasProperty("namespace")) {
         namespace 'com.NourAlmomen.islamicapp'

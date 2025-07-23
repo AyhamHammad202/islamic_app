@@ -6,12 +6,11 @@ import 'package:islamic_app/common/custom_button.dart';
 import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/controllers/readers_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
-import 'package:islamic_app/models/aya_of_surah_model.dart';
-import 'package:islamic_app/models/surah_model.dart';
+import 'package:quran_library/quran.dart';
 
 class ShareModelSheet extends StatelessWidget {
   const ShareModelSheet({super.key, required this.aya, required this.surah});
-  final AyaOfSurahModel aya;
+  final AyahModel aya;
   final SurahModel surah;
 
   @override
@@ -32,21 +31,20 @@ class ShareModelSheet extends StatelessWidget {
               child: Column(
                 children: [
                   CustomButton(
-                    title: S.current.shareAyaAudio,
-                    onTap: () async {
-                      readersController.shareAudio(
-                        audioController,
-                        readersController,
-                        aya,
-                        surah,
-                      );
+                    title: S.current.shareAyaText,
+                    onTap: () {
+                      readersController.shareText(aya, surah);
                     },
                   ),
                   Gap(16.h),
                   CustomButton(
-                    title: S.current.shareAyaText,
-                    onTap: () {
-                      readersController.shareText(aya, surah);
+                    title: S.current.shareAyaAudio,
+                    onTap: () async {
+                      readersController.shareAudio(
+                        audioController,
+                        aya,
+                        surah,
+                      );
                     },
                   ),
                 ],

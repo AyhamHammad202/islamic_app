@@ -13,9 +13,9 @@ class AyasSearchSliverList extends StatelessWidget {
     return GetBuilder<QuranController>(
       builder: (c) {
         return SliverList.builder(
-          itemCount: quranController.ayasFoundBySearch.length,
+          itemCount: quranController.searchedAyas.length,
           itemBuilder: (context, index) => AyaSearchTile(
-            aya: quranController.ayasFoundBySearch[index],
+            aya: quranController.searchedAyas[index],
           ),
         );
       },

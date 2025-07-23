@@ -8,9 +8,9 @@ import 'package:islamic_app/controllers/readers_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
 import 'package:islamic_app/models/reader_model.dart';
-import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/text_themes.dart';
+import 'package:quran_library/quran.dart';
 
 import 'widgets/downloading_dialog.dart';
 
@@ -40,7 +40,7 @@ class SuraDownloadView extends StatelessWidget {
                 readersController.checkIfSuraDownloaded(
                     surahModel, readerModel);
                 String key =
-                    '${surahModel.englishNameOfSurah}-${readerModel.englishName}';
+                    '${surahModel.englishName}-${readerModel.englishName}';
                 bool isSuraDownloaded =
                     readersController.suraDownloadStatus[key] ?? false;
                 return Container(
@@ -63,7 +63,7 @@ class SuraDownloadView extends StatelessWidget {
                             height: 30.h,
                           ),
                           Text(
-                            surahModel.numberOfSurah.toArabic(),
+                            surahModel.surahNumber.toArabic(),
                             style: TextThemes.suraNumTextStyle(context),
                           )
                         ],
@@ -73,12 +73,12 @@ class SuraDownloadView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            surahModel.nameOfSurah.substring(8),
+                            surahModel.arabicName.substring(8),
                             style: TextThemes.suraNameTextStyle(context)
                                 .copyWith(fontSize: 16.sp),
                           ),
                           Text(
-                            "${surahModel.ayas.length.toArabic()} ${S.current.aya}",
+                            "${surahModel.ayahs.length.toArabic()} ${S.current.aya}",
                             style: TextThemes.suraInfoTextStyle(context),
                           ),
                         ],

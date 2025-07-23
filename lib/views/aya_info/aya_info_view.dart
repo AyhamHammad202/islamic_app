@@ -6,17 +6,14 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/common/share_model_sheet.dart';
 import 'package:islamic_app/controllers/bookmark_controller.dart';
-import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/helper.dart';
-
-import 'package:islamic_app/models/aya_of_surah_model.dart';
-import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/services/settings_service.dart';
+
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/text_themes.dart';
-
-import 'widgets/tafser_richtext_widget.dart';
+import 'package:islamic_app/views/aya_info/widgets/tafser_richtext_widget.dart';
+import 'package:quran_library/quran.dart';
 
 class AyaInfoView extends StatelessWidget {
   const AyaInfoView({
@@ -24,11 +21,11 @@ class AyaInfoView extends StatelessWidget {
     required this.aya,
     required this.surahModel,
   });
-  final AyaOfSurahModel aya;
+  final AyahModel aya;
   final SurahModel surahModel;
   @override
   Widget build(BuildContext context) {
-    final QuranController quranController = Get.find();
+    // final QuranController quranController = Get.find();
     final BookMarkController bookMarkController = Get.find();
     final SettingsService settingsService = Get.find();
     return Scaffold(
@@ -49,7 +46,7 @@ class AyaInfoView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}  ${S.of(context).aya} ${aya.numberOfAyaInSurah}",
+                      "${surahModel.arabicName} ${S.of(context).aya} ${aya.ayahNumber}",
                       style: TextThemes.ayaInfoTextStyle(context),
                     ),
                     Gap(16.w),
@@ -60,7 +57,7 @@ class AyaInfoView extends StatelessWidget {
                             await Clipboard.setData(
                               ClipboardData(
                                 text:
-                                    '﴿${aya.textOfAya}﴾ [${quranController.surahs[quranController.getSurahNumberByAya(aya) - 1].nameOfSurah}-${aya.numberOfAyaInSurah.toArabic()}]',
+                                    '﴿${aya.ayaTextEmlaey}﴾ [${surahModel.arabicName}-${aya.ayahNumber.toArabic()}]',
                               ),
                             );
                             if (context.mounted) {
@@ -84,7 +81,7 @@ class AyaInfoView extends StatelessWidget {
                           child: SvgPicturesMethods.bookmarkIcon(),
                           onTap: () async {
                             await bookMarkController
-                                .addAyaBookMark(aya.uniqueIdOfAya);
+                                .addAyaBookMark(aya.ayahUQNumber);
                           },
                         ),
                         Gap(8.w),
@@ -104,7 +101,12 @@ class AyaInfoView extends StatelessWidget {
                   color: Theme.of(context).colorScheme.secondary,
                 ),
                 TafserRichTextWidget(
-                  text: quranController.mapOfTafser[aya.uniqueIdOfAya]!,
+                  text: QuranLibrary()
+                      .tafsirList
+                      .firstWhere(
+                        (element) => element.id == aya.ayahUQNumber,
+                      )
+                      .tafsirText,
                   fontSize: settingsService.ayaTafserFontSize.value,
                 ),
               ],

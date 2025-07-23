@@ -3,14 +3,14 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/database/data_client.dart';
-import 'package:islamic_app/models/aya_of_surah_model.dart';
+import 'package:quran_library/quran.dart';
 import 'package:sqflite/sqflite.dart';
 
 class BookMarkController extends GetxController {
   final DataClient _client = DataClient();
   final QuranController _quranController = Get.find();
   final String _bookmarksTable = "Bookmarks";
-  List<AyaOfSurahModel> ayasWithBookMark = [];
+  List<AyahModel> ayasWithBookMark = [];
   List<int> bookmarkedAyasID = [];
 
   @override
@@ -26,7 +26,7 @@ class BookMarkController extends GetxController {
       return;
     }
     if (ayasWithBookMark.contains(
-      _quranController.allAyas[idOfAya - 1],
+      _quranController.ayas[idOfAya - 1],
     )) {
       await deleteAyaBookMark(idOfAya);
       return;
@@ -55,14 +55,14 @@ class BookMarkController extends GetxController {
     for (var ayaBookmark in results) {
       bookmarkedAyasID.add(ayaBookmark['AyaID'] as int);
       ayasWithBookMark.addAll(
-        _quranController.allAyas.where(
-          (aya) => aya.uniqueIdOfAya == ayaBookmark['AyaID'],
+        _quranController.ayas.where(
+          (aya) => aya.ayahUQNumber == ayaBookmark['AyaID'],
         ),
       );
     }
-    for (var element in ayasWithBookMark) {
-      log(element.textOfAya);
-    }
+    // for (var element in ayasWithBookMark) {
+      // log(element.text);
+    // }
     refresh();
   }
 
@@ -73,7 +73,7 @@ class BookMarkController extends GetxController {
       return;
     }
     ayasWithBookMark.remove(
-      ayasWithBookMark.firstWhere((aya) => aya.uniqueIdOfAya == ayaID),
+      ayasWithBookMark.firstWhere((aya) => aya.ayahUQNumber == ayaID),
     );
     database.delete(_bookmarksTable, where: "AyaID  = $ayaID");
     await getAllAyasBookMarks();

@@ -1,15 +1,19 @@
 import 'package:get/get.dart';
+import 'package:islamic_app/controllers/quran_controller.dart';
+import 'package:quran_library/quran.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LastReadService extends GetxService {
   late SharedPreferences sharedPrefs;
+  final QuranController _quranController = Get.find();
 
   RxInt lastPageRead = 1.obs;
   RxString lastDateRead = "${DateTime.now()}".obs;
   RxInt lastSuraNumRead = 1.obs;
   RxInt lastAyaNumRead = 1.obs;
   RxInt lastAyaUniqeNumRead = 1.obs;
-  void setLastRead(int page, String date, int suraNum, int ayaNum,int uniqeNumOfAya) {
+  void _setLastRead(
+      int page, String date, int suraNum, int ayaNum, int uniqeNumOfAya) {
     lastPageRead.value = page;
     lastDateRead.value = date;
     lastSuraNumRead.value = suraNum;
@@ -19,6 +23,18 @@ class LastReadService extends GetxService {
     sharedPrefs.setInt("lastSuraNumRead", suraNum);
     sharedPrefs.setInt("lastAyaNumRead", ayaNum);
     sharedPrefs.setInt("lastAyaUniqeNumRead", uniqeNumOfAya);
+  }
+
+  void updateLastRead(AyahModel firstAya) {
+    _setLastRead(
+      firstAya.page,
+      DateTime.now().toString(),
+      QuranLibrary()
+          .getCurrentSurahDataByPageNumber(pageNumber: firstAya.page)
+          .surahNumber,
+      _quranController.pages[firstAya.page - 1].first.ayahNumber,
+      _quranController.pages[firstAya.page - 1].first.ayahUQNumber,
+    );
   }
 
   Future<LastReadService> init() async {

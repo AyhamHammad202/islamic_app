@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 import 'package:islamic_app/services/last_read_service.dart';
 import 'package:islamic_app/svg_pictures.dart';
 import 'package:islamic_app/text_themes.dart';
-
-import '../../ayat/ayat_view.dart';
+import 'package:islamic_app/views/ayat/ayat_view.dart';
+import 'package:quran_library/quran.dart';
 
 class LastReadAya extends StatelessWidget {
   const LastReadAya({
@@ -20,7 +19,6 @@ class LastReadAya extends StatelessWidget {
   Widget build(BuildContext context) {
     LastReadService lastReadService = Get.find();
     QuranController quranController = Get.find();
-    AudioController audioController = Get.find();
     var formatter = DateFormat(
       'd MMMM',
       // 'ar_SA',
@@ -34,22 +32,21 @@ class LastReadAya extends StatelessWidget {
         child: InkWell(
           highlightColor: Colors.transparent,
           onTap: () {
-            audioController.ayaUniqeId.value = quranController
-                .pages[lastReadService.lastPageRead.value - 1]
-                .first
-                .uniqueIdOfAya;
-            quranController.globalPage.value =
-                lastReadService.lastPageRead.value - 1;
-            quranController
-                .getCurrentPageAyas(lastReadService.lastPageRead.value - 1);
+            // audioController.ayaUniqeId.value = quranController
+            //     .pages[lastReadService.lastPageRead.value - 1]
+            //     .first
+            //     .uniqueIdOfAya;
+            // quranController.globalPage.value =
+            //     lastReadService.lastPageRead.value - 1;
+            // quranController
+            //     .getCurrentPageAyas(lastReadService.lastPageRead.value - 1);
             Get.to(
-              AyatView(
-                surahModel: quranController
-                    .surahs[lastReadService.lastSuraNumRead.value - 1],
-              ),
+              AyatView(),
               transition: Transition.upToDown,
               duration: const Duration(milliseconds: 300),
             );
+            QuranLibrary().jumpToAyah(lastReadService.lastPageRead.value,
+                lastReadService.lastAyaUniqeNumRead.value);
           },
           child: Stack(
             // alignment: Alignment.center,
@@ -86,7 +83,7 @@ class LastReadAya extends StatelessWidget {
                     Text(
                       quranController
                           .surahs[lastReadService.lastSuraNumRead.value - 1]
-                          .nameOfSurah,
+                          .arabicName,
                       style: TextThemes.lastSuraNameTextStyle(context),
                     ),
                   ],

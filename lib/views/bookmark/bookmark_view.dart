@@ -4,13 +4,13 @@ import 'package:get/get.dart';
 import 'package:islamic_app/common/background_image.dart';
 import 'package:islamic_app/constants/constant.dart';
 import 'package:islamic_app/controllers/bookmark_controller.dart';
-import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/generated/l10n.dart';
 
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:islamic_app/views/ayat/ayat_view.dart';
 import 'package:lottie/lottie.dart';
+import 'package:quran_library/quran.dart';
 
-import '../ayat/ayat_view.dart';
 import 'widgets/bookmarked_aya.dart';
 
 class BookmarkView extends StatelessWidget {
@@ -18,7 +18,6 @@ class BookmarkView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final QuranController quranController = Get.find();
     final BookMarkController bookMarkController = Get.find();
     return BackgroundImage(
       child: GetBuilder<BookMarkController>(builder: (c) {
@@ -47,30 +46,21 @@ class BookmarkView extends StatelessWidget {
                                 verticalOffset: 50,
                                 child: InkWell(
                                   onTap: () {
-                                    quranController.globalPage.value =
-                                        bookMarkController
-                                                .ayasWithBookMark[index].page -
-                                            1;
-                                    quranController.getCurrentPageAyas(
-                                        bookMarkController
-                                                .ayasWithBookMark[index].page -
-                                            1);
-                                    quranController.selectedAyahIndexes.add(
-                                        bookMarkController
-                                            .ayasWithBookMark[index]
-                                            .uniqueIdOfAya);
+                                    // quranController.selectedAyahIndexes.add(
+                                    //     bookMarkController
+                                    //         .ayasWithBookMark[index]
+                                    //         .uniqueIdOfAya);
                                     Get.to(
-                                      AyatView(
-                                        surahModel: quranController.surahs[
-                                            quranController.getSurahNumberByAya(
-                                                    bookMarkController
-                                                            .ayasWithBookMark[
-                                                        index]) -
-                                                1],
-                                      ),
+                                      AyatView(),
                                       transition: Transition.cupertino,
                                       duration:
                                           const Duration(milliseconds: 300),
+                                    );
+                                    QuranLibrary().jumpToAyah(
+                                      bookMarkController
+                                          .ayasWithBookMark[index].page,
+                                      bookMarkController
+                                          .ayasWithBookMark[index].ayahUQNumber,
                                     );
                                   },
                                   child: BookmarkedAya(

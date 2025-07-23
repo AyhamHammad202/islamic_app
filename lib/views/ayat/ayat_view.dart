@@ -1,194 +1,157 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:islamic_app/common/background_image.dart';
-import 'package:islamic_app/constants/constant.dart';
+import 'package:islamic_app/constants/assets.dart';
 import 'package:islamic_app/controllers/audio_controller.dart';
+import 'package:islamic_app/controllers/bookmark_controller.dart';
 import 'package:islamic_app/controllers/quran_controller.dart';
-import 'package:islamic_app/models/surah_model.dart';
+import 'package:islamic_app/menu_extension.dart';
+// import 'package:islamic_app/models/surah_model.dart';
 import 'package:islamic_app/services/last_read_service.dart';
-import 'package:islamic_app/text_themes.dart';
 import 'package:islamic_app/views/ayat/widgets/audio_widget.dart';
-import 'package:islamic_app/views/ayat/widgets/bassmlah.dart';
-import 'package:islamic_app/views/ayat/widgets/sura_bannar_with_name.dart';
-
-import 'widgets/ayat_of_page.dart';
-import 'widgets/page_info.dart';
+import 'package:islamic_app/views/surah_info/surah_info_view.dart';
+import 'package:quran_library/quran.dart';
 
 class AyatView extends StatelessWidget {
-  const AyatView({super.key, required this.surahModel});
-  final SurahModel surahModel;
+  const AyatView({super.key});
+  // final SurahModel surahModel;
 
   @override
   Widget build(BuildContext context) {
     final QuranController quranController = Get.find();
     final AudioController audioController = Get.find();
+    final BookMarkController bookMarkController = Get.find();
     final LastReadService lastReadService = Get.find();
-    quranController.pageController =
-        PageController(initialPage: quranController.globalPage.value);
+    // quranController.pageController =
+    //     PageController(initialPage: quranController.globalPage.value);
     return BackgroundImage(
       child: PopScope(
         onPopInvokedWithResult: (didPop, results) {
-          quranController.selectedAyahIndexes.clear();
+          // QuranLibrary().
           audioController.stopAudioPlayer();
         },
         child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: GetX<QuranController>(builder: (controller) {
-              return Text(
-                quranController
-                    .surahs[quranController.getSurahNumberByAya(quranController
-                            .pages[quranController.globalPage.value].first) -
-                        1]
-                    .nameOfSurah,
-                style: TextThemes.suraNameTextStyle(context),
-              );
-            }),
-          ),
-          body: Obx(() {
-            return SizedBox(
-              height: MediaQuery.sizeOf(context).height,
-              width: MediaQuery.sizeOf(context).width,
-              child: Stack(
-                alignment: Alignment.bottomCenter,
+            backgroundColor: Colors.transparent,
+            body: Obx(() {
+              return Stack(
                 children: [
-                  PageView.builder(
-                    controller: quranController.pageController,
-                    itemCount: 604,
-                    onPageChanged: (page) {
-                      lastReadService.setLastRead(
-                        page + 1,
-                        "${DateTime.now()}",
-                        quranController.getSurahNumberByAya(
-                            quranController.pages[page].first),
-                        quranController.pages[page].first.numberOfAyaInSurah,
-                        quranController.pages[page].first.uniqueIdOfAya,
-                      );
-                      audioController.isPlaying.value ||
-                              audioController.isLoading.value
-                          ? null
-                          : audioController.ayaUniqeId.value =
-                              quranController.pages[page].first.uniqueIdOfAya;
-                      quranController.globalPage.value = page;
+                  QuranLibraryScreen(
+                    backgroundColor: Colors.transparent,
+                    textColor: Get.isDarkMode ? Colors.white : Colors.black,
+                    ayahSelectedBackgroundColor: Get.theme.highlightColor,
+                    useDefaultAppBar: false,
+                    optimizeScrolling: true,
+                    ayahBookmarked: bookMarkController.bookmarkedAyasID,
+                    bookmarkList: bookMarkController.ayasWithBookMark,
+                    bookmarksColor: const Color(0xffc4975b).withOpacity(0.4),
+                    bannerStyle: BannerStyle(
+                      bannerSvgHeight: 200.h,
+                      bannerSvgWidth: Get.width,
+                      bannerSvgPath: "assets/images/design/Sorah_name_ba3.svg",
+                    ),
+                    surahNameStyle: SurahNameStyle(
+                      surahNameWidth: Get.width / 4,
+                      surahNameHeight: 160.h,
+                    ),
+                    onPageChanged: (pageNumber) {
+                      lastReadService.updateLastRead(
+                          quranController.pages[pageNumber].first);
+                      if (!audioController.isPlaying.value ||
+                          audioController.isLoading.value) {
+                        audioController.ayaUniqeId.value = quranController
+                            .pages[pageNumber].first.ayahUQNumber;
+                      }
                     },
-                    itemBuilder: (context, page) {
-                      quranController
-                          .getCurrentPageAyahsSeparatedForBasmala(page);
-                      return InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        radius: 0,
-                        onTap: () {
-                          audioController.isPlaying.value ||
-                                  audioController.isLoading.value
-                              ? null
-                              : quranController.clearSelection();
-                          quranController.isClickedOnPage.value =
-                              !quranController.isClickedOnPage.value;
-                        },
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.height,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Column(
-                                // mainAxisSize: MainAxisSize.max,
-                                // mainAxisAlignment: MainAxisAlignment.center,
-                                // crossAxisAlignment: CrossAxisAlignment.center,
-                                children: List.generate(
-                                  quranController
-                                      .getCurrentPageAyahsSeparatedForBasmala(
-                                          page)
-                                      .length,
-                                  (index) {
-                                    final ayas = quranController
-                                        .getCurrentPageAyahsSeparatedForBasmala(
-                                            page)[index];
-                                    return Column(
-                                      // mainAxisAlignment: MainAxisAlignment.center,
-                                      // crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        // quranController.getCurrentPageAyahsSeparatedForBasmala(pageIndex)[i];
-                                        ayas.first.numberOfAyaInSurah == 1 &&
-                                                !Constant
-                                                    .lastPlaceBannerPageIndex
-                                                    .contains(page)
-                                            ? SuraBannerWithName(
-                                                aya: ayas.first,
-                                                quranController:
-                                                    quranController,
-                                              )
-                                            : const SizedBox.shrink(),
-                                        ayas.first.numberOfAyaInSurah == 1 &&
-                                                quranController
-                                                        .getSurahNumberByAya(
-                                                            ayas.first) !=
-                                                    1 &&
-                                                quranController
-                                                        .getSurahNumberByAya(
-                                                            ayas.first) !=
-                                                    9
-                                            ? Bassmalah(
-                                                aya: ayas.first,
-                                                quranController:
-                                                    quranController,
-                                              )
-                                            : const SizedBox.shrink(),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 16.w),
-                                          child: FittedBox(
-                                            fit: BoxFit.fitWidth,
-                                            child: AyatOfPage(
-                                              ayas: ayas,
-                                              quranController: quranController,
-                                              page: page,
-                                            ),
-                                          ),
-                                        ),
-                                        LastBannar(
-                                            aya: ayas.last,
-                                            quranController: quranController),
-                                      ],
-                                    );
-                                  },
-                                ),
-                              ),
-                              PageInfo(
-                                page: page,
-                              ),
-                            ],
-                          ),
-                        ),
+                    onSurahBannerPress: (surah) {
+                      Get.to(
+                        () => SurahInfoView(
+                            surahModel:
+                                quranController.surahs[surah.number - 1]),
+                        transition: Transition.leftToRight,
+                        duration: const Duration(milliseconds: 300),
                       );
+                    },
+                    onAyahLongPress: (details, ayah) {
+                      context.showAyahMenu(
+                        QuranLibrary()
+                            .getCurrentSurahDataByAyah(ayah: ayah)
+                            .surahNumber,
+                        ayah.page,
+                        ayah.ayahUQNumber,
+                        details: details,
+                        ayaOfSurahModel: ayah,
+                      );
+                    },
+                    onPagePress: () {
+                      if (!audioController.isPlaying.value) {
+                        QuranLibrary().quranCtrl.clearSelection();
+                      }
+                      quranController.isClickedOnPage.value =
+                          !quranController.isClickedOnPage.value;
+                      log("IS CLICKED ${quranController.isClickedOnPage.value}");
                     },
                   ),
                   AnimatedPositioned(
                     duration: const Duration(milliseconds: 400),
-                    bottom: (audioController.isPlaying.value &&
-                                quranController.isClickedOnPage.value) ||
-                            quranController.isClickedOnPage.value
-                        ? 25
-                        : -MediaQuery.of(context).size.height / 2.5,
-                    left: 30,
-                    right: 30,
+                    bottom: quranController.isClickedOnPage.value
+                        ? 10.h //  start at bottom of screen
+                        : -MediaQuery.of(context).size.height /
+                            3, //  slide from below
+                    left: 5.w,
+                    right: 5.w,
                     child: AudioWidget(
                       firstAyaInPage: quranController
-                          .pages[quranController.globalPage.value].first,
+                          .pages[QuranLibrary().currentPageNumber].first,
+                    ),
+                  ),
+                  AnimatedPositioned(
+                    duration: Duration(milliseconds: 400),
+                    top: quranController.isClickedOnPage.value
+                        ? MediaQuery.of(context).padding.top
+                        : -100,
+                    child: Container(
+                      width: Get.width,
+                      height: 40.h,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(.6),
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.onSecondary),
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: Get.back,
+                            icon: Icon(Icons.arrow_back_sharp),
+                          ),
+                          Spacer(),
+                          IconButton(
+                            onPressed: () {
+                              Get.dialog(Dialog(
+                                child: QuranLibrary().getFontsDownloadWidget(
+                                  context,
+                                  isDark: Get.isDarkMode,
+                                ),
+                              ));
+                            },
+                            icon: Icon(Icons.settings),
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],
-              ),
-            );
-          }),
-        ),
+              );
+            })),
       ),
     );
   }
 }
-
-typedef LongPressStartDetailsFunction = void Function(LongPressStartDetails);

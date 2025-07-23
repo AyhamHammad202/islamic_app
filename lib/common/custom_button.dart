@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
+import 'package:islamic_app/constants/assets.dart';
 import 'package:islamic_app/text_themes.dart';
 
 class CustomButton extends StatelessWidget {
@@ -16,14 +19,22 @@ class CustomButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        margin: EdgeInsets.symmetric(horizontal: 8.w),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onSecondary,
+          color: Theme.of(context).colorScheme.secondary.withOpacity(.4),
+          border: Border.all(color: Theme.of(context).colorScheme.onSecondary),
           borderRadius: BorderRadius.circular(8.r),
         ),
-        child: Text(
-          title,
-          style: TextThemes.settingTextStyle(context),
+        child: Row(
+          children: [
+            SvgPicture.asset(Assets.svgShareIcon),
+            Gap(4.w),
+            Text(
+              title,
+              style: TextThemes.settingTextStyle(context),
+            ),
+          ],
         ),
       ),
     );

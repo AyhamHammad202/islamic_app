@@ -6,6 +6,7 @@ import 'package:islamic_app/controllers/quran_controller.dart';
 import 'package:islamic_app/services/last_read_service.dart';
 import 'package:islamic_app/views/ayat/ayat_view.dart';
 import 'package:islamic_app/views/quran/widgets/sura_tile.dart';
+import 'package:quran_library/quran_library.dart';
 
 class SurasListView extends StatelessWidget {
   const SurasListView({
@@ -30,27 +31,20 @@ class SurasListView extends StatelessWidget {
                 child: SuraTile(
                   index: index,
                   onTap: () {
-                    quranController.globalPage.value =
-                        quranController.surahs[index].ayas[0].page - 1;
-                    quranController.getCurrentPageAyas(
-                        quranController.surahs[index].ayas.first.page - 1);
                     Get.to(
-                      AyatView(
-                        surahModel: quranController.surahs[index],
-                      ),
+                      AyatView(),
                       transition: Transition.rightToLeft,
                       duration: const Duration(milliseconds: 300),
                     );
+                    QuranLibrary().jumpToSurah(index + 1);
+                    lastReadService.updateLastRead(
+                        quranController.surahs[index].ayahs.first);
+                    // quranController.globalPage.value =
+                    //     quranController.surahs[index].ayas[0].page - 1;
+                    // quranController.getCurrentPageAyas(
+                    //     quranController.surahs[index].ayas.first.page - 1);
                     audioController.ayaUniqeId.value =
-                        quranController.surahs[index].ayas.first.uniqueIdOfAya;
-                    lastReadService.setLastRead(
-                      quranController.surahs[index].ayas.first.page,
-                      "${DateTime.now()}",
-                      quranController.surahs[index].numberOfSurah,
-                      quranController
-                          .surahs[index].ayas.first.numberOfAyaInSurah,
-                      quranController.surahs[index].ayas.first.uniqueIdOfAya,
-                    );
+                        quranController.surahs[index].ayahs.first.ayahUQNumber;
                   },
                 ),
               ),

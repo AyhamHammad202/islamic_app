@@ -3,15 +3,14 @@
     package="com.NourAlmomen.islamicapp">
 
   <!-- Permissions -->
-  <uses-permission android:name="android.permission.VIBRATE"/>
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.VIBRATE" />
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
 
-  <!-- Queries -->
+  <!-- Queries for Telegram and WhatsApp -->
   <queries>
     <intent>
       <action android:name="android.intent.action.VIEW" />
@@ -23,55 +22,60 @@
     </intent>
   </queries>
 
-  <!-- Application -->
-  <application android:label="نور المؤمن"
+  <application
       android:name="${applicationName}"
+      android:label="نور المؤمن"
+      android:icon="@mipmap/launcher_icon"
       android:usesCleartextTraffic="true"
-      android:networkSecurityConfig="@xml/network_security_config"
-      android:icon="@mipmap/launcher_icon">
+      android:networkSecurityConfig="@xml/network_security_config">
 
     <!-- Main Activity -->
-    <!-- <activity android:name=".MainActivity" -->
-    <activity android:name="com.ryanheise.audioservice.AudioServiceActivity"
+    <activity
+        android:name="com.NourAlmomen.islamicapp.MainActivity"
         android:exported="true"
-        android:enableOnBackInvokedCallback="true"
         android:launchMode="singleTop"
         android:theme="@style/LaunchTheme"
         android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
         android:hardwareAccelerated="true"
         android:windowSoftInputMode="adjustResize">
 
-      <!-- Meta-data -->
       <meta-data android:name="io.flutter.embedding.android.NormalTheme"
           android:resource="@style/NormalTheme" />
 
-      <!-- Intent-filter -->
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-     <service android:name="com.ryanheise.audioservice.AudioService"
+
+    <!-- Audio Service for just_audio_background -->
+    <service
+        android:name="com.ryanheise.audioservice.AudioService"
+        android:exported="true"
         android:foregroundServiceType="mediaPlayback"
-        android:exported="true" tools:ignore="Instantiatable">
+        tools:ignore="Instantiatable">
       <intent-filter>
         <action android:name="android.media.browse.MediaBrowserService" />
       </intent-filter>
     </service>
-    <service android:name="androidx.media3.session.MediaSessionService"
-            android:foregroundServiceType="mediaPlayback"
-            android:exported="true">
-    </service>
 
-    <!-- ADD THIS "RECEIVER" element -->
-    <receiver android:name="com.ryanheise.audioservice.MediaButtonReceiver"
-        android:exported="true" tools:ignore="Instantiatable">
+    <!-- MediaSessionService (optional with some audio configs) -->
+    <service
+        android:name="androidx.media3.session.MediaSessionService"
+        android:exported="true"
+        android:foregroundServiceType="mediaPlayback" />
+
+    <!-- Media Button Receiver -->
+    <receiver
+        android:name="com.ryanheise.audioservice.MediaButtonReceiver"
+        android:exported="true"
+        tools:ignore="Instantiatable">
       <intent-filter>
         <action android:name="android.intent.action.MEDIA_BUTTON" />
       </intent-filter>
-    </receiver> 
+    </receiver>
 
-    <!-- Flutter Embedding -->
+    <!-- Flutter Embedding Version -->
     <meta-data android:name="flutterEmbedding"
         android:value="2" />
   </application>

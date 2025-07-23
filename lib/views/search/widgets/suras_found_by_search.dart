@@ -17,9 +17,9 @@ class SurasFoundBySearch extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: List.generate(
-          quranController.surasFoundbySearch.length,
+          quranController.searchedSurahs.length,
           (index) => SuraSearchTile(
-            surahModel: quranController.surasFoundbySearch[index],
+            ayahModel: quranController.searchedSurahs[index],
           ),
         ),
       ), // var sura = c.surahs[index];
