@@ -78,6 +78,7 @@ class Themes {
       onError: Colors.red,
       surface: lightBackgroundClr,
       onSurface: Color(0xff132D2E),
+      primaryContainer: lightBackgroundClr,
     ),
   );
   static final dark = ThemeData(
@@ -120,16 +121,16 @@ class Themes {
     ),
     highlightColor: const Color(0xffFFD08A).withOpacity(.2),
     colorScheme: const ColorScheme(
-      brightness: Brightness.dark,
-      primary: Colors.black54,
-      onPrimary: Colors.black54,
-      secondary: Color(0xff2E2A26),
-      onSecondary: Color(0xffD7A664),
-      secondaryContainer: Colors.black54,
-      error: Colors.red,
-      onError: Colors.red,
-      surface: darkBackgroundClr,
-      onSurface: Color(0xff132D2E),
-    ),
+        brightness: Brightness.dark,
+        primary: Colors.black54,
+        onPrimary: Colors.black54,
+        secondary: Color(0xff2E2A26),
+        onSecondary: Color(0xffD7A664),
+        secondaryContainer: Colors.black54,
+        error: Colors.red,
+        onError: Colors.red,
+        surface: darkBackgroundClr,
+        onSurface: Color(0xff132D2E),
+        primaryContainer: lightBackgroundClr),
   );
 }

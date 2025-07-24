@@ -221,9 +221,7 @@ class TextThemes {
   static TextStyle readerTextStyle(BuildContext context) => GoogleFonts.cairo(
         fontSize: 14.sp,
         fontWeight: FontWeight.w400,
-        color: Theme.of(context).brightness == Brightness.dark
-            ? const Color(0xff997647)
-            : Color(0xff997647),
+        color: Theme.of(context).colorScheme.primaryContainer,
       );
   static TextStyle ayaTimeTextStyle(BuildContext context) =>
       GoogleFonts.tajawal(

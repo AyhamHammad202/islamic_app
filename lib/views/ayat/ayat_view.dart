@@ -47,13 +47,22 @@ class AyatView extends StatelessWidget {
                     bookmarkList: bookMarkController.ayasWithBookMark,
                     bookmarksColor: const Color(0xffc4975b).withOpacity(0.4),
                     bannerStyle: BannerStyle(
-                      bannerSvgHeight: 200.h,
-                      bannerSvgWidth: Get.width,
+                      bannerSvgHeight: QuranLibrary().currentFontsSelected == 0
+                          ? 40.h
+                          : 120.h,
+                      // bannerSvgWidth: Get.width * .2,
                       bannerSvgPath: "assets/images/design/Sorah_name_ba3.svg",
                     ),
+                    basmalaStyle: BasmalaStyle(
+                      basmalaHeight: QuranLibrary().currentFontsSelected == 0
+                          ? 30.h
+                          : 100.h,
+                      basmalaColor: Theme.of(context).colorScheme.onSecondary,
+                    ),
                     surahNameStyle: SurahNameStyle(
-                      surahNameWidth: Get.width / 4,
-                      surahNameHeight: 160.h,
+                      surahNameHeight: QuranLibrary().currentFontsSelected == 0
+                          ? 25.h
+                          : 80.h,
                     ),
                     onPageChanged: (pageNumber) {
                       lastReadService.updateLastRead(
@@ -109,19 +118,17 @@ class AyatView extends StatelessWidget {
                   ),
                   AnimatedPositioned(
                     duration: Duration(milliseconds: 400),
+                    width: Get.width,
                     top: quranController.isClickedOnPage.value
                         ? MediaQuery.of(context).padding.top
                         : -100,
                     child: Container(
                       width: Get.width,
                       height: 40.h,
+                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      margin: EdgeInsets.symmetric(horizontal: 5.w),
                       decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .secondary
-                            .withOpacity(.6),
-                        border: Border.all(
-                            color: Theme.of(context).colorScheme.onSecondary),
+                        color: Theme.of(context).colorScheme.onSurface,
                         borderRadius: BorderRadius.circular(8.r),
                       ),
                       child: Row(
@@ -129,7 +136,12 @@ class AyatView extends StatelessWidget {
                         children: [
                           IconButton(
                             onPressed: Get.back,
-                            icon: Icon(Icons.arrow_back_sharp),
+                            icon: Icon(
+                              Icons.arrow_back_sharp,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                            ),
                           ),
                           Spacer(),
                           IconButton(
@@ -141,7 +153,12 @@ class AyatView extends StatelessWidget {
                                 ),
                               ));
                             },
-                            icon: Icon(Icons.settings),
+                            icon: Icon(
+                              Icons.settings,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                            ),
                           ),
                         ],
                       ),

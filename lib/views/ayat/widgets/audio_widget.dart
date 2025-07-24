@@ -2,7 +2,6 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import 'package:islamic_app/controllers/audio_controller.dart';
 import 'package:islamic_app/services/settings_service.dart';
 import 'package:islamic_app/text_themes.dart';
@@ -29,7 +28,7 @@ class AudioWidget extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onSurface,
-          borderRadius: BorderRadius.circular(20.r),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         padding: EdgeInsets.symmetric(vertical: 8.h),
         child: Column(
