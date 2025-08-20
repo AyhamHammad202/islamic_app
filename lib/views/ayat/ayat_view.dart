@@ -42,7 +42,7 @@ class AyatView extends StatelessWidget {
                     textColor: Get.isDarkMode ? Colors.white : Colors.black,
                     ayahSelectedBackgroundColor: Get.theme.highlightColor,
                     useDefaultAppBar: false,
-                    optimizeScrolling: true,
+                    // optimizeScrolling: true,
                     ayahBookmarked: bookMarkController.bookmarkedAyasID,
                     bookmarkList: bookMarkController.ayasWithBookMark,
                     bookmarksColor: const Color(0xffc4975b).withOpacity(0.4),
